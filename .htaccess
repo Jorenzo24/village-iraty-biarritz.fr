@@ -86,9 +86,12 @@ ErrorDocument 404 /404.html
     Require all denied
 </FilesMatch>
 
-<FilesMatch "\.(env|log|bak|old|swp|sql|md|yml|yaml|json|gitignore|htaccess|htpasswd)$">
+<FilesMatch "\.(env|log|bak|old|swp|sql|md|yml|yaml|gitignore|htaccess|htpasswd)$">
     Require all denied
 </FilesMatch>
+
+# Les .json dans data/ sont du contenu legitime servi au frontend (acteurs,
+# articles, locaux). On autorise explicitement leur acces en lecture.
 
 <Files ".cpanel.yml">
     Require all denied
