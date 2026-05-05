@@ -57,11 +57,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             logoImg.alt = `Logo ${e.name}`;
         }
 
-        // Description (multi-paragraphes : on split sur les sauts de ligne)
+        // Description : multi-paragraphes + détection de listes à puces
         const descEl = document.getElementById('entity-description');
         if (e.description) {
-            const paragraphs = e.description.split(/\n+/).filter(p => p.trim());
-            descEl.innerHTML = paragraphs.map(p => `<p>${escape(p)}</p>`).join('');
+            descEl.innerHTML = renderDescription(e.description);
         } else {
             descEl.innerHTML = `<p style="color:var(--c-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n'hésitez pas à <a href="contact.html" style="color:var(--c-red);">nous contacter</a>.</p>`;
         }
@@ -150,5 +149,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         const div = document.createElement('div');
         div.textContent = s || '';
         return div.innerHTML;
+    }
+
+    /**
+     * Rendu enrichi d'une description multi-paragraphes :
+     * - Lignes commençant par ● • · ou - (avec/sans espace) → <ul><li>
+     * - Si la ligne précédente se termine par ":" et est suivie de bullets,
+     *   elle reste un <p> introductif (le ":" est conservé).
+     * - Lignes vides ignorées.
+     */
+    function renderDescription(text) {
+        const isBullet = (line) => /^[\s]*[●•·\-–—][\s]*\S/.test(line);
+        const stripBullet = (line) => line.replace(/^[\s]*[●•·\-–—][\s]*/, '').trim();
+
+        const lines = text.split(/\n+/).map(l => l.trim()).filter(Boolean);
+        const out = [];
+        let listBuf = [];
+
+        const flushList = () => {
+            if (listBuf.length) {
+                out.push(`<ul>${listBuf.map(li => `<li>${escape(li)}</li>`).join('')}</ul>`);
+                listBuf = [];
+            }
+        };
+
+        for (const line of lines) {
+            if (isBullet(line)) {
+                listBuf.push(stripBullet(line));
+            } else {
+                flushList();
+                out.push(`<p>${escape(line)}</p>`);
+            }
+        }
+        flushList();
+
+        return out.join('');
     }
 });
