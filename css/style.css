@@ -479,18 +479,11 @@ button:focus-visible, a:focus-visible {
 }
 
 .page-hero--with-bg {
-    background: var(--c-grey-3);
-    overflow: hidden;
-}
-
-.page-hero--with-bg::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--bg-image);
+    background-color: var(--c-grey-3);
     background-size: cover;
     background-position: center;
-    z-index: 0;
+    background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .page-hero--with-bg::after {
@@ -1007,6 +1000,18 @@ button:focus-visible, a:focus-visible {
     color: #fff;
 }
 
+.split-section__content--dark {
+    background: #7a7a7a;
+    color: #fff;
+}
+
+.split-section__content--dark .split-section__title {
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.4em;
+}
+
 .split-section__title {
     font-family: var(--font-heading);
     font-size: 1.625rem;
@@ -1038,14 +1043,22 @@ button:focus-visible, a:focus-visible {
     margin-bottom: 1.75rem;
 }
 
-.stat { display: flex; flex-direction: column; }
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--c-grey-2);
+    border-radius: 14px;
+    padding: 1.25rem 2rem;
+    min-width: 9rem;
+}
 
 .stat__value {
     font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 800;
     line-height: 1;
-    color: #fff;
+    color: var(--c-red);
     display: inline-flex;
     align-items: baseline;
 }
@@ -1065,6 +1078,19 @@ button:focus-visible, a:focus-visible {
     font-size: 0.875rem;
     text-transform: lowercase;
     margin-top: 0.5rem;
+    color: var(--c-text-muted);
+}
+
+.split-section__content--red .stat {
+    border: none;
+    padding: 0;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.split-section__content--red .stat__value,
+.split-section__content--red .stat__label {
+    color: #fff;
     opacity: 0.95;
 }
 
@@ -1254,6 +1280,10 @@ button:focus-visible, a:focus-visible {
 
 .values-engagements__col--red {
     background: var(--c-red);
+    color: #fff;
+}
+
+.values-engagements__col--red .values-engagements__title {
     color: #fff;
 }
 

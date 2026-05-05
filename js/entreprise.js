@@ -44,12 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         heroTitle.textContent = e.name;
 
-        // Si on a une photo, on l'utilise en bg du hero
-        if (e.photos && e.photos.length > 0) {
-            const hero = document.getElementById('entity-hero');
-            hero.classList.add('page-hero--with-bg');
-            hero.style.setProperty('--bg-image', `url('${e.photos[0]}')`);
-        }
         document.getElementById('entity-name-h2').textContent = e.name;
         document.getElementById('entity-category').textContent = e.category_label || '';
         document.getElementById('entity-address').textContent = e.address || '';

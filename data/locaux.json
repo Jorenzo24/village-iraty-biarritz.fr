@@ -1,50 +1,8 @@
 [
   {
-    "slug": "local-commercial-de-472-mm2-en-duplex-ref-occ71",
-    "name": "Local commercial de 472 m² en duplex (REF-OCC71)",
-    "address": "VILLAGE Iraty-Biarritz",
-    "surface": 472,
-    "price_ht": 4930.0,
-    "charges_ht": 0,
-    "type": "Commerce / Bureau",
-    "norm_pmr": false,
-    "no_fees": true,
-    "no_pas_de_porte": true,
-    "description": "La fibre optique privative très haut débit est également disponible sur demande.",
-    "photos": []
-  },
-  {
-    "slug": "bureau-neuf-amenage-a-louer-de-135-mm2-ref-ald19",
-    "name": "Bureau neuf aménagé à louer de 135 m² (REF-ALD19)",
-    "address": "VILLAGE Iraty-Biarritz",
-    "surface": 135,
-    "price_ht": 1700.0,
-    "charges_ht": 0,
-    "type": "Commerce / Bureau",
-    "norm_pmr": true,
-    "no_fees": true,
-    "no_pas_de_porte": true,
-    "description": "Ce local professionnel vous permet de profiter d’un espace de travail avec une visibilité maximale dans un quartier très dynamique qui compte plus de 500 entreprises et 1200 salariés résidents.",
-    "photos": []
-  },
-  {
-    "slug": "grand-local-sur-2-etages-de-135-mm2-ref-dar36",
-    "name": "Grand local sur 2 étages de 135 m² (REF-DAR36)",
-    "address": "VILLAGE Iraty-Biarritz",
-    "surface": 135,
-    "price_ht": 1475.0,
-    "charges_ht": 0,
-    "type": "Commerce / Bureau",
-    "norm_pmr": true,
-    "no_fees": true,
-    "no_pas_de_porte": true,
-    "description": "Local professionnel partiellement aménagé et neuf en TRIPLEX de 135 m² (surface nette certifiée après travaux).",
-    "photos": []
-  },
-  {
     "slug": "duplex-commercial-de-90mm2-ref-dar41",
-    "name": "Duplex commercial de 90m² (REF-DAR41)",
-    "address": "VILLAGE Iraty-Biarritz",
+    "name": "Lot 38 — Duplex commercial 90 m² (REF-DAR41)",
+    "address": "Lot 38 — Halle DARLA, VILLAGE Iraty-Biarritz",
     "surface": 90,
     "price_ht": 1165.0,
     "charges_ht": 0,
@@ -53,34 +11,15 @@
     "no_fees": true,
     "no_pas_de_porte": true,
     "description": "Beau local professionnel en duplex aménagé de 90 m² (surface nette certifiée après travaux) en rez-de-chaussée et premier étage.",
-    "photos": []
-  },
-  {
-    "slug": "local-professionnel-de-44-mm2-ref-dar42bis",
-    "name": "Local professionnel de 44 m² (REF-DAR42BIS)",
-    "address": "VILLAGE Iraty-Biarritz",
-    "surface": 44,
-    "price_ht": 590.0,
-    "charges_ht": 0,
-    "type": "Commerce / Bureau",
-    "norm_pmr": false,
-    "no_fees": true,
-    "no_pas_de_porte": true,
-    "description": "Situé au premier étage, desservi par un escalier en bois, ce bureau bénéficie d’une entrée individuelle, d’un coin cuisine avec évier et d’un sanitaire privatif,",
-    "photos": []
-  },
-  {
-    "slug": "local-professionnel-de-42-mm2-pour-activite-medicale-ref-ald21",
-    "name": "Local professionnel de 42 m² pour activité médicale (REF-ALD21)",
-    "address": "VILLAGE Iraty-Biarritz",
-    "surface": 42,
-    "price_ht": 906.1,
-    "charges_ht": 0,
-    "type": "Commerce / Bureau",
-    "norm_pmr": true,
-    "no_fees": true,
-    "no_pas_de_porte": true,
-    "description": "Situé au premier étage avec ascenseur et accès PMR, local entièrement aménagé et climatisé de 42 m²,",
-    "photos": []
+    "photos": [
+      "assets/photos/locaux/lot-38-duplex-90m2/facade-halle-darla.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/interieur-1.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/interieur-2.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/interieur-3.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/interieur-4.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/interieur-5.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/galerie-1.jpg",
+      "assets/photos/locaux/lot-38-duplex-90m2/galerie-2.jpg"
+    ]
   }
 ]

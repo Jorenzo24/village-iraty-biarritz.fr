@@ -1,16 +1,50 @@
 [
   {
     "slug": "2p-gourmands",
-    "name": "2P GOURMANDS – Épicerie Épicurienne",
-    "category": "commerces",
-    "category_label": "Commerces",
-    "description": "– Vente de viande, charcuterie, conserve, huitres, vin, alcool, produits de saison – Animations autour de la gastronomie : la planche des gros, la planche de la mer – Repas au brasero, tous les jours mais uniquement sur réservation\n\nNé d’une rencontre autour d’un verre devant un match de rugby, Pascal et Pierre, deux épicuriens chevronnés, ont eu l’envie de créer un club pour les gastronomes proposant des produits authentiques & rares, voir inconnus :",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "07 50 96 12 03",
-    "email": "",
+    "name": "2P GOURMANDS - Épicerie Écurienne",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "2P Gourmands « Les Épicuriens dénicheurs de saveurs », est un nouveau genre d’épicerie : une boutique restaurant vous proposant la vente et/ou la dégustation de mets gourmands et d'exceptions issus du Pays basque, de France, d'Espagne, du Portugal et d’Italie ainsi qu’une belle sélection de vins direct de propriétaires.\nNé d’une rencontre autour d’un verre devant un match de rugby, Pascal et Pierre, deux épicuriens chevronnés, ont eu l’envie de créer un club pour les gastronomes proposant des produits authentiques & rares, voir inconnus :\nVente de viande, charcuterie, conserve, huitres, vin, alcool, produits de saison\nAnimations autour de la gastronomie : la planche des gros, la planche de la mer\nRepas au brasero, tous les jours mais uniquement sur réservation\nÉpicerie – Restaurant ouvert :\nJeudi et vendredi de 14 h à 23 h - Restauration à partir de 18h\nSamedi de 11 h 30 à 15 h - Restauration à partir de 12 h\nOn n'est pas cuisto, ni barman, ni plongeur, mais on vous reçoit comme à la maison !\nVenez faire Vibrer vos papilles grâce aux restaurants de votre VILLAGE Iraty – Biarritz",
+    "address": "Halle DARLA - 12 rue des Mésanges - Lot n°13 - 64200 Biarritz",
+    "phone": "06 30 55 61 25",
+    "email": "2pgourmands@gmail.com",
     "website": "",
-    "hours": "",
-    "photos": []
+    "hours": "Jeudi et vendredi de 14h à 23h · Samedi de 11h30 à 15h et de 9h00 à 18h00",
+    "photos": [
+      "assets/photos/entreprises/2p-gourmands/cover.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-01.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-02.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-03.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-04.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-05.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-06.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-07.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-08.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-09.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-10.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-11.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-12.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-13.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-14.jpg",
+      "assets/photos/entreprises/2p-gourmands/photo-15.jpg",
+      "assets/photos/entreprises/2p-gourmands/logo.jpg"
+    ]
+  },
+  {
+    "slug": "ada",
+    "name": "ADA LOCATION DE VOITURE ET UTILITAIRE",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Location de voitures",
+    "address": "",
+    "phone": "05 59 51 11 35",
+    "email": "",
+    "website": "https://www.ada.fr/location-voiture-biarritz",
+    "hours": "Du lundi au dimanche de 8H à 18H30",
+    "photos": [
+      "assets/photos/entreprises/ada/cover.jpg",
+      "assets/photos/entreprises/ada/logo.jpg"
+    ]
   },
   {
     "slug": "agence-erronda",
@@ -20,10 +54,13 @@
     "description": "📍Biarritz – Agence Événementielle 🦋 Partage d’émotions & création de liens 🌝 Valoriser les acteurs locaux & notre territoire",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 22 17 69",
-    "email": "",
+    "email": "contact@erronda.com",
     "website": "https://www.erronda.com",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au vendredi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/agence-erronda/cover.png",
+      "assets/photos/entreprises/agence-erronda/logo.jpg"
+    ]
   },
   {
     "slug": "aimery-chemin",
@@ -33,10 +70,13 @@
     "description": "Avec une approche naturelle et créative, il sublime chaque instant, en capturant les émotions et l’essence même de chaque scène. À Biarritz ou ailleurs, faites confiance à Aimery Chemin pour des photos uniques et pleines de sens",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 62 18 41 17",
-    "email": "",
+    "email": "aimerychemin@icloud.com",
     "website": "https://aimerychemin.myportfolio.com",
     "hours": "",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/aimery-chemin/cover.jpeg",
+      "assets/photos/entreprises/aimery-chemin/logo.jpeg"
+    ]
   },
   {
     "slug": "ajoupa-rhumerie",
@@ -45,11 +85,30 @@
     "category_label": "Restaurants",
     "description": "L'Ajoupa est une rhumerie créole unique sur la côte basque, située rue des Mésanges au VILLAGE Iraty-Biarritz. Cuisine créole et ambiance décontractée avec des spécialités comme le bokit, pastry croustillant guadeloupéen. L'établissement combine restauration authentique et bar à thèmes avec une sélection variée de rhums. L'atmosphère festive se renforce le soir avec DJ, piste de danse et cocktails élaborés. Une expérience gastronomique chaleureuse et animée appréciée des familles et festards en quête d'un dépaysement.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "",
-    "email": "",
+    "phone": "06 49 72 25 65",
+    "email": "Lajoupa.rhumerie@gmail.com",
     "website": "",
-    "hours": "",
-    "photos": []
+    "hours": "Du mardi au mercredi de 12h à 14h30 · Du jeudi à samedi de 12h à 2h",
+    "photos": [
+      "assets/photos/entreprises/ajoupa-rhumerie/cover.jpg",
+      "assets/photos/entreprises/ajoupa-rhumerie/logo.jpg"
+    ]
+  },
+  {
+    "slug": "al-mounia",
+    "name": "AL MOUNIA",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Restaurant marocain",
+    "address": "Biarritz Activités",
+    "phone": "05 59 54 51 25",
+    "email": "najibsetta@gmail.com",
+    "website": "https://almounia-biarritz.com",
+    "hours": "Du mardi au dimanche de 10h30 à 21h",
+    "photos": [
+      "assets/photos/entreprises/al-mounia/cover.jpeg",
+      "assets/photos/entreprises/al-mounia/logo.png"
+    ]
   },
   {
     "slug": "alba-recovery-drink",
@@ -59,10 +118,13 @@
     "description": "ALBA Recovery Drink est une marque française de boissons de récupération sportive, conçue à Biarritz et fabriquée à Ogeu à partir d'eau de source des Pyrénées. Une formulation à base de dix ingrédients naturels incluant des électrolytes (sodium, potassium, magnésium, calcium), du ginseng et du ginkgo pour la vitalité mentale, et du zinc pour la protection cellulaire. Positionnée comme « la récupération naturelle et française », ALBA cible les athlètes de haut niveau en CrossFit et surf et organise des événements sportifs comme la Deep Fitness Race.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 81 76 58 49",
-    "email": "",
+    "email": "contact@thealbasociety.com",
     "website": "https://www.thealbasociety.com",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au vendredi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/alba-recovery-drink/cover.jpg",
+      "assets/photos/entreprises/alba-recovery-drink/logo.jpeg"
+    ]
   },
   {
     "slug": "association-blak",
@@ -72,10 +134,156 @@
     "description": "Que vous soyez artiste, amateur ou simple curieux, Blak est un espace d’expression et de partage, où la diversité culturelle et l’innovation sont célébrées. Rejoignez-nous pour vivre des expériences uniques et enrichissantes au service de l’art et de la communauté.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 24 75 65 44",
-    "email": "",
+    "email": "petitemadi@gmail.com",
     "website": "https://petitemadi.blogspot.com",
     "hours": "",
     "photos": []
+  },
+  {
+    "slug": "astra",
+    "name": "ASTRA Bar Audiophile",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "BAR",
+    "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 59 95 61 60",
+    "email": "corbetdennis@gmail.com",
+    "website": "",
+    "hours": "Du jeudi au samedi de 18h à 2h",
+    "photos": [
+      "assets/photos/entreprises/astra/cover.jpg",
+      "assets/photos/entreprises/astra/logo.jpg"
+    ]
+  },
+  {
+    "slug": "atlantic-service",
+    "name": "ATLANTIC SERVICE",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Entreprise de nettoyage et entretien des locaux",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 47 96 39",
+    "email": "ATLANTIC.SERVICE@WANADOO.FR",
+    "website": "http://www.atlantic-service.fr",
+    "hours": "Du lundi au vendredi de 8h30 à 17h30",
+    "photos": [
+      "assets/photos/entreprises/atlantic-service/cover.jpg",
+      "assets/photos/entreprises/atlantic-service/photo-01.jpeg",
+      "assets/photos/entreprises/atlantic-service/photo-02.png",
+      "assets/photos/entreprises/atlantic-service/photo-03.jpeg",
+      "assets/photos/entreprises/atlantic-service/logo.jpg"
+    ]
+  },
+  {
+    "slug": "avad",
+    "name": "AVAD",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Service de prestation à domicile",
+    "address": "Biarritz Activités",
+    "phone": "05 56 99 32 32",
+    "email": "Service.patients@avad.fr",
+    "website": "http://www.avad-assistance.com",
+    "hours": "",
+    "photos": [
+      "assets/photos/entreprises/avad/logo.png"
+    ]
+  },
+  {
+    "slug": "axe-eco-energie",
+    "name": "AXE ECO ENERGIE",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Etude des énergies renouvables",
+    "address": "Biarritz Activités",
+    "phone": "06 13 03 29 44",
+    "email": "axe.eco.energie@gmail.com",
+    "website": "https://axe-ecoenergie.fr/contact",
+    "hours": "Du lundi au vendredi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/axe-eco-energie/cover.jpeg",
+      "assets/photos/entreprises/axe-eco-energie/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "b-ocean",
+    "name": "B.Ocean",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Charpentier",
+    "address": "",
+    "phone": "06 50 21 00 40",
+    "email": "bocean@orange.fr",
+    "website": "",
+    "hours": "",
+    "photos": [
+      "assets/photos/entreprises/b-ocean/cover.jpg",
+      "assets/photos/entreprises/b-ocean/logo.jpg"
+    ]
+  },
+  {
+    "slug": "bab-cardio-respi",
+    "name": "BAB CARDIO RESPI",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "BAB Cardio-Respi est un cabinet de kinésithérapie libéral spécialisé en rééducation et réhabilitation cardio-respiratoire de l’adulte, l’enfant et le nourrisson.",
+    "address": "BIARRITZ Activités",
+    "phone": "06 67 19 71 58",
+    "email": "",
+    "website": "https://www.babcardiorespi.com",
+    "hours": "Du lundi au vendredi de 9h à 19h",
+    "photos": [
+      "assets/photos/entreprises/bab-cardio-respi/cover.jpg",
+      "assets/photos/entreprises/bab-cardio-respi/logo.jpg"
+    ]
+  },
+  {
+    "slug": "bab-location",
+    "name": "ADA LOCATION DE VOITURE ET UTILITAIRE",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Location de voitures",
+    "address": "",
+    "phone": "05 59 51 11 35",
+    "email": "",
+    "website": "https://www.ada.fr/location-voiture-biarritz",
+    "hours": "Du lundi au dimanche de 8H à 18H30",
+    "photos": [
+      "assets/photos/entreprises/bab-location/cover.jpg",
+      "assets/photos/entreprises/bab-location/logo.jpg"
+    ]
+  },
+  {
+    "slug": "beauty-success",
+    "name": "BEAUTY SUCCES",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Institut de beauté",
+    "address": "HALLE DALBA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 24 07 23",
+    "email": "ROMASIS@ORANGE.FR",
+    "website": "https://www.beautysuccess.fr/nos-points-de-vente/biarritz/1350",
+    "hours": "Du lundi au samedi de 9h30 à 19h",
+    "photos": [
+      "assets/photos/entreprises/beauty-success/cover.jpg",
+      "assets/photos/entreprises/beauty-success/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "biarritz-box",
+    "name": "BIARRITZ BOX",
+    "category": "services",
+    "category_label": "Services",
+    "description": "",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://biarritz-box.com",
+    "hours": "",
+    "photos": [
+      "assets/photos/entreprises/biarritz-box/cover.jpg",
+      "assets/photos/entreprises/biarritz-box/logo.jpeg"
+    ]
   },
   {
     "slug": "biarritz-buro",
@@ -85,10 +293,62 @@
     "description": "une salle d’attente, des sanitaires individuels, séparés pour les hommes et pour les femmes, une place de parking, une boîte aux lettres.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 23 93 10",
-    "email": "",
+    "email": "contact@biarritzburo.com",
     "website": "http://www.biarritzburo.com",
+    "hours": "Du lundi au vendredi de 9h à 18H",
+    "photos": [
+      "assets/photos/entreprises/biarritz-buro/cover.jpg",
+      "assets/photos/entreprises/biarritz-buro/logo.png"
+    ]
+  },
+  {
+    "slug": "biarritz-corp",
+    "name": "BIARRITZ CORP",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Conciergerie",
+    "address": "",
+    "phone": "",
+    "email": "seblaff@gmail.com",
+    "website": "",
     "hours": "",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/biarritz-corp/cover.jpg",
+      "assets/photos/entreprises/biarritz-corp/logo.jpg"
+    ]
+  },
+  {
+    "slug": "biarritz-domiciliation",
+    "name": "BIARRITZ DOMICILIATION",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Création de boite aux lettres pour des entreprises",
+    "address": "Biarritz Activités",
+    "phone": "05 59 23 93 10",
+    "email": "contact@biarritzdomiciliation.com",
+    "website": "http://www.biarritzdomiciliation.com",
+    "hours": "Du lundi au vendredi de 9h à 18h",
+    "photos": [
+      "assets/photos/entreprises/biarritz-domiciliation/cover.jpg",
+      "assets/photos/entreprises/biarritz-domiciliation/logo.png"
+    ]
+  },
+  {
+    "slug": "biarritz-training",
+    "name": "BEST TRAINING à BIARRITZ TRAINING",
+    "category": "sport",
+    "category_label": "Sport",
+    "description": "Entrainement de sport",
+    "address": "Halles OCCABE – Lot 72, 74 et 75 - 18 rue des mésanges, 64 200 Biarritz",
+    "phone": "09 80 25 58 19",
+    "email": "contact@biarritztraining.fr",
+    "website": "https://biarritztraining.fr",
+    "hours": "Du lundi au samedi de 9h à 21h",
+    "photos": [
+      "assets/photos/entreprises/biarritz-training/cover.jpg",
+      "assets/photos/entreprises/biarritz-training/photo-01.png",
+      "assets/photos/entreprises/biarritz-training/logo.png"
+    ]
   },
   {
     "slug": "bistrot-toque",
@@ -98,23 +358,106 @@
     "description": "Le Bistrot Toqué est une brasserie gastronomique française située au VILLAGE Iraty-Biarritz. L'établissement se distingue par son engagement envers les produits régionaux du terroir basque, avec une cuisine entièrement élaborée maison. L'ambiance y est authentique, chaleureuse et cosy. Le restaurant accueille volontiers les végétariens et offre une expérience culinaire mettant en avant les saveurs locales. Un incontournable gastronomique au cœur de Biarritz, proposant notamment des menus de midi travaillés avec soin.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 47 34 28",
-    "email": "",
+    "email": "f.couturier34@gmail.com",
     "website": "https://bistro-toque-bayonne.fr",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au samedi de 8h30 à 14H",
+    "photos": [
+      "assets/photos/entreprises/bistrot-toque/cover.jpg",
+      "assets/photos/entreprises/bistrot-toque/logo.jpg"
+    ]
   },
   {
-    "slug": "boussart-gallery",
-    "name": "BOUSSART GALLERY",
+    "slug": "boucherie-diraty",
+    "name": "BOUCHERIE D'IRATY",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Vente de viandes",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 24 10 13",
+    "email": "",
+    "website": "https://www.boucheriediraty.fr",
+    "hours": "Du lundi au samedi de 7h30 à 19h",
+    "photos": [
+      "assets/photos/entreprises/boucherie-diraty/cover.jpg",
+      "assets/photos/entreprises/boucherie-diraty/logo.jpg"
+    ]
+  },
+  {
+    "slug": "boulangerie-enneartz",
+    "name": "BOULANGERIE ENNEARTZ",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Boulangerie biologique",
+    "address": "Halles dalba, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "09 87 38 80 80",
+    "email": "",
+    "website": "https://www.boulangerie-enneartz.fr",
+    "hours": "Du lundi au samedi 8h 19h",
+    "photos": [
+      "assets/photos/entreprises/boulangerie-enneartz/cover.jpg",
+      "assets/photos/entreprises/boulangerie-enneartz/logo.jpg"
+    ]
+  },
+  {
+    "slug": "boussaad-art-deco",
+    "name": "BOUSSAAD ART DECO",
     "category": "createurs",
     "category_label": "Créateurs",
-    "description": "Venez découvrir des sculptures uniques, nées de matériaux recyclés, sublimées par le travail de l’artiste.",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "07 53 97 58 95",
+    "description": "",
+    "address": "",
+    "phone": "",
     "email": "",
     "website": "",
     "hours": "",
     "photos": []
+  },
+  {
+    "slug": "bowl-go",
+    "name": "BOWL & GO",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Livraison de nourriture",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "09 88 49 84 65",
+    "email": "",
+    "website": "https://www.bowlandgo.fr",
+    "hours": "Du lundi au dimanche 11H30 à 22H",
+    "photos": [
+      "assets/photos/entreprises/bowl-go/cover.jpg",
+      "assets/photos/entreprises/bowl-go/logo.png"
+    ]
+  },
+  {
+    "slug": "brasserie-diraty",
+    "name": "BRASSERIE D'IRATY",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Brasserie",
+    "address": "Halles OCCABE, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 41 93 87",
+    "email": "brasserie.iraty64@gmail.com",
+    "website": "",
+    "hours": "Du lundi au vendredi de 6h30 à 15h3à",
+    "photos": [
+      "assets/photos/entreprises/brasserie-diraty/cover.jpg",
+      "assets/photos/entreprises/brasserie-diraty/logo.png"
+    ]
+  },
+  {
+    "slug": "btm-biarritz-train-miniature",
+    "name": "BTM BIARRITZ TRAINS MINIATURES",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Vente de trains miniatures",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 87 34 87 33",
+    "email": "",
+    "website": "https://btm.eus",
+    "hours": "Du lundi au jeudi de 10h à 17h",
+    "photos": [
+      "assets/photos/entreprises/btm-biarritz-train-miniature/cover.jpg",
+      "assets/photos/entreprises/btm-biarritz-train-miniature/logo.png"
+    ]
   },
   {
     "slug": "bye-buy-car",
@@ -130,6 +473,108 @@
     "photos": []
   },
   {
+    "slug": "cabinet-de-radiologie-dr-nomblot",
+    "name": "CABINET DE RADIOLOGIE DR.NOMBLOT",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Centre d’imagerie médicale",
+    "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 47 15 64 64",
+    "email": "",
+    "website": "https://www.doctolib.fr/centre-d-imagerie-medicale/biarritz/dr-nomblot-oloron-sainte-marie-chauvigny-et-chantonnay?highlight[agenda_ids",
+    "hours": "Du lundi au vendredi de 8h15 à 18h15",
+    "photos": [
+      "assets/photos/entreprises/cabinet-de-radiologie-dr-nomblot/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "cafe-grand-biarritz",
+    "name": "CAFÉ GRAND BIARRITZ",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Propose de la cuisine et des boissons",
+    "address": "Halle DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 24 33 03 04",
+    "email": "cafegrandbiarritz@gmail.com",
+    "website": "https://le-cafe-du-vib.business.site",
+    "hours": "Du lundi au vendredi de 11h30 à 2h",
+    "photos": [
+      "assets/photos/entreprises/cafe-grand-biarritz/cover.jpg",
+      "assets/photos/entreprises/cafe-grand-biarritz/photo-01.jpg",
+      "assets/photos/entreprises/cafe-grand-biarritz/logo.png"
+    ]
+  },
+  {
+    "slug": "cap-vital-sante",
+    "name": "CAP VITAL SANTE",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Vente de matériels medicaux",
+    "address": "HALLE DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 23 49 57",
+    "email": "ADAPT.BIARRITZ.MEDICAL@WANADOO.FR",
+    "website": "https://www.capvitalsante64-40.fr",
+    "hours": "Du lundi au samedi de 9h à 18h",
+    "photos": [
+      "assets/photos/entreprises/cap-vital-sante/cover.jpg",
+      "assets/photos/entreprises/cap-vital-sante/logo.jpg"
+    ]
+  },
+  {
+    "slug": "carrosserie-jmb-auto-moto",
+    "name": "CARROSSERIE JMB AUTO MOTO",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Carrosserie de voitures motos",
+    "address": "Biarritz Activités",
+    "phone": "06 78 80 45 37",
+    "email": "jmbautomoto@gmail.com",
+    "website": "http://www.carrosserie-biarritz.com",
+    "hours": "Du lundi au vendredi de 7h30 à 17h",
+    "photos": [
+      "assets/photos/entreprises/carrosserie-jmb-auto-moto/cover.jpg",
+      "assets/photos/entreprises/carrosserie-jmb-auto-moto/logo.jpg"
+    ]
+  },
+  {
+    "slug": "centre-lazeo",
+    "name": "LAZEO BIARRITZ - Centres d’épilation laser & Soins esthétiques",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Nos centres d’Épilation Laser et de Soins esthétiques LAZEO respectent les plus hauts standards en matière de sécurité de patients. Spacieux et modernes, ils offrent un confort maximal. Tous nos traitements sont effectués par des médecins et professionnels hautement qualifiés et formés par nos soins, avec une approche ultra-personnalisé pour chaque patient. Les centres sont équipés de machines de dernière génération parmi les plus performantes et sûres du monde.\nLes équipes de LAZEO Biarritz vous accueillent, dans une ambiance conviviale dans la plus grande sécurité et respect des mesures sanitaires.\nNous vous proposons plusieurs types de prestations telles que :\nL’épilation définitive au laser\nDes soins Esthétiques : Dermo et Capillaires\nDe la médecine Esthétique\nN’hésitez pas à nous contacter pour plus de renseignements.\nVILLAGE Iraty-Biarritz, le VILLAGE qui VIBre pour votre santé",
+    "address": "Halle DARLA - 16 rue des Mésanges - Lot n°67 - 64200 Biarritz",
+    "phone": "05 33 09 49 45",
+    "email": "biarritz@lazeo.com",
+    "website": "https://www.lazeo.com/centres/lazeo-biarritz",
+    "hours": "Lundi – Vendredi 08:00 - 19:00 · Samedi 09:00 - 19:00 · Dimanche · Fermé",
+    "photos": [
+      "assets/photos/entreprises/centre-lazeo/cover.jpg",
+      "assets/photos/entreprises/centre-lazeo/photo-01.jpeg",
+      "assets/photos/entreprises/centre-lazeo/photo-02.jpeg",
+      "assets/photos/entreprises/centre-lazeo/photo-03.jpeg",
+      "assets/photos/entreprises/centre-lazeo/photo-04.jpeg",
+      "assets/photos/entreprises/centre-lazeo/photo-05.jpg",
+      "assets/photos/entreprises/centre-lazeo/photo-06.png",
+      "assets/photos/entreprises/centre-lazeo/logo.webp"
+    ]
+  },
+  {
+    "slug": "click-go",
+    "name": "CLICK & GO",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Livraison à domicile de course",
+    "address": "BIARRITZ ACTIVITES",
+    "phone": "06 58 73 75 52",
+    "email": "",
+    "website": "https://www.clickgo.fr/vendeur/bayonne",
+    "hours": "Du lundi au dimanche de 20h à 4H",
+    "photos": [
+      "assets/photos/entreprises/click-go/cover.jpeg",
+      "assets/photos/entreprises/click-go/logo.png"
+    ]
+  },
+  {
     "slug": "cuir-factory",
     "name": "CUIR FACTORY",
     "category": "createurs",
@@ -137,10 +582,13 @@
     "description": "Cuir Factory BTZ est un atelier de maroquinerie artisanale établi à Biarritz depuis 1995, spécialisé dans la création et la réparation de pièces en cuir. Une gamme complète incluant sacs, portefeuilles, ceintures et chaussures, avec des créations sur mesure adaptées à chaque client. Son engagement principal réside dans l'utilisation exclusive de cuir recyclé dans toutes ses créations pour une mode responsable. Au-delà de la vente, l'atelier offre des services de réparation, d'entretien et de cordonnerie. Plus de 25 ans d'expérience alliant tradition, précision artisanale et démarche écologique.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "07 57 58 30 41",
-    "email": "",
+    "email": "Cuirfactorybtz@gmail.com",
     "website": "https://www.cuir-factory-btz.fr",
-    "hours": "",
-    "photos": []
+    "hours": "Du mardi au samedi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/cuir-factory/cover.jpeg",
+      "assets/photos/entreprises/cuir-factory/logo.webp"
+    ]
   },
   {
     "slug": "dance-wave",
@@ -150,10 +598,13 @@
     "description": "Dance·Wave est une association de danse à Biarritz proposant des cours de danse pour tous les âges et niveaux. L'école accueille les enfants dès 4 ans avec un cours d'éveil, puis propose du hip-hop pour les enfants et adolescents. Pour les plus grands : Streetjazz, Dancehall, Girly, Urban Contempo, Talons. Les professeurs visent à transmettre leur passion artistique dans une pédagogie bienveillante, encourageant le lâcher-prise, la confiance en soi et le plaisir de danser. Cours privés et prestations d'ouverture de bal également disponibles.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 69 63 16 79",
-    "email": "",
+    "email": "charlene.couturat@gmail.com",
     "website": "https://www.dance-wave.fr",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au vendredi de 18h30 à 21h30",
+    "photos": [
+      "assets/photos/entreprises/dance-wave/cover.jpg",
+      "assets/photos/entreprises/dance-wave/logo.jpeg"
+    ]
   },
   {
     "slug": "darrieumerlou",
@@ -163,10 +614,62 @@
     "description": "Que ce soit pour une maison, une extension ou un projet sur mesure, Darrieurmerlou allie expertise artisanale et respect des matériaux pour sublimer vos espaces. Faites confiance à notre engagement pour des réalisations qui traversent le temps.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 56 80 41",
-    "email": "",
+    "email": "Bertrand.arrue@darrieumerlou.fr",
     "website": "https://www.darrieumerlou.fr/?fbclid=IwY2xjawGpQVBleHRuA2FlbQIxMAABHXVkURXw6SvSDmZLImpWZ5Ykk1brtY--pFdbDtlY25BnxFUVN4yiuGxmqA_aem_2auD08Lp4EIY4bYngDJoaQ",
     "hours": "",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/darrieumerlou/cover.webp",
+      "assets/photos/entreprises/darrieumerlou/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "david-coralie-opticien",
+    "name": "DAVID & CORALIE - OPTICIEN LUNETIER",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Bienvenue chez DAVID & CORALIE, votre Opticien Lunetier du ViB :\nOpticien diplômé & visagiste - Expérience & conseil - Examen & Technique - Verres & Lunettes //\nEnfants, Adultes, tout notre savoir-faire à votre service.\nExamen de vue\nService visagiste\nAdaptation de lentille\nRéparation entretien\nPolissage\nLunettes sur mesure\nLunettes de sport\nLunettes de protection\nNous sommes ouverts du mardi au samedi de 9H30 à 12H30 et 14H à 19H et le lundi après-midi sur rendez-vous.\nVILLAGE Iraty-Biarritz, le VILLAGE qui VIBre pour votre santé",
+    "address": "Bâtiment Les ALDADES - 2 rue des Mésanges – Lot 2 – 64 200 Biarritz",
+    "phone": "05 59 43 06 71",
+    "email": "contact@davidetcoralie.com",
+    "website": "https://www.davidetcoralie.com",
+    "hours": "Du mardi au samedi de 9H30 à 12H30 et 14H à 19H",
+    "photos": [
+      "assets/photos/entreprises/david-coralie-opticien/cover.png",
+      "assets/photos/entreprises/david-coralie-opticien/photo-01.png",
+      "assets/photos/entreprises/david-coralie-opticien/photo-02.jpg",
+      "assets/photos/entreprises/david-coralie-opticien/photo-03.jpg"
+    ]
+  },
+  {
+    "slug": "depann-pc64",
+    "name": "DEPANN PC'64",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Réparation de portables, ordinateur, connecteur ..",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 74 14 46",
+    "email": "contact@depannpc64.com",
+    "website": "https://www.depannpc64.com",
+    "hours": "Du lundi au jeudi de 10h à 17h30",
+    "photos": [
+      "assets/photos/entreprises/depann-pc64/cover.jpg"
+    ]
+  },
+  {
+    "slug": "dietplus",
+    "name": "DIETPLUS",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Conseil en nutrition",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 06 56 28 58",
+    "email": "contact@dietplus.fr",
+    "website": "https://www.dietplus.fr/centres/biarritz",
+    "hours": "Lundi – Mercredi – Vendredi de 9h à 18H · Mardi – Jeudi de 9h à 18h3à",
+    "photos": [
+      "assets/photos/entreprises/dietplus/cover.jpg",
+      "assets/photos/entreprises/dietplus/logo.jpg"
+    ]
   },
   {
     "slug": "don-donuts",
@@ -176,10 +679,125 @@
     "description": "Don Donuts est une petite entreprise spécialisée dans la vente de donuts à emporter, située à Biarritz. Chaque jour de nouvelles saveurs avec des toppings variés et savoureux. Le shop fonctionne selon un concept original : ouvert à partir de 10h30, il ferme lorsque tous les produits sont vendus. Don Donuts se distingue par son engagement écologique, avec un projet de cargo électrique le long des plages. Très bien noté par les clients, livraison disponible via Uber Eats et commandes en ligne acceptées.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "07 85 93 25 10",
-    "email": "",
+    "email": "Dondonuts64@gmail.com",
     "website": "https://linktr.ee/dondonuts?fbclid=PAZXh0bgNhZW0CMTEAAaZWPqnGaUv3Ugx4Y35cZBFRA_a6VpOnanLZFTpC_ng0wiF5p6a_UYGLM9c_aem_p65d6J8LIl2n7lCaeTHiKg",
+    "hours": "Du lundi au samedi de 9h30 à 20h",
+    "photos": [
+      "assets/photos/entreprises/don-donuts/cover.jpg",
+      "assets/photos/entreprises/don-donuts/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "dr-leslie-morales",
+    "name": "LESLIE MORALES OSTHÉOPATHE",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Médecin Ostéopathe",
+    "address": "Biarritz Activités",
+    "phone": "07 80 12 26 41",
+    "email": "Dr.moralesleslie@gmail.com",
+    "website": "",
     "hours": "",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/dr-leslie-morales/cover.webp",
+      "assets/photos/entreprises/dr-leslie-morales/logo.webp"
+    ]
+  },
+  {
+    "slug": "ds-wash",
+    "name": "ANTONIO WASH",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Station de lavage",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 63 56 17",
+    "email": "ANTONIO-PEREIRA1@LIVE.COM.PT",
+    "website": "",
+    "hours": "Du lundi au samedi de 9h à 18h30",
+    "photos": [
+      "assets/photos/entreprises/ds-wash/cover.jpg",
+      "assets/photos/entreprises/ds-wash/logo.jpg"
+    ]
+  },
+  {
+    "slug": "eat-go",
+    "name": "EAT & GO",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Vente et livraison de nourriture",
+    "address": "Biarritz Activités",
+    "phone": "06 58 73 75 52",
+    "email": "yol.clement@outlook.fr",
+    "website": "https://www.ubereats.com/fr/store/eat-%26-go/lP_w0ilPVOm5GL1Xe7c-DA?diningMode=DELIVERY",
+    "hours": "Du lundi au dimanche de 20h à 4h",
+    "photos": [
+      "assets/photos/entreprises/eat-go/cover.jpg",
+      "assets/photos/entreprises/eat-go/logo.jpg"
+    ]
+  },
+  {
+    "slug": "ecole-de-cirque-ballabulle",
+    "name": "ÉCOLE DE CIRQUE BALLABULLE",
+    "category": "sport",
+    "category_label": "Sport",
+    "description": "Le travail de Ballabulle s’articule autour de la motricité, de la créativité, de l’expression en favorisant le développement des échanges et des capacités relationnelles. Acrobatie, portés, manipulation d’objets, équilibre sont proposés sous forme de parcours ou d’ateliers. En solo, en duo, ou sous forme d’activités collectives, ils sont toujours abordés dans un esprit ludique.",
+    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 14 97 10 84",
+    "email": "ecoledecirque.ballabulle@gmail.com",
+    "website": "http://ballabulle.com/?fbclid=IwAR2hNJBvXZa1UyXhsu6J-2ogpUcVn0GvO2jQBiDUn67Trekom7Mk8nFHoDw",
+    "hours": "Du mardi au samedi de 10h à 18h",
+    "photos": [
+      "assets/photos/entreprises/ecole-de-cirque-ballabulle/cover.jpg",
+      "assets/photos/entreprises/ecole-de-cirque-ballabulle/logo.png"
+    ]
+  },
+  {
+    "slug": "ecole-des-metiers-du-sport-by-gtf",
+    "name": "ÉCOLE DES MÉTIERS DU SPORT BY GTF",
+    "category": "sport",
+    "category_label": "Sport",
+    "description": "L'EMS – École des Métiers du Sport est un Centre de Formation pour Apprentis (CFA) spécialisé dans les métiers du sport, implanté à Biarritz et Toulouse. Formations professionnelles : éducateur sportif (BP JEPS AF), fitness (CQP), Pilates, massage sportif et sport sur prescription médicale. Pour ceux souhaitant changer de métier ou mettre à l'œuvre leur vocation pour le sport. Enseignement habilité par la DRAJES Nouvelle-Aquitaine, dispensé par des experts reconnus, avec des salles partenaires et un cadre privilégié au Pays Basque.",
+    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
+    "phone": "07 69 84 44 88",
+    "email": "contact@ems-biarritz.fr",
+    "website": "https://ems-biarritz.fr",
+    "hours": "Du lundi au vendredi de 8h30 à 18h30",
+    "photos": [
+      "assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/cover.jpg",
+      "assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/logo.jpg"
+    ]
+  },
+  {
+    "slug": "eyesea-production",
+    "name": "EYESEA PRODUCTION",
+    "category": "createurs",
+    "category_label": "Créateurs",
+    "description": "Production de films",
+    "address": "Biarritz Activités",
+    "phone": "06 22 12 42 78",
+    "email": "contact@eyeseaproduction.com",
+    "website": "http://eyeseaproduction.com/index.php/services",
+    "hours": "",
+    "photos": [
+      "assets/photos/entreprises/eyesea-production/cover.jpg",
+      "assets/photos/entreprises/eyesea-production/logo.jpg"
+    ]
+  },
+  {
+    "slug": "formatext",
+    "name": "FORMATEXT",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Propose des solutions de formations pour des entreprises",
+    "address": "Biarritz Activités",
+    "phone": "09 63 68 83 97",
+    "email": "contactbtz@formatext-igs.com",
+    "website": "http://www.formatext-igs.com",
+    "hours": "Du lundi au samedi de 9h à 18h30",
+    "photos": [
+      "assets/photos/entreprises/formatext/cover.jpg",
+      "assets/photos/entreprises/formatext/logo.jpg"
+    ]
   },
   {
     "slug": "horoa",
@@ -189,10 +807,53 @@
     "description": "Spécialisé dans les courts-métrages, documentaires et projets audiovisuels variés, Horoa Studio met en avant la créativité, l’innovation et la richesse des histoires locales et universelles. Faites confiance à notre expertise pour donner vie à vos projets cinématographiques avec authenticité et excellence.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "",
-    "email": "",
+    "email": "florian@horoa.eu",
     "website": "https://linktr.ee/horoa?fbclid=PAZXh0bgNhZW0CMTEAAabZBK_ZKoXJ9nw5VUzNp-8CaUrfDUfRBK-uDi7gT8sFlwXM644bkn5WXBA_aem_oNBg98Kvl-yfZsc2bB-4gA",
     "hours": "",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/horoa/cover.webp",
+      "assets/photos/entreprises/horoa/logo.png"
+    ]
+  },
+  {
+    "slug": "ingerop-cote-basque",
+    "name": "INGÉROP CÔTE BASQUE",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Développe des projets telles que les transports l’industrie,..",
+    "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 58 23 23",
+    "email": "ingerop.cotebasque@ingerop.com",
+    "website": "https://www.ingerop.fr",
+    "hours": "Du lundi au vendredi 10h à 14h",
+    "photos": [
+      "assets/photos/entreprises/ingerop-cote-basque/cover.png",
+      "assets/photos/entreprises/ingerop-cote-basque/logo.png"
+    ]
+  },
+  {
+    "slug": "inovie-axbio",
+    "name": "INOVIE AXBIO - Laboratoire d’Analyses Médicales",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Découvrez le laboratoire d’analyses médicales INOVIE AXBIO récemment installé dans le VILLAGE Iraty-Biarritz.\nCréé en 2010, le Groupe INOVIE est un acteur majeur du diagnostic médical représentant notamment 20% de l’activité de biologie médicale privée en France.\nCe laboratoire de Biologie Médicale a pour mission d’accompagner et de conseiller le patient tout au long de son parcours de soins.\nPrises de sang et tous types de prélèvements sans rendez-vous de 7h à 12h et de 14h à 18h du lundi au vendredi.\nCe service fait partie du pôle santé du VIB qui regroupe SOS Médecins, une pharmacie, un cabinet de radiologie, des chirurgiens-dentistes, des infirmières libérales, des kinésithérapeutes, un centre de podologie, un opticien, des sages femmes et d’autres professionnels de santé pour vous servir.\nVILLAGE Iraty-Biarritz, le VILLAGE qui VIBre pour votre santé",
+    "address": "12 rue des Mésanges - Halle DARLA - Lot n°14 - 64200 Biarritz",
+    "phone": "05 59 23 41 40",
+    "email": "",
+    "website": "https://inovie.fr/laboratoire/inovie-axbio/inovie-axbio-biarritz-iraty-ex-kennedy",
+    "hours": "Lundi, mardi, mercredi, jeudi, vendredi : 07:00-12:30 14:00-18:00 · Samedi : 07:30-12:00 · Dimanche : Fermé",
+    "photos": [
+      "assets/photos/entreprises/inovie-axbio/cover.jpg",
+      "assets/photos/entreprises/inovie-axbio/photo-01.jpg",
+      "assets/photos/entreprises/inovie-axbio/photo-02.jpg",
+      "assets/photos/entreprises/inovie-axbio/photo-03.jpg",
+      "assets/photos/entreprises/inovie-axbio/photo-04.jpg",
+      "assets/photos/entreprises/inovie-axbio/photo-05.jpg",
+      "assets/photos/entreprises/inovie-axbio/photo-06.png",
+      "assets/photos/entreprises/inovie-axbio/photo-07.png",
+      "assets/photos/entreprises/inovie-axbio/photo-08.jpg",
+      "assets/photos/entreprises/inovie-axbio/logo.png"
+    ]
   },
   {
     "slug": "istanbul-kebab",
@@ -202,23 +863,61 @@
     "description": "Istanbul Kebab à Biarritz est un restaurant turc indépendant situé à la halle Iraty. L'établissement se spécialise dans les kebabs, tacos, grillades et pizzas turques. Apprécié de la clientèle locale, il propose une cuisine généreuse et savoureuse dans une ambiance décontractée. Service sur place, à emporter ou en livraison. Une adresse fiable pour les amateurs de cuisine méditerranéenne et turque à Biarritz.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 05 91 48 08",
+    "email": "cemalyavuz00@gmail.com",
+    "website": "",
+    "hours": "Du lundi au samedi de 11h à 15h et de 18h à 21h",
+    "photos": [
+      "assets/photos/entreprises/istanbul-kebab/cover.jpg",
+      "assets/photos/entreprises/istanbul-kebab/logo.jpg"
+    ]
+  },
+  {
+    "slug": "kafe-etxea",
+    "name": "KAFE ETXEA",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Café restauration",
+    "address": "Biarritz Activités",
+    "phone": "06 95 45 26 08",
+    "email": "draperi.david@gmail.com",
+    "website": "https://kafe-etxea.com",
+    "hours": "Le lundi de 14h à 18h · Le mardi de 9h à 18h · Le samedi de 9h à 12h",
+    "photos": [
+      "assets/photos/entreprises/kafe-etxea/cover.jpg",
+      "assets/photos/entreprises/kafe-etxea/logo.jpg"
+    ]
+  },
+  {
+    "slug": "kines-biarritz-iraty",
+    "name": "KINÉS BIARRITZ-IRATY",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "KARENMARESCHAL@GMAIL.COM 0559245758 LES ALDADES",
+    "address": "",
+    "phone": "",
     "email": "",
     "website": "",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au vendredi de 8h à 20h",
+    "photos": [
+      "assets/photos/entreprises/kines-biarritz-iraty/cover.jpg",
+      "assets/photos/entreprises/kines-biarritz-iraty/logo.png"
+    ]
   },
   {
     "slug": "la-guinguette-des-sardines",
     "name": "LA GUINGUETTE DES SARDINES",
     "category": "restaurants",
     "category_label": "Restaurants",
-    "description": "La Guinguette des Sardines est un concept de resto-bar convivial présent à Biarritz et dans plusieurs villes du Sud-Ouest. L'établissement propose une expérience festive centrée autour de tapas et d'une carte fraîche et maison où règne une ambiance de fiesta. Personnel au service énergique, planches à partager généreuses et qualité gastronomique. L'atmosphère, très cool et conviviale, combine convivialité et divertissement. Cocktails bien dosés, gastronomie et bonne humeur au rendez-vous : un véritable lieu de rencontre.",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
+    "description": "Bar à tapas",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "06 81 81 21 23",
-    "email": "",
+    "email": "contact@lessardinesbar.fr",
     "website": "https://www.sardines-guinguettes.com/reservation",
-    "hours": "",
-    "photos": []
+    "hours": "Mardi-mercredi de 17h à 00h · Jeudi de 17h à 2h · Vendredi et samedi de 18h à 2h",
+    "photos": [
+      "assets/photos/entreprises/la-guinguette-des-sardines/cover.jpg",
+      "assets/photos/entreprises/la-guinguette-des-sardines/logo.jpg"
+    ]
   },
   {
     "slug": "la-parqueterie-basque",
@@ -237,6 +936,22 @@
     ]
   },
   {
+    "slug": "la-ptite-biarrote",
+    "name": "LA PTITE BIARROTE",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Restaurant",
+    "address": "Halles DALBA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "09 50 86 88 49",
+    "email": "",
+    "website": "",
+    "hours": "Du samedi au dimanche de 8h30 à 14h",
+    "photos": [
+      "assets/photos/entreprises/la-ptite-biarrote/cover.jpg",
+      "assets/photos/entreprises/la-ptite-biarrote/logo.jpg"
+    ]
+  },
+  {
     "slug": "la-vague",
     "name": "LA VAGUE",
     "category": "entreprises",
@@ -244,10 +959,13 @@
     "description": "La Vague est un studio d'enregistrement moderne situé au VILLAGE Iraty-Biarritz. Il propose des services complets de mixage, production et mastering destinés aux musiciens et artistes. Le studio offre également des formations à la demande et collabore avec des labels majeurs tels qu'Universal Music et Sony Music. Avec plus de 26 millions de streams à son actif, La Vague se positionne comme un espace créatif professionnel pour la production musicale, la post-production et la création de contenus pour artistes, labels et marques.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "07 80 91 02 92",
-    "email": "",
+    "email": "contact@lavague.studio",
     "website": "https://www.lavague.studio/?utm_source=google&#038;utm_medium=wix_google_business_profile&#038;utm_campaign=1845846328326374139",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au vendredi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/la-vague/cover.jpg",
+      "assets/photos/entreprises/la-vague/logo.jpg"
+    ]
   },
   {
     "slug": "laminak",
@@ -257,10 +975,61 @@
     "description": "Chez Laminak, nous allions qualité, fraîcheur et savoir-faire pour satisfaire les amateurs de produits marins. Que ce soit pour vos repas quotidiens ou vos occasions spéciales, nous sommes là pour vous conseiller et sublimer vos assiettes avec le goût authentique de l’océan.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 22 12 02 28",
+    "email": "Laminak.se@hotmail.com",
+    "website": "",
+    "hours": "Tous les jours sauf le lundi",
+    "photos": [
+      "assets/photos/entreprises/laminak/cover.jpeg",
+      "assets/photos/entreprises/laminak/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "larty-chaud",
+    "name": "L'ARTY CHAUD",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Cuisine de bistro",
+    "address": "HALLE DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "09 87 34 80 68",
     "email": "",
     "website": "",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au samedi de 12h à 14h30",
+    "photos": [
+      "assets/photos/entreprises/larty-chaud/cover.jpg",
+      "assets/photos/entreprises/larty-chaud/logo.jpg"
+    ]
+  },
+  {
+    "slug": "lazy-days",
+    "name": "LAZY DAYS",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Salon de détente",
+    "address": "Halles DALBA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 23 80 77",
+    "email": "accueil@lazydays.fr",
+    "website": "https://www.massage-spa-biarritz.com",
+    "hours": "Du mardi au samedi 9h30 à 18h",
+    "photos": [
+      "assets/photos/entreprises/lazy-days/cover.jpg",
+      "assets/photos/entreprises/lazy-days/logo.jpg"
+    ]
+  },
+  {
+    "slug": "le-local",
+    "name": "LE LOCAL",
+    "category": "createurs",
+    "category_label": "Créateurs",
+    "description": "Club de musique",
+    "address": "Biarritz Activités",
+    "phone": "06 11 49 28 84",
+    "email": "etcheverlepo.marc@orange.fr",
+    "website": "",
+    "hours": "Le vendredi de 20h à 2h",
+    "photos": [
+      "assets/photos/entreprises/le-local/cover.jpg",
+      "assets/photos/entreprises/le-local/logo.png"
+    ]
   },
   {
     "slug": "le-studio",
@@ -270,23 +1039,29 @@
     "description": "Le Studio Pilates & Coaching, situé au VILLAGE Iraty-Biarritz, est un espace accueillant dirigé par Stéphanie qui propose des cours de Pilates, danse et gymnastique. Le studio se distingue par son approche inclusive et bienveillante, basée sur la philosophie que votre corps est précieux. Les cours sont conçus comme une reconnexion à soi-même. Espace détente, douches, cabines individuelles et parking gratuit à disposition. Une séance d'essai offerte permet aux nouveaux venus de découvrir cette méthode.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 75 91 77 52",
-    "email": "",
+    "email": "lestudiopilatesetcoaching@gmail.com",
     "website": "https://www.lestudiopilatesetcoaching.com",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au samedi de 8h à 20h",
+    "photos": [
+      "assets/photos/entreprises/le-studio/cover.jpg",
+      "assets/photos/entreprises/le-studio/logo.jpg"
+    ]
   },
   {
-    "slug": "violon-dans-lame",
-    "name": "LE VIOLON DANS l’ÂME- Atelier de lutherie",
-    "category": "commerces",
-    "category_label": "Commerces",
-    "description": "Gilles et Lore, artisans luthiers diplômés de la prestigieuse École Nationale de Mirecourt, apportent leur sérieux et leurs compétences déjà reconnus, au sein de leur atelier à Biarritz. Ils se consacrent avec passion à la haute restauration et la création des instruments de quatuor.\n\n– Vente de violons, altos, violoncelles et contrebasses – Vente de tous les accessoires : cordes, étuis, coussins, partitions… – Les réglages de vos instruments – L’entretien de vos archets – Les estimations et expertises – La location de violons, altos, violoncelles et contrebasses\n\nÉrable, épicéa, ébène… Entre les mains du créateur, ces matières prennent vie et deviennent bien plus qu’un objet. Elles deviennent violon.",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "05 59 59 73 91",
-    "email": "",
-    "website": "https://www.gilles-braem-luthier-bordeaux.fr",
-    "hours": "",
-    "photos": []
+    "slug": "lecho-du-silence",
+    "name": "L’ECHO DU SILENCE",
+    "category": "createurs",
+    "category_label": "Créateurs",
+    "description": "Course de poterie",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 63 95 47 25",
+    "email": "contact@lechodusilence.com",
+    "website": "https://www.lechodusilence.com/contact",
+    "hours": "Du mardi au vendredi de 10h30 à 19h · Le samedi de 10h à 17h",
+    "photos": [
+      "assets/photos/entreprises/lecho-du-silence/cover.jpg",
+      "assets/photos/entreprises/lecho-du-silence/logo.jpg"
+    ]
   },
   {
     "slug": "les-losanges",
@@ -296,36 +1071,104 @@
     "description": "Un large choix de pièces uniques, exceptionnelles disponibles sur la boutique en ligne ou à Biarritz dans un showroom de plus de 300 m², où plusieurs tribus sont représentées. Retrouvez des tapis Azilal, des tapis Beni Ouarain, des tapis Boucherouite, des tapis Kilim, et bien d’autres tapis de prestige issus des tribus M’rirt, Boujaad, M’Guild, ou Talsint pour ne citer qu’elles.\n\nQuels que soient vos goûts en matière de tapis marocain, vous trouverez forcément LE modèle qui vous fait rêver chez LESLOSANGES. Le duo explore sans cesse les petits villages berbères à la recherche de perles rares, neuves ou vintages.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 52 60 96 99",
-    "email": "",
+    "email": "leslosanges@gmail.com",
     "website": "https://www.leslosanges.com",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au vendredi de 8h à 22H",
+    "photos": [
+      "assets/photos/entreprises/les-losanges/cover.jpg",
+      "assets/photos/entreprises/les-losanges/logo.jpg"
+    ]
   },
   {
-    "slug": "lecho-du-silence",
-    "name": "L’ECHO DU SILENCE",
-    "category": "createurs",
-    "category_label": "Créateurs",
-    "description": "L'Écho du Silence est un atelier-boutique de céramique au VILLAGE Iraty-Biarritz, dirigé par l'artiste Wirginia. Cours d'initiation au tournage, modelage et azulejos, ateliers libres et formations professionnelles éligibles au CPF. L'atelier crée également des décors muraux personnalisés en faïence, inspirés par la technique des azulejos marocains et portugais. Avec une formation aux Beaux-Arts, Wirginia accompagne les clients dans leurs projets artistiques, du carrelage mural aux pièces de poterie, en partenariat avec des carreleurs professionnels.",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "06 63 95 47 25",
-    "email": "",
-    "website": "https://www.lechodusilence.com/contact",
-    "hours": "",
-    "photos": []
+    "slug": "maison-auto-nettoyante-technitoit",
+    "name": "Technitoit",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Entreprise de travaux",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 87 08 42 36",
+    "email": "Cristovao.f@technitoit.com",
+    "website": "https://www.technitoit.com/agence/pyrenees-atlantiques-64-biarritz?utm_source=google&utm_medium=gmb",
+    "hours": "Du lundi au vendredi de 8h30 à 12h et de 13h30 à 17h30",
+    "photos": [
+      "assets/photos/entreprises/maison-auto-nettoyante-technitoit/cover.jpg",
+      "assets/photos/entreprises/maison-auto-nettoyante-technitoit/logo.jpg"
+    ]
   },
   {
     "slug": "maison-vishnu",
     "name": "MAISON VISHNU",
     "category": "restaurants",
     "category_label": "Restaurants",
-    "description": "La Maison Vishnu met à l’honneur la cuisine indienne et sri lankaise traditionnelle à travers une carte variée et généreuse. Chaque recette est préparée avec des épices authentiques et des ingrédients frais pour offrir une expérience culinaire dépaysante. Retrouvez une sélection d’entrées gourmandes, un large choix de plats cuisinés, des spécialités végétariennes, ainsi que des desserts et boissons typiques.\n\nDégustez des plats faits maison, préparés dans le respect de la tradition indienne et sri lankaise, pour une pause gourmande pleine de saveurs.\n\nCommandez vos plats indiens & Sri lankais à emporter à Biarritz, ou sur UBER EATS ou retrouvez-nous sur les marchés locaux :",
+    "description": "Venez découvrir une véritable invitation au voyage avec nos plats indiens et sri lankais à emporter.\nLa Maison Vishnu met à l’honneur la cuisine indienne et sri lankaise traditionnelle à travers une carte variée et généreuse. Chaque recette est préparée avec des épices authentiques et des ingrédients frais pour offrir une expérience culinaire dépaysante. Retrouvez une sélection d’entrées gourmandes, un large choix de plats cuisinés, des spécialités végétariennes, ainsi que des desserts et boissons typiques.\nNous proposons notamment :\n● Samossas croustillants, rouleaux épicés, poulet tandoori mariné\n● Curry de légumes, dhal curry, palak paneer\n● Poulet tikka masala, butter chicken, biryani au poulet\n● Kottu boeuf, curry de crevettes, pâtes au curry\n● Accompagnements : riz basmati, riz kashmir, naan nature, naan fromage, naan ail\n● Desserts maison : kesari, salade de fruits exotiques\n● Lassis traditionnels : mangue, rose, banane ou nature\nCommandez vos plats indiens & Sri lankais à emporter à Biarritz, ou sur UBER EATS ou retrouvez-nous sur les marchés locaux :\n● Mardi : marché de Saint-Jean-de-Luz\n● Jeudi : marché d’Anglet Quintaou\n● Vendredi : marché de Saint-Jean-de-Luz\n● Samedi : marché de Bayonne\n● Dimanche : marché d’Anglet Quintaou\nDégustez des plats faits maison, préparés dans le respect de la tradition indienne et sri lankaise, pour une pause gourmande pleine de saveurs.\nVenez faire Vibrer vos papilles grâce aux restaurants de votre VILLAGE Iraty – Biarritz !",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "07 70 74 93 71",
-    "email": "",
+    "email": "commande@maisonvishnu.com",
     "website": "https://www.maisonvishnu.com",
-    "hours": "",
-    "photos": []
+    "hours": "Lundi 12:00 - 14:30 18:00 - 22:30 · Mardi 18:30 - 22:30 · Mercredi 12:00 - 14:30 18:00 - 22:30 · Jeudi 18:00 - 22:30 · Vendredi 18:30 - 22:30 · Samedi 12:00 - 14:30 18:00 - 22:30 · Dimanche 18:00 - 22:30",
+    "photos": [
+      "assets/photos/entreprises/maison-vishnu/cover.png",
+      "assets/photos/entreprises/maison-vishnu/photo-01.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-02.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-03.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-04.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-05.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-06.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-07.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-08.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-09.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-10.webp",
+      "assets/photos/entreprises/maison-vishnu/photo-11.png",
+      "assets/photos/entreprises/maison-vishnu/photo-12.webp",
+      "assets/photos/entreprises/maison-vishnu/logo.jpg"
+    ]
+  },
+  {
+    "slug": "mega-sun-biarritz",
+    "name": "MEGASUN BIARRITZ",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Centre de bronzage",
+    "address": "HALLE DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 22 20 93",
+    "email": "contact@megasun-biarritz.fr",
+    "website": "http://www.megasun-biarritz.fr",
+    "hours": "Du lundi au vendredi 8h à 19h",
+    "photos": [
+      "assets/photos/entreprises/mega-sun-biarritz/logo.png"
+    ]
+  },
+  {
+    "slug": "monsieur-brisson",
+    "name": "MONSIEUR BRISSON",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Politique",
+    "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 51 40 85",
+    "email": "maxbrisson.senateur64@gmail.com",
+    "website": "https://www.maxbrisson.fr",
+    "hours": "Du lundi au vendredi",
+    "photos": [
+      "assets/photos/entreprises/monsieur-brisson/cover.jpg",
+      "assets/photos/entreprises/monsieur-brisson/logo.jpg"
+    ]
+  },
+  {
+    "slug": "nahia",
+    "name": "NAHIA",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Restaurant",
+    "address": "Halle DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "09 83 01 57 27",
+    "email": "herve.philippe64@orange.fr",
+    "website": "",
+    "hours": "Du lundi au samedi de 9h à 21h",
+    "photos": [
+      "assets/photos/entreprises/nahia/cover.jpg",
+      "assets/photos/entreprises/nahia/logo.png"
+    ]
   },
   {
     "slug": "nouvelle-compagnie-des-arts-graphiques",
@@ -335,23 +1178,135 @@
     "description": "La Nouvelle Compagnie des Arts Graphiques (NCAG) est une galerie spécialisée depuis 2001 dans les estampes originales rares et œuvres sur papier des 19e et 20e siècles. Un inventaire sélectif couvrant plusieurs mouvements artistiques : Art nouveau, art moderne, art contemporain, Pop Art et affiches maîtres. Représentation d'artistes prestigieux comme Picasso, Dalí, Miró et Hundertwasser. Authentification garantie avec certificats, vente sécurisée et livraison mondiale.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "07 85 56 62 52",
-    "email": "",
+    "email": "bs@ncag.fr",
     "website": "https://www.ncag-art-gallery.com",
-    "hours": "",
-    "photos": []
+    "hours": "Du lundi au dimanche 24h/24h",
+    "photos": [
+      "assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/cover.jpg",
+      "assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/logo.png"
+    ]
+  },
+  {
+    "slug": "number-one-shop",
+    "name": "NUMBER ONE BARBERSHOP",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Barbier",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "09 53 98 84 26",
+    "email": "Direction@numberonebarbershop.com",
+    "website": "https://www.numberonebarbershop.com",
+    "hours": "Du lundi au samedi de 10h à 20h",
+    "photos": [
+      "assets/photos/entreprises/number-one-shop/cover.jpg",
+      "assets/photos/entreprises/number-one-shop/logo.jpeg"
+    ]
   },
   {
     "slug": "odette-coiffure",
     "name": "ODETTE COIFFURE",
     "category": "commerces",
     "category_label": "Commerces",
-    "description": "Un salon de coiffure moderne et soigné, proposant des coupes tendance avec une équipe attentive pour définir un look personnalisé. Conseils en coiffure et soins beauté.",
+    "description": "Notre équipe vous reçoit dans un espace moderne et soigné.\nUne équipe attentive vous accompagne pour définir un look qui vous ressemble.\nLe salon offre des coupes tendance, avec des conseils adaptés.\nPrenez rendez-vous en toute simplicité pour sublimer vos cheveux.\nPrestations :\nShampooing / Coupe / Brushing\nColorations & balayages\nChignons & Coiffures de mariée\nLissages & Extensions de cheveux\nInformations pratiques : Entrée accessible en fauteuil roulant - Parking gratuit",
     "address": "10 Rue des Mésanges, 64200 Biarritz (Village Iraty)",
     "phone": "05 59 24 23 56",
-    "email": "",
+    "email": "odettebtz@gmail.com",
     "website": "",
     "hours": "Sur rendez-vous (Planity, Fresha)",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/odette-coiffure/cover.jpg",
+      "assets/photos/entreprises/odette-coiffure/photo-01.jpg",
+      "assets/photos/entreprises/odette-coiffure/photo-02.jpg",
+      "assets/photos/entreprises/odette-coiffure/photo-03.jpg",
+      "assets/photos/entreprises/odette-coiffure/photo-04.jpg",
+      "assets/photos/entreprises/odette-coiffure/photo-05.jpeg",
+      "assets/photos/entreprises/odette-coiffure/photo-06.jpeg",
+      "assets/photos/entreprises/odette-coiffure/photo-07.jpg",
+      "assets/photos/entreprises/odette-coiffure/photo-08.jpg",
+      "assets/photos/entreprises/odette-coiffure/logo.jpg"
+    ]
+  },
+  {
+    "slug": "ongles-en-gel",
+    "name": "ONGLES EN GEL",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Prothésiste ongulaire",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 13 34 23 51",
+    "email": "california54300@hotmail.fr",
+    "website": "",
+    "hours": "Du lundi au samedi de 9h30 à 19h",
+    "photos": [
+      "assets/photos/entreprises/ongles-en-gel/cover.jpeg",
+      "assets/photos/entreprises/ongles-en-gel/logo.jpg"
+    ]
+  },
+  {
+    "slug": "ophelie-hubert",
+    "name": "Ophélie HUBERT Pédicure – Podologue",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Bienvenue au cabinet de Podologie du VIB :\n•\tSoin de pédicurie complet\n•\tSoin spécifique : ongle incarné, cor, verrue\n•\tSoin diabétique (avec ordonnance)\n•\tBilan podologique et postural\n•\tBilan du coureur (avec analyse de la course)\n•\tContrôle des 6 semaines (semelles)\n•\tPose de bandes de Tape (augmente la vascularisation, diminue l’inflammation et la douleur)\n•\tOrthoplastie (orthèse de correction/compensation d’orteils)\n•\tOrthonyxie (correction hypercourbure de l’ongle)\nConventionné, Carte Vitale acceptée, Accréditée 'La clinique du coureur\" dans la prise en charge du coureur/Traileur.\nInformations pratiques : 1er étage avec ascenseur, Entrée accessible, Parking gratuit, stationnement PMR, Accepte les nouveaux patients sur Doctolib\nMoyens de paiement : Chèques, espèces et carte bancaire\nPrenez rendez-vous en ligne sur Doctolib, en réservant directement votre consultation à l'heure que vous souhaitez avec Ophélie HUBERT, Pédicure-podologue à BIARRITZ\nVILLAGE Iraty-Biarritz, le VILLAGE qui VIBre pour votre santé",
+    "address": "Bâtiment Les Aldades - 4 rue des Mésanges -– Lot 20 – 64 200 Biarritz",
+    "phone": "09 86 11 01 03",
+    "email": "hubertpodologie@gmail.com",
+    "website": "https://www.doctolib.fr/pedicure-podologue/biarritz/ophelie-hubert",
+    "hours": "Horaires d’ouverture : · Lundi :09h15 - 19h00 · Mardi :09h15 - 19h00 · Mercredi :09h15 - 19h00 · Jeudi :09h15 - 12h30 · Vendredi :09h15 - 19h00",
+    "photos": [
+      "assets/photos/entreprises/ophelie-hubert/cover.jpg",
+      "assets/photos/entreprises/ophelie-hubert/photo-01.png",
+      "assets/photos/entreprises/ophelie-hubert/photo-02.png",
+      "assets/photos/entreprises/ophelie-hubert/photo-03.png"
+    ]
+  },
+  {
+    "slug": "origins-digital",
+    "name": "ORIGINS DIGITAL",
+    "category": "entreprises",
+    "category_label": "Entreprises",
+    "description": "Vente de matériels digitales",
+    "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 43 85 47",
+    "email": "",
+    "website": "https://www.onrewind.com/#intro",
+    "hours": "",
+    "photos": [
+      "assets/photos/entreprises/origins-digital/cover.jpg",
+      "assets/photos/entreprises/origins-digital/logo.jpg"
+    ]
+  },
+  {
+    "slug": "paritel",
+    "name": "PARITÉL",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Propose des solutions personnalisés pour développer des entreprises",
+    "address": "Halle DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 47 15 71 20",
+    "email": "web@paritel.fr",
+    "website": "http://agences.paritel.fr/813478-paritel-biarritz",
+    "hours": "Du lundi au vendredi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/paritel/cover.jpg",
+      "assets/photos/entreprises/paritel/logo.png"
+    ]
+  },
+  {
+    "slug": "pharmacie-biarritz-iraty",
+    "name": "PHARMACIE BIARRITZ IRATY",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Pharmacie vente de produits de santé",
+    "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 24 00 33",
+    "email": "phieiraty@offisecure.com",
+    "website": "https://www.pharmacie-biarritz-iraty.fr",
+    "hours": "Du lundi au samedi 8h à 20H",
+    "photos": [
+      "assets/photos/entreprises/pharmacie-biarritz-iraty/cover.png",
+      "assets/photos/entreprises/pharmacie-biarritz-iraty/logo.png"
+    ]
   },
   {
     "slug": "piknika",
@@ -361,10 +1316,45 @@
     "description": "PIKNIKA est une entreprise spécialisée dans la création d'expériences gourmandes sur mesure au Pays Basque. Box grazing, brunchs sophistiqués, pique-niques chics et buffets pour événements privés ou professionnels. Fondée par Manon et Tom, l'entreprise privilégie les produits frais et locaux, confectionnés dans son laboratoire à Biarritz. Chaque création est pensée comme une œuvre d'art mêlant esthétique, qualité et saveur. Les commandes requièrent 24 heures de préavis pour garantir la fraîcheur maximale.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "07 16 01 01 39",
-    "email": "",
+    "email": "contact@picnika-paysbasque.fr",
     "website": "https://www.piknika-paysbasque.fr",
-    "hours": "",
-    "photos": []
+    "hours": "Du mardi au samedi de 9h à 17h · Le dimanche de 10h à 12",
+    "photos": [
+      "assets/photos/entreprises/piknika/cover.jpeg",
+      "assets/photos/entreprises/piknika/logo.jpg"
+    ]
+  },
+  {
+    "slug": "piuma-pizza",
+    "name": "PIUMA PIZZA",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Vente de pizza",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 43 65 42",
+    "email": "gregther@rocketmail.com",
+    "website": "https://piumabiarritz.com",
+    "hours": "Du mardi au vendredi de 12h à 14h et de 19h à 21h · Le samedi de 19h à 21h30",
+    "photos": [
+      "assets/photos/entreprises/piuma-pizza/cover.jpg",
+      "assets/photos/entreprises/piuma-pizza/logo.jpeg"
+    ]
+  },
+  {
+    "slug": "pog-64",
+    "name": "POG64",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Concept de cuisines",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 51 00 19",
+    "email": "",
+    "website": "https://www.poggenpohl.com/fr",
+    "hours": "Du lundi au samedi de 10h à 19h",
+    "photos": [
+      "assets/photos/entreprises/pog-64/cover.jpg",
+      "assets/photos/entreprises/pog-64/logo.png"
+    ]
   },
   {
     "slug": "porrada-barber-shop",
@@ -374,23 +1364,97 @@
     "description": "Porrada Barber Shop est un salon de coiffure-barberie atypique et authentique situé au VILLAGE Iraty-Biarritz, spécialisé dans les coupes masculines et la taille de moustaches. Un savant mélange de style, de bonne humeur et de savoir-faire artisanal traditionnel. Les barbiers proposent des créations sophistiquées et personnalisées adaptées à la morphologie du visage et au style de vie de chaque client. Une expérience unique dans une ambiance décalée, facilement accessible avec parking.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 74 14 67 36",
-    "email": "",
+    "email": "porradabarbershop@icloud.com",
     "website": "https://www.planity.com/porrada-barber-shop-64200-biarritz",
-    "hours": "",
-    "photos": []
+    "hours": "Du mardi au samedi de 8h à. 18h",
+    "photos": [
+      "assets/photos/entreprises/porrada-barber-shop/cover.jpg",
+      "assets/photos/entreprises/porrada-barber-shop/logo.jpg"
+    ]
   },
   {
-    "slug": "technitoit",
-    "name": "TECHNITOIT",
+    "slug": "regatta-france",
+    "name": "REGATTA FRANCE",
     "category": "entreprises",
     "category_label": "Entreprises",
-    "description": "Nous combinons expertise technique, matériaux de qualité et technologies innovantes pour garantir des résultats durables et esthétiques. Faites confiance à Technitoit pour transformer votre maison tout en optimisant son confort et sa performance énergétique",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "06 87 08 42 36",
+    "description": "Vente des produits pour la randonnée, montagne",
+    "address": "Biarritz Activités",
+    "phone": "06 07 41 87 88",
+    "email": "OLIVIER@REGATTA.COM",
+    "website": "https://www.regatta.com/fr",
+    "hours": "Du lundi au dimanche de 10h à 18h",
+    "photos": [
+      "assets/photos/entreprises/regatta-france/cover.jpg",
+      "assets/photos/entreprises/regatta-france/logo.png"
+    ]
+  },
+  {
+    "slug": "s-o-s-medecins",
+    "name": "SOS Médecins Côte Basque",
+    "category": "sante",
+    "category_label": "Santé",
+    "description": "Le cabinet SOS médecins de Biarritz-Iraty vous accueille et vous accompagne en l’absence de votre médecin traitant. Sa mission au sein de SOS Médecins Côte Basque est de participer à la permanence des soins non programmés de médecine générale 24h/24, 7j/7 et 365 jours/365, en consultation ou en visite à domicile pour motifs justifiés.\nPrenez rendez-vous en ligne sur https://www.rdvasos.fr/ en réservant directement votre consultation à l'heure que vous souhaitez Ou par téléphone si RDV en ligne impossible : 05 56 48 75 59\nCe service fait partie du pôle santé du VIB qui regroupe une pharmacie, un cabinet de radiologie, un centre d’analyses médicales, des chirurgiens-dentistes, des infirmières libérales, des kinésithérapeutes, un centre de podologie, un opticien, des sages femmes et d’autres professionnels de santé pour vous servir.\nVILLAGE Iraty-Biarritz, le VILLAGE qui VIBre pour votre santé",
+    "address": "Les Aldades - 4 rue des Mésanges - Lot n°13 - 64200 Biarritz",
+    "phone": "05 56 48 75 59",
     "email": "",
-    "website": "https://www.technitoit.com/agence/pyrenees-atlantiques-64-biarritz?utm_source=google&#038;utm_medium=gmb",
-    "hours": "",
-    "photos": []
+    "website": "https://www.rdvasos.fr",
+    "hours": "Tous les jours de 8h à 20h",
+    "photos": [
+      "assets/photos/entreprises/s-o-s-medecins/cover.jpg",
+      "assets/photos/entreprises/s-o-s-medecins/photo-01.jpg",
+      "assets/photos/entreprises/s-o-s-medecins/photo-02.jpg",
+      "assets/photos/entreprises/s-o-s-medecins/photo-03.jpg",
+      "assets/photos/entreprises/s-o-s-medecins/photo-04.jpg",
+      "assets/photos/entreprises/s-o-s-medecins/photo-05.jpg",
+      "assets/photos/entreprises/s-o-s-medecins/logo.png"
+    ]
+  },
+  {
+    "slug": "sud-immo-pro",
+    "name": "SUD IMMO PRO",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Aménageur et Constructeur",
+    "address": "VIB, Bâtiment Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 23 93 10",
+    "email": "contact@sud-immo-pro.com",
+    "website": "https://www.sud-immo-pro.com",
+    "hours": "Du lundi au vendredi de 9h00 à 12h30 et de 14h00 à 18h00",
+    "photos": [
+      "assets/photos/entreprises/sud-immo-pro/logo.jpg"
+    ]
+  },
+  {
+    "slug": "sunset-studio-biarritz",
+    "name": "SUNSET STUDIO BIARRITZ",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Location de studio photo",
+    "address": "Halles Darla, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "06 86 92 05 93",
+    "email": "sunsetstudio.biarritz@gmail.com",
+    "website": "https://sunset-studio.fr/v2",
+    "hours": "Du mardi au dimanche de 9h à 18h",
+    "photos": [
+      "assets/photos/entreprises/sunset-studio-biarritz/cover.png",
+      "assets/photos/entreprises/sunset-studio-biarritz/logo.png"
+    ]
+  },
+  {
+    "slug": "the-inspire-academy",
+    "name": "THE INSPIRE ACADEMY",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Formation linguistique",
+    "address": "Biarritz Activités",
+    "phone": "07 78 03 89 86",
+    "email": "contact@inspireacademy.fr",
+    "website": "",
+    "hours": "Du lundi au vendredi de 9h à 19h30 · Le samedi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/the-inspire-academy/cover.jpg",
+      "assets/photos/entreprises/the-inspire-academy/logo.jpeg"
+    ]
   },
   {
     "slug": "tunstall",
@@ -403,7 +1467,67 @@
     "email": "le64teleassistance@tunstall.com",
     "website": "https://www.tunstall.fr",
     "hours": "",
-    "photos": []
+    "photos": [
+      "assets/photos/entreprises/tunstall/cover.webp",
+      "assets/photos/entreprises/tunstall/logo.png"
+    ]
+  },
+  {
+    "slug": "umih-pays-basque",
+    "name": "UMIH PAYS BASQUE",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Accompagne au quotidien de nombreuses entreprises",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 24 03 47",
+    "email": "umih.paysbasque@wanadoo.fr",
+    "website": "",
+    "hours": "Du lundi au vendredi de 9h à 17h",
+    "photos": [
+      "assets/photos/entreprises/umih-pays-basque/cover.jpg",
+      "assets/photos/entreprises/umih-pays-basque/logo.jpg"
+    ]
+  },
+  {
+    "slug": "veloff",
+    "name": "VELOFF",
+    "category": "restaurants",
+    "category_label": "Restaurants",
+    "description": "Vente de cafés",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 54 61 87 37",
+    "email": "",
+    "website": "https://www.veloffcafe.fr",
+    "hours": "Du lundi au samedi de 9h à 15h",
+    "photos": [
+      "assets/photos/entreprises/veloff/cover.jpg",
+      "assets/photos/entreprises/veloff/photo-01.jpg",
+      "assets/photos/entreprises/veloff/photo-02.jpg",
+      "assets/photos/entreprises/veloff/logo.png"
+    ]
+  },
+  {
+    "slug": "violon-dans-lame",
+    "name": "LE VIOLON DANS l’ÂME- Atelier de lutherie",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Le violon dans l’âme fait partie de \"GB Lutherie\" à Bordeaux, Luthiers depuis 1973.\nGilles et Lore, artisans luthiers diplômés de la prestigieuse École Nationale de Mirecourt, apportent leur sérieux et leurs compétences déjà reconnus, au sein de leur atelier à Biarritz.\nIls se consacrent avec passion à la haute restauration et la création des instruments de quatuor.\nAutres services proposés :\n- Vente de violons, altos, violoncelles et contrebasses\n- Vente de tous les accessoires : cordes, étuis, coussins, partitions…\n- Les réglages de vos instruments\n- L'entretien de vos archets\n- Les estimations et expertises\n- La location de violons, altos, violoncelles et contrebasses\nÉrable, épicéa, ébène… Entre les mains du créateur, ces matières prennent vie et deviennent bien plus qu’un objet. Elles deviennent violon.\nDébutants, amateurs, professionnels, vous êtes au bon endroit avec ces artisans luthiers.",
+    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
+    "phone": "05 59 59 73 91",
+    "email": "",
+    "website": "https://www.gilles-braem-luthier-bordeaux.fr",
+    "hours": "Lundi Fermé · Mardi 10:00 - 18:00 · Mercredi 10:00 - 18:00 · Jeudi 10:00 - 18:00 · Vendredi 10:00 - 18:00 · Samedi 10:00 - 12:00 · Dimanche Fermé",
+    "photos": [
+      "assets/photos/entreprises/violon-dans-lame/cover.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-01.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-02.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-03.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-04.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-05.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-06.jpg",
+      "assets/photos/entreprises/violon-dans-lame/photo-07.jpg",
+      "assets/photos/entreprises/violon-dans-lame/logo.png"
+    ]
   },
   {
     "slug": "wave-pole-studio",
@@ -415,8 +1539,11 @@
     "phone": "06 66 17 73 35",
     "email": "",
     "website": "https://wavepolestudio.com",
-    "hours": "",
-    "photos": []
+    "hours": "Lundi : 16h à 20h30 · Mardi : 17h à 21h · Mercredi : 9h à 13h · Jeudi : 16h à 21h · Samedi : 9h à 13h",
+    "photos": [
+      "assets/photos/entreprises/wave-pole-studio/cover.jpeg",
+      "assets/photos/entreprises/wave-pole-studio/logo.jpg"
+    ]
   },
   {
     "slug": "west-wave-tatoo-shop",
@@ -425,11 +1552,14 @@
     "category_label": "Commerces",
     "description": "Salon de tatouage au cœur du VILLAGE Iraty-Biarritz. Pour toutes vos envies d'encre, de la simple touche minimaliste aux pièces plus élaborées.",
     "address": "16 Rue des Mésanges, 64200 Biarritz",
-    "phone": "",
-    "email": "",
+    "phone": "06 86 66 83 74",
+    "email": "west.wave.ttt@gmail.com",
     "website": "",
-    "hours": "",
-    "photos": []
+    "hours": "Du mardi au samedi de 11h à 18H",
+    "photos": [
+      "assets/photos/entreprises/west-wave-tatoo-shop/cover.jpg",
+      "assets/photos/entreprises/west-wave-tatoo-shop/logo.jpg"
+    ]
   },
   {
     "slug": "wilau-proprete",
@@ -441,46 +1571,59 @@
     "phone": "05 62 35 09 85",
     "email": "",
     "website": "https://www.groupe-wilau.com/contact",
-    "hours": "",
-    "photos": []
+    "hours": "De 9h00 à 18h00",
+    "photos": [
+      "assets/photos/entreprises/wilau-proprete/cover.png",
+      "assets/photos/entreprises/wilau-proprete/photo-01.png",
+      "assets/photos/entreprises/wilau-proprete/photo-02.png",
+      "assets/photos/entreprises/wilau-proprete/photo-03.jpg",
+      "assets/photos/entreprises/wilau-proprete/photo-04.jpg",
+      "assets/photos/entreprises/wilau-proprete/photo-05.jpg",
+      "assets/photos/entreprises/wilau-proprete/photo-06.jpg",
+      "assets/photos/entreprises/wilau-proprete/photo-07.jpg",
+      "assets/photos/entreprises/wilau-proprete/logo.png"
+    ]
   },
   {
     "slug": "ximunaxiette",
     "name": "XIMUNAXIETTE",
     "category": "services",
     "category_label": "Services",
-    "description": "Également nutritionniste de formation, il enseigne la diététique à des étudiants, sportifs et professionnels en formation Chef, Traiteur et Diététicien diplômé, il vous propose de multiples prestations :\n\nXimun Tellechea, votre Chef Cuisinier du Pays Basque & Landes depuis 2018 conçoit des plats généreux qui font plaisir aux papilles et aux yeux tout en respectant les saisons.\n\n-Repas-à-emporter – Brunch – Chef-à-domicile – Mariage – Évènements – Amuses-tigrés – Pâtisseries",
+    "description": "Ximunaxiette c'est une activité de traiteur pour tout type d'évènement et aussi de chef à domicile.\nXimun Tellechea, votre Chef Cuisinier du Pays Basque & Landes depuis 2018 conçoit des plats généreux qui font plaisir aux papilles et aux yeux tout en respectant les saisons.\nÉgalement diététicien de formation, il enseigne la diététique à des étudiants, sportifs et professionnels en formation\nChef, Traiteur et Diététicien diplômé, il vous propose de multiples prestations :\n-Repas-à-emporter\n- Brunch\n- Chef-à-domicile\n- Mariage\n- Évènements\n- Amuses-tigrés\n- Pâtisseries\nVous pouvez venir à son atelier sur les horaires d'ouvertures pour déguster toutes ses créations à emporter.\nN’hésitez pas à le contacter pour découvrir ses services.\nVILLAGE Iraty-Biarritz, le VILLAGE qui fait VIBrer vos papilles !",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 13 71 12 54",
-    "email": "",
+    "email": "nutrition@ximunaxiette.com",
     "website": "https://ximunaxiette.com",
-    "hours": "",
-    "photos": []
+    "hours": "lundi FERMÉ · mardi 10:00 - 14:00 · mercredi 10:00 - 17:00 · jeudi 10:00 - 14:00 · vendredi 10:00 - 17:00 · samedi 10:00 - 17:00 · dimanche 10:00 - 13:30",
+    "photos": [
+      "assets/photos/entreprises/ximunaxiette/cover.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-01.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-02.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-03.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-04.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-05.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-06.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-07.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-08.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-09.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-10.jpg",
+      "assets/photos/entreprises/ximunaxiette/photo-11.jpg"
+    ]
   },
   {
-    "slug": "ecole-de-cirque-ballabulle",
-    "name": "ÉCOLE DE CIRQUE BALLABULLE",
-    "category": "sport",
-    "category_label": "Sport",
-    "description": "Le travail de Ballabulle s’articule autour de la motricité, de la créativité, de l’expression en favorisant le développement des échanges et des capacités relationnelles. Acrobatie, portés, manipulation d’objets, équilibre sont proposés sous forme de parcours ou d’ateliers. En solo, en duo, ou sous forme d’activités collectives, ils sont toujours abordés dans un esprit ludique.",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "06 14 97 10 84",
-    "email": "",
-    "website": "http://ballabulle.com/?fbclid=IwAR2hNJBvXZa1UyXhsu6J-2ogpUcVn0GvO2jQBiDUn67Trekom7Mk8nFHoDw",
-    "hours": "",
-    "photos": []
-  },
-  {
-    "slug": "ecole-des-metiers-du-sport-by-gtf",
-    "name": "ÉCOLE DES MÉTIERS DU SPORT BY GTF",
-    "category": "sport",
-    "category_label": "Sport",
-    "description": "L'EMS – École des Métiers du Sport est un Centre de Formation pour Apprentis (CFA) spécialisé dans les métiers du sport, implanté à Biarritz et Toulouse. Formations professionnelles : éducateur sportif (BP JEPS AF), fitness (CQP), Pilates, massage sportif et sport sur prescription médicale. Pour ceux souhaitant changer de métier ou mettre à l'œuvre leur vocation pour le sport. Enseignement habilité par la DRAJES Nouvelle-Aquitaine, dispensé par des experts reconnus, avec des salles partenaires et un cadre privilégié au Pays Basque.",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
-    "phone": "07 69 84 44 88",
-    "email": "",
-    "website": "https://ems-biarritz.fr",
-    "hours": "",
-    "photos": []
+    "slug": "zuri-objets",
+    "name": "ZURI OBJETS",
+    "category": "createurs",
+    "category_label": "Créateurs",
+    "description": "Atelier/showroom d’objets en béton",
+    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
+    "phone": "07 81 75 72 22",
+    "email": "contact@zuri.fr",
+    "website": "",
+    "hours": "Du lundi au samedi : 10h -12h",
+    "photos": [
+      "assets/photos/entreprises/zuri-objets/cover.jpg",
+      "assets/photos/entreprises/zuri-objets/logo.jpeg"
+    ]
   }
 ]

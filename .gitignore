@@ -11,7 +11,17 @@ node_modules/
 # Sources de reconstruction (fichiers volumineux non publiés)
 VIB/
 wayback-archive/
+Florian/
 scripts/
+
+# Photos originales lourdes archivées localement (pas servies sur le site)
+assets/photos/_originaux_lourds/
+
+# Backups locaux
+*.backup
+
+# Fichiers de travail intermédiaires (générés par scripts/)
+data/entreprises-a-integrer.json
 
 # Config Claude Code locale (pas commitée)
 .claude/settings.json
