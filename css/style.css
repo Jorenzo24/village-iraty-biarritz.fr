@@ -761,6 +761,8 @@ button:focus-visible, a:focus-visible {
     height: 4rem;
     margin: 0 auto 1.5rem;
     color: var(--c-text);
+    object-fit: contain;
+    display: block;
 }
 
 .pillar__title {
