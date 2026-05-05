@@ -1900,6 +1900,11 @@ button:focus-visible, a:focus-visible {
     border-bottom: none;
 }
 
+.entity-info__block--cta {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
 .entity-info__block p {
     font-family: var(--font-body);
     font-size: 0.9375rem;

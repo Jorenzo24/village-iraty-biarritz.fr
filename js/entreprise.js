@@ -70,13 +70,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             link.href = 'tel:' + e.phone.replace(/\s/g, '');
         }
 
-        // Website
+        // Website (rendu en bouton)
         if (e.website) {
             const block = document.getElementById('entity-website-block');
             block.hidden = false;
             const link = document.getElementById('entity-website');
-            link.textContent = e.website.replace(/^https?:\/\//, '').replace(/\/$/, '');
             link.href = e.website;
+            // Label : nom de domaine clean (ex: "biarritzburo.com")
+            const domain = e.website.replace(/^https?:\/\//, '').replace(/\/$/, '').replace(/^www\./, '');
+            const label = document.getElementById('entity-website-label');
+            if (label) {
+                label.textContent = domain.length > 30 ? 'Visiter le site web' : domain;
+            }
         }
 
         // Email

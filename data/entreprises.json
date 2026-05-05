@@ -225,13 +225,16 @@
     "name": "LA PARQUETERIE BASQUE",
     "category": "entreprises",
     "category_label": "Entreprises",
-    "description": "Votre fabricant et restauration sur mesure de parquet massifs et contrecollés, de lame de terrasses\n\nAménagement intérieur de cuisines et dressing\n\nFourniture et pose Alu, Bois et PVC",
-    "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
+    "description": "Votre fabricant et atelier de restauration sur mesure de parquets massifs et contrecollés, ainsi que de lames de terrasses. Aménagement intérieur réalisé selon vos envies, dans le respect de la tradition du bois et avec un savoir-faire reconnu. Conseil personnalisé pour le choix des essences (chêne, châtaignier, exotiques) et des finitions, suivi de chantier de A à Z, et restauration de parquets anciens. Showroom au cœur du VILLAGE Iraty-Biarritz pour voir et toucher les matières.",
+    "address": "Lot 7 — Halle DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "",
     "email": "",
     "website": "",
-    "hours": "",
-    "photos": []
+    "hours": "Du mardi au samedi : 9h30–12h30 et 14h–19h",
+    "photos": [
+      "assets/photos/entreprises/la-parqueterie-basque/showroom.jpg",
+      "assets/photos/entreprises/la-parqueterie-basque/logo.jpg"
+    ]
   },
   {
     "slug": "la-vague",
