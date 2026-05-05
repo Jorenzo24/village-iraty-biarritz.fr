@@ -1906,12 +1906,6 @@ button:focus-visible, a:focus-visible {
     padding: 2rem;
     border-radius: var(--r-md);
     align-self: start;
-    position: sticky;
-    top: 6rem;
-}
-
-@media (max-width: 899px) {
-    .entity-info { position: static; }
 }
 
 .entity-info__category {
