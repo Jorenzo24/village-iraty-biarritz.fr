@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Activités — VILLAGE Iraty-Biarritz</title>
+    <meta name="description" content="Découvrez les commerces, restaurants, créateurs, entreprises et services du VILLAGE Iraty-Biarritz. Annuaire complet avec recherche et filtres par catégorie.">
+
+    <meta property="og:title" content="Activités — VILLAGE Iraty-Biarritz">
+    <meta property="og:description" content="Annuaire des acteurs du VILLAGE Iraty-Biarritz : commerces, restaurants, services, créateurs, sport, santé.">
+    <meta property="og:image" content="https://village-iraty-biarritz.fr/assets/og/og-image.jpg">
+    <meta property="og:url" content="https://village-iraty-biarritz.fr/activites.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+
+    <link rel="canonical" href="https://village-iraty-biarritz.fr/activites.html">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css?v=20260505b">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Aller au contenu</a>
+
+<header class="header">
+    <div class="header__inner">
+        <a href="/" class="header__logo" aria-label="VILLAGE Iraty-Biarritz">
+            <img src="assets/logo/vib-full.svg" alt="VILLAGE Iraty-Biarritz">
+        </a>
+        <nav class="nav" aria-label="Navigation principale">
+            <ul class="nav__list">
+                <li><a href="le-village.html" class="nav__link">Votre village</a></li>
+                <li><a href="activites.html" class="nav__link is-active">Activités</a></li>
+                <li><a href="louer-un-local.html" class="nav__link">Louer un local</a></li>
+                <li><a href="services.html" class="nav__link">Nos services</a></li>
+            </ul>
+        </nav>
+        <div class="header__cta">
+            <a href="contact.html" class="btn btn--outline">Prendre un rendez-vous</a>
+            <a href="contact.html?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+        </div>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+        <ul class="mobile-nav__list">
+            <li><a href="le-village.html" class="mobile-nav__link">Votre village</a></li>
+            <li><a href="activites.html" class="mobile-nav__link">Activités</a></li>
+            <li><a href="louer-un-local.html" class="mobile-nav__link">Louer un local</a></li>
+            <li><a href="services.html" class="mobile-nav__link">Nos services</a></li>
+        </ul>
+        <div class="mobile-nav__cta">
+            <a href="contact.html" class="btn btn--outline">Prendre un rendez-vous</a>
+            <a href="contact.html?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+        </div>
+    </nav>
+</header>
+
+<main id="main">
+
+    <section class="page-hero page-hero--with-bg" style="--bg-image: url('assets/photos/facade-1.jpg');">
+        <h1 class="page-hero__title">Activités</h1>
+    </section>
+
+    <section class="section">
+        <div class="container-narrow text-center">
+            <h2 class="section-title section-title--red">Des activités pour Vivre et Vibrer</h2>
+            <p class="lead">Au sein du VILLAGE Iraty-Biarritz, bénéficiez d'un parking facile d'accès et gratuit pour satisfaire immédiatement et facilement vos besoins et surtout toutes vos envies.</p>
+        </div>
+
+        <div class="container">
+            <div class="tabs" role="tablist">
+<button class="tab is-active" data-cat="all">Tous</button>
+                <button class="tab" data-cat="commerces">Commerces</button>
+                <button class="tab" data-cat="coworking">Coworking</button>
+                <button class="tab" data-cat="createurs">Créateurs</button>
+                <button class="tab" data-cat="entreprises">Entreprises</button>
+                <button class="tab" data-cat="restaurants">Restaurants</button>
+                <button class="tab" data-cat="sante-soins">Santé & soins</button>
+                <button class="tab" data-cat="services">Services</button>
+                <button class="tab" data-cat="sport">Sport</button>
+            </div>
+
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Rechercher une activité, un commerce…" aria-label="Recherche">
+                <button id="search-btn" type="button">Trouver un acteur</button>
+            </div>
+
+            <p id="search-empty" class="search-empty" hidden>Aucun résultat. Essayez avec d'autres mots-clés ou changez de catégorie.</p>
+
+            <div class="cards" id="cards-grid">
+                <article class="card" data-cat="commerces" data-name="2p gourmands – épicerie épicurienne">
+                    <a href="entreprise.html?slug=2p-gourmands" class="card__media card__media--logo" style="background:#fef3c7;color:#b21927;">
+                        <span class="card__ph-text" style="color:#b21927;">2P GOURMANDS</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">2P GOURMANDS – Épicerie Épicurienne</h3>
+                        <p class="card__meta">Commerces</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=2p-gourmands" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="commerces" data-name="porrada barber shop">
+                    <a href="entreprise.html?slug=porrada-barber-shop" class="card__media card__media--logo" style="background:#fef3c7;color:#b21927;">
+                        <span class="card__ph-text" style="color:#b21927;">PORRADA BARBER SHO</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">PORRADA BARBER SHOP</h3>
+                        <p class="card__meta">Commerces</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=porrada-barber-shop" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="commerces" data-name="odette coiffure">
+                    <a href="entreprise.html?slug=odette-coiffure" class="card__media card__media--logo" style="background:#fef3c7;color:#b21927;">
+                        <span class="card__ph-text" style="color:#b21927;">ODETTE COIFFURE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">ODETTE COIFFURE</h3>
+                        <p class="card__meta">Commerces</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=odette-coiffure" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="commerces" data-name="west wave tatoo shop">
+                    <a href="entreprise.html?slug=west-wave-tatoo-shop" class="card__media card__media--logo" style="background:#fef3c7;color:#b21927;">
+                        <span class="card__ph-text" style="color:#b21927;">WEST WAVE TATOO SH</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">WEST WAVE TATOO SHOP</h3>
+                        <p class="card__meta">Commerces</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=west-wave-tatoo-shop" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="commerces" data-name="le violon dans l’âme- atelier de lutherie">
+                    <a href="entreprise.html?slug=violon-dans-lame" class="card__media card__media--logo" style="background:#fef3c7;color:#b21927;">
+                        <span class="card__ph-text" style="color:#b21927;">LE VIOLON DANS l’Â</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LE VIOLON DANS l’ÂME- Atelier de lutherie</h3>
+                        <p class="card__meta">Commerces</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=violon-dans-lame" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="commerces" data-name="les losanges">
+                    <a href="entreprise.html?slug=les-losanges" class="card__media card__media--logo" style="background:#fef3c7;color:#b21927;">
+                        <span class="card__ph-text" style="color:#b21927;">LES LOSANGES</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LES LOSANGES</h3>
+                        <p class="card__meta">Commerces</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=les-losanges" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="createurs" data-name="boussart gallery">
+                    <a href="entreprise.html?slug=boussart-gallery" class="card__media card__media--logo" style="background:#fce7f3;color:#9d174d;">
+                        <span class="card__ph-text" style="color:#9d174d;">BOUSSART GALLERY</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">BOUSSART GALLERY</h3>
+                        <p class="card__meta">Créateurs</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=boussart-gallery" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="createurs" data-name="association blak">
+                    <a href="entreprise.html?slug=association-blak" class="card__media card__media--logo" style="background:#fce7f3;color:#9d174d;">
+                        <span class="card__ph-text" style="color:#9d174d;">ASSOCIATION BLAK</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">ASSOCIATION BLAK</h3>
+                        <p class="card__meta">Créateurs</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=association-blak" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="createurs" data-name="horoa">
+                    <a href="entreprise.html?slug=horoa" class="card__media card__media--logo" style="background:#fce7f3;color:#9d174d;">
+                        <span class="card__ph-text" style="color:#9d174d;">HOROA</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">HOROA</h3>
+                        <p class="card__meta">Créateurs</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=horoa" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="createurs" data-name="nouvelle compagnie des arts graphiques">
+                    <a href="entreprise.html?slug=nouvelle-compagnie-des-arts-graphiques" class="card__media card__media--logo" style="background:#fce7f3;color:#9d174d;">
+                        <span class="card__ph-text" style="color:#9d174d;">NOUVELLE COMPAGNIE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">NOUVELLE COMPAGNIE DES ARTS GRAPHIQUES</h3>
+                        <p class="card__meta">Créateurs</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=nouvelle-compagnie-des-arts-graphiques" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="createurs" data-name="l’echo du silence">
+                    <a href="entreprise.html?slug=lecho-du-silence" class="card__media card__media--logo" style="background:#fce7f3;color:#9d174d;">
+                        <span class="card__ph-text" style="color:#9d174d;">L’ECHO DU SILENCE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">L’ECHO DU SILENCE</h3>
+                        <p class="card__meta">Créateurs</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=lecho-du-silence" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="createurs" data-name="cuir factory">
+                    <a href="entreprise.html?slug=cuir-factory" class="card__media card__media--logo" style="background:#fce7f3;color:#9d174d;">
+                        <span class="card__ph-text" style="color:#9d174d;">CUIR FACTORY</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">CUIR FACTORY</h3>
+                        <p class="card__meta">Créateurs</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=cuir-factory" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="entreprises" data-name="la parqueterie basque">
+                    <a href="entreprise.html?slug=la-parqueterie-basque" class="card__media card__media--logo" style="background:#1e3a8a;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">LA PARQUETERIE BAS</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LA PARQUETERIE BASQUE</h3>
+                        <p class="card__meta">Entreprises</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=la-parqueterie-basque" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="entreprises" data-name="laminak">
+                    <a href="entreprise.html?slug=laminak" class="card__media card__media--logo" style="background:#1e3a8a;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">LAMINAK</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LAMINAK</h3>
+                        <p class="card__meta">Entreprises</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=laminak" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="entreprises" data-name="darrieumerlou">
+                    <a href="entreprise.html?slug=darrieumerlou" class="card__media card__media--logo" style="background:#1e3a8a;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">DARRIEUMERLOU</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">DARRIEUMERLOU</h3>
+                        <p class="card__meta">Entreprises</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=darrieumerlou" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="entreprises" data-name="technitoit">
+                    <a href="entreprise.html?slug=technitoit" class="card__media card__media--logo" style="background:#1e3a8a;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">TECHNITOIT</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">TECHNITOIT</h3>
+                        <p class="card__meta">Entreprises</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=technitoit" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="entreprises" data-name="don donuts">
+                    <a href="entreprise.html?slug=don-donuts" class="card__media card__media--logo" style="background:#1e3a8a;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">DON DONUTS</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">DON DONUTS</h3>
+                        <p class="card__meta">Entreprises</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=don-donuts" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="entreprises" data-name="la vague">
+                    <a href="entreprise.html?slug=la-vague" class="card__media card__media--logo" style="background:#1e3a8a;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">LA VAGUE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LA VAGUE</h3>
+                        <p class="card__meta">Entreprises</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=la-vague" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="restaurants" data-name="maison vishnu">
+                    <a href="entreprise.html?slug=maison-vishnu" class="card__media card__media--logo" style="background:#fed7aa;color:#9a3412;">
+                        <span class="card__ph-text" style="color:#9a3412;">MAISON VISHNU</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">MAISON VISHNU</h3>
+                        <p class="card__meta">Restaurants</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=maison-vishnu" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="restaurants" data-name="bistrot toqué">
+                    <a href="entreprise.html?slug=bistrot-toque" class="card__media card__media--logo" style="background:#fed7aa;color:#9a3412;">
+                        <span class="card__ph-text" style="color:#9a3412;">BISTROT TOQUÉ</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">BISTROT TOQUÉ</h3>
+                        <p class="card__meta">Restaurants</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=bistrot-toque" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="restaurants" data-name="la guinguette des sardines">
+                    <a href="entreprise.html?slug=la-guinguette-des-sardines" class="card__media card__media--logo" style="background:#fed7aa;color:#9a3412;">
+                        <span class="card__ph-text" style="color:#9a3412;">LA GUINGUETTE DES </span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LA GUINGUETTE DES SARDINES</h3>
+                        <p class="card__meta">Restaurants</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=la-guinguette-des-sardines" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="restaurants" data-name="ajoupa rhumerie">
+                    <a href="entreprise.html?slug=ajoupa-rhumerie" class="card__media card__media--logo" style="background:#fed7aa;color:#9a3412;">
+                        <span class="card__ph-text" style="color:#9a3412;">AJOUPA RHUMERIE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">AJOUPA RHUMERIE</h3>
+                        <p class="card__meta">Restaurants</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=ajoupa-rhumerie" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="restaurants" data-name="piknika">
+                    <a href="entreprise.html?slug=piknika" class="card__media card__media--logo" style="background:#fed7aa;color:#9a3412;">
+                        <span class="card__ph-text" style="color:#9a3412;">PIKNIKA</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">PIKNIKA</h3>
+                        <p class="card__meta">Restaurants</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=piknika" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="restaurants" data-name="istanbul kebab">
+                    <a href="entreprise.html?slug=istanbul-kebab" class="card__media card__media--logo" style="background:#fed7aa;color:#9a3412;">
+                        <span class="card__ph-text" style="color:#9a3412;">ISTANBUL KEBAB</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">ISTANBUL KEBAB</h3>
+                        <p class="card__meta">Restaurants</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=istanbul-kebab" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="services" data-name="biarritz buro">
+                    <a href="entreprise.html?slug=biarritz-buro" class="card__media card__media--logo" style="background:#1f1f1f;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">BIARRITZ BURO</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">BIARRITZ BURO</h3>
+                        <p class="card__meta">Services</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=biarritz-buro" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="services" data-name="tunstall">
+                    <a href="entreprise.html?slug=tunstall" class="card__media card__media--logo" style="background:#1f1f1f;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">TUNSTALL</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">TUNSTALL</h3>
+                        <p class="card__meta">Services</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=tunstall" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="services" data-name="aimery chemin">
+                    <a href="entreprise.html?slug=aimery-chemin" class="card__media card__media--logo" style="background:#1f1f1f;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">AIMERY CHEMIN</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">AIMERY CHEMIN</h3>
+                        <p class="card__meta">Services</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=aimery-chemin" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="services" data-name="ximunaxiette">
+                    <a href="entreprise.html?slug=ximunaxiette" class="card__media card__media--logo" style="background:#1f1f1f;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">XIMUNAXIETTE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">XIMUNAXIETTE</h3>
+                        <p class="card__meta">Services</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=ximunaxiette" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="services" data-name="wilau propreté – nettoyage industriel">
+                    <a href="entreprise.html?slug=wilau-proprete" class="card__media card__media--logo" style="background:#1f1f1f;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">WILAU PROPRETÉ</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">WILAU PROPRETÉ – Nettoyage Industriel</h3>
+                        <p class="card__meta">Services</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=wilau-proprete" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="services" data-name="agence erronda">
+                    <a href="entreprise.html?slug=agence-erronda" class="card__media card__media--logo" style="background:#1f1f1f;color:#fff;">
+                        <span class="card__ph-text" style="color:#fff;">AGENCE ERRONDA</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">AGENCE ERRONDA</h3>
+                        <p class="card__meta">Services</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=agence-erronda" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="sport" data-name="alba recovery drink">
+                    <a href="entreprise.html?slug=alba-recovery-drink" class="card__media card__media--logo" style="background:#dbeafe;color:#1e3a8a;">
+                        <span class="card__ph-text" style="color:#1e3a8a;">ALBA RECOVERY DRIN</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">ALBA RECOVERY DRINK</h3>
+                        <p class="card__meta">Sport</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=alba-recovery-drink" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="sport" data-name="wave pole studio">
+                    <a href="entreprise.html?slug=wave-pole-studio" class="card__media card__media--logo" style="background:#dbeafe;color:#1e3a8a;">
+                        <span class="card__ph-text" style="color:#1e3a8a;">WAVE POLE STUDIO</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">WAVE POLE STUDIO</h3>
+                        <p class="card__meta">Sport</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=wave-pole-studio" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="sport" data-name="dance wave">
+                    <a href="entreprise.html?slug=dance-wave" class="card__media card__media--logo" style="background:#dbeafe;color:#1e3a8a;">
+                        <span class="card__ph-text" style="color:#1e3a8a;">DANCE WAVE</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">DANCE WAVE</h3>
+                        <p class="card__meta">Sport</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=dance-wave" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="sport" data-name="école des métiers du sport by gtf">
+                    <a href="entreprise.html?slug=ecole-des-metiers-du-sport-by-gtf" class="card__media card__media--logo" style="background:#dbeafe;color:#1e3a8a;">
+                        <span class="card__ph-text" style="color:#1e3a8a;">ÉCOLE DES MÉTIERS </span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">ÉCOLE DES MÉTIERS DU SPORT BY GTF</h3>
+                        <p class="card__meta">Sport</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=ecole-des-metiers-du-sport-by-gtf" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="sport" data-name="le studio">
+                    <a href="entreprise.html?slug=le-studio" class="card__media card__media--logo" style="background:#dbeafe;color:#1e3a8a;">
+                        <span class="card__ph-text" style="color:#1e3a8a;">LE STUDIO</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">LE STUDIO</h3>
+                        <p class="card__meta">Sport</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=le-studio" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="card" data-cat="sport" data-name="école de cirque ballabulle">
+                    <a href="entreprise.html?slug=ecole-de-cirque-ballabulle" class="card__media card__media--logo" style="background:#dbeafe;color:#1e3a8a;">
+                        <span class="card__ph-text" style="color:#1e3a8a;">ÉCOLE DE CIRQUE BA</span>
+                    </a>
+                    <div class="card__body">
+                        <h3 class="card__title">ÉCOLE DE CIRQUE BALLABULLE</h3>
+                        <p class="card__meta">Sport</p>
+                        <div class="card__footer">
+                            <a href="entreprise.html?slug=ecole-de-cirque-ballabulle" class="card__call">Voir la fiche →</a>
+                            <span class="status status--open">Ouvert</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--alt">
+        <div class="container-narrow text-center">
+            <h2 class="section-title">Vous êtes une entreprise ?</h2>
+            <p class="lead">Rejoignez les 1200 acteurs qui font Vibrer le VILLAGE Iraty-Biarritz. Locaux disponibles, accompagnement sur-mesure et loyers 30% sous le marché.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                <a href="louer-un-local.html" class="btn btn--ghost-red">Voir les locaux disponibles</a>
+                <a href="contact.html?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__brand">VILLAGE Iraty-Biarritz</div>
+        <nav class="footer__nav" aria-label="Pied de page">
+            <a href="/">Accueil</a>
+            <a href="nos-articles.html">Nos articles</a>
+            <a href="contact.html">Contact</a>
+            <a href="a-propos.html">À propos</a>
+        </nav>
+    </div>
+    <div class="footer__bottom">
+        <span>&copy; <span id="year">2026</span> VILLAGE Iraty-BIARRITZ</span>
+        <span>
+            <a href="mentions-legales.html">Mentions légales</a> ·
+            <a href="politique-confidentialite.html">Politique de confidentialité</a>
+        </span>
+    </div>
+</footer>
+
+<script src="js/main.js?v=20260505b"></script>
+<script src="js/activites.js?v=20260505a"></script>
+</body>
+</html>

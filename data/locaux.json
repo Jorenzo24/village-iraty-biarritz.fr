@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "belle-boutique-140m2",
+    "name": "Belle boutique entièrement aménagée — 140 m²",
+    "address": "10 rue des Mésanges à BIARRITZ",
+    "surface": 140,
+    "price_ht": 1960,
+    "charges_ht": 174.83,
+    "type": "Commerce",
+    "norm_pmr": true,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Idéalement placé au cœur du VIB. Belle et lumineuse boutique aménagée et climatisée de 140 m² sur deux niveaux, localisée dans l'aile nord de la Halle DARLA. Ce local est aux normes PMR (pour faciliter son accès aux personnes à mobilité réduite). Bonne visibilité commerciale grâce à sa devanture entièrement vitrée ainsi qu'un excellent emplacement. Belle surface commerciale en rez-de-chaussée de 70 m². À l'étage, vous trouverez une salle d'eau, un sanitaire et une pièce cloisonnée pour du stockage ou un bureau.",
+    "photos": ["assets/photos/divers-1.jpg", "assets/photos/interieur-1.jpg", "assets/photos/interieur-2.jpg"]
+  },
+  {
+    "slug": "local-commercial-68m2",
+    "name": "Local commercial — 68 m²",
+    "address": "Halles DARLA, VILLAGE Iraty-Biarritz",
+    "surface": 68,
+    "price_ht": 950,
+    "charges_ht": 0,
+    "type": "Commerce",
+    "norm_pmr": false,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Local commercial compact et bien situé dans les Halles DARLA. Idéal pour une activité de proximité ou un atelier-boutique. Surface optimisée et accessible.",
+    "photos": ["assets/photos/interieur-2.jpg", "assets/photos/divers-2.jpg"]
+  },
+  {
+    "slug": "duplex-commercial-472m2",
+    "name": "Spacieux et lumineux duplex commercial — 472 m²",
+    "address": "VILLAGE Iraty-Biarritz",
+    "surface": 472,
+    "price_ht": 4930,
+    "charges_ht": 0,
+    "type": "Commerce / Entreprise",
+    "norm_pmr": true,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Vaste duplex commercial sur 2 niveaux de 472 m² avec une excellente luminosité grâce à de grandes baies vitrées. Idéal pour une enseigne d'envergure, un showroom, un espace de coworking premium ou une activité multi-services.",
+    "photos": ["assets/photos/facade-4.jpg", "assets/photos/interieur-3.jpg", "assets/photos/divers-3.jpg"]
+  },
+  {
+    "slug": "bureau-200m2",
+    "name": "Beau bureau aménagé avec grandes baies vitrées — 200 m²",
+    "address": "VILLAGE Iraty-Biarritz",
+    "surface": 200,
+    "price_ht": 1900,
+    "charges_ht": 0,
+    "type": "Bureau",
+    "norm_pmr": true,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Bureau professionnel aménagé de 200 m² avec grandes baies vitrées offrant une excellente luminosité naturelle. Espace polyvalent adapté à une équipe d'une vingtaine de personnes. Open-space, bureaux fermés possibles, salle de réunion.",
+    "photos": ["assets/photos/interieur-3.jpg", "assets/photos/facade-5.jpg"]
+  },
+  {
+    "slug": "atelier-mezzanine-200m2",
+    "name": "Spacieux atelier avec mezzanine — 200 m²",
+    "address": "VILLAGE Iraty-Biarritz",
+    "surface": 200,
+    "price_ht": 2471,
+    "charges_ht": 232,
+    "type": "Atelier / Local d'activité",
+    "norm_pmr": false,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Atelier professionnel aménagé de 200 m² avec mezzanine (surface nette certifiée après travaux). Cet espace dispose d'une belle hauteur sous plafond avec charpente en bois, d'un bloc cuisine et de sanitaires privatifs avec lave-mains. Nombreuses prises électriques et chauffe-eau afin de faciliter votre activité. Le local est équipé d'une excellente isolation thermique et phonique. Pour votre sécurité et celle de vos clients, les parties communes sont dotées d'équipements de télésurveillance. À proximité de toutes les commodités et de la gare TGV de Biarritz et de l'aéroport international du BAB.",
+    "photos": ["assets/photos/divers-3.jpg", "assets/photos/interieur-1.jpg"]
+  }
+]

@@ -99,6 +99,11 @@ ErrorDocument 404 /404.html
 </Files>
 
 # ============================================
+# Bloquer l'accès direct au dossier vendor
+# ============================================
+RedirectMatch 403 ^/vendor(/|$)
+
+# ============================================
 # Désactiver listing des répertoires
 # ============================================
 Options -Indexes

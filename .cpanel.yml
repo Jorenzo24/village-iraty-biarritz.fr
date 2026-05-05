@@ -5,8 +5,22 @@ deployment:
     - /bin/cp -R css $DEPLOYPATH
     - /bin/cp -R js $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R data $DEPLOYPATH
+    - /bin/cp -R vendor $DEPLOYPATH
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp 404.html $DEPLOYPATH
+    - /bin/cp le-village.html $DEPLOYPATH
+    - /bin/cp activites.html $DEPLOYPATH
+    - /bin/cp louer-un-local.html $DEPLOYPATH
+    - /bin/cp services.html $DEPLOYPATH
+    - /bin/cp regie-vib.html $DEPLOYPATH
+    - /bin/cp a-propos.html $DEPLOYPATH
+    - /bin/cp contact.html $DEPLOYPATH
+    - /bin/cp entreprise.html $DEPLOYPATH
+    - /bin/cp local.html $DEPLOYPATH
+    - /bin/cp mentions-legales.html $DEPLOYPATH
+    - /bin/cp politique-confidentialite.html $DEPLOYPATH
+    - /bin/cp send.php $DEPLOYPATH
     - /bin/cp .htaccess $DEPLOYPATH
     - /bin/cp robots.txt $DEPLOYPATH
     - /bin/cp sitemap.xml $DEPLOYPATH

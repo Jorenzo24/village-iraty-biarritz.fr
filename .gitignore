@@ -7,3 +7,13 @@ Thumbs.db
 node_modules/
 *.bak
 *.old
+
+# Sources de reconstruction (fichiers volumineux non publiés)
+VIB/
+wayback-archive/
+scripts/
+
+# Config Claude Code locale (pas commitée)
+.claude/settings.json
+.claude/settings.local.json
+
