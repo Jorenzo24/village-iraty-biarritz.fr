@@ -660,15 +660,13 @@ button:focus-visible, a:focus-visible {
     margin-top: 2.5rem;
 }
 
-/* ─── Section "Une histoire de vibrations" (split rouge) ────── */
+/* ─── Section "Une histoire de vibrations" (split rouge — PLEINE LARGEUR) ── */
 .split-red {
-    background: var(--c-grey-1);
+    background: var(--c-red);
 }
 
 .split-red__inner {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
 }
@@ -680,18 +678,20 @@ button:focus-visible, a:focus-visible {
 .split-red__text {
     background: var(--c-red);
     color: #fff;
-    padding: 3rem 1.75rem;
+    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 @media (min-width: 768px) {
-    .split-red__text { padding: 4rem 3rem; }
+    .split-red__text { padding: 4rem 3.5rem; }
 }
 
 @media (min-width: 1200px) {
-    .split-red__text { padding: 5rem 4rem; }
+    .split-red__text {
+        padding: 5rem 6rem 5rem max(4rem, calc((100vw - 1400px) / 2 + 4rem));
+    }
 }
 
 .split-red__title {
@@ -1733,6 +1733,107 @@ button:focus-visible, a:focus-visible {
     white-space: nowrap;
     border: 0;
 }
+
+/* ─── Article (page individuelle) ───────────────────────────── */
+.article-hero {
+    background: var(--c-red);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.article-hero__inner {
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.article-hero__date {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1rem;
+}
+
+.article-hero__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #fff;
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .article-hero__title { font-size: 2.75rem; }
+}
+
+.article-hero__cover {
+    width: 100%;
+    height: 24rem;
+    overflow: hidden;
+    background: var(--c-grey-1);
+}
+
+.article-hero__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .article-hero__cover { height: 28rem; }
+}
+
+.article-body {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+}
+
+.article-body h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--c-red);
+    margin: 2.5rem 0 1rem;
+}
+
+.article-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 2rem 0 0.875rem;
+}
+
+.article-body p {
+    margin-bottom: 1.25rem;
+    color: var(--c-text);
+}
+
+.article-body ul, .article-body ol {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.article-body ol { list-style: decimal; }
+
+.article-body li { margin-bottom: 0.5rem; }
+
+.article-body a {
+    color: var(--c-red);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.article-body strong { font-weight: 700; }
 
 /* ─── Page détail entreprise ────────────────────────────────── */
 .entity-grid {

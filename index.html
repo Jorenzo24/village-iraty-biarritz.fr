@@ -101,11 +101,9 @@
 
             <div class="tabs" role="tablist">
                 <button class="tab is-active" data-cat="commerces">Commerces</button>
-                <button class="tab" data-cat="coworking">Coworking</button>
                 <button class="tab" data-cat="createurs">Créateurs</button>
                 <button class="tab" data-cat="entreprises">Entreprises</button>
                 <button class="tab" data-cat="restaurants">Restaurants</button>
-                <button class="tab" data-cat="sante-soins">Santé &amp; soins</button>
                 <button class="tab" data-cat="services">Services</button>
                 <button class="tab" data-cat="sport">Sport</button>
             </div>
@@ -216,18 +214,17 @@
 
         <div class="pillars__grid">
             <div class="pillar">
-                <svg class="pillar__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <!-- Main paume vers le haut (style trait fin) -->
-                    <path d="M14 60 Q14 56 18 54 L40 50 Q46 49 52 51 L72 58 Q80 60 80 66 Q80 70 76 72 L52 78 Q44 80 36 78 L18 72 Q14 70 14 66 Z"/>
-                    <!-- Pouce -->
-                    <path d="M14 60 Q12 50 18 46 Q24 44 28 50"/>
-                    <!-- Pièce € au-dessus -->
-                    <circle cx="58" cy="28" r="11"/>
-                    <text x="58" y="34" text-anchor="middle" font-size="14" font-weight="700" font-family="Georgia,serif" fill="currentColor" stroke="none">€</text>
-                    <!-- Lignes de mouvement (pièce qui tombe) -->
-                    <path d="M58 44 L58 48" opacity="0.6"/>
-                    <path d="M50 42 L48 46" opacity="0.4"/>
-                    <path d="M66 42 L68 46" opacity="0.4"/>
+                <svg class="pillar__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <!-- Pile de 3 pièces € (vues légèrement de profil) -->
+                    <ellipse cx="58" cy="22" rx="14" ry="5"/>
+                    <path d="M44 22 v6 c0 2.7 6.3 5 14 5 s14 -2.3 14 -5 v-6"/>
+                    <path d="M44 32 v6 c0 2.7 6.3 5 14 5 s14 -2.3 14 -5 v-6"/>
+                    <path d="M44 42 v6 c0 2.7 6.3 5 14 5 s14 -2.3 14 -5 v-6"/>
+                    <!-- Symbole € sur la pièce du haut -->
+                    <text x="58" y="26" text-anchor="middle" font-size="9" font-weight="700" font-family="Georgia,serif" fill="currentColor" stroke="none">€</text>
+                    <!-- Main paume vers le haut (en bas, qui reçoit) -->
+                    <path d="M16 78 c0-3 2-5 5-5 h45 c4 0 8 2 8 6 c0 4 -3 6 -7 6 H30 c-3 0 -5 -2 -5 -4 v-2 z"/>
+                    <path d="M16 78 c-3 -2 -5 -6 -3 -10 c2 -3 6 -2 8 1"/>
                 </svg>
                 <h3 class="pillar__title">Aide au financement</h3>
                 <p class="pillar__text">Encourager l'inventivité, l'innovation et la réussite locale. Le VILLAGE Iraty-Biarritz permet à tous de s'installer et s'engage aux côtés de ses acteurs sur le plan financier.</p>
@@ -282,35 +279,35 @@
 
         <div class="news__grid">
             <article class="news-card">
-                <div class="news-card__media">
-                    <img src="assets/photos/divers-1.jpg" alt="Pourquoi de plus en plus de professionnels s'installent en zone d'activités" loading="lazy">
-                </div>
+                <a href="article.html?slug=pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites" class="news-card__media">
+                    <img src="assets/photos/drone-aerien.jpg" alt="Pourquoi de plus en plus de professionnels s'installent en zone d'activités" loading="lazy">
+                </a>
                 <div class="news-card__body">
                     <p class="news-card__source">Article</p>
-                    <h3 class="news-card__title">Pourquoi de plus en plus de professionnels s'installent en zone d'activités</h3>
-                    <a href="article/zone-activites.html" class="news-card__more">Voir plus →</a>
+                    <h3 class="news-card__title"><a href="article.html?slug=pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites" style="color:inherit;">Pourquoi de plus en plus de professionnels s'installent en zone d'activités</a></h3>
+                    <a href="article.html?slug=pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites" class="news-card__more">Lire l'article →</a>
                 </div>
             </article>
 
             <article class="news-card">
-                <div class="news-card__media">
+                <a href="article.html?slug=les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz" class="news-card__media">
                     <img src="assets/photos/facade-5.jpg" alt="Les meilleurs endroits pour une virée shopping à Biarritz" loading="lazy">
-                </div>
+                </a>
                 <div class="news-card__body">
                     <p class="news-card__source">Article</p>
-                    <h3 class="news-card__title">Les meilleurs endroits pour une virée shopping à Biarritz</h3>
-                    <a href="article/shopping-biarritz.html" class="news-card__more">Voir plus →</a>
+                    <h3 class="news-card__title"><a href="article.html?slug=les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz" style="color:inherit;">Les meilleurs endroits pour une virée shopping à Biarritz</a></h3>
+                    <a href="article.html?slug=les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz" class="news-card__more">Lire l'article →</a>
                 </div>
             </article>
 
             <article class="news-card">
-                <div class="news-card__media">
-                    <img src="assets/photos/drone-aerien.jpg" alt="Gros plan sur le quartier Iraty de Biarritz et son marché immobilier" loading="lazy">
-                </div>
+                <a href="article.html?slug=gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier" class="news-card__media">
+                    <img src="assets/photos/facade-1.jpg" alt="Gros plan sur le quartier Iraty de Biarritz et son marché immobilier" loading="lazy">
+                </a>
                 <div class="news-card__body">
                     <p class="news-card__source">Article</p>
-                    <h3 class="news-card__title">Gros plan sur le quartier Iraty de Biarritz et son marché immobilier</h3>
-                    <a href="article/quartier-iraty.html" class="news-card__more">Voir plus →</a>
+                    <h3 class="news-card__title"><a href="article.html?slug=gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier" style="color:inherit;">Gros plan sur le quartier Iraty de Biarritz et son marché immobilier</a></h3>
+                    <a href="article.html?slug=gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier" class="news-card__more">Lire l'article →</a>
                 </div>
             </article>
         </div>

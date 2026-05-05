@@ -18,6 +18,8 @@ deployment:
     - /bin/cp contact.html $DEPLOYPATH
     - /bin/cp entreprise.html $DEPLOYPATH
     - /bin/cp local.html $DEPLOYPATH
+    - /bin/cp nos-articles.html $DEPLOYPATH
+    - /bin/cp article.html $DEPLOYPATH
     - /bin/cp mentions-legales.html $DEPLOYPATH
     - /bin/cp politique-confidentialite.html $DEPLOYPATH
     - /bin/cp send.php $DEPLOYPATH
