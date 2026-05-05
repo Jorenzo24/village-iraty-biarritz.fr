@@ -1965,6 +1965,26 @@ button:focus-visible, a:focus-visible {
 
 .entity-info__block a { color: var(--c-red); }
 
+/* ─── Horaires : un jour par ligne ───────────────── */
+#entity-hours { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.hours-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.hours-row strong {
+    flex: 0 0 5rem;
+    text-transform: capitalize;
+    color: var(--c-text);
+    font-weight: 600;
+}
+
+.hours-row > span { color: var(--c-text-soft); }
+
 /* ─── Logo encart ───────────────────── */
 .entity-info__logo {
     width: 100%;

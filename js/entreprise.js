@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             descEl.innerHTML = `<p style="color:var(--c-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n'hésitez pas à <a href="contact.html" style="color:var(--c-red);">nous contacter</a>.</p>`;
         }
 
-        // Hours
+        // Hours : un jour par ligne
         if (e.hours) {
             document.getElementById('entity-hours-block').hidden = false;
-            document.getElementById('entity-hours').textContent = e.hours;
+            document.getElementById('entity-hours').innerHTML = renderHours(e.hours);
         }
 
         // Phone
@@ -149,6 +149,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         const div = document.createElement('div');
         div.textContent = s || '';
         return div.innerHTML;
+    }
+
+    /**
+     * Rendu des horaires : split sur " · " ou retours à la ligne, un jour par ligne.
+     * Si une ligne contient un nom de jour suivi de plages, on aligne via <strong>.
+     */
+    function renderHours(text) {
+        const DAY_RE = /^(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\b/i;
+        const items = text.split(/\s*·\s*|\n+/).map(s => s.trim()).filter(Boolean);
+        return items.map(item => {
+            const m = item.match(DAY_RE);
+            if (m) {
+                const day = m[1];
+                const rest = item.slice(m[0].length).trim();
+                return `<span class="hours-row"><strong>${escape(day)}</strong> <span>${escape(rest || 'Fermé')}</span></span>`;
+            }
+            return `<span class="hours-row">${escape(item)}</span>`;
+        }).join('');
     }
 
     /**
