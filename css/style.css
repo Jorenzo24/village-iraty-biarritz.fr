@@ -463,9 +463,9 @@ button:focus-visible, a:focus-visible {
     background: var(--c-red);
     color: #fff;
     text-align: center;
-    padding: 4.5rem 1.5rem;
+    padding: 3rem 1.5rem;
     position: relative;
-    min-height: 14rem;
+    min-height: 9rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -473,8 +473,8 @@ button:focus-visible, a:focus-visible {
 
 @media (min-width: 768px) {
     .page-hero {
-        padding: 6rem 1.5rem;
-        min-height: 18rem;
+        padding: 4rem 1.5rem;
+        min-height: 12rem;
     }
 }
 
