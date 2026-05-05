@@ -18,7 +18,46 @@ RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L]
 
-# 2. Sert /foo en lisant /foo.html en interne
+# ============================================
+# URLs WordPress historiques (préservation SEO)
+# ============================================
+
+# Anciennes catégories d'acteurs : /acteurs-X → /activites?cat=X (301)
+RewriteRule ^acteurs-commerces/?$ /activites?cat=commerces [L,R=301]
+RewriteRule ^acteurs-restaurants/?$ /activites?cat=restaurants [L,R=301]
+RewriteRule ^acteurs-createurs/?$ /activites?cat=createurs [L,R=301]
+RewriteRule ^acteurs-entreprises/?$ /activites?cat=entreprises [L,R=301]
+RewriteRule ^acteurs-services/?$ /activites?cat=services [L,R=301]
+RewriteRule ^acteurs-sport/?$ /activites?cat=sport [L,R=301]
+RewriteRule ^acteurs-sante-soins/?$ /activites?cat=sante [L,R=301]
+RewriteRule ^acteurs-coworking/?$ /activites [L,R=301]
+
+# Pages renommées
+RewriteRule ^fastlink/?$ /regie-vib [L,R=301]
+RewriteRule ^les-services/?$ /services [L,R=301]
+
+# /entreprise?slug=X → /acteur/X (301, URL canonique propre)
+RewriteCond %{THE_REQUEST} \s/+entreprise\?slug=([a-z0-9\-]+)\s [NC]
+RewriteRule ^ /acteur/%1? [R=301,L]
+
+# /local?slug=X → /local/X (301)
+RewriteCond %{THE_REQUEST} \s/+local\?slug=([a-z0-9\-]+)\s [NC]
+RewriteRule ^ /local/%1? [R=301,L]
+
+# /article?slug=X → /X (301, articles au root)
+RewriteCond %{THE_REQUEST} \s/+article\?slug=([a-z0-9\-]+)\s [NC]
+RewriteRule ^ /%1? [R=301,L]
+
+# /acteur/<slug> → entreprise.html?slug=<slug> (rewrite silencieux)
+RewriteRule ^acteur/([a-z0-9\-]+)/?$ /entreprise.html?slug=$1 [L,QSA]
+
+# /local/<slug> → local.html?slug=<slug>
+RewriteRule ^local/([a-z0-9\-]+)/?$ /local.html?slug=$1 [L,QSA]
+
+# Articles au root : liste explicite des slugs
+RewriteRule ^(gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier|le-forum-des-associations-de-biarritz-de-retour-a-la-halle-diraty|pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites|5-astuces-pour-bien-choisir-son-local-commercial|les-erreurs-a-eviter-lors-de-la-location-dun-local-commercial|les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz|la-location-dun-local-commercial-a-biarritz)/?$ /article.html?slug=$1 [L,QSA]
+
+# 2. Sert /foo en lisant /foo.html en interne (pour les pages restantes)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
