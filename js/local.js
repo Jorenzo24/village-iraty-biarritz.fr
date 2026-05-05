@@ -96,6 +96,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                         t.classList.toggle('is-active', t === thumb));
                 });
             });
+        } else {
+            // Fallback : placeholder rouge avec surface
+            mainPhotoEl.innerHTML = `
+                <div class="local-detail__placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                    </svg>
+                    <p>${l.surface} m²</p>
+                    <small>Photos prochainement</small>
+                </div>`;
         }
 
         content.hidden = false;
