@@ -12,6 +12,19 @@ RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 
 # ============================================
+# URLs propres (sans .html)
+# ============================================
+# 1. Redirige /foo.html → /foo (301, preserve query string)
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# 2. Sert /foo en lisant /foo.html en interne
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# ============================================
 # Pages d'erreur personnalisées
 # ============================================
 ErrorDocument 404 /404.html

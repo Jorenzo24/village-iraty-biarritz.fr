@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Bouton RDV avec slug
         const rdvBtn = document.getElementById('local-rdv-btn');
-        rdvBtn.href = `contact.html?sujet=louer-local&local=${encodeURIComponent(l.slug)}`;
+        rdvBtn.href = `contact?sujet=louer-local&local=${encodeURIComponent(l.slug)}`;
 
         // Caractéristiques (chips)
         const features = [];

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (e.description) {
             descEl.innerHTML = renderDescription(e.description);
         } else {
-            descEl.innerHTML = `<p style="color:var(--c-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n'hésitez pas à <a href="contact.html" style="color:var(--c-red);">nous contacter</a>.</p>`;
+            descEl.innerHTML = `<p style="color:var(--c-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n'hésitez pas à <a href="contact" style="color:var(--c-red);">nous contacter</a>.</p>`;
         }
 
         // Hours : un jour par ligne

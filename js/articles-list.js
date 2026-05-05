@@ -1,4 +1,4 @@
-// VIB — Liste des articles (nos-articles.html)
+// VIB — Liste des articles (nos-articles)
 document.addEventListener('DOMContentLoaded', async () => {
     const grid = document.getElementById('articles-grid');
     const empty = document.getElementById('articles-empty');
@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         grid.innerHTML = articles.map(a => `
             <article class="news-card">
-                <a href="article.html?slug=${a.slug}" class="news-card__media">
+                <a href="article?slug=${a.slug}" class="news-card__media">
                     <img src="${a.image}" alt="${escape(a.title)}" loading="lazy">
                 </a>
                 <div class="news-card__body">
                     <p class="news-card__source">${formatDate(a.date)}</p>
-                    <h2 class="news-card__title"><a href="article.html?slug=${a.slug}" style="color:inherit;">${escape(a.title)}</a></h2>
+                    <h2 class="news-card__title"><a href="article?slug=${a.slug}" style="color:inherit;">${escape(a.title)}</a></h2>
                     ${a.summary ? `<p style="font-size:0.9375rem;color:var(--c-text-soft);line-height:1.5;margin-bottom:1.25rem;flex:1;">${escape(a.summary).slice(0, 180)}${a.summary.length > 180 ? '…' : ''}</p>` : ''}
-                    <a href="article.html?slug=${a.slug}" class="news-card__more">Lire l'article →</a>
+                    <a href="article?slug=${a.slug}" class="news-card__more">Lire l'article →</a>
                 </div>
             </article>
         `).join('');
