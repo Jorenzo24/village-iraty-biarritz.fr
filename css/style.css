@@ -1957,7 +1957,7 @@ button:focus-visible, a:focus-visible {
     line-height: 1.5;
 }
 
-.entity-info__block a { color: var(--c-red); }
+.entity-info__block a:not(.btn) { color: var(--c-red); }
 
 /* ─── Horaires : un jour par ligne ───────────────── */
 #entity-hours { display: flex; flex-direction: column; gap: 0.25rem; }

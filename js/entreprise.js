@@ -86,12 +86,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             block.hidden = false;
             const link = document.getElementById('entity-website');
             link.href = e.website;
-            // Label : nom de domaine clean (ex: "biarritzburo.com")
-            const domain = e.website.replace(/^https?:\/\//, '').replace(/\/$/, '').replace(/^www\./, '');
             const label = document.getElementById('entity-website-label');
-            if (label) {
-                label.textContent = domain.length > 30 ? 'Visiter le site web' : domain;
-            }
+            if (label) label.textContent = 'Site web';
         }
 
         // Email
