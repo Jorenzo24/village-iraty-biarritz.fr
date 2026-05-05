@@ -48,10 +48,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('entity-category').textContent = e.category_label || '';
         document.getElementById('entity-address').textContent = e.address || '';
 
-        // Description
+        // Logo (encart dédié)
+        if (e.logo) {
+            const logoBlock = document.getElementById('entity-logo-block');
+            logoBlock.hidden = false;
+            const logoImg = document.getElementById('entity-logo');
+            logoImg.src = e.logo;
+            logoImg.alt = `Logo ${e.name}`;
+        }
+
+        // Description (multi-paragraphes : on split sur les sauts de ligne)
         const descEl = document.getElementById('entity-description');
         if (e.description) {
-            descEl.innerHTML = `<p>${e.description}</p>`;
+            const paragraphs = e.description.split(/\n+/).filter(p => p.trim());
+            descEl.innerHTML = paragraphs.map(p => `<p>${escape(p)}</p>`).join('');
         } else {
             descEl.innerHTML = `<p style="color:var(--c-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n'hésitez pas à <a href="contact.html" style="color:var(--c-red);">nous contacter</a>.</p>`;
         }
@@ -92,6 +102,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             const link = document.getElementById('entity-email');
             link.textContent = e.email;
             link.href = 'mailto:' + e.email;
+        }
+
+        // Réseaux sociaux
+        const social = e.social || {};
+        const socialEntries = Object.entries(social).filter(([k, v]) => v);
+        if (socialEntries.length > 0) {
+            const block = document.getElementById('entity-social-block');
+            const list = document.getElementById('entity-social-list');
+            const SOCIAL_ICONS = {
+                facebook:  '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>',
+                instagram: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+                linkedin:  '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>',
+                tiktok:    '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.79a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.22z"/></svg>',
+                twitter:   '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>',
+            };
+            const LABELS = {
+                facebook: 'Facebook', instagram: 'Instagram', linkedin: 'LinkedIn',
+                tiktok: 'TikTok', twitter: 'Twitter / X',
+            };
+            list.innerHTML = socialEntries.map(([kind, url]) =>
+                `<li><a href="${escape(url)}" target="_blank" rel="noopener" aria-label="${LABELS[kind] || kind}" title="${LABELS[kind] || kind}">${SOCIAL_ICONS[kind] || ''}</a></li>`
+            ).join('');
+            block.hidden = false;
         }
 
         // Photos

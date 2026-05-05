@@ -26,9 +26,13 @@
       "assets/photos/entreprises/2p-gourmands/photo-12.jpg",
       "assets/photos/entreprises/2p-gourmands/photo-13.jpg",
       "assets/photos/entreprises/2p-gourmands/photo-14.jpg",
-      "assets/photos/entreprises/2p-gourmands/photo-15.jpg",
-      "assets/photos/entreprises/2p-gourmands/logo.jpg"
-    ]
+      "assets/photos/entreprises/2p-gourmands/photo-15.jpg"
+    ],
+    "logo": "assets/photos/entreprises/2p-gourmands/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=61553609499206#",
+      "instagram": "https://www.instagram.com/2p_gourmands"
+    }
   },
   {
     "slug": "ada",
@@ -38,13 +42,17 @@
     "description": "Location de voitures",
     "address": "",
     "phone": "05 59 51 11 35",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.ada.fr/location-voiture-biarritz",
     "hours": "Du lundi au dimanche de 8H à 18H30",
     "photos": [
-      "assets/photos/entreprises/ada/cover.jpg",
-      "assets/photos/entreprises/ada/logo.jpg"
-    ]
+      "assets/photos/entreprises/ada/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/ada/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/ADALocationdevehicules",
+      "instagram": "https://www.instagram.com/ada.location"
+    }
   },
   {
     "slug": "agence-erronda",
@@ -58,9 +66,13 @@
     "website": "https://www.erronda.com",
     "hours": "Du lundi au vendredi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/agence-erronda/cover.png",
-      "assets/photos/entreprises/agence-erronda/logo.jpg"
-    ]
+      "assets/photos/entreprises/agence-erronda/cover.png"
+    ],
+    "logo": "assets/photos/entreprises/agence-erronda/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/errondaagence",
+      "instagram": "https://www.instagram.com/erronda_event"
+    }
   },
   {
     "slug": "aimery-chemin",
@@ -74,9 +86,12 @@
     "website": "https://aimerychemin.myportfolio.com",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/aimery-chemin/cover.jpeg",
-      "assets/photos/entreprises/aimery-chemin/logo.jpeg"
-    ]
+      "assets/photos/entreprises/aimery-chemin/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/aimery-chemin/logo.jpeg",
+    "social": {
+      "instagram": "https://www.instagram.com/aimeryc"
+    }
   },
   {
     "slug": "ajoupa-rhumerie",
@@ -90,9 +105,13 @@
     "website": "",
     "hours": "Du mardi au mercredi de 12h à 14h30 · Du jeudi à samedi de 12h à 2h",
     "photos": [
-      "assets/photos/entreprises/ajoupa-rhumerie/cover.jpg",
-      "assets/photos/entreprises/ajoupa-rhumerie/logo.jpg"
-    ]
+      "assets/photos/entreprises/ajoupa-rhumerie/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/ajoupa-rhumerie/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100093037325578",
+      "instagram": "https://www.instagram.com/ajoupa.biarritz"
+    }
   },
   {
     "slug": "al-mounia",
@@ -106,9 +125,13 @@
     "website": "https://almounia-biarritz.com",
     "hours": "Du mardi au dimanche de 10h30 à 21h",
     "photos": [
-      "assets/photos/entreprises/al-mounia/cover.jpeg",
-      "assets/photos/entreprises/al-mounia/logo.png"
-    ]
+      "assets/photos/entreprises/al-mounia/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/al-mounia/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/people/Al-Mounia-Restaurant/100094235071232/?_rdr",
+      "instagram": "https://www.instagram.com/almounia_restaurant"
+    }
   },
   {
     "slug": "alba-recovery-drink",
@@ -122,9 +145,13 @@
     "website": "https://www.thealbasociety.com",
     "hours": "Du lundi au vendredi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/alba-recovery-drink/cover.jpg",
-      "assets/photos/entreprises/alba-recovery-drink/logo.jpeg"
-    ]
+      "assets/photos/entreprises/alba-recovery-drink/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/alba-recovery-drink/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/albasociety",
+      "instagram": "https://www.instagram.com/alba.recovery.drink"
+    }
   },
   {
     "slug": "association-blak",
@@ -137,7 +164,9 @@
     "email": "petitemadi@gmail.com",
     "website": "https://petitemadi.blogspot.com",
     "hours": "",
-    "photos": []
+    "photos": [],
+    "logo": "",
+    "social": {}
   },
   {
     "slug": "astra",
@@ -151,9 +180,12 @@
     "website": "",
     "hours": "Du jeudi au samedi de 18h à 2h",
     "photos": [
-      "assets/photos/entreprises/astra/cover.jpg",
-      "assets/photos/entreprises/astra/logo.jpg"
-    ]
+      "assets/photos/entreprises/astra/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/astra/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/astra_bar"
+    }
   },
   {
     "slug": "atlantic-service",
@@ -170,9 +202,13 @@
       "assets/photos/entreprises/atlantic-service/cover.jpg",
       "assets/photos/entreprises/atlantic-service/photo-01.jpeg",
       "assets/photos/entreprises/atlantic-service/photo-02.png",
-      "assets/photos/entreprises/atlantic-service/photo-03.jpeg",
-      "assets/photos/entreprises/atlantic-service/logo.jpg"
-    ]
+      "assets/photos/entreprises/atlantic-service/photo-03.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/atlantic-service/logo.jpg",
+    "social": {
+      "facebook": "https://fr-fr.facebook.com/atlanticservice.fr",
+      "instagram": "https://www.instagram.com/atlanticservice33"
+    }
   },
   {
     "slug": "avad",
@@ -187,7 +223,9 @@
     "hours": "",
     "photos": [
       "assets/photos/entreprises/avad/logo.png"
-    ]
+    ],
+    "logo": "assets/photos/entreprises/avad/logo.png",
+    "social": {}
   },
   {
     "slug": "axe-eco-energie",
@@ -201,9 +239,13 @@
     "website": "https://axe-ecoenergie.fr/contact",
     "hours": "Du lundi au vendredi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/axe-eco-energie/cover.jpeg",
-      "assets/photos/entreprises/axe-eco-energie/logo.jpeg"
-    ]
+      "assets/photos/entreprises/axe-eco-energie/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/axe-eco-energie/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/axeecoenergie",
+      "instagram": "https://www.instagram.com/axeecoenergie"
+    }
   },
   {
     "slug": "b-ocean",
@@ -217,9 +259,10 @@
     "website": "",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/b-ocean/cover.jpg",
-      "assets/photos/entreprises/b-ocean/logo.jpg"
-    ]
+      "assets/photos/entreprises/b-ocean/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/b-ocean/logo.jpg",
+    "social": {}
   },
   {
     "slug": "bab-cardio-respi",
@@ -229,13 +272,17 @@
     "description": "BAB Cardio-Respi est un cabinet de kinésithérapie libéral spécialisé en rééducation et réhabilitation cardio-respiratoire de l’adulte, l’enfant et le nourrisson.",
     "address": "BIARRITZ Activités",
     "phone": "06 67 19 71 58",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.babcardiorespi.com",
     "hours": "Du lundi au vendredi de 9h à 19h",
     "photos": [
-      "assets/photos/entreprises/bab-cardio-respi/cover.jpg",
-      "assets/photos/entreprises/bab-cardio-respi/logo.jpg"
-    ]
+      "assets/photos/entreprises/bab-cardio-respi/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/bab-cardio-respi/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=61553290898069",
+      "instagram": "https://www.instagram.com/babcardiorespi"
+    }
   },
   {
     "slug": "bab-location",
@@ -245,13 +292,17 @@
     "description": "Location de voitures",
     "address": "",
     "phone": "05 59 51 11 35",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.ada.fr/location-voiture-biarritz",
     "hours": "Du lundi au dimanche de 8H à 18H30",
     "photos": [
-      "assets/photos/entreprises/bab-location/cover.jpg",
-      "assets/photos/entreprises/bab-location/logo.jpg"
-    ]
+      "assets/photos/entreprises/bab-location/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/bab-location/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/ADALocationdevehicules",
+      "instagram": "https://www.instagram.com/ada.location"
+    }
   },
   {
     "slug": "beauty-success",
@@ -265,9 +316,13 @@
     "website": "https://www.beautysuccess.fr/nos-points-de-vente/biarritz/1350",
     "hours": "Du lundi au samedi de 9h30 à 19h",
     "photos": [
-      "assets/photos/entreprises/beauty-success/cover.jpg",
-      "assets/photos/entreprises/beauty-success/logo.jpeg"
-    ]
+      "assets/photos/entreprises/beauty-success/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/beauty-success/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/BeautySuccessFrance",
+      "instagram": "https://www.instagram.com/beautysuccess_fr/?hl=fr"
+    }
   },
   {
     "slug": "biarritz-box",
@@ -277,13 +332,18 @@
     "description": "",
     "address": "",
     "phone": "",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://biarritz-box.com",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/biarritz-box/cover.jpg",
-      "assets/photos/entreprises/biarritz-box/logo.jpeg"
-    ]
+      "assets/photos/entreprises/biarritz-box/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/biarritz-box/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/biarritzbox",
+      "instagram": "https://www.instagram.com/biarritz_box",
+      "twitter": "https://biarritz-box.com"
+    }
   },
   {
     "slug": "biarritz-buro",
@@ -297,9 +357,10 @@
     "website": "http://www.biarritzburo.com",
     "hours": "Du lundi au vendredi de 9h à 18H",
     "photos": [
-      "assets/photos/entreprises/biarritz-buro/cover.jpg",
-      "assets/photos/entreprises/biarritz-buro/logo.png"
-    ]
+      "assets/photos/entreprises/biarritz-buro/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/biarritz-buro/logo.png",
+    "social": {}
   },
   {
     "slug": "biarritz-corp",
@@ -313,9 +374,10 @@
     "website": "",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/biarritz-corp/cover.jpg",
-      "assets/photos/entreprises/biarritz-corp/logo.jpg"
-    ]
+      "assets/photos/entreprises/biarritz-corp/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/biarritz-corp/logo.jpg",
+    "social": {}
   },
   {
     "slug": "biarritz-domiciliation",
@@ -329,9 +391,10 @@
     "website": "http://www.biarritzdomiciliation.com",
     "hours": "Du lundi au vendredi de 9h à 18h",
     "photos": [
-      "assets/photos/entreprises/biarritz-domiciliation/cover.jpg",
-      "assets/photos/entreprises/biarritz-domiciliation/logo.png"
-    ]
+      "assets/photos/entreprises/biarritz-domiciliation/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/biarritz-domiciliation/logo.png",
+    "social": {}
   },
   {
     "slug": "biarritz-training",
@@ -346,9 +409,13 @@
     "hours": "Du lundi au samedi de 9h à 21h",
     "photos": [
       "assets/photos/entreprises/biarritz-training/cover.jpg",
-      "assets/photos/entreprises/biarritz-training/photo-01.png",
-      "assets/photos/entreprises/biarritz-training/logo.png"
-    ]
+      "assets/photos/entreprises/biarritz-training/photo-01.png"
+    ],
+    "logo": "assets/photos/entreprises/biarritz-training/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/BestrainingBiarritz",
+      "instagram": "https://www.instagram.com/biarritztraining"
+    }
   },
   {
     "slug": "bistrot-toque",
@@ -362,9 +429,10 @@
     "website": "https://bistro-toque-bayonne.fr",
     "hours": "Du lundi au samedi de 8h30 à 14H",
     "photos": [
-      "assets/photos/entreprises/bistrot-toque/cover.jpg",
-      "assets/photos/entreprises/bistrot-toque/logo.jpg"
-    ]
+      "assets/photos/entreprises/bistrot-toque/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/bistrot-toque/logo.jpg",
+    "social": {}
   },
   {
     "slug": "boucherie-diraty",
@@ -374,13 +442,16 @@
     "description": "Vente de viandes",
     "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 24 10 13",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.boucheriediraty.fr",
     "hours": "Du lundi au samedi de 7h30 à 19h",
     "photos": [
-      "assets/photos/entreprises/boucherie-diraty/cover.jpg",
-      "assets/photos/entreprises/boucherie-diraty/logo.jpg"
-    ]
+      "assets/photos/entreprises/boucherie-diraty/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/boucherie-diraty/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100083231535578"
+    }
   },
   {
     "slug": "boulangerie-enneartz",
@@ -390,13 +461,16 @@
     "description": "Boulangerie biologique",
     "address": "Halles dalba, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "09 87 38 80 80",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.boulangerie-enneartz.fr",
     "hours": "Du lundi au samedi 8h 19h",
     "photos": [
-      "assets/photos/entreprises/boulangerie-enneartz/cover.jpg",
-      "assets/photos/entreprises/boulangerie-enneartz/logo.jpg"
-    ]
+      "assets/photos/entreprises/boulangerie-enneartz/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/boulangerie-enneartz/logo.jpg",
+    "social": {
+      "instagram": "https://instagram.com/boulangerie_enneartz_biarrritz"
+    }
   },
   {
     "slug": "boussaad-art-deco",
@@ -409,7 +483,9 @@
     "email": "",
     "website": "",
     "hours": "",
-    "photos": []
+    "photos": [],
+    "logo": "",
+    "social": {}
   },
   {
     "slug": "bowl-go",
@@ -419,13 +495,17 @@
     "description": "Livraison de nourriture",
     "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "09 88 49 84 65",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.bowlandgo.fr",
     "hours": "Du lundi au dimanche 11H30 à 22H",
     "photos": [
-      "assets/photos/entreprises/bowl-go/cover.jpg",
-      "assets/photos/entreprises/bowl-go/logo.png"
-    ]
+      "assets/photos/entreprises/bowl-go/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/bowl-go/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/bowlandgobiarritz",
+      "instagram": "https://www.instagram.com/bowl_and_go"
+    }
   },
   {
     "slug": "brasserie-diraty",
@@ -439,9 +519,13 @@
     "website": "",
     "hours": "Du lundi au vendredi de 6h30 à 15h3à",
     "photos": [
-      "assets/photos/entreprises/brasserie-diraty/cover.jpg",
-      "assets/photos/entreprises/brasserie-diraty/logo.png"
-    ]
+      "assets/photos/entreprises/brasserie-diraty/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/brasserie-diraty/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/La-brasserie-diraty-off-2635272809867688",
+      "instagram": "https://www.instagram.com/brasserieiraty"
+    }
   },
   {
     "slug": "btm-biarritz-train-miniature",
@@ -451,13 +535,14 @@
     "description": "Vente de trains miniatures",
     "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "06 87 34 87 33",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://btm.eus",
     "hours": "Du lundi au jeudi de 10h à 17h",
     "photos": [
-      "assets/photos/entreprises/btm-biarritz-train-miniature/cover.jpg",
-      "assets/photos/entreprises/btm-biarritz-train-miniature/logo.png"
-    ]
+      "assets/photos/entreprises/btm-biarritz-train-miniature/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/btm-biarritz-train-miniature/logo.png",
+    "social": {}
   },
   {
     "slug": "bye-buy-car",
@@ -470,7 +555,9 @@
     "email": "",
     "website": "https://bye-buy-car.com",
     "hours": "Mar-Ven : 10h-13h / 14h-18h30 · Sam : 10h-13h / 14h-17h",
-    "photos": []
+    "photos": [],
+    "logo": "",
+    "social": {}
   },
   {
     "slug": "cabinet-de-radiologie-dr-nomblot",
@@ -480,12 +567,14 @@
     "description": "Centre d’imagerie médicale",
     "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "05 47 15 64 64",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.doctolib.fr/centre-d-imagerie-medicale/biarritz/dr-nomblot-oloron-sainte-marie-chauvigny-et-chantonnay?highlight[agenda_ids",
     "hours": "Du lundi au vendredi de 8h15 à 18h15",
     "photos": [
       "assets/photos/entreprises/cabinet-de-radiologie-dr-nomblot/logo.jpeg"
-    ]
+    ],
+    "logo": "assets/photos/entreprises/cabinet-de-radiologie-dr-nomblot/logo.jpeg",
+    "social": {}
   },
   {
     "slug": "cafe-grand-biarritz",
@@ -500,9 +589,13 @@
     "hours": "Du lundi au vendredi de 11h30 à 2h",
     "photos": [
       "assets/photos/entreprises/cafe-grand-biarritz/cover.jpg",
-      "assets/photos/entreprises/cafe-grand-biarritz/photo-01.jpg",
-      "assets/photos/entreprises/cafe-grand-biarritz/logo.png"
-    ]
+      "assets/photos/entreprises/cafe-grand-biarritz/photo-01.jpg"
+    ],
+    "logo": "assets/photos/entreprises/cafe-grand-biarritz/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/cafegrandbiarritz",
+      "instagram": "https://www.instagram.com/cafegrandbiarritz"
+    }
   },
   {
     "slug": "cap-vital-sante",
@@ -516,9 +609,12 @@
     "website": "https://www.capvitalsante64-40.fr",
     "hours": "Du lundi au samedi de 9h à 18h",
     "photos": [
-      "assets/photos/entreprises/cap-vital-sante/cover.jpg",
-      "assets/photos/entreprises/cap-vital-sante/logo.jpg"
-    ]
+      "assets/photos/entreprises/cap-vital-sante/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/cap-vital-sante/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/capvitalofficiel"
+    }
   },
   {
     "slug": "carrosserie-jmb-auto-moto",
@@ -532,9 +628,12 @@
     "website": "http://www.carrosserie-biarritz.com",
     "hours": "Du lundi au vendredi de 7h30 à 17h",
     "photos": [
-      "assets/photos/entreprises/carrosserie-jmb-auto-moto/cover.jpg",
-      "assets/photos/entreprises/carrosserie-jmb-auto-moto/logo.jpg"
-    ]
+      "assets/photos/entreprises/carrosserie-jmb-auto-moto/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/carrosserie-jmb-auto-moto/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/jmbautomoto/?fref=ts"
+    }
   },
   {
     "slug": "centre-lazeo",
@@ -554,9 +653,12 @@
       "assets/photos/entreprises/centre-lazeo/photo-03.jpeg",
       "assets/photos/entreprises/centre-lazeo/photo-04.jpeg",
       "assets/photos/entreprises/centre-lazeo/photo-05.jpg",
-      "assets/photos/entreprises/centre-lazeo/photo-06.png",
-      "assets/photos/entreprises/centre-lazeo/logo.webp"
-    ]
+      "assets/photos/entreprises/centre-lazeo/photo-06.png"
+    ],
+    "logo": "assets/photos/entreprises/centre-lazeo/logo.webp",
+    "social": {
+      "facebook": "https://www.facebook.com/lazeo.medecine.esthetique"
+    }
   },
   {
     "slug": "click-go",
@@ -566,13 +668,16 @@
     "description": "Livraison à domicile de course",
     "address": "BIARRITZ ACTIVITES",
     "phone": "06 58 73 75 52",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.clickgo.fr/vendeur/bayonne",
     "hours": "Du lundi au dimanche de 20h à 4H",
     "photos": [
-      "assets/photos/entreprises/click-go/cover.jpeg",
-      "assets/photos/entreprises/click-go/logo.png"
-    ]
+      "assets/photos/entreprises/click-go/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/click-go/logo.png",
+    "social": {
+      "instagram": "https://instagram.com/clickngo.france"
+    }
   },
   {
     "slug": "cuir-factory",
@@ -586,9 +691,13 @@
     "website": "https://www.cuir-factory-btz.fr",
     "hours": "Du mardi au samedi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/cuir-factory/cover.jpeg",
-      "assets/photos/entreprises/cuir-factory/logo.webp"
-    ]
+      "assets/photos/entreprises/cuir-factory/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/cuir-factory/logo.webp",
+    "social": {
+      "facebook": "https://www.facebook.com/cordonneriechezjean/?_rdr",
+      "instagram": "https://www.instagram.com/cuirfactory/?hl=fr"
+    }
   },
   {
     "slug": "dance-wave",
@@ -602,9 +711,13 @@
     "website": "https://www.dance-wave.fr",
     "hours": "Du lundi au vendredi de 18h30 à 21h30",
     "photos": [
-      "assets/photos/entreprises/dance-wave/cover.jpg",
-      "assets/photos/entreprises/dance-wave/logo.jpeg"
-    ]
+      "assets/photos/entreprises/dance-wave/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/dance-wave/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/dancewave64",
+      "instagram": "https://www.instagram.com/dancewave64"
+    }
   },
   {
     "slug": "darrieumerlou",
@@ -618,9 +731,12 @@
     "website": "https://www.darrieumerlou.fr/?fbclid=IwY2xjawGpQVBleHRuA2FlbQIxMAABHXVkURXw6SvSDmZLImpWZ5Ykk1brtY--pFdbDtlY25BnxFUVN4yiuGxmqA_aem_2auD08Lp4EIY4bYngDJoaQ",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/darrieumerlou/cover.webp",
-      "assets/photos/entreprises/darrieumerlou/logo.jpeg"
-    ]
+      "assets/photos/entreprises/darrieumerlou/cover.webp"
+    ],
+    "logo": "assets/photos/entreprises/darrieumerlou/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/DarrieumerlouBardos"
+    }
   },
   {
     "slug": "david-coralie-opticien",
@@ -638,7 +754,11 @@
       "assets/photos/entreprises/david-coralie-opticien/photo-01.png",
       "assets/photos/entreprises/david-coralie-opticien/photo-02.jpg",
       "assets/photos/entreprises/david-coralie-opticien/photo-03.jpg"
-    ]
+    ],
+    "logo": "",
+    "social": {
+      "instagram": "https://www.instagram.com/david_et_coralie"
+    }
   },
   {
     "slug": "depann-pc64",
@@ -653,7 +773,12 @@
     "hours": "Du lundi au jeudi de 10h à 17h30",
     "photos": [
       "assets/photos/entreprises/depann-pc64/cover.jpg"
-    ]
+    ],
+    "logo": "",
+    "social": {
+      "facebook": "https://www.facebook.com/dmmlorcana/?_rdr",
+      "instagram": "https://www.instagram.com/dmm_france"
+    }
   },
   {
     "slug": "dietplus",
@@ -667,9 +792,13 @@
     "website": "https://www.dietplus.fr/centres/biarritz",
     "hours": "Lundi – Mercredi – Vendredi de 9h à 18H · Mardi – Jeudi de 9h à 18h3à",
     "photos": [
-      "assets/photos/entreprises/dietplus/cover.jpg",
-      "assets/photos/entreprises/dietplus/logo.jpg"
-    ]
+      "assets/photos/entreprises/dietplus/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/dietplus/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/people/Dietplus-Biarritz/61557919933865",
+      "instagram": "https://www.instagram.com/dietplusbiarritz"
+    }
   },
   {
     "slug": "don-donuts",
@@ -683,9 +812,13 @@
     "website": "https://linktr.ee/dondonuts?fbclid=PAZXh0bgNhZW0CMTEAAaZWPqnGaUv3Ugx4Y35cZBFRA_a6VpOnanLZFTpC_ng0wiF5p6a_UYGLM9c_aem_p65d6J8LIl2n7lCaeTHiKg",
     "hours": "Du lundi au samedi de 9h30 à 20h",
     "photos": [
-      "assets/photos/entreprises/don-donuts/cover.jpg",
-      "assets/photos/entreprises/don-donuts/logo.jpeg"
-    ]
+      "assets/photos/entreprises/don-donuts/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/don-donuts/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/Dondonuts.mlb/?_rdr",
+      "instagram": "https://www.instagram.com/dondonuts.mlb/?hl=fr"
+    }
   },
   {
     "slug": "dr-leslie-morales",
@@ -699,9 +832,10 @@
     "website": "",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/dr-leslie-morales/cover.webp",
-      "assets/photos/entreprises/dr-leslie-morales/logo.webp"
-    ]
+      "assets/photos/entreprises/dr-leslie-morales/cover.webp"
+    ],
+    "logo": "assets/photos/entreprises/dr-leslie-morales/logo.webp",
+    "social": {}
   },
   {
     "slug": "ds-wash",
@@ -715,9 +849,12 @@
     "website": "",
     "hours": "Du lundi au samedi de 9h à 18h30",
     "photos": [
-      "assets/photos/entreprises/ds-wash/cover.jpg",
-      "assets/photos/entreprises/ds-wash/logo.jpg"
-    ]
+      "assets/photos/entreprises/ds-wash/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/ds-wash/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/antonio.wash.104"
+    }
   },
   {
     "slug": "eat-go",
@@ -731,9 +868,10 @@
     "website": "https://www.ubereats.com/fr/store/eat-%26-go/lP_w0ilPVOm5GL1Xe7c-DA?diningMode=DELIVERY",
     "hours": "Du lundi au dimanche de 20h à 4h",
     "photos": [
-      "assets/photos/entreprises/eat-go/cover.jpg",
-      "assets/photos/entreprises/eat-go/logo.jpg"
-    ]
+      "assets/photos/entreprises/eat-go/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/eat-go/logo.jpg",
+    "social": {}
   },
   {
     "slug": "ecole-de-cirque-ballabulle",
@@ -747,9 +885,12 @@
     "website": "http://ballabulle.com/?fbclid=IwAR2hNJBvXZa1UyXhsu6J-2ogpUcVn0GvO2jQBiDUn67Trekom7Mk8nFHoDw",
     "hours": "Du mardi au samedi de 10h à 18h",
     "photos": [
-      "assets/photos/entreprises/ecole-de-cirque-ballabulle/cover.jpg",
-      "assets/photos/entreprises/ecole-de-cirque-ballabulle/logo.png"
-    ]
+      "assets/photos/entreprises/ecole-de-cirque-ballabulle/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/ecole-de-cirque-ballabulle/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/Ballabulle-Ecole-de-cirque-de-Biarritz-149873968483729"
+    }
   },
   {
     "slug": "ecole-des-metiers-du-sport-by-gtf",
@@ -763,9 +904,14 @@
     "website": "https://ems-biarritz.fr",
     "hours": "Du lundi au vendredi de 8h30 à 18h30",
     "photos": [
-      "assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/cover.jpg",
-      "assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/logo.jpg"
-    ]
+      "assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100088011774093",
+      "instagram": "https://www.instagram.com/emsbygtf",
+      "linkedin": "https://www.linkedin.com/company/emsbygtf"
+    }
   },
   {
     "slug": "eyesea-production",
@@ -779,9 +925,13 @@
     "website": "http://eyeseaproduction.com/index.php/services",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/eyesea-production/cover.jpg",
-      "assets/photos/entreprises/eyesea-production/logo.jpg"
-    ]
+      "assets/photos/entreprises/eyesea-production/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/eyesea-production/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/people/EyeSea-Production/100063661684594",
+      "instagram": "https://www.instagram.com/eyeseaprod/?hl=fr"
+    }
   },
   {
     "slug": "formatext",
@@ -795,9 +945,12 @@
     "website": "http://www.formatext-igs.com",
     "hours": "Du lundi au samedi de 9h à 18h30",
     "photos": [
-      "assets/photos/entreprises/formatext/cover.jpg",
-      "assets/photos/entreprises/formatext/logo.jpg"
-    ]
+      "assets/photos/entreprises/formatext/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/formatext/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100057220848849"
+    }
   },
   {
     "slug": "horoa",
@@ -811,9 +964,12 @@
     "website": "https://linktr.ee/horoa?fbclid=PAZXh0bgNhZW0CMTEAAabZBK_ZKoXJ9nw5VUzNp-8CaUrfDUfRBK-uDi7gT8sFlwXM644bkn5WXBA_aem_oNBg98Kvl-yfZsc2bB-4gA",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/horoa/cover.webp",
-      "assets/photos/entreprises/horoa/logo.png"
-    ]
+      "assets/photos/entreprises/horoa/cover.webp"
+    ],
+    "logo": "assets/photos/entreprises/horoa/logo.png",
+    "social": {
+      "instagram": "https://www.instagram.com/horoa.eu"
+    }
   },
   {
     "slug": "ingerop-cote-basque",
@@ -827,9 +983,13 @@
     "website": "https://www.ingerop.fr",
     "hours": "Du lundi au vendredi 10h à 14h",
     "photos": [
-      "assets/photos/entreprises/ingerop-cote-basque/cover.png",
-      "assets/photos/entreprises/ingerop-cote-basque/logo.png"
-    ]
+      "assets/photos/entreprises/ingerop-cote-basque/cover.png"
+    ],
+    "logo": "assets/photos/entreprises/ingerop-cote-basque/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/ingerop/?fref=ts",
+      "instagram": "https://www.instagram.com/groupeingerop/?hl=fr"
+    }
   },
   {
     "slug": "inovie-axbio",
@@ -851,9 +1011,10 @@
       "assets/photos/entreprises/inovie-axbio/photo-05.jpg",
       "assets/photos/entreprises/inovie-axbio/photo-06.png",
       "assets/photos/entreprises/inovie-axbio/photo-07.png",
-      "assets/photos/entreprises/inovie-axbio/photo-08.jpg",
-      "assets/photos/entreprises/inovie-axbio/logo.png"
-    ]
+      "assets/photos/entreprises/inovie-axbio/photo-08.jpg"
+    ],
+    "logo": "assets/photos/entreprises/inovie-axbio/logo.png",
+    "social": {}
   },
   {
     "slug": "istanbul-kebab",
@@ -867,9 +1028,13 @@
     "website": "",
     "hours": "Du lundi au samedi de 11h à 15h et de 18h à 21h",
     "photos": [
-      "assets/photos/entreprises/istanbul-kebab/cover.jpg",
-      "assets/photos/entreprises/istanbul-kebab/logo.jpg"
-    ]
+      "assets/photos/entreprises/istanbul-kebab/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/istanbul-kebab/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/istanbulkebab64/?locale=fr_FR",
+      "instagram": "https://www.instagram.com/istanbul_kebab64"
+    }
   },
   {
     "slug": "kafe-etxea",
@@ -883,9 +1048,13 @@
     "website": "https://kafe-etxea.com",
     "hours": "Le lundi de 14h à 18h · Le mardi de 9h à 18h · Le samedi de 9h à 12h",
     "photos": [
-      "assets/photos/entreprises/kafe-etxea/cover.jpg",
-      "assets/photos/entreprises/kafe-etxea/logo.jpg"
-    ]
+      "assets/photos/entreprises/kafe-etxea/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/kafe-etxea/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100086199408975",
+      "instagram": "https://www.instagram.com/kafe.etxea"
+    }
   },
   {
     "slug": "kines-biarritz-iraty",
@@ -895,13 +1064,16 @@
     "description": "KARENMARESCHAL@GMAIL.COM 0559245758 LES ALDADES",
     "address": "",
     "phone": "",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "",
     "hours": "Du lundi au vendredi de 8h à 20h",
     "photos": [
-      "assets/photos/entreprises/kines-biarritz-iraty/cover.jpg",
-      "assets/photos/entreprises/kines-biarritz-iraty/logo.png"
-    ]
+      "assets/photos/entreprises/kines-biarritz-iraty/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/kines-biarritz-iraty/logo.png",
+    "social": {
+      "facebook": "https://fr-fr.facebook.com/kinesbiarritziraty"
+    }
   },
   {
     "slug": "la-guinguette-des-sardines",
@@ -915,9 +1087,13 @@
     "website": "https://www.sardines-guinguettes.com/reservation",
     "hours": "Mardi-mercredi de 17h à 00h · Jeudi de 17h à 2h · Vendredi et samedi de 18h à 2h",
     "photos": [
-      "assets/photos/entreprises/la-guinguette-des-sardines/cover.jpg",
-      "assets/photos/entreprises/la-guinguette-des-sardines/logo.jpg"
-    ]
+      "assets/photos/entreprises/la-guinguette-des-sardines/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/la-guinguette-des-sardines/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/sardinesanglet",
+      "instagram": "https://www.instagram.com/guinguettedessardines_biarritz"
+    }
   },
   {
     "slug": "la-parqueterie-basque",
@@ -933,7 +1109,9 @@
     "photos": [
       "assets/photos/entreprises/la-parqueterie-basque/showroom.jpg",
       "assets/photos/entreprises/la-parqueterie-basque/logo.jpg"
-    ]
+    ],
+    "logo": "",
+    "social": {}
   },
   {
     "slug": "la-ptite-biarrote",
@@ -943,13 +1121,17 @@
     "description": "Restaurant",
     "address": "Halles DALBA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "09 50 86 88 49",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "",
     "hours": "Du samedi au dimanche de 8h30 à 14h",
     "photos": [
-      "assets/photos/entreprises/la-ptite-biarrote/cover.jpg",
-      "assets/photos/entreprises/la-ptite-biarrote/logo.jpg"
-    ]
+      "assets/photos/entreprises/la-ptite-biarrote/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/la-ptite-biarrote/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/lapetitebiarrote",
+      "instagram": "https://www.instagram.com/la_ptite_biarrote/?hl=fr"
+    }
   },
   {
     "slug": "la-vague",
@@ -963,9 +1145,12 @@
     "website": "https://www.lavague.studio/?utm_source=google&#038;utm_medium=wix_google_business_profile&#038;utm_campaign=1845846328326374139",
     "hours": "Du lundi au vendredi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/la-vague/cover.jpg",
-      "assets/photos/entreprises/la-vague/logo.jpg"
-    ]
+      "assets/photos/entreprises/la-vague/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/la-vague/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/studiolavague"
+    }
   },
   {
     "slug": "laminak",
@@ -979,9 +1164,13 @@
     "website": "",
     "hours": "Tous les jours sauf le lundi",
     "photos": [
-      "assets/photos/entreprises/laminak/cover.jpeg",
-      "assets/photos/entreprises/laminak/logo.jpeg"
-    ]
+      "assets/photos/entreprises/laminak/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/laminak/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/p/Poissonnerie-Traiteur-LaminaK-100076035736390",
+      "instagram": "https://www.instagram.com/laminak.biarritz/?hl=fr"
+    }
   },
   {
     "slug": "larty-chaud",
@@ -991,13 +1180,16 @@
     "description": "Cuisine de bistro",
     "address": "HALLE DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "09 87 34 80 68",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "",
     "hours": "Du lundi au samedi de 12h à 14h30",
     "photos": [
-      "assets/photos/entreprises/larty-chaud/cover.jpg",
-      "assets/photos/entreprises/larty-chaud/logo.jpg"
-    ]
+      "assets/photos/entreprises/larty-chaud/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/larty-chaud/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/p/Larty-chaud-100063689585467/?locale=fr_FR"
+    }
   },
   {
     "slug": "lazy-days",
@@ -1011,9 +1203,12 @@
     "website": "https://www.massage-spa-biarritz.com",
     "hours": "Du mardi au samedi 9h30 à 18h",
     "photos": [
-      "assets/photos/entreprises/lazy-days/cover.jpg",
-      "assets/photos/entreprises/lazy-days/logo.jpg"
-    ]
+      "assets/photos/entreprises/lazy-days/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/lazy-days/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/lazydaysbiarritz"
+    }
   },
   {
     "slug": "le-local",
@@ -1027,9 +1222,13 @@
     "website": "",
     "hours": "Le vendredi de 20h à 2h",
     "photos": [
-      "assets/photos/entreprises/le-local/cover.jpg",
-      "assets/photos/entreprises/le-local/logo.png"
-    ]
+      "assets/photos/entreprises/le-local/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/le-local/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/local.biarritz/?_rdr",
+      "instagram": "https://www.instagram.com/lelocalbiarritz"
+    }
   },
   {
     "slug": "le-studio",
@@ -1043,9 +1242,13 @@
     "website": "https://www.lestudiopilatesetcoaching.com",
     "hours": "Du lundi au samedi de 8h à 20h",
     "photos": [
-      "assets/photos/entreprises/le-studio/cover.jpg",
-      "assets/photos/entreprises/le-studio/logo.jpg"
-    ]
+      "assets/photos/entreprises/le-studio/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/le-studio/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/lestudiopilatesbtz",
+      "instagram": "https://www.instagram.com/lestudiopilatesetcoaching"
+    }
   },
   {
     "slug": "lecho-du-silence",
@@ -1059,9 +1262,13 @@
     "website": "https://www.lechodusilence.com/contact",
     "hours": "Du mardi au vendredi de 10h30 à 19h · Le samedi de 10h à 17h",
     "photos": [
-      "assets/photos/entreprises/lecho-du-silence/cover.jpg",
-      "assets/photos/entreprises/lecho-du-silence/logo.jpg"
-    ]
+      "assets/photos/entreprises/lecho-du-silence/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/lecho-du-silence/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/L.EchoduSilence.atelier.de.ceramique.et.azulejos",
+      "instagram": "https://www.instagram.com/l_echo_du_silence_ceramique"
+    }
   },
   {
     "slug": "les-losanges",
@@ -1075,9 +1282,13 @@
     "website": "https://www.leslosanges.com",
     "hours": "Du lundi au vendredi de 8h à 22H",
     "photos": [
-      "assets/photos/entreprises/les-losanges/cover.jpg",
-      "assets/photos/entreprises/les-losanges/logo.jpg"
-    ]
+      "assets/photos/entreprises/les-losanges/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/les-losanges/logo.jpg",
+    "social": {
+      "facebook": "https://fr-fr.facebook.com/leslosanges",
+      "instagram": "https://www.instagram.com/leslosanges"
+    }
   },
   {
     "slug": "maison-auto-nettoyante-technitoit",
@@ -1091,9 +1302,12 @@
     "website": "https://www.technitoit.com/agence/pyrenees-atlantiques-64-biarritz?utm_source=google&utm_medium=gmb",
     "hours": "Du lundi au vendredi de 8h30 à 12h et de 13h30 à 17h30",
     "photos": [
-      "assets/photos/entreprises/maison-auto-nettoyante-technitoit/cover.jpg",
-      "assets/photos/entreprises/maison-auto-nettoyante-technitoit/logo.jpg"
-    ]
+      "assets/photos/entreprises/maison-auto-nettoyante-technitoit/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/maison-auto-nettoyante-technitoit/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/technitoit"
+    }
   },
   {
     "slug": "maison-vishnu",
@@ -1119,9 +1333,13 @@
       "assets/photos/entreprises/maison-vishnu/photo-09.webp",
       "assets/photos/entreprises/maison-vishnu/photo-10.webp",
       "assets/photos/entreprises/maison-vishnu/photo-11.png",
-      "assets/photos/entreprises/maison-vishnu/photo-12.webp",
-      "assets/photos/entreprises/maison-vishnu/logo.jpg"
-    ]
+      "assets/photos/entreprises/maison-vishnu/photo-12.webp"
+    ],
+    "logo": "assets/photos/entreprises/maison-vishnu/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/people/Maisonvishnu",
+      "instagram": "https://www.instagram.com/maisonvishnu"
+    }
   },
   {
     "slug": "mega-sun-biarritz",
@@ -1136,7 +1354,11 @@
     "hours": "Du lundi au vendredi 8h à 19h",
     "photos": [
       "assets/photos/entreprises/mega-sun-biarritz/logo.png"
-    ]
+    ],
+    "logo": "assets/photos/entreprises/mega-sun-biarritz/logo.png",
+    "social": {
+      "facebook": "https://fr-fr.facebook.com/MegaSun-Biarritz-292279920871012"
+    }
   },
   {
     "slug": "monsieur-brisson",
@@ -1150,9 +1372,13 @@
     "website": "https://www.maxbrisson.fr",
     "hours": "Du lundi au vendredi",
     "photos": [
-      "assets/photos/entreprises/monsieur-brisson/cover.jpg",
-      "assets/photos/entreprises/monsieur-brisson/logo.jpg"
-    ]
+      "assets/photos/entreprises/monsieur-brisson/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/monsieur-brisson/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/max.brisson.5",
+      "instagram": "https://www.instagram.com/max.brisson64"
+    }
   },
   {
     "slug": "nahia",
@@ -1166,9 +1392,12 @@
     "website": "",
     "hours": "Du lundi au samedi de 9h à 21h",
     "photos": [
-      "assets/photos/entreprises/nahia/cover.jpg",
-      "assets/photos/entreprises/nahia/logo.png"
-    ]
+      "assets/photos/entreprises/nahia/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/nahia/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/Restaurant-NAHIA-786778441418290/timeline"
+    }
   },
   {
     "slug": "nouvelle-compagnie-des-arts-graphiques",
@@ -1182,9 +1411,13 @@
     "website": "https://www.ncag-art-gallery.com",
     "hours": "Du lundi au dimanche 24h/24h",
     "photos": [
-      "assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/cover.jpg",
-      "assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/logo.png"
-    ]
+      "assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/artgalleryNCAG",
+      "instagram": "https://www.instagram.com/ncag_art_gallery"
+    }
   },
   {
     "slug": "number-one-shop",
@@ -1198,9 +1431,12 @@
     "website": "https://www.numberonebarbershop.com",
     "hours": "Du lundi au samedi de 10h à 20h",
     "photos": [
-      "assets/photos/entreprises/number-one-shop/cover.jpg",
-      "assets/photos/entreprises/number-one-shop/logo.jpeg"
-    ]
+      "assets/photos/entreprises/number-one-shop/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/number-one-shop/logo.jpeg",
+    "social": {
+      "instagram": "https://www.instagram.com/numberonebarbershopbtz"
+    }
   },
   {
     "slug": "odette-coiffure",
@@ -1222,9 +1458,13 @@
       "assets/photos/entreprises/odette-coiffure/photo-05.jpeg",
       "assets/photos/entreprises/odette-coiffure/photo-06.jpeg",
       "assets/photos/entreprises/odette-coiffure/photo-07.jpg",
-      "assets/photos/entreprises/odette-coiffure/photo-08.jpg",
-      "assets/photos/entreprises/odette-coiffure/logo.jpg"
-    ]
+      "assets/photos/entreprises/odette-coiffure/photo-08.jpg"
+    ],
+    "logo": "assets/photos/entreprises/odette-coiffure/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/romaincoiffeur",
+      "instagram": "https://www.instagram.com/odettebtz"
+    }
   },
   {
     "slug": "ongles-en-gel",
@@ -1238,9 +1478,12 @@
     "website": "",
     "hours": "Du lundi au samedi de 9h30 à 19h",
     "photos": [
-      "assets/photos/entreprises/ongles-en-gel/cover.jpeg",
-      "assets/photos/entreprises/ongles-en-gel/logo.jpg"
-    ]
+      "assets/photos/entreprises/ongles-en-gel/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/ongles-en-gel/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/onglesa.gogo"
+    }
   },
   {
     "slug": "ophelie-hubert",
@@ -1258,7 +1501,9 @@
       "assets/photos/entreprises/ophelie-hubert/photo-01.png",
       "assets/photos/entreprises/ophelie-hubert/photo-02.png",
       "assets/photos/entreprises/ophelie-hubert/photo-03.png"
-    ]
+    ],
+    "logo": "",
+    "social": {}
   },
   {
     "slug": "origins-digital",
@@ -1268,13 +1513,16 @@
     "description": "Vente de matériels digitales",
     "address": "Les ALDADES, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 43 85 47",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.onrewind.com/#intro",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/origins-digital/cover.jpg",
-      "assets/photos/entreprises/origins-digital/logo.jpg"
-    ]
+      "assets/photos/entreprises/origins-digital/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/origins-digital/logo.jpg",
+    "social": {
+      "facebook": "https://fr-fr.facebook.com/onrewindtv"
+    }
   },
   {
     "slug": "paritel",
@@ -1288,9 +1536,13 @@
     "website": "http://agences.paritel.fr/813478-paritel-biarritz",
     "hours": "Du lundi au vendredi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/paritel/cover.jpg",
-      "assets/photos/entreprises/paritel/logo.png"
-    ]
+      "assets/photos/entreprises/paritel/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/paritel/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/Paritel",
+      "instagram": "https://www.instagram.com/paritel_operateur"
+    }
   },
   {
     "slug": "pharmacie-biarritz-iraty",
@@ -1304,9 +1556,12 @@
     "website": "https://www.pharmacie-biarritz-iraty.fr",
     "hours": "Du lundi au samedi 8h à 20H",
     "photos": [
-      "assets/photos/entreprises/pharmacie-biarritz-iraty/cover.png",
-      "assets/photos/entreprises/pharmacie-biarritz-iraty/logo.png"
-    ]
+      "assets/photos/entreprises/pharmacie-biarritz-iraty/cover.png"
+    ],
+    "logo": "assets/photos/entreprises/pharmacie-biarritz-iraty/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/pharmacieiraty"
+    }
   },
   {
     "slug": "piknika",
@@ -1320,9 +1575,13 @@
     "website": "https://www.piknika-paysbasque.fr",
     "hours": "Du mardi au samedi de 9h à 17h · Le dimanche de 10h à 12",
     "photos": [
-      "assets/photos/entreprises/piknika/cover.jpeg",
-      "assets/photos/entreprises/piknika/logo.jpg"
-    ]
+      "assets/photos/entreprises/piknika/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/piknika/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=61558967971061&locale=fr_FR",
+      "instagram": "https://www.instagram.com/piknika_paysbasque"
+    }
   },
   {
     "slug": "piuma-pizza",
@@ -1336,9 +1595,13 @@
     "website": "https://piumabiarritz.com",
     "hours": "Du mardi au vendredi de 12h à 14h et de 19h à 21h · Le samedi de 19h à 21h30",
     "photos": [
-      "assets/photos/entreprises/piuma-pizza/cover.jpg",
-      "assets/photos/entreprises/piuma-pizza/logo.jpeg"
-    ]
+      "assets/photos/entreprises/piuma-pizza/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/piuma-pizza/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100071308614712",
+      "instagram": "https://www.instagram.com/piuma_pizza_biarritz"
+    }
   },
   {
     "slug": "pog-64",
@@ -1348,13 +1611,17 @@
     "description": "Concept de cuisines",
     "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "05 59 51 00 19",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.poggenpohl.com/fr",
     "hours": "Du lundi au samedi de 10h à 19h",
     "photos": [
-      "assets/photos/entreprises/pog-64/cover.jpg",
-      "assets/photos/entreprises/pog-64/logo.png"
-    ]
+      "assets/photos/entreprises/pog-64/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/pog-64/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/conceptstorecuisines",
+      "instagram": "https://instagram.com/conceptstorecuisines"
+    }
   },
   {
     "slug": "porrada-barber-shop",
@@ -1368,9 +1635,13 @@
     "website": "https://www.planity.com/porrada-barber-shop-64200-biarritz",
     "hours": "Du mardi au samedi de 8h à. 18h",
     "photos": [
-      "assets/photos/entreprises/porrada-barber-shop/cover.jpg",
-      "assets/photos/entreprises/porrada-barber-shop/logo.jpg"
-    ]
+      "assets/photos/entreprises/porrada-barber-shop/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/porrada-barber-shop/logo.jpg",
+    "social": {
+      "facebook": "https://www.facebook.com/planitypro",
+      "instagram": "https://www.instagram.com/porradabarbershop"
+    }
   },
   {
     "slug": "regatta-france",
@@ -1384,9 +1655,13 @@
     "website": "https://www.regatta.com/fr",
     "hours": "Du lundi au dimanche de 10h à 18h",
     "photos": [
-      "assets/photos/entreprises/regatta-france/cover.jpg",
-      "assets/photos/entreprises/regatta-france/logo.png"
-    ]
+      "assets/photos/entreprises/regatta-france/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/regatta-france/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/RegattaOutdoors",
+      "instagram": "https://www.instagram.com/regattaoutdoors"
+    }
   },
   {
     "slug": "s-o-s-medecins",
@@ -1405,9 +1680,10 @@
       "assets/photos/entreprises/s-o-s-medecins/photo-02.jpg",
       "assets/photos/entreprises/s-o-s-medecins/photo-03.jpg",
       "assets/photos/entreprises/s-o-s-medecins/photo-04.jpg",
-      "assets/photos/entreprises/s-o-s-medecins/photo-05.jpg",
-      "assets/photos/entreprises/s-o-s-medecins/logo.png"
-    ]
+      "assets/photos/entreprises/s-o-s-medecins/photo-05.jpg"
+    ],
+    "logo": "assets/photos/entreprises/s-o-s-medecins/logo.png",
+    "social": {}
   },
   {
     "slug": "sud-immo-pro",
@@ -1422,7 +1698,9 @@
     "hours": "Du lundi au vendredi de 9h00 à 12h30 et de 14h00 à 18h00",
     "photos": [
       "assets/photos/entreprises/sud-immo-pro/logo.jpg"
-    ]
+    ],
+    "logo": "assets/photos/entreprises/sud-immo-pro/logo.jpg",
+    "social": {}
   },
   {
     "slug": "sunset-studio-biarritz",
@@ -1436,9 +1714,12 @@
     "website": "https://sunset-studio.fr/v2",
     "hours": "Du mardi au dimanche de 9h à 18h",
     "photos": [
-      "assets/photos/entreprises/sunset-studio-biarritz/cover.png",
-      "assets/photos/entreprises/sunset-studio-biarritz/logo.png"
-    ]
+      "assets/photos/entreprises/sunset-studio-biarritz/cover.png"
+    ],
+    "logo": "assets/photos/entreprises/sunset-studio-biarritz/logo.png",
+    "social": {
+      "instagram": "https://www.instagram.com/sunsetstudio_biarritz"
+    }
   },
   {
     "slug": "the-inspire-academy",
@@ -1449,12 +1730,16 @@
     "address": "Biarritz Activités",
     "phone": "07 78 03 89 86",
     "email": "contact@inspireacademy.fr",
-    "website": "",
+    "website": "https://inspireacademy.fr",
     "hours": "Du lundi au vendredi de 9h à 19h30 · Le samedi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/the-inspire-academy/cover.jpg",
-      "assets/photos/entreprises/the-inspire-academy/logo.jpeg"
-    ]
+      "assets/photos/entreprises/the-inspire-academy/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/the-inspire-academy/logo.jpeg",
+    "social": {
+      "facebook": "https://www.facebook.com/inspireacademybiarritz",
+      "instagram": "https://www.instagram.com/inspireacademy.fr"
+    }
   },
   {
     "slug": "tunstall",
@@ -1468,9 +1753,10 @@
     "website": "https://www.tunstall.fr",
     "hours": "",
     "photos": [
-      "assets/photos/entreprises/tunstall/cover.webp",
-      "assets/photos/entreprises/tunstall/logo.png"
-    ]
+      "assets/photos/entreprises/tunstall/cover.webp"
+    ],
+    "logo": "assets/photos/entreprises/tunstall/logo.png",
+    "social": {}
   },
   {
     "slug": "umih-pays-basque",
@@ -1484,9 +1770,13 @@
     "website": "",
     "hours": "Du lundi au vendredi de 9h à 17h",
     "photos": [
-      "assets/photos/entreprises/umih-pays-basque/cover.jpg",
-      "assets/photos/entreprises/umih-pays-basque/logo.jpg"
-    ]
+      "assets/photos/entreprises/umih-pays-basque/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/umih-pays-basque/logo.jpg",
+    "social": {
+      "facebook": "https://fr-fr.facebook.com/umihpaysbasque",
+      "instagram": "https://www.instagram.com/umihpaysbasque"
+    }
   },
   {
     "slug": "veloff",
@@ -1496,15 +1786,19 @@
     "description": "Vente de cafés",
     "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
     "phone": "05 54 61 87 37",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://www.veloffcafe.fr",
     "hours": "Du lundi au samedi de 9h à 15h",
     "photos": [
       "assets/photos/entreprises/veloff/cover.jpg",
       "assets/photos/entreprises/veloff/photo-01.jpg",
-      "assets/photos/entreprises/veloff/photo-02.jpg",
-      "assets/photos/entreprises/veloff/logo.png"
-    ]
+      "assets/photos/entreprises/veloff/photo-02.jpg"
+    ],
+    "logo": "assets/photos/entreprises/veloff/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/veloffcafe",
+      "instagram": "https://www.instagram.com/veloffcafe"
+    }
   },
   {
     "slug": "violon-dans-lame",
@@ -1525,9 +1819,10 @@
       "assets/photos/entreprises/violon-dans-lame/photo-04.jpg",
       "assets/photos/entreprises/violon-dans-lame/photo-05.jpg",
       "assets/photos/entreprises/violon-dans-lame/photo-06.jpg",
-      "assets/photos/entreprises/violon-dans-lame/photo-07.jpg",
-      "assets/photos/entreprises/violon-dans-lame/logo.png"
-    ]
+      "assets/photos/entreprises/violon-dans-lame/photo-07.jpg"
+    ],
+    "logo": "assets/photos/entreprises/violon-dans-lame/logo.png",
+    "social": {}
   },
   {
     "slug": "wave-pole-studio",
@@ -1537,13 +1832,16 @@
     "description": "Wave Pole Studio est un studio de pole dance à Biarritz proposant une atmosphère chaleureuse et conviviale. Cours variés adaptés à tous les niveaux : pole dance sportive, sexy et poleo, cerceau aérien, hamac aérien. Dispensés par des professionnels diplômés, ces enseignements permettent de développer force, souplesse et confiance en soi. Équipements modernes (5 barres, 3 cerceaux, 3 hamacs) dans un espace climatisé et chauffé. Formules spéciales EVJF, EVG et anniversaires disponibles, avec une offre découverte à 15€ pour le premier cours.",
     "address": "VILLAGE Iraty-Biarritz, 4 rue des Mésanges, 64200 Biarritz",
     "phone": "06 66 17 73 35",
-    "email": "",
+    "email": "assist.co@v-i-b.fr",
     "website": "https://wavepolestudio.com",
     "hours": "Lundi : 16h à 20h30 · Mardi : 17h à 21h · Mercredi : 9h à 13h · Jeudi : 16h à 21h · Samedi : 9h à 13h",
     "photos": [
-      "assets/photos/entreprises/wave-pole-studio/cover.jpeg",
-      "assets/photos/entreprises/wave-pole-studio/logo.jpg"
-    ]
+      "assets/photos/entreprises/wave-pole-studio/cover.jpeg"
+    ],
+    "logo": "assets/photos/entreprises/wave-pole-studio/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/wavepolestudio"
+    }
   },
   {
     "slug": "west-wave-tatoo-shop",
@@ -1557,9 +1855,12 @@
     "website": "",
     "hours": "Du mardi au samedi de 11h à 18H",
     "photos": [
-      "assets/photos/entreprises/west-wave-tatoo-shop/cover.jpg",
-      "assets/photos/entreprises/west-wave-tatoo-shop/logo.jpg"
-    ]
+      "assets/photos/entreprises/west-wave-tatoo-shop/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/west-wave-tatoo-shop/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/westwave_tattooshop"
+    }
   },
   {
     "slug": "wilau-proprete",
@@ -1580,9 +1881,13 @@
       "assets/photos/entreprises/wilau-proprete/photo-04.jpg",
       "assets/photos/entreprises/wilau-proprete/photo-05.jpg",
       "assets/photos/entreprises/wilau-proprete/photo-06.jpg",
-      "assets/photos/entreprises/wilau-proprete/photo-07.jpg",
-      "assets/photos/entreprises/wilau-proprete/logo.png"
-    ]
+      "assets/photos/entreprises/wilau-proprete/photo-07.jpg"
+    ],
+    "logo": "assets/photos/entreprises/wilau-proprete/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/WilauProprete/?locale=fr_FR",
+      "instagram": "https://www.instagram.com/wilauproprete"
+    }
   },
   {
     "slug": "ximunaxiette",
@@ -1608,7 +1913,11 @@
       "assets/photos/entreprises/ximunaxiette/photo-09.jpg",
       "assets/photos/entreprises/ximunaxiette/photo-10.jpg",
       "assets/photos/entreprises/ximunaxiette/photo-11.jpg"
-    ]
+    ],
+    "logo": "",
+    "social": {
+      "facebook": "https://www.facebook.com/Ximunaxiette"
+    }
   },
   {
     "slug": "zuri-objets",
@@ -1622,8 +1931,9 @@
     "website": "",
     "hours": "Du lundi au samedi : 10h -12h",
     "photos": [
-      "assets/photos/entreprises/zuri-objets/cover.jpg",
-      "assets/photos/entreprises/zuri-objets/logo.jpeg"
-    ]
+      "assets/photos/entreprises/zuri-objets/cover.jpg"
+    ],
+    "logo": "assets/photos/entreprises/zuri-objets/logo.jpeg",
+    "social": {}
   }
 ]

@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css?v=20260505e">
+    <link rel="stylesheet" href="css/style.css?v=20260505g">
 </head>
 <body>
 
@@ -66,6 +66,10 @@
         <div class="container">
             <div class="entity-grid">
                 <aside class="entity-info">
+                    <div class="entity-info__logo" id="entity-logo-block" hidden>
+                        <img id="entity-logo" src="" alt="">
+                    </div>
+
                     <p class="entity-info__category" id="entity-category"></p>
                     <h2 class="entity-info__name" id="entity-name-h2"></h2>
                     <p class="entity-info__address" id="entity-address"></p>
@@ -90,6 +94,11 @@
                     <div class="entity-info__block" id="entity-email-block" hidden>
                         <p class="contact-info__label">Email</p>
                         <p><a id="entity-email" href="#"></a></p>
+                    </div>
+
+                    <div class="entity-info__social" id="entity-social-block" hidden>
+                        <p class="contact-info__label">Suivez-les</p>
+                        <ul class="entity-social__list" id="entity-social-list"></ul>
                     </div>
 
                     <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:2rem;">
@@ -142,6 +151,6 @@
 </footer>
 
 <script src="js/main.js?v=20260505b"></script>
-<script src="js/entreprise.js?v=20260505f"></script>
+<script src="js/entreprise.js?v=20260505g"></script>
 </body>
 </html>
