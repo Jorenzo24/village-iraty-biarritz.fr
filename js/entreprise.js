@@ -1,7 +1,9 @@
 // VIB — Page détail entreprise (chargée depuis data/entreprises.json)
 document.addEventListener('DOMContentLoaded', async () => {
+    // Slug peut venir du path (/acteur/<slug>) ou de la query (?slug=)
     const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug');
+    const pathMatch = window.location.pathname.match(/^\/acteur\/([a-z0-9\-]+)/i);
+    const slug = pathMatch ? pathMatch[1] : params.get('slug');
 
     const heroTitle = document.getElementById('entity-name');
     const content = document.getElementById('entity-content');

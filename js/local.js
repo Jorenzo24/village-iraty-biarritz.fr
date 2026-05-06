@@ -1,7 +1,8 @@
 // VIB — Page détail local (chargée depuis data/locaux.json)
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug');
+    const pathMatch = window.location.pathname.match(/^\/local\/([a-z0-9\-]+)/i);
+    const slug = pathMatch ? pathMatch[1] : params.get('slug');
 
     const content = document.getElementById('local-content');
     const notFound = document.getElementById('local-not-found');

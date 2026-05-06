@@ -1,7 +1,13 @@
 // VIB — Page article individuelle
 document.addEventListener('DOMContentLoaded', async () => {
+    // Articles au root : /<slug>. Filtrer les pages connues du site.
     const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug');
+    const pathMatch = window.location.pathname.match(/^\/([a-z0-9\-]+)\/?$/i);
+    const ROOT_PAGES = new Set(['le-village', 'activites', 'louer-un-local',
+        'services', 'regie-vib', 'a-propos', 'contact', 'entreprise', 'local',
+        'nos-articles', 'article', 'mentions-legales', 'politique-confidentialite', '404']);
+    const candidate = pathMatch ? pathMatch[1] : null;
+    const slug = (candidate && !ROOT_PAGES.has(candidate)) ? candidate : params.get('slug');
 
     const wrapper = document.getElementById('article-wrapper');
     const notFound = document.getElementById('article-not-found');
