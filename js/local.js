@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('data/locaux.json');
+        const res = await fetch('/data/locaux.json');
         if (!res.ok) throw new Error('JSON load failed');
         const list = await res.json();
         const local = list.find(l => l.slug === slug);

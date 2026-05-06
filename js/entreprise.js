@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('data/entreprises.json');
+        const res = await fetch('/data/entreprises.json');
         if (!res.ok) throw new Error('JSON load failed');
         const list = await res.json();
         const entity = list.find(e => e.slug === slug);

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const empty = document.getElementById('articles-empty');
 
     try {
-        const res = await fetch('data/articles.json');
+        const res = await fetch('/data/articles.json');
         const articles = await res.json();
 
         if (!articles || articles.length === 0) {
