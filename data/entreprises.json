@@ -1,60 +1,5 @@
 [
   {
-    "slug": "2p-gourmands",
-    "name": "2P GOURMANDS - Épicerie Écurienne",
-    "category": "restaurants",
-    "category_label": "Restaurants",
-    "description": "2P Gourmands « Les Épicuriens dénicheurs de saveurs », est un nouveau genre d’épicerie : une boutique restaurant vous proposant la vente et/ou la dégustation de mets gourmands et d'exceptions issus du Pays basque, de France, d'Espagne, du Portugal et d’Italie ainsi qu’une belle sélection de vins direct de propriétaires.\nNé d’une rencontre autour d’un verre devant un match de rugby, Pascal et Pierre, deux épicuriens chevronnés, ont eu l’envie de créer un club pour les gastronomes proposant des produits authentiques & rares, voir inconnus :\nVente de viande, charcuterie, conserve, huitres, vin, alcool, produits de saison\nAnimations autour de la gastronomie : la planche des gros, la planche de la mer\nRepas au brasero, tous les jours mais uniquement sur réservation\nÉpicerie – Restaurant ouvert :\nJeudi et vendredi de 14 h à 23 h - Restauration à partir de 18h\nSamedi de 11 h 30 à 15 h - Restauration à partir de 12 h\nOn n'est pas cuisto, ni barman, ni plongeur, mais on vous reçoit comme à la maison !\nVenez faire Vibrer vos papilles grâce aux restaurants de votre VILLAGE Iraty – Biarritz",
-    "address": "Halle DARLA - 12 rue des Mésanges - Lot n°13 - 64200 Biarritz",
-    "phone": "06 30 55 61 25",
-    "email": "2pgourmands@gmail.com",
-    "website": "",
-    "hours": "Jeudi et vendredi de 14h à 23h · Samedi de 11h30 à 15h et de 9h00 à 18h00",
-    "photos": [
-      "/assets/photos/entreprises/2p-gourmands/cover.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-01.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-02.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-03.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-04.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-05.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-06.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-07.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-08.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-09.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-10.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-11.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-12.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-13.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-14.jpg",
-      "/assets/photos/entreprises/2p-gourmands/photo-15.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/2p-gourmands/logo.jpg",
-    "social": {
-      "facebook": "https://www.facebook.com/profile.php?id=61553609499206#",
-      "instagram": "https://www.instagram.com/2p_gourmands"
-    }
-  },
-  {
-    "slug": "ada",
-    "name": "ADA LOCATION DE VOITURE ET UTILITAIRE",
-    "category": "services",
-    "category_label": "Services",
-    "description": "Location de voitures",
-    "address": "",
-    "phone": "05 59 51 11 35",
-    "email": "assist.co@v-i-b.fr",
-    "website": "https://www.ada.fr/location-voiture-biarritz",
-    "hours": "Du lundi au dimanche de 8H à 18H30",
-    "photos": [
-      "/assets/photos/entreprises/ada/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/ada/logo.jpg",
-    "social": {
-      "facebook": "https://www.facebook.com/ADALocationdevehicules",
-      "instagram": "https://www.instagram.com/ada.location"
-    }
-  },
-  {
     "slug": "agence-erronda",
     "name": "AGENCE ERRONDA",
     "category": "services",
@@ -285,26 +230,6 @@
     }
   },
   {
-    "slug": "bab-location",
-    "name": "ADA LOCATION DE VOITURE ET UTILITAIRE",
-    "category": "services",
-    "category_label": "Services",
-    "description": "Location de voitures",
-    "address": "",
-    "phone": "05 59 51 11 35",
-    "email": "assist.co@v-i-b.fr",
-    "website": "https://www.ada.fr/location-voiture-biarritz",
-    "hours": "Du lundi au dimanche de 8H à 18H30",
-    "photos": [
-      "/assets/photos/entreprises/bab-location/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/bab-location/logo.jpg",
-    "social": {
-      "facebook": "https://www.facebook.com/ADALocationdevehicules",
-      "instagram": "https://www.instagram.com/ada.location"
-    }
-  },
-  {
     "slug": "beauty-success",
     "name": "BEAUTY SUCCES",
     "category": "sante",
@@ -471,21 +396,6 @@
     "social": {
       "instagram": "https://instagram.com/boulangerie_enneartz_biarrritz"
     }
-  },
-  {
-    "slug": "boussaad-art-deco",
-    "name": "BOUSSAAD ART DECO",
-    "category": "createurs",
-    "category_label": "Créateurs",
-    "description": "",
-    "address": "",
-    "phone": "",
-    "email": "",
-    "website": "",
-    "hours": "",
-    "photos": [],
-    "logo": "",
-    "social": {}
   },
   {
     "slug": "bowl-go",
@@ -1291,25 +1201,6 @@
     }
   },
   {
-    "slug": "maison-auto-nettoyante-technitoit",
-    "name": "Technitoit",
-    "category": "entreprises",
-    "category_label": "Entreprises",
-    "description": "Entreprise de travaux",
-    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
-    "phone": "06 87 08 42 36",
-    "email": "Cristovao.f@technitoit.com",
-    "website": "https://www.technitoit.com/agence/pyrenees-atlantiques-64-biarritz?utm_source=google&utm_medium=gmb",
-    "hours": "Du lundi au vendredi de 8h30 à 12h et de 13h30 à 17h30",
-    "photos": [
-      "/assets/photos/entreprises/maison-auto-nettoyante-technitoit/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/maison-auto-nettoyante-technitoit/logo.jpg",
-    "social": {
-      "instagram": "https://www.instagram.com/technitoit"
-    }
-  },
-  {
     "slug": "maison-vishnu",
     "name": "MAISON VISHNU",
     "category": "restaurants",
@@ -1522,26 +1413,6 @@
     "logo": "/assets/photos/entreprises/origins-digital/logo.jpg",
     "social": {
       "facebook": "https://fr-fr.facebook.com/onrewindtv"
-    }
-  },
-  {
-    "slug": "paritel",
-    "name": "PARITÉL",
-    "category": "services",
-    "category_label": "Services",
-    "description": "Propose des solutions personnalisés pour développer des entreprises",
-    "address": "Halle DARLA, 10 rue des Mésanges, 64200 Biarritz",
-    "phone": "05 47 15 71 20",
-    "email": "web@paritel.fr",
-    "website": "http://agences.paritel.fr/813478-paritel-biarritz",
-    "hours": "Du lundi au vendredi de 9h à 17h",
-    "photos": [
-      "/assets/photos/entreprises/paritel/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/paritel/logo.png",
-    "social": {
-      "facebook": "https://www.facebook.com/Paritel",
-      "instagram": "https://www.instagram.com/paritel_operateur"
     }
   },
   {
@@ -1918,22 +1789,5 @@
     "social": {
       "facebook": "https://www.facebook.com/Ximunaxiette"
     }
-  },
-  {
-    "slug": "zuri-objets",
-    "name": "ZURI OBJETS",
-    "category": "createurs",
-    "category_label": "Créateurs",
-    "description": "Atelier/showroom d’objets en béton",
-    "address": "Halles DARLA, 10 rue des Mésanges, 64200 Biarritz",
-    "phone": "07 81 75 72 22",
-    "email": "contact@zuri.fr",
-    "website": "",
-    "hours": "Du lundi au samedi : 10h -12h",
-    "photos": [
-      "/assets/photos/entreprises/zuri-objets/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/zuri-objets/logo.jpeg",
-    "social": {}
   }
 ]
