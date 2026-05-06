@@ -12,14 +12,14 @@
     "no_pas_de_porte": true,
     "description": "Beau local professionnel en duplex aménagé de 90 m² (surface nette certifiée après travaux) en rez-de-chaussée et premier étage.",
     "photos": [
-      "assets/photos/locaux/lot-38-duplex-90m2/facade-halle-darla.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/interieur-1.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/interieur-2.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/interieur-3.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/interieur-4.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/interieur-5.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/galerie-1.jpg",
-      "assets/photos/locaux/lot-38-duplex-90m2/galerie-2.jpg"
+      "/assets/photos/locaux/lot-38-duplex-90m2/facade-halle-darla.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-1.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-2.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-3.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-4.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-5.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/galerie-1.jpg",
+      "/assets/photos/locaux/lot-38-duplex-90m2/galerie-2.jpg"
     ]
   }
 ]
