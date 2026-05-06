@@ -67,10 +67,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             descEl.innerHTML = `<p style="color:var(--c-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n'hésitez pas à <a href="contact" style="color:var(--c-red);">nous contacter</a>.</p>`;
         }
 
-        // Hours : un jour par ligne
+        // Hours : un jour par ligne + badge Ouvert/Fermé
         if (e.hours) {
             document.getElementById('entity-hours-block').hidden = false;
             document.getElementById('entity-hours').innerHTML = renderHours(e.hours);
+            const statusEl = document.getElementById('entity-status');
+            if (statusEl && window.OpeningStatus) {
+                window.OpeningStatus.applyBadge(statusEl, e.hours);
+            }
         }
 
         // Phone
