@@ -35,13 +35,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         heroTitle.textContent = 'Fiche introuvable';
         content.hidden = true;
         notFound.hidden = false;
-        document.title = 'Fiche introuvable — VILLAGE Iraty-Biarritz';
+        document.title = 'Fiche introuvable — VILLAGE Iraty-BIARRITZ';
     }
 
     function renderEntity(e) {
         // Title + meta
-        document.getElementById('page-title').textContent = `${e.name} — VILLAGE Iraty-Biarritz`;
-        const desc = e.description || `Découvrez ${e.name}, ${e.category_label.toLowerCase()} au VILLAGE Iraty-Biarritz.`;
+        document.getElementById('page-title').textContent = `${e.name} — VILLAGE Iraty-BIARRITZ`;
+        const desc = e.description || `Découvrez ${e.name}, ${e.category_label.toLowerCase()} au VILLAGE Iraty-BIARRITZ.`;
         document.getElementById('page-description').setAttribute('content', desc);
 
         heroTitle.textContent = e.name;

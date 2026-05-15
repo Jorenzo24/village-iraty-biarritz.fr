@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     function showNotFound() {
         wrapper.hidden = true;
         notFound.hidden = false;
-        document.title = 'Article introuvable — VILLAGE Iraty-Biarritz';
+        document.title = 'Article introuvable — VILLAGE Iraty-BIARRITZ';
     }
 
     function renderArticle(a) {
-        document.title = `${a.title} — VILLAGE Iraty-Biarritz`;
+        document.title = `${a.title} — VILLAGE Iraty-BIARRITZ`;
         document.getElementById('page-description').setAttribute(
             'content', a.summary || a.title.slice(0, 160)
         );

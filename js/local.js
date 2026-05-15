@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function renderLocal(l) {
         // Title + meta
-        document.title = `${l.name} — VILLAGE Iraty-Biarritz`;
+        document.title = `${l.name} — VILLAGE Iraty-BIARRITZ`;
         document.getElementById('page-description').setAttribute(
             'content',
-            `${l.name} à louer au VILLAGE Iraty-Biarritz. ${l.surface} m², ${l.price_ht} € HT/mois.`
+            `${l.name} à louer au VILLAGE Iraty-BIARRITZ. ${l.surface} m², ${l.price_ht} € HT/mois.`
         );
 
         document.getElementById('local-name').textContent = l.name;
