@@ -26,3 +26,7 @@ deployment:
     - /bin/cp .htaccess $DEPLOYPATH
     - /bin/cp robots.txt $DEPLOYPATH
     - /bin/cp sitemap.xml $DEPLOYPATH
+    # Preview refonte 2026 (URL temporaire pour validation client) — exclu node_modules/references/scripts
+    - /bin/mkdir -p $DEPLOYPATH/preview
+    - /bin/cp vib-refonte/index.html $DEPLOYPATH/preview/
+    - /bin/cp -R vib-refonte/assets-2026 $DEPLOYPATH/preview/

@@ -27,3 +27,9 @@ data/entreprises-a-integrer.json
 .claude/settings.json
 .claude/settings.local.json
 
+# Refonte 2026 — artefacts de dev (Playwright captures, deps, scripts internes)
+vib-refonte/references/
+vib-refonte/package.json
+vib-refonte/package-lock.json
+references/
+
