@@ -294,7 +294,10 @@
 .quick-access {
   position: relative;
   z-index: 3;
-  margin-top: -72px;   /* remonte sur le bas du hero */
+  /* Fond crème identique à la section stats : démarre pile au bas du hero,
+     donc aucune bande blanche. Les cartes flottent vers le haut via transform
+     (visuel uniquement) pour chevaucher la photo sans recouvrir le hero. */
+  background: var(--color-bg-alt);
 }
 
 .quick-access__grid {
@@ -304,11 +307,15 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  transform: translateY(-40px);    /* chevauchement mobile */
+  margin-bottom: -40px;            /* récupère l'espace laissé par le transform */
 }
 @media (min-width: 768px) {
   .quick-access__grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-5);
+    transform: translateY(-60px);  /* chevauchement desktop */
+    margin-bottom: -60px;
   }
 }
 
@@ -386,9 +393,6 @@
   transform: translateX(4px);
 }
 
-@media (max-width: 767px) {
-  .quick-access { margin-top: calc(-1 * var(--space-7)); }
-}
 
 /* =====================================================================
    3. Stats
