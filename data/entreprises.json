@@ -491,12 +491,12 @@
     "name": "CAFÉ GRAND BIARRITZ",
     "category": "restaurants",
     "category_label": "Restaurants & Bars",
-    "description": "Propose de la cuisine et des boissons",
+    "description": "Bar restaurant convivial au cœur du VILLAGE Iraty-BIARRITZ : déjeuners, cuisine généreuse et ambiance pub.\nInstallé au VILLAGE Iraty, Café Grand Biarritz propose une cuisine généreuse et conviviale dans une ambiance chaleureuse, idéale pour les pauses déjeuner, les afterworks et les soirées entre amis.\nLe restaurant accueille les visiteurs du lundi au vendredi pour le déjeuner, avec une carte simple et gourmande préparée dans un esprit de partage.\nDu jeudi au samedi soir, Café Grand Biarritz se transforme en pub animé : boissons, musique et moments à partager au cœur du Village Iraty.",
     "address": "Halle DARLA, 10 rue des Mésanges, 64200 BIARRITZ",
     "phone": "05 24 33 03 04",
     "email": "cafegrandbiarritz@gmail.com",
     "website": "https://le-cafe-du-vib.business.site",
-    "hours": "Du lundi au vendredi de 11h30 à 2h",
+    "hours": "Du lundi au mercredi de 9h à 15h · Du jeudi au vendredi de 9h à 15h et de 18h à 2h · Samedi de 18h à 2h",
     "photos": [
       "/assets/photos/entreprises/cafe-grand-biarritz/cover.jpg",
       "/assets/photos/entreprises/cafe-grand-biarritz/photo-01.jpg"
@@ -1789,5 +1789,45 @@
     "social": {
       "facebook": "https://www.facebook.com/Ximunaxiette"
     }
+  },
+  {
+    "slug": "trikoa",
+    "name": "TRIKOA",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Mercerie créative et ateliers couture au VILLAGE Iraty-BIARRITZ.\nInstallée au VILLAGE Iraty, TRIKOA est une mercerie moderne et conviviale dédiée aux passionnés de couture, de tricot, de crochet et de loisirs créatifs.\nLa boutique accompagne aussi bien les débutants que les créateurs plus expérimentés grâce à une sélection de matières, d'accessoires et de conseils personnalisés, dans une ambiance chaleureuse et accessible.\nTRIKOA propose également des activités créatives pour enfants et adultes, autour du fait main, du textile et du plaisir de créer loin des écrans.\nÀ proximité de la pizzeria Piuma.",
+    "address": "VILLAGE Iraty-BIARRITZ, 14 rue des Mésanges — Halle DARLA (Lot 58), 64200 BIARRITZ",
+    "phone": "",
+    "email": "",
+    "website": "",
+    "hours": "Du mardi au vendredi de 10h à 12h et de 13h à 18h · Samedi de 10h à 18h",
+    "photos": [
+      "/assets/photos/entreprises/trikoa/cover.jpg",
+      "/assets/photos/entreprises/trikoa/galerie-1.jpg",
+      "/assets/photos/entreprises/trikoa/galerie-2.webp",
+      "/assets/photos/entreprises/trikoa/galerie-3.webp"
+    ],
+    "logo": "/assets/photos/entreprises/trikoa/logo.jpg",
+    "social": {}
+  },
+  {
+    "slug": "uniti-habitat",
+    "name": "UNITI HABITAT",
+    "category": "services",
+    "category_label": "Services",
+    "description": "Promoteur immobilier résidentiel et solutions d'habitat.\nInstallé au VILLAGE Iraty-BIARRITZ depuis le début de l'année, UNITI HABITAT développe depuis 2012 des solutions immobilières accessibles et innovantes, dédiées à l'habitat résidentiel, au logement abordable et aux résidences services.\nSpécialisé dans l'immobilier à prix maîtrisés, UNITI accompagne les collectivités et les territoires dans la création de nouveaux modèles d'habitat intégrant logement, santé, services et emploi.\nGuidé par une vision humaine et durable de l'immobilier, le groupe conçoit des résidences pensées pour répondre aux évolutions de la société et aux besoins des habitants d'aujourd'hui et de demain.\nAttentif aux enjeux environnementaux et aux futures réglementations énergétiques, UNITI HABITAT développe des projets résidentiels alliant performance énergétique, innovation et qualité de vie.\nGrâce à son agilité et à son expertise, UNITI s'impose aujourd'hui comme un acteur engagé de l'immobilier résidentiel au Pays Basque et sur l'ensemble du territoire français.",
+    "address": "VILLAGE Iraty-BIARRITZ, 4 rue des Mésanges, 64200 BIARRITZ",
+    "phone": "",
+    "email": "",
+    "website": "",
+    "hours": "",
+    "photos": [
+      "/assets/photos/entreprises/uniti-habitat/cover.jpg",
+      "/assets/photos/entreprises/uniti-habitat/galerie-1.jpg",
+      "/assets/photos/entreprises/uniti-habitat/galerie-2.jpg",
+      "/assets/photos/entreprises/uniti-habitat/galerie-3.jpg"
+    ],
+    "logo": "/assets/photos/entreprises/uniti-habitat/logo.png",
+    "social": {}
   }
 ]
