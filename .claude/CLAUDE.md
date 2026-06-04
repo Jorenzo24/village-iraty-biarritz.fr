@@ -82,6 +82,40 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 - `defer` ou en fin de `<body>` (déjà fait)
 - `DOMContentLoaded` pour le code qui touche au DOM
 
+## Contenu data-driven : locaux & acteurs
+
+Les **fiches détail** sont générées dynamiquement à partir de fichiers JSON, mais les **listes (cartes) sont codées en dur dans le HTML**. Quand on ajoute un local ou un acteur, il faut donc toucher **plusieurs endroits** (sinon la fiche existe mais n'apparaît dans aucune liste, ou inversement).
+
+### Locaux à louer
+- **Données** : [`data/locaux.json`](../data/locaux.json) — champs : `slug`, `name`, `address`, `surface` (nb), `price_ht` (nb), `charges_ht` (nb, 0 si aucune), `type`, `norm_pmr`/`no_fees`/`no_pas_de_porte` (bool → chips), `description`, `photos` (liste de chemins `/assets/...`, le 1er = cover).
+- **Fiche détail** : `local.html` rendue par [`js/local.js`](../js/local.js). URL `/local/<slug>` (rewrite `.htaccess` → `local.html?slug=`). Si `photos` vide → placeholder auto.
+- **Carte liste (en dur)** : ajouter un `<article class="local-card">` dans [`louer-un-local.html`](../louer-un-local.html) (grid `.locaux-grid`).
+- **Sitemap** : ajouter `/local/<slug>`.
+- **Photos** : `assets/photos/locaux/<slug>/` (dossier = slug), `cover.jpg` en premier.
+
+### Acteurs (entreprises)
+- **Données** : [`data/entreprises.json`](../data/entreprises.json) — champs : `slug`, `name`, `category`, `category_label`, `description`, `address`, `phone`, `email`, `website`, `hours`, `photos` (1er = cover), `logo`, `social` (objet). Champs vides = `""` ou `[]`/`{}` (tout est conditionnel côté JS).
+- **Catégories** (`category` → `category_label`) : `commerces`→Commerces, `restaurants`→Restaurants & Bars, `sante`→Santé & soins, `services`→Services, `sport`→Sports & Loisirs, `entreprises`→Entreprises, `createurs`→Créateurs. (Immobilier/agences = `services`.)
+- **Fiche détail** : `entreprise.html` rendue par [`js/entreprise.js`](../js/entreprise.js). URL `/acteur/<slug>`. `description` multi-paragraphes via `\n` (les lignes commençant par •/- deviennent des `<ul>`).
+- **Carte liste (en dur)** : ajouter un `<article class="card" data-cat="<category>" data-name="<nom en minuscules>">` dans [`activites.html`](../activites.html) (grid `#cards-grid`). Le filtre/recherche JS ([`js/activites.js`](../js/activites.js)) s'appuie sur `data-cat`/`data-name`. Badge statut : `<span class="status" hidden></span>` (rempli au chargement).
+- **Sitemap** : ajouter `/acteur/<slug>`.
+- **Photos** : `assets/photos/entreprises/<slug>/` (dossier = slug), `cover.jpg` + `logo.png|jpg`.
+
+### Horaires (champ `hours`) → badge « Ouvert / Fermé »
+Texte libre parsé par [`js/open-status.js`](../js/open-status.js). Format : segments séparés par ` · `, plages multiples par jour avec « et », plages d'horaires « de Xh à Yh ». Le passage minuit est géré (ex. `de 18h à 2h`). Exemples :
+- `Du mardi au vendredi de 10h à 12h et de 13h à 18h · Samedi de 10h à 18h`
+- `Du lundi au mercredi de 9h à 15h · Du jeudi au vendredi de 9h à 15h et de 18h à 2h · Samedi de 18h à 2h`
+- Vide ou `Sur rendez-vous` → pas de badge.
+
+### ⚠️ Orientation EXIF des photos (piège iPhone)
+Les photos prises au téléphone ont souvent un tag EXIF `Orientation=6` (« Rotate 90 CW ») : elles s'affichent droites dans certains contextes mais **de travers** ailleurs (aperçus OG, vieux navigateurs). **Toujours redresser physiquement + purger l'EXIF** avant de committer :
+```bash
+sips -r 90 photo.jpg                                  # redresse les pixels (90° CW pour orientation 6)
+exiftool -Orientation=1 -n -overwrite_original photo.jpg
+exiftool -Orientation -filename -T photo.jpg          # vérifier : doit afficher "Horizontal (normal)"
+```
+Vérifier le sens réel avec `exiftool -Orientation <f>` avant de redresser, puis contrôler visuellement (Read sur l'image). `sips`/`exiftool` sont dispos sur la machine.
+
 ## Cache-busting
 
 **À chaque modification de `css/style.css` ou `js/main.js`**, il faut bumper le query string `?v=AAAAMMJJx` dans `index.html` (et toutes les pages qui référencent ces fichiers).
