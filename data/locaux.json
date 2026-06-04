@@ -44,5 +44,51 @@
       "/assets/photos/locaux/lots-7-10-aldades-270m2/lot-10-interieur-1.jpg",
       "/assets/photos/locaux/lots-7-10-aldades-270m2/lot-10-interieur-2.jpg"
     ]
+  },
+  {
+    "slug": "lot-21-aldades-42m2",
+    "name": "Lot 21 — Les Aldades 42 m²",
+    "address": "10, rue des Mésanges — Les Aldades, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
+    "surface": 42,
+    "price_ht": 906.0,
+    "charges_ht": 107.87,
+    "type": "Bureau / Profession libérale",
+    "norm_pmr": true,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Beau bureau de 42 m² avec un espace d'attente, au 1er étage d'un immeuble tertiaire récent équipé d'un ascenseur. Idéal pour une profession libérale, cet espace est accessible aux personnes à mobilité réduite. Il possède une belle luminosité grâce à un skydome, des espaces de rangement, un sol en quartz gris anthracite, une climatisation réversible ainsi qu'un sanitaire privatif avec lave-mains. Une place de stationnement privative est incluse dans le prix. Disponible sans intermédiaire ni droit au bail. Le VILLAGE Iraty-BIARRITZ est parfaitement desservi : gare à environ 10 minutes à pied, aéroport international de BIARRITZ à proximité, accès direct vers 2 sorties d'autoroute (Anglet Sud et Biarritz) et 4 lignes de bus.",
+    "photos": [
+      "/assets/photos/locaux/lot-21-aldades-42m2/cover.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/bureau-1.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/bureau-2.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/bureau-3.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/espace-accueil.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/piece-rangement.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/sanitaire.jpg",
+      "/assets/photos/locaux/lot-21-aldades-42m2/parties-communes.jpg"
+    ]
+  },
+  {
+    "slug": "lot-12-moura-45m2",
+    "name": "Lot 12 — Biarritz La Négresse 45 m²",
+    "address": "25, allée du Moura — Biarritz La Négresse, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
+    "surface": 45,
+    "price_ht": 880.0,
+    "charges_ht": 88.5,
+    "type": "Bureau / Santé / Services",
+    "norm_pmr": false,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Local professionnel de 45 m² en rez-de-chaussée, idéalement situé à Biarritz La Négresse, face à la gare SNCF et directement sur l'Allée du Moura. Emplacement premium offrant une excellente accessibilité, visibilité et confort de travail. Orienté plein sud, il profite d'une très belle luminosité naturelle tout au long de la journée, idéale pour accueillir clientèle, patients ou collaborateurs. En très bon état général, immédiatement opérationnel : climatisation réversible, point d'eau avec évier, sanitaires privatifs avec WC, nombreuses prises électriques et place de parking privative incluse. Disponible sans droit d'entrée ni frais d'agence. Accès rapide à la gare TGV de Biarritz à pied, à l'aéroport de Biarritz, aux axes autoroutiers ainsi qu'aux transports en commun. Idéal pour une activité libérale, tertiaire, médicale, paramédicale, bien-être ou de services.",
+    "photos": [
+      "/assets/photos/locaux/lot-12-moura-45m2/cover.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/bureau-1.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/bureau-2.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/bureau-3.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/piece.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/point-deau.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/exterieur-1.jpg",
+      "/assets/photos/locaux/lot-12-moura-45m2/exterieur-2.jpg"
+    ]
   }
 ]
