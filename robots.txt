@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /preview/
+Disallow: /vib-refonte/
 
 Sitemap: https://village-iraty-biarritz.fr/sitemap.xml

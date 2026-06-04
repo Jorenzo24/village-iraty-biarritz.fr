@@ -1,5 +1,35 @@
 # village-iraty-biarritz.fr
 
+## ⚠️ Chantier actif : refonte (homepage en prod, pages internes en cours)
+
+Une refonte est en cours dans le sous-dossier [`vib-refonte/`](vib-refonte/). Le dossier est **tracké et commité** sur `main` (la homepage refonte est déjà en production à la racine du site).
+
+**Avant de répondre à toute question liée à la refonte, lire [`vib-refonte/CLAUDE.md`](vib-refonte/CLAUDE.md)** — il contient la méthode imposée (capture Playwright de la maquette `https://vib-site.vercel.app/` avant chaque section, boucle de vérification visuelle, etc.).
+
+**Fichiers actifs de la refonte :**
+- [`vib-refonte/index.html`](vib-refonte/index.html)
+- [`vib-refonte/assets-2026/css/styles.css`](vib-refonte/assets-2026/css/styles.css) + [`design-system.css`](vib-refonte/assets-2026/css/design-system.css)
+- [`vib-refonte/assets-2026/js/main.js`](vib-refonte/assets-2026/js/main.js)
+- Captures de référence et rendus locaux : [`vib-refonte/references/`](vib-refonte/references/)
+- Scripts Playwright : [`vib-refonte/scripts/`](vib-refonte/scripts/)
+
+**Workflow de travail : on bosse directement sur l'URL live `/vib-refonte/`, plus de serveur local.**
+
+La homepage refonte est déjà en production (racine du site). On reconstruit maintenant **les pages internes une par une**, consultables sous `https://village-iraty-biarritz.fr/vib-refonte/`, jusqu'à validation avant promotion en prod (racine).
+
+⚠️ **Modèle de déploiement (important)** : cPanel **n'exécute PAS `.cpanel.yml`** sur ce serveur. Il fait un simple `git pull` de `main` dans `public_html/`, donc **l'URL live = le chemin dans le repo** (`vib-refonte/index.html` → `…/vib-refonte/`). Le déploiement se déclenche **manuellement** via cPanel › Git Version Control › **Deploy HEAD Commit**.
+
+Cycle pour chaque page interne :
+1. Éditer les fichiers dans [`vib-refonte/`](vib-refonte/) (HTML + `assets-2026/`).
+2. Commit + push sur `main`, puis cliquer **Deploy HEAD Commit** dans cPanel.
+3. Vérifier le rendu **sur l'URL live** `https://village-iraty-biarritz.fr/vib-refonte/<page>.html` (capture Playwright sur l'URL live, pas sur localhost).
+
+`/vib-refonte/` est exclu de l'indexation (`Disallow: /vib-refonte/` dans `robots.txt` + `<meta name="robots" content="noindex,nofollow,…">` dans chaque page) pour ne pas dupliquer la prod.
+
+Le site **live** (décrit dans la suite de ce fichier) reste à la racine du repo. Ne pas confondre les deux : la refonte ne touche **aucun** fichier hors de `vib-refonte/`.
+
+---
+
 ## Hébergement
 - **VPS** : Hetzner
 - **Panneau** : cPanel

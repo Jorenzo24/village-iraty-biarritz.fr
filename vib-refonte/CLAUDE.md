@@ -117,13 +117,21 @@ Pour chaque section :
 
 ### Étape 3 — Boucle de vérification visuelle
 
-Après chaque section codée, lancer une capture du rendu local et comparer :
+> **Plus de serveur local.** On vérifie le rendu directement sur l'URL live de travail : la refonte
+> est consultable sous `https://village-iraty-biarritz.fr/vib-refonte/`. cPanel n'exécute pas
+> `.cpanel.yml` — il fait un `git pull` de `main` dans `public_html/`, donc l'URL = le chemin du repo.
+> Cycle : éditer dans `vib-refonte/` → commit + push → cliquer **Deploy HEAD Commit** dans cPanel →
+> capturer l'URL live. La homepage est en prod ; on reconstruit désormais les pages internes
+> une par une sous `/vib-refonte/<page>.html` avant de les promouvoir en prod.
+
+Après chaque section/page codée et déployée, capturer le rendu live et comparer :
 
 ```javascript
 // scripts/capture-local.mjs
 import { chromium } from 'playwright';
 
-const URL = 'http://localhost:8000/'; // ou ton serveur local
+// URL live de travail (et non plus localhost) ; cibler la page travaillée
+const URL = 'https://village-iraty-biarritz.fr/vib-refonte/';
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const p = await ctx.newPage();
@@ -132,7 +140,7 @@ await p.screenshot({ path: './references/local-full.png', fullPage: true });
 await browser.close();
 ```
 
-**Comparer visuellement** `references/desktop-full.png` (référence) et `references/local-full.png` (ton rendu). Lire les deux images, identifier les écarts (typo, espacements, couleurs, alignements, hover states), et corriger jusqu'à ce que le rendu soit fidèle.
+**Comparer visuellement** `references/desktop-full.png` (référence) et `references/local-full.png` (ton rendu live). Lire les deux images, identifier les écarts (typo, espacements, couleurs, alignements, hover states), et corriger jusqu'à ce que le rendu soit fidèle.
 
 Ne pas considérer une section comme "terminée" tant que le rendu n'est pas visuellement très proche de la référence.
 
