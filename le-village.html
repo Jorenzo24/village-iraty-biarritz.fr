@@ -1,183 +1,335 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Découvrir le Village — VILLAGE Iraty-BIARRITZ</title>
-    <meta name="description" content="Découvrez l'histoire du VILLAGE Iraty-BIARRITZ : un lieu dynamique de 1200 acteurs, 5000 visiteurs/jour, qui mêle artisans, commerces, créateurs et entreprises au cœur de BIARRITZ.">
+  <title>Découvrir le VILLAGE Iraty-Biarritz, son histoire et sa mixité</title>
+  <meta name="description" content="Depuis 2005, le VILLAGE Iraty-Biarritz rassemble 1 200+ acteurs, commerces, artisans et services au cœur de BIARRITZ. Découvrez son histoire, sa mixité et ses accès.">
 
-    <meta property="og:title" content="Découvrir le Village — VILLAGE Iraty-BIARRITZ">
-    <meta property="og:description" content="L'histoire et la mixité du VILLAGE Iraty-BIARRITZ, un quartier dynamique au cœur de BIARRITZ.">
-    <meta property="og:image" content="https://village-iraty-biarritz.fr/assets/og/og-image.jpg">
-    <meta property="og:url" content="https://village-iraty-biarritz.fr/le-village.html">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="fr_FR">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Découvrir le VILLAGE Iraty-Biarritz, son histoire et sa mixité">
+  <meta property="og:description" content="L'histoire et la mixité du VILLAGE Iraty-Biarritz, un quartier dynamique de 1 200+ acteurs au cœur de BIARRITZ.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://village-iraty-biarritz.fr/le-village">
+  <meta property="og:site_name" content="VILLAGE Iraty-Biarritz">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://village-iraty-biarritz.fr/assets-2026/images/hero-drone.jpg">
 
-    <link rel="canonical" href="https://village-iraty-biarritz.fr/le-village">
-    <link rel="icon" type="image/png" href="/assets/favicon.png?v=20260505a">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Découvrir le VILLAGE Iraty-Biarritz, son histoire et sa mixité">
+  <meta name="twitter:description" content="L'histoire et la mixité du VILLAGE Iraty-Biarritz, un quartier dynamique au cœur de BIARRITZ.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://village-iraty-biarritz.fr/le-village">
+  <link rel="icon" type="image/png" href="assets-2026/images/logo/favicon.png">
 
-    <link rel="stylesheet" href="/css/style.css?v=20260515a">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Préchargement image hero -->
+  <link rel="preload" as="image" href="assets-2026/images/hero-drone.jpg">
+
+  <link rel="stylesheet" href="assets-2026/css/design-system.css?v=20260526a">
+  <link rel="stylesheet" href="assets-2026/css/styles.css?v=20260615a">
+
+  <!-- JSON-LD BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://village-iraty-biarritz.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Le VILLAGE", "item": "https://village-iraty-biarritz.fr/le-village" }
+    ]
+  }
+  </script>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Aller au contenu</a>
 
-<header class="header">
-    <div class="header__inner">
-        <a href="/" class="header__logo" aria-label="VILLAGE Iraty-BIARRITZ">
-            <img src="/assets/logo/vib-full.svg" alt="VILLAGE Iraty-BIARRITZ">
-        </a>
-        <nav class="nav" aria-label="Navigation principale">
-            <ul class="nav__list">
-                <li><a href="/le-village" class="nav__link is-active">Votre village</a></li>
-                <li><a href="/activites" class="nav__link">Activités</a></li>
-                <li><a href="/louer-un-local" class="nav__link">Louer un local</a></li>
-                <li><a href="/services" class="nav__link">Nos services</a></li>
-            </ul>
-        </nav>
-        <div class="header__cta">
-            <a href="/contact" class="btn btn--outline">Prendre un rendez-vous</a>
-            <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
-        </div>
-        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
-        <ul class="mobile-nav__list">
-            <li><a href="/le-village" class="mobile-nav__link">Votre village</a></li>
-            <li><a href="/activites" class="mobile-nav__link">Activités</a></li>
-            <li><a href="/louer-un-local" class="mobile-nav__link">Louer un local</a></li>
-            <li><a href="/services" class="mobile-nav__link">Nos services</a></li>
-        </ul>
-        <div class="mobile-nav__cta">
-            <a href="/contact" class="btn btn--outline">Prendre un rendez-vous</a>
-            <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
-        </div>
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header" role="banner">
+  <div class="header__inner">
+    <a href="/" class="header__logo" aria-label="VILLAGE Iraty-Biarritz, Accueil">
+      <img src="assets-2026/images/logo/vib-full.svg" alt="VILLAGE Iraty-Biarritz">
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav__list">
+        <li><a href="/le-village" class="nav__link is-active" aria-current="page">Votre VILLAGE</a></li>
+        <li><a href="/activites" class="nav__link">Activités</a></li>
+        <li><a href="/louer-un-local" class="nav__link">Louer un local</a></li>
+        <li><a href="/services" class="nav__link">Nos services</a></li>
+      </ul>
     </nav>
+
+    <div class="header__cta">
+      <a href="/contact" class="btn btn--outline-light">Prendre un rendez-vous</a>
+      <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+    <ul class="mobile-nav__list">
+      <li><a href="/le-village" class="mobile-nav__link">Votre VILLAGE</a></li>
+      <li><a href="/activites" class="mobile-nav__link">Activités</a></li>
+      <li><a href="/louer-un-local" class="mobile-nav__link">Louer un local</a></li>
+      <li><a href="/services" class="mobile-nav__link">Nos services</a></li>
+    </ul>
+    <div class="mobile-nav__cta">
+      <a href="/contact" class="btn btn--outline-dark">Prendre un rendez-vous</a>
+      <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+    </div>
+  </nav>
 </header>
 
 <main id="main">
 
-    <section class="page-hero">
-        <h1 class="page-hero__title">Le VILLAGE</h1>
-    </section>
+  <!-- ═══════════════ HERO DE PAGE ═══════════════ -->
+  <section class="page-hero" aria-labelledby="page-hero-title">
+    <div class="page-hero__bg">
+      <!-- TODO image : la maquette utilise une façade de rue ; faute de ce visuel en assets-2026, on réutilise la vue aérienne. À remplacer par une photo de façade si dispo. -->
+      <img src="assets-2026/images/hero-drone.jpg" alt="Le VILLAGE Iraty-Biarritz vu du ciel" loading="eager" fetchpriority="high">
+      <div class="page-hero__overlay"></div>
+    </div>
+    <div class="page-hero__inner">
+      <span class="page-hero__eyebrow">Depuis 2005</span>
+      <h1 id="page-hero-title" class="page-hero__title">Un village qui <span class="hero__highlight">VIB</span>re</h1>
+      <p class="page-hero__lead">Ce qui n'était qu'un quartier s'est transformé en un lieu dynamique regroupant commerces, ateliers, coworking et bien plus.</p>
+    </div>
+  </section>
 
-    <!-- ═══ Section : Découvrir l'histoire ═══ -->
-    <section class="split-section split-section--left-image">
-        <div class="split-section__inner">
-            <div class="split-section__image">
-                <img src="/assets/photos/drone-aerien.jpg" alt="Vue aérienne du VILLAGE Iraty-BIARRITZ" loading="eager">
-            </div>
-            <div class="split-section__content">
-                <h2 class="split-section__title">Découvrir l'histoire du VILLAGE</h2>
-                <div class="split-section__text">
-                    <p>Il s'est transformé en un lieu dynamique comprenant des commerces, des ateliers d'artistes, des espaces de coworking et bien plus encore.</p>
-                    <p>Cette reconversion exemplaire, menée par la Société d'exploitation de BIARRITZ (SEBI), incarne le mariage réussi entre développement économique et respect de l'environnement.</p>
-                </div>
-                <div class="stats">
-                    <div class="stat">
-                        <span class="stat__value" data-counter="1200">1200<span class="stat__plus">+</span></span>
-                        <span class="stat__label">acteurs</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat__value" data-counter="5000">5000<span class="stat__plus">+</span></span>
-                        <span class="stat__label">visiteurs chaque jour</span>
-                    </div>
-                </div>
-                <div>
-                    <a href="/activites" class="btn btn--primary">Découvrir les acteurs du Village</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- ═══════════════ STATS ═══════════════ -->
+  <section class="stats section section--cream" aria-label="Chiffres clés du VILLAGE">
+    <div class="container">
+      <ul class="stats__grid stats__grid--divided">
+        <li class="stat">
+          <div class="stat__value">1<span class="stat__sep" aria-hidden="true"></span>200<span class="stat__plus">+</span></div>
+          <div class="stat__label">Acteurs</div>
+        </li>
+        <li class="stat">
+          <div class="stat__value">5<span class="stat__sep" aria-hidden="true"></span>000<span class="stat__plus">+</span></div>
+          <div class="stat__label">Visiteurs / jour</div>
+        </li>
+        <li class="stat">
+          <div class="stat__value">100<span class="stat__plus">+</span></div>
+          <div class="stat__label">Commerces</div>
+        </li>
+        <li class="stat">
+          <div class="stat__value">20 ans</div>
+          <div class="stat__label">D'existence</div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- ═══ Section : La mixité ═══ -->
-    <section class="section section--alt">
-        <div class="container-narrow">
-            <h2 class="section-title section-title--red">La mixité, une valeur essentielle du VILLAGE Iraty-BIARRITZ</h2>
-        </div>
-        <div class="container">
-            <div class="duo">
-                <div class="duo__text">
-                    <p>Mêler les artisans, les créateurs, les TPE et PME, la culture, les prestataires de services, les start-ups et les commerces de petites et moyennes surfaces, fait partie de notre vision de l'aménagement du VILLAGE Iraty-BIARRITZ. C'est aujourd'hui encore plus vrai que jamais.</p>
-                    <p>Avec le désir d'encourager l'inventivité, l'innovation et la réussite locale, le VILLAGE Iraty-BIARRITZ permet à chacun de s'installer. La Société d'exploitation de BIARRITZ IRATY (SEBI) poursuit sa politique de loyer modéré pour favoriser et agréger la microéconomie locale.</p>
-                    <p>Le VIB offre aux consommateurs un lieu marchand différencié, un lieu où les consommateurs trouvent une offre locale, une sélection de produits, un accueil dans un esprit et convivial de VILLAGE.</p>
-                    <div style="margin-top:2rem;">
-                        <a href="/contact?sujet=installer-entreprise" class="btn btn--ghost-red">Installer mon activité dans le Village</a>
-                    </div>
-                </div>
-                <div class="duo__image">
-                    <img src="/assets/photos/mixite.png" alt="La mixité au cœur du Village Iraty-BIARRITZ" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- ═══════════════ NOTRE HISTOIRE (timeline) ═══════════════ -->
+  <section class="histoire section section--white" aria-labelledby="histoire-title">
+    <div class="container">
+      <header class="histoire__header">
+        <h2 id="histoire-title" class="section-title text-center">Notre histoire</h2>
+      </header>
 
-    <!-- ═══ Section : Comment venir ═══ -->
-    <section class="section">
-        <div class="container-narrow">
-            <h2 class="section-title">Comment venir ?</h2>
-            <div class="how-to-come">
-                <p>Le VILLAGE Iraty-BIARRITZ, c'est en premier lieu une localisation exceptionnelle. Tous les moyens de transport (Aéroport international, gare TGV, Autoroute) sont directement accessibles depuis le centre du VILLAGE Iraty-BIARRITZ.</p>
-                <p>Le VILLAGE Iraty-BIARRITZ est également desservi par quatre lignes de transport en commun : la ligne C, la ligne 5, la ligne 8, la ligne 10 et la ligne 12.</p>
-                <p>Pour autant et malgré cet environnement urbain favorable, sa topologie en fait un lieu préservé des nuisances sonores pourtant souvent liées aux voies de communication.</p>
-            </div>
-            <div class="map-placeholder">
-                <img src="/assets/photos/comment-venir.png" alt="Plan d'accès au VILLAGE Iraty-BIARRITZ" loading="lazy">
-            </div>
-            <div class="text-center" style="margin-top:2rem;">
-                <a href="https://www.google.com/maps/search/?api=1&query=4+rue+des+Mésanges+64200+BIARRITZ" target="_blank" rel="noopener" class="btn btn--primary">Voir l'itinéraire pour venir</a>
-            </div>
-        </div>
-    </section>
+      <ol class="timeline">
+        <li class="timeline__item timeline__item--right">
+          <span class="timeline__year" aria-hidden="true">2005</span>
+          <div class="timeline__event">
+            <h3 class="timeline__event-title"><span class="timeline__date">2005</span> Naissance du VILLAGE</h3>
+            <p class="timeline__event-text">Le quartier d'Iraty entame sa transformation en quartier d'activités, portée par la SEBI.</p>
+          </div>
+        </li>
+        <li class="timeline__item timeline__item--left">
+          <span class="timeline__year" aria-hidden="true">2010</span>
+          <div class="timeline__event">
+            <h3 class="timeline__event-title"><span class="timeline__date">2010</span> La Halle d'Iraty</h3>
+            <p class="timeline__event-text">Inauguration de la Halle d'Iraty, espace congrès devenu moteur du quartier.</p>
+          </div>
+        </li>
+        <li class="timeline__item timeline__item--right">
+          <span class="timeline__year" aria-hidden="true">2015</span>
+          <div class="timeline__event">
+            <h3 class="timeline__event-title"><span class="timeline__date">2015</span> 100 acteurs</h3>
+            <p class="timeline__event-text">Le VILLAGE franchit le cap des 100 acteurs : commerces, artisans, services et restaurants.</p>
+          </div>
+        </li>
+        <li class="timeline__item timeline__item--left">
+          <span class="timeline__year" aria-hidden="true">2024</span>
+          <div class="timeline__event">
+            <h3 class="timeline__event-title"><span class="timeline__date">2024</span> Association Biarritz Iraty</h3>
+            <p class="timeline__event-text">Création de l'association pour fédérer les 1 200 acteurs et accélérer le développement.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-    <!-- ═══ Section : Un VILLAGE fédérateur ═══ -->
-    <section class="split-section split-section--right-text">
-        <div class="split-section__inner">
-            <div class="split-section__image">
-                <img src="/assets/photos/federateur-photo.jpg" alt="Halle d'Iraty au VILLAGE Iraty-BIARRITZ" loading="lazy">
-            </div>
-            <div class="split-section__content split-section__content--dark">
-                <h2 class="split-section__title">Un VILLAGE fédérateur</h2>
-                <p style="margin-bottom:1.25rem;">Le VILLAGE Iraty-BIARRITZ s'inscrit dans une opération de requalification urbaine. Outre son propre engagement, d'importants investissements ont été entrepris tant par des opérateurs publics que privés. Ces énergies ont donné naissance à :</p>
-                <ul class="checked-list">
-                    <li>L'ATABAL, centre de musiques amplifiées, construit sous maîtrise d'ouvrage de la communauté d'agglomération</li>
-                    <li>Le collège d'Ostéopathie du Pays Basque</li>
-                    <li>Le siège européen de Surfrider Foundation Europe</li>
-                    <li>La Halle d'IRATY : parc d'expositions, de congrès et d'évènements, inaugurée en janvier 2010 et construite sous maîtrise d'ouvrage de la Communauté d'Agglomération</li>
-                    <li>Le plus grand Skate Park indoor de Nouvelle-Aquitaine</li>
-                </ul>
-            </div>
+  <!-- ═══════════════ LA MIXITÉ ═══════════════ -->
+  <section class="mixite section section--cream" aria-labelledby="mixite-title">
+    <div class="container mixite__inner">
+      <div class="mixite__text">
+        <p class="eyebrow">La mixité</p>
+        <h2 id="mixite-title" class="section-title">Une valeur essentielle du VILLAGE</h2>
+        <p>Mêler artisans, créateurs, TPE, PME, culture, prestataires de services, start-ups et commerces de petites et moyennes surfaces fait partie de notre vision de l'aménagement du VILLAGE Iraty-Biarritz. C'est aujourd'hui plus vrai que jamais.</p>
+        <p>Avec le désir d'encourager l'inventivité, l'innovation et la réussite locale, le VILLAGE permet à chacun de s'installer. La Société d'exploitation de Biarritz Iraty (SEBI) poursuit sa politique de loyer modéré pour favoriser et agréger la microéconomie locale.</p>
+        <p>Le VIB offre un lieu marchand différencié, où chacun trouve une offre locale, une sélection de produits et un accueil chaleureux dans un véritable esprit de VILLAGE.</p>
+        <div class="mixite__cta">
+          <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon activité dans le VILLAGE</a>
         </div>
-    </section>
+      </div>
+      <div class="mixite__media">
+        <img src="assets-2026/images/mixite.png" alt="La mixité des acteurs au cœur du VILLAGE Iraty-Biarritz" loading="lazy" width="926" height="626">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COMMENT VENIR ═══════════════ -->
+  <section class="acces section section--white" aria-labelledby="acces-title">
+    <div class="container">
+      <header class="acces__header text-center">
+        <h2 id="acces-title" class="section-title">Comment venir</h2>
+      </header>
+
+      <ul class="acces__grid">
+        <li class="acces__card">
+          <span class="acces__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+          </span>
+          <h3 class="acces__name">Aéroport</h3>
+          <p class="acces__detail">Biarritz-Pays Basque à 5 min</p>
+        </li>
+        <li class="acces__card">
+          <span class="acces__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><path d="M8 15h.01"/><path d="M16 15h.01"/></svg>
+          </span>
+          <h3 class="acces__name">Gare TGV</h3>
+          <p class="acces__detail">Biarritz à 2 min</p>
+        </li>
+        <li class="acces__card">
+          <span class="acces__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+          </span>
+          <h3 class="acces__name">Autoroute</h3>
+          <p class="acces__detail">A63 sortie Biarritz</p>
+        </li>
+        <li class="acces__card">
+          <span class="acces__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
+          </span>
+          <h3 class="acces__name">Bus</h3>
+          <p class="acces__detail">Lignes C, 5, 8, 10, 12</p>
+        </li>
+      </ul>
+
+      <a class="acces__map" href="https://www.google.com/maps/search/?api=1&query=4+rue+des+M%C3%A9sanges+64200+BIARRITZ" target="_blank" rel="noopener" aria-label="Plan d'accès au VILLAGE Iraty-Biarritz, ouvrir dans Google Maps (nouvelle fenêtre)">
+        <img src="assets-2026/images/plan-acces.png" alt="Plan d'accès au VILLAGE Iraty-Biarritz : aéroport international, gare TGV La Négresse et Halle d'Iraty" loading="lazy" width="942" height="596">
+      </a>
+
+      <div class="acces__cta text-center">
+        <a href="https://www.google.com/maps/search/?api=1&query=4+rue+des+M%C3%A9sanges+64200+BIARRITZ" target="_blank" rel="noopener" class="btn btn--ghost">
+          Voir sur Google Maps
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA FINAL ═══════════════ -->
+  <section class="cta-final cta-final--solid" aria-labelledby="cta-final-title">
+    <div class="container cta-final__inner">
+      <p class="eyebrow cta-final__eyebrow">Rejoignez-nous</p>
+      <h2 id="cta-final-title" class="cta-final__title">Prêt à faire partie de l'aventure ?</h2>
+      <p class="cta-final__lead">Des espaces professionnels accessibles dans le quartier le plus dynamique de BIARRITZ.</p>
+      <div class="cta-final__cta">
+        <a href="/louer-un-local" class="btn btn--primary">
+          Découvrir nos locaux
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href="/contact" class="btn btn--outline-light">Nous contacter</a>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<footer class="footer">
-    <div class="footer__inner">
-        <div class="footer__brand">VILLAGE Iraty-BIARRITZ</div>
-        <nav class="footer__nav" aria-label="Pied de page">
-            <a href="/">Accueil</a>
-            <a href="/nos-articles">Nos articles</a>
-            <a href="/contact">Contact</a>
-            <a href="/a-propos">À propos</a>
-        </nav>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="VILLAGE Iraty-Biarritz, Accueil">
+        <img src="assets-2026/images/logo/vib-full.svg" alt="VILLAGE Iraty-Biarritz">
+      </a>
+      <p class="footer__tagline">Plus de 1 200 acteurs qui font vibrer BIARRITZ depuis 2005.<br>Commerces, restaurants, coworking et services.</p>
     </div>
-    <div class="footer__bottom">
-        <span>&copy; <span id="year">2026</span> VILLAGE Iraty-BIARRITZ</span>
-        <span>
-            <a href="/mentions-legales">Mentions légales</a> ·
-            <a href="/politique-confidentialite">Politique de confidentialité</a>
-        </span>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Navigation</h2>
+      <ul class="footer__list">
+        <li><a href="/le-village">Votre VILLAGE</a></li>
+        <li><a href="/activites">Activités</a></li>
+        <li><a href="/louer-un-local">Louer un local</a></li>
+        <li><a href="/services">Nos services</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
     </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Contact</h2>
+      <ul class="footer__list footer__contact">
+        <li>
+          <span class="footer__label">Adresse</span>
+          <address>4 Rue des Mésanges,<br>64200 BIARRITZ</address>
+        </li>
+        <li>
+          <span class="footer__label">Téléphone</span>
+          <a href="tel:+33559239310">05 59 23 93 10</a>
+        </li>
+        <li>
+          <span class="footer__label">Email</span>
+          <a href="mailto:contact@v-i-b.fr">contact@v-i-b.fr</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Services associés</h2>
+      <ul class="footer__services">
+        <li>
+          <a href="https://www.biarritz-box.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Box (nouvelle fenêtre)">
+            <img src="assets-2026/images/services/biarritz-box.jpeg" alt="BIARRITZ Box" loading="lazy">
+          </a>
+        </li>
+        <li>
+          <a href="https://www.biarritz-buro.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Buro (nouvelle fenêtre)">
+            <img src="assets-2026/images/services/biarritz-buro.png" alt="BIARRITZ Buro" loading="lazy">
+          </a>
+        </li>
+        <li>
+          <a href="https://www.biarritz-domiciliation.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Domiciliation (nouvelle fenêtre)">
+            <img src="assets-2026/images/services/biarritz-domiciliation.png" alt="BIARRITZ Domiciliation" loading="lazy">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>&copy; <span id="year">2026</span> VILLAGE Iraty-Biarritz · Tous droits réservés</span>
+    <span class="footer__legal">
+      <a href="/mentions-legales">Mentions légales</a>
+      <span aria-hidden="true">·</span>
+      <a href="/politique-confidentialite">Politique de confidentialité</a>
+    </span>
+  </div>
 </footer>
 
-<script src="/js/main.js?v=20260505d"></script>
+<script src="assets-2026/js/main.js?v=20260526a" defer></script>
 </body>
 </html>

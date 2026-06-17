@@ -57,6 +57,16 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 └── assets/              # Images, fonts, favicon, etc.
 ```
 
+## Conventions de marque (retours client — valables sur TOUT le site)
+
+Règles imposées par le client, à appliquer sur **toutes les pages** (live + refonte), y compris les pages futures :
+
+- **« VILLAGE » toujours en capitales** dès que le mot apparaît dans du texte visible (titres, baselines, nav « Votre VILLAGE », footer, corps, méta, alt/aria). Ne **jamais** toucher aux URLs/chemins/slugs (`/le-village`, `village-iraty-biarritz.fr`, noms de fichiers) ni aux sélecteurs.
+- **« zone » → « quartier »** quand le mot décrit le VIB (ex. « la zone la plus dynamique » → « le quartier le plus dynamique », accorder l'article : « de la zone » → « du quartier »). **Exception** : ne pas toucher au terme générique/au sujet d'article « zones d'activités » ni à son slug d'URL.
+- **Exception slogan** : sur la page « Le village » le titre reste **« Un village qui VIBre »** (`village` en minuscules, **VIB** en capitales). C'est le seul endroit où `village` reste en minuscules.
+
+Balayage sûr déjà utilisé : `perl -CSD -Mutf8 -i -pe 's/(?<![-\w])([Vv]illage)(?!-)/VILLAGE/g'` (exclut `le-village`/`village-iraty`), à lancer sur toute nouvelle page.
+
 ## Conventions de code
 
 ### HTML
