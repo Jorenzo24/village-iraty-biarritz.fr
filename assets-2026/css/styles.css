@@ -1466,19 +1466,23 @@
   /* Événement à droite : année (col 1, alignée à droite) | événement (col 2) */
   .timeline__item--right .timeline__year {
     grid-column: 1;
+    grid-row: 1;
     text-align: right;
   }
   .timeline__item--right .timeline__event {
     grid-column: 2;
+    grid-row: 1;
     text-align: left;
   }
   /* Événement à gauche : événement (col 1, aligné à droite) | année (col 2) */
   .timeline__item--left .timeline__event {
     grid-column: 1;
+    grid-row: 1;
     text-align: right;
   }
   .timeline__item--left .timeline__year {
     grid-column: 2;
+    grid-row: 1;
     text-align: left;
   }
   .timeline__item--left .timeline__event-text { margin-left: auto; }
