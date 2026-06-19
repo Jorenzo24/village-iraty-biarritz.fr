@@ -1,6 +1,6 @@
 <?php
 /**
- * VIB — Traitement du formulaire de contact
+ * VIB - Traitement du formulaire de contact
  * Lit la config SMTP depuis .env, envoie via PHPMailer.
  */
 
@@ -146,7 +146,7 @@ try {
     $mail->addAddress($env['SMTP_TO'], $env['SMTP_TO_NAME'] ?? '');
 
     // Contenu
-    $mail->Subject = '[VIB] ' . $sujet_libelle . ' — ' . $nom;
+    $mail->Subject = '[VIB] ' . $sujet_libelle . ' - ' . $nom;
 
     $html_body = '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;color:#222;max-width:600px;margin:0 auto;">';
     $html_body .= '<div style="background:#b21927;color:#fff;padding:20px;text-align:center;">';
@@ -162,10 +162,10 @@ try {
     }
     $html_body .= '<p><strong>Message :</strong></p>';
     $html_body .= '<div style="background:#fff;padding:15px;border-left:4px solid #b21927;white-space:pre-wrap;">' . htmlspecialchars($message) . '</div>';
-    $html_body .= '<p style="margin-top:20px;font-size:12px;color:#888;">Envoyé depuis village-iraty-biarritz.fr — IP : ' . htmlspecialchars($ip) . '</p>';
+    $html_body .= '<p style="margin-top:20px;font-size:12px;color:#888;">Envoyé depuis village-iraty-biarritz.fr - IP : ' . htmlspecialchars($ip) . '</p>';
     $html_body .= '</div></body></html>';
 
-    $text_body = "Nouveau message — VILLAGE Iraty-Biarritz\n";
+    $text_body = "Nouveau message - VILLAGE Iraty-Biarritz\n";
     $text_body .= "==========================================\n\n";
     $text_body .= "Sujet : $sujet_libelle\n";
     $text_body .= "Nom : $nom\n";
@@ -174,7 +174,7 @@ try {
         $text_body .= "Téléphone : $telephone\n";
     }
     $text_body .= "\nMessage :\n$message\n\n";
-    $text_body .= "—\nIP : $ip\n";
+    $text_body .= "-\nIP : $ip\n";
 
     $mail->isHTML(true);
     $mail->Body = $html_body;

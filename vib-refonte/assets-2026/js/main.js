@@ -1,4 +1,4 @@
-// VIB — main.js
+// VIB - main.js
 // Comportements : header au scroll, menu mobile, badges Ouvert/Fermé,
 // année automatique dans le footer.
 

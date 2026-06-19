@@ -1,4 +1,4 @@
-// VIB — Liste des articles (nos-articles)
+// VIB - Liste des articles (nos-articles)
 document.addEventListener('DOMContentLoaded', async () => {
     const grid = document.getElementById('articles-grid');
     const empty = document.getElementById('articles-empty');

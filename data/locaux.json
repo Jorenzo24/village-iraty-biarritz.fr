@@ -1,8 +1,8 @@
 [
   {
     "slug": "duplex-commercial-de-90mm2-ref-dar41",
-    "name": "Lot 38 — Duplex commercial 90 m² (REF-DAR41)",
-    "address": "Lot 38 — Halle DARLA, VILLAGE Iraty-BIARRITZ",
+    "name": "Lot 38 - Duplex commercial 90 m² (REF-DAR41)",
+    "address": "Lot 38 - Halle DARLA, VILLAGE Iraty-BIARRITZ",
     "surface": 90,
     "price_ht": 1165.0,
     "charges_ht": 0,
@@ -24,7 +24,7 @@
   },
   {
     "slug": "lots-7-10-aldades-270m2",
-    "name": "Lots 7 et 10 — Les Aldades 270 m²",
+    "name": "Lots 7 et 10 - Les Aldades 270 m²",
     "address": "4 rue des Mésanges, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
     "surface": 270,
     "price_ht": 4960.0,
@@ -47,8 +47,8 @@
   },
   {
     "slug": "lot-21-aldades-42m2",
-    "name": "Lot 21 — Les Aldades 42 m²",
-    "address": "10, rue des Mésanges — Les Aldades, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
+    "name": "Lot 21 - Les Aldades 42 m²",
+    "address": "10, rue des Mésanges - Les Aldades, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
     "surface": 42,
     "price_ht": 906.0,
     "charges_ht": 107.87,
@@ -70,8 +70,8 @@
   },
   {
     "slug": "lot-12-moura-45m2",
-    "name": "Lot 12 — Biarritz La Négresse 45 m²",
-    "address": "25, allée du Moura — Biarritz La Négresse, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
+    "name": "Lot 12 - Biarritz La Négresse 45 m²",
+    "address": "25, allée du Moura - Biarritz La Négresse, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
     "surface": 45,
     "price_ht": 880.0,
     "charges_ht": 88.5,

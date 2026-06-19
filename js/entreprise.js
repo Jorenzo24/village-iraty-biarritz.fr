@@ -1,4 +1,4 @@
-// VIB — Page détail entreprise (chargée depuis data/entreprises.json)
+// VIB - Page détail entreprise (chargée depuis data/entreprises.json)
 document.addEventListener('DOMContentLoaded', async () => {
     // Slug peut venir du path (/acteur/<slug>) ou de la query (?slug=)
     const params = new URLSearchParams(window.location.search);
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         heroTitle.textContent = 'Fiche introuvable';
         content.hidden = true;
         notFound.hidden = false;
-        document.title = 'Fiche introuvable — VILLAGE Iraty-BIARRITZ';
+        document.title = 'Fiche introuvable - VILLAGE Iraty-BIARRITZ';
     }
 
     function renderEntity(e) {
         // Title + meta
-        document.getElementById('page-title').textContent = `${e.name} — VILLAGE Iraty-BIARRITZ`;
+        document.getElementById('page-title').textContent = `${e.name} - VILLAGE Iraty-BIARRITZ`;
         const desc = e.description || `Découvrez ${e.name}, ${e.category_label.toLowerCase()} au VILLAGE Iraty-BIARRITZ.`;
         document.getElementById('page-description').setAttribute('content', desc);
 

@@ -1,4 +1,4 @@
-// VIB — Détection "Ouvert / Fermé" à partir du champ `hours` des fiches.
+// VIB - Détection "Ouvert / Fermé" à partir du champ `hours` des fiches.
 // Expose window.OpeningStatus.{ getStatus, applyToCards }.
 (function () {
     const DAY_INDEX = {

@@ -1,4 +1,4 @@
-// VIB — Page Activités (refonte) : filtres par catégorie + recherche live.
+// VIB - Page Activités (refonte) : filtres par catégorie + recherche live.
 // Les badges Ouvert/Fermé sont gérés par main.js (data-hours sur .acteur-card).
 (function () {
   'use strict';

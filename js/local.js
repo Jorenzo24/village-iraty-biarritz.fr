@@ -1,4 +1,4 @@
-// VIB — Page détail local (chargée depuis data/locaux.json)
+// VIB - Page détail local (chargée depuis data/locaux.json)
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const pathMatch = window.location.pathname.match(/^\/local\/([a-z0-9\-]+)/i);
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function renderLocal(l) {
         // Title + meta
-        document.title = `${l.name} — VILLAGE Iraty-BIARRITZ`;
+        document.title = `${l.name} - VILLAGE Iraty-BIARRITZ`;
         document.getElementById('page-description').setAttribute(
             'content',
             `${l.name} à louer au VILLAGE Iraty-BIARRITZ. ${l.surface} m², ${l.price_ht} € HT/mois.`

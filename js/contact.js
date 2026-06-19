@@ -1,4 +1,4 @@
-// VIB — Soumission AJAX du formulaire de contact
+// VIB - Soumission AJAX du formulaire de contact
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
     const feedback = document.getElementById('form-feedback');

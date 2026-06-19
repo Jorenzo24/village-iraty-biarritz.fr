@@ -1,4 +1,4 @@
-// VIB — Page Activités : filtres par catégorie + recherche live
+// VIB - Page Activités : filtres par catégorie + recherche live
 document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.tab');
     const cards = document.querySelectorAll('#cards-grid .card');
