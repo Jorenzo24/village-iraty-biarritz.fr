@@ -1604,3 +1604,157 @@
 .cta-final--solid .cta-final__inner {
   margin-inline: auto;
 }
+
+/* =====================================================================
+   Page Activités (annuaire)
+   ===================================================================== */
+.page-hero--compact { min-height: 42vh; }
+
+.annuaire-toolbar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--color-bg-alt);
+  padding-block: var(--space-5);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+.annuaire-toolbar__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+.filter-toggle:hover { border-color: var(--color-success); color: var(--color-success); }
+.filter-toggle__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  transition: background var(--transition-base);
+}
+.filter-toggle:hover .filter-toggle__dot { background: var(--color-success); }
+.filter-toggle.is-active {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-on-dark);
+}
+.filter-toggle.is-active .filter-toggle__dot { background: var(--color-on-dark); }
+.annuaire-search {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+.annuaire-search__icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+.annuaire-search input {
+  width: 100%;
+  padding: 14px 18px 14px 48px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+.annuaire-search input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(172, 44, 38, 0.12);
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+.filter-pill:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.filter-pill.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-dark);
+}
+.filter-pill__count { font-size: var(--fs-xs); opacity: 0.7; }
+.filter-pill.is-active .filter-pill__count { opacity: 0.85; }
+
+.annuaire-count {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-5);
+}
+.annuaire-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--space-8) var(--space-4);
+}
+
+/* Grille annuaire : reprend les 3 colonnes de l'accueil (.acteurs-grid de base) */
+
+/* Lien "Voir la fiche" épinglé en bas de carte */
+.acteur-card__more {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+}
+.acteur-card__more:hover { color: var(--color-accent-hover); }
+
+/* Placeholder pour les acteurs sans photo */
+.acteur-card__media--ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-border));
+}
+.acteur-card__ph {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: var(--fw-black);
+  letter-spacing: 1px;
+  color: var(--color-text-strong);
+  opacity: 0.35;
+}
