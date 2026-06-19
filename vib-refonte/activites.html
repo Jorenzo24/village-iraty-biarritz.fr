@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets-2026/css/design-system.css?v=20260526a">
-  <link rel="stylesheet" href="assets-2026/css/styles.css?v=20260619a">
+  <link rel="stylesheet" href="assets-2026/css/styles.css?v=20260619b">
 
   <!-- JSON-LD BreadcrumbList -->
   <script type="application/ld+json">
@@ -109,9 +109,14 @@
     <div class="container">
 
       <div class="annuaire-toolbar">
-        <div class="annuaire-search">
-          <svg class="annuaire-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <input type="search" id="acteur-search" placeholder="Rechercher un commerce, un service…" aria-label="Rechercher un acteur">
+        <div class="annuaire-toolbar__top">
+          <div class="annuaire-search">
+            <svg class="annuaire-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="search" id="acteur-search" placeholder="Rechercher un commerce, une catégorie…" aria-label="Rechercher un acteur">
+          </div>
+          <button class="filter-toggle" id="filter-open" type="button" aria-pressed="false">
+            <span class="filter-toggle__dot" aria-hidden="true"></span>Ouvert maintenant
+          </button>
         </div>
         <div class="filter-pills" role="group" aria-label="Filtrer par catégorie">
           <button class="filter-pill is-active" data-cat="all" type="button" aria-pressed="true">Tous <span class="filter-pill__count">92</span></button>
@@ -129,7 +134,7 @@
 
       <ul class="acteurs-grid acteurs-grid--page" id="acteurs-grid">
         <li>
-          <article class="acteur-card" data-cat="services" data-name="agence erronda" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
+          <article class="acteur-card" data-cat="services" data-name="agence erronda services" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
             <a href="/acteur/agence-erronda" class="acteur-card__media">
               <img src="/assets/photos/entreprises/agence-erronda/cover.png" alt="AGENCE ERRONDA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -143,7 +148,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="aimery chemin">
+          <article class="acteur-card" data-cat="services" data-name="aimery chemin services">
             <a href="/acteur/aimery-chemin" class="acteur-card__media">
               <img src="/assets/photos/entreprises/aimery-chemin/cover.jpeg" alt="AIMERY CHEMIN, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -157,7 +162,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="ajoupa rhumerie" data-hours="Tu 12:00-14:30;We 12:00-14:30;Th 12:00-02:00;Sa 12:00-02:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="ajoupa rhumerie restaurants &amp; bars" data-hours="Tu 12:00-14:30;We 12:00-14:30;Th 12:00-02:00;Sa 12:00-02:00">
             <a href="/acteur/ajoupa-rhumerie" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ajoupa-rhumerie/cover.jpg" alt="AJOUPA RHUMERIE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -171,7 +176,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="al mounia" data-hours="Tu 10:30-21:00;We 10:30-21:00;Th 10:30-21:00;Fr 10:30-21:00;Sa 10:30-21:00;Su 10:30-21:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="al mounia restaurants &amp; bars" data-hours="Tu 10:30-21:00;We 10:30-21:00;Th 10:30-21:00;Fr 10:30-21:00;Sa 10:30-21:00;Su 10:30-21:00">
             <a href="/acteur/al-mounia" class="acteur-card__media">
               <img src="/assets/photos/entreprises/al-mounia/cover.jpeg" alt="AL MOUNIA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -185,7 +190,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="alba recovery drink" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
+          <article class="acteur-card" data-cat="sport" data-name="alba recovery drink sports &amp; loisirs" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
             <a href="/acteur/alba-recovery-drink" class="acteur-card__media">
               <img src="/assets/photos/entreprises/alba-recovery-drink/cover.jpg" alt="ALBA RECOVERY DRINK, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -199,7 +204,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="antonio wash" data-hours="Mo 09:00-18:30;Tu 09:00-18:30;We 09:00-18:30;Th 09:00-18:30;Fr 09:00-18:30;Sa 09:00-18:30">
+          <article class="acteur-card" data-cat="services" data-name="antonio wash services" data-hours="Mo 09:00-18:30;Tu 09:00-18:30;We 09:00-18:30;Th 09:00-18:30;Fr 09:00-18:30;Sa 09:00-18:30">
             <a href="/acteur/ds-wash" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ds-wash/cover.jpg" alt="ANTONIO WASH, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -213,7 +218,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="association blak">
+          <article class="acteur-card" data-cat="createurs" data-name="association blak créateurs">
             <a href="/acteur/association-blak" class="acteur-card__media acteur-card__media--ph" aria-label="ASSOCIATION BLAK, voir la fiche">
               <span class="acteur-card__ph" aria-hidden="true">AB</span>
               <span class="badge badge--category">Créateurs</span>
@@ -227,7 +232,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="astra bar audiophile" data-hours="Th 18:00-02:00;Fr 18:00-02:00;Sa 18:00-02:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="astra bar audiophile restaurants &amp; bars" data-hours="Th 18:00-02:00;Fr 18:00-02:00;Sa 18:00-02:00">
             <a href="/acteur/astra" class="acteur-card__media">
               <img src="/assets/photos/entreprises/astra/cover.jpg" alt="ASTRA Bar Audiophile, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -241,7 +246,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="atlantic service" data-hours="Mo 08:30-17:30;Tu 08:30-17:30;We 08:30-17:30;Th 08:30-17:30;Fr 08:30-17:30">
+          <article class="acteur-card" data-cat="services" data-name="atlantic service services" data-hours="Mo 08:30-17:30;Tu 08:30-17:30;We 08:30-17:30;Th 08:30-17:30;Fr 08:30-17:30">
             <a href="/acteur/atlantic-service" class="acteur-card__media">
               <img src="/assets/photos/entreprises/atlantic-service/cover.jpg" alt="ATLANTIC SERVICE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -255,7 +260,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="avad">
+          <article class="acteur-card" data-cat="services" data-name="avad services">
             <a href="/acteur/avad" class="acteur-card__media">
               <img src="/assets/photos/entreprises/avad/logo.png" alt="AVAD, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -269,7 +274,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="axe eco energie" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="axe eco energie entreprises" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
             <a href="/acteur/axe-eco-energie" class="acteur-card__media">
               <img src="/assets/photos/entreprises/axe-eco-energie/cover.jpeg" alt="AXE ECO ENERGIE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -283,7 +288,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="b.ocean">
+          <article class="acteur-card" data-cat="entreprises" data-name="b.ocean entreprises">
             <a href="/acteur/b-ocean" class="acteur-card__media">
               <img src="/assets/photos/entreprises/b-ocean/cover.jpg" alt="B.Ocean, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -297,7 +302,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="bab cardio respi" data-hours="Mo 09:00-19:00;Tu 09:00-19:00;We 09:00-19:00;Th 09:00-19:00;Fr 09:00-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="bab cardio respi santé &amp; soins" data-hours="Mo 09:00-19:00;Tu 09:00-19:00;We 09:00-19:00;Th 09:00-19:00;Fr 09:00-19:00">
             <a href="/acteur/bab-cardio-respi" class="acteur-card__media">
               <img src="/assets/photos/entreprises/bab-cardio-respi/cover.jpg" alt="BAB CARDIO RESPI, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -311,7 +316,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="beauty succes" data-hours="Mo 09:30-19:00;Tu 09:30-19:00;We 09:30-19:00;Th 09:30-19:00;Fr 09:30-19:00;Sa 09:30-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="beauty succes santé &amp; soins" data-hours="Mo 09:30-19:00;Tu 09:30-19:00;We 09:30-19:00;Th 09:30-19:00;Fr 09:30-19:00;Sa 09:30-19:00">
             <a href="/acteur/beauty-success" class="acteur-card__media">
               <img src="/assets/photos/entreprises/beauty-success/cover.jpg" alt="BEAUTY SUCCES, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -325,7 +330,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="best training à biarritz training" data-hours="Mo 09:00-21:00;Tu 09:00-21:00;We 09:00-21:00;Th 09:00-21:00;Fr 09:00-21:00;Sa 09:00-21:00">
+          <article class="acteur-card" data-cat="sport" data-name="best training à biarritz training sports &amp; loisirs" data-hours="Mo 09:00-21:00;Tu 09:00-21:00;We 09:00-21:00;Th 09:00-21:00;Fr 09:00-21:00;Sa 09:00-21:00">
             <a href="/acteur/biarritz-training" class="acteur-card__media">
               <img src="/assets/photos/entreprises/biarritz-training/cover.jpg" alt="BEST TRAINING à BIARRITZ TRAINING, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -339,7 +344,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="biarritz box">
+          <article class="acteur-card" data-cat="services" data-name="biarritz box services">
             <a href="/acteur/biarritz-box" class="acteur-card__media">
               <img src="/assets/photos/entreprises/biarritz-box/cover.jpg" alt="BIARRITZ BOX, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -353,7 +358,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="biarritz buro" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00">
+          <article class="acteur-card" data-cat="services" data-name="biarritz buro services" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00">
             <a href="/acteur/biarritz-buro" class="acteur-card__media">
               <img src="/assets/photos/entreprises/biarritz-buro/cover.jpg" alt="BIARRITZ BURO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -367,7 +372,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="biarritz corp">
+          <article class="acteur-card" data-cat="entreprises" data-name="biarritz corp entreprises">
             <a href="/acteur/biarritz-corp" class="acteur-card__media">
               <img src="/assets/photos/entreprises/biarritz-corp/cover.jpg" alt="BIARRITZ CORP, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -381,7 +386,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="biarritz domiciliation" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00">
+          <article class="acteur-card" data-cat="services" data-name="biarritz domiciliation services" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00">
             <a href="/acteur/biarritz-domiciliation" class="acteur-card__media">
               <img src="/assets/photos/entreprises/biarritz-domiciliation/cover.jpg" alt="BIARRITZ DOMICILIATION, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -395,7 +400,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="bistrot toqué" data-hours="Mo 08:30-14:00;Tu 08:30-14:00;We 08:30-14:00;Th 08:30-14:00;Fr 08:30-14:00;Sa 08:30-14:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="bistrot toqué restaurants &amp; bars" data-hours="Mo 08:30-14:00;Tu 08:30-14:00;We 08:30-14:00;Th 08:30-14:00;Fr 08:30-14:00;Sa 08:30-14:00">
             <a href="/acteur/bistrot-toque" class="acteur-card__media">
               <img src="/assets/photos/entreprises/bistrot-toque/cover.jpg" alt="BISTROT TOQUÉ, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -409,7 +414,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="boucherie d'iraty" data-hours="Mo 07:30-19:00;Tu 07:30-19:00;We 07:30-19:00;Th 07:30-19:00;Fr 07:30-19:00;Sa 07:30-19:00">
+          <article class="acteur-card" data-cat="commerces" data-name="boucherie d'iraty commerces" data-hours="Mo 07:30-19:00;Tu 07:30-19:00;We 07:30-19:00;Th 07:30-19:00;Fr 07:30-19:00;Sa 07:30-19:00">
             <a href="/acteur/boucherie-diraty" class="acteur-card__media">
               <img src="/assets/photos/entreprises/boucherie-diraty/cover.jpg" alt="BOUCHERIE D'IRATY, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -423,7 +428,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="boulangerie enneartz" data-hours="Mo 08:00-19:00;Tu 08:00-19:00;We 08:00-19:00;Th 08:00-19:00;Fr 08:00-19:00;Sa 08:00-19:00">
+          <article class="acteur-card" data-cat="commerces" data-name="boulangerie enneartz commerces" data-hours="Mo 08:00-19:00;Tu 08:00-19:00;We 08:00-19:00;Th 08:00-19:00;Fr 08:00-19:00;Sa 08:00-19:00">
             <a href="/acteur/boulangerie-enneartz" class="acteur-card__media">
               <img src="/assets/photos/entreprises/boulangerie-enneartz/cover.jpg" alt="BOULANGERIE ENNEARTZ, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -437,7 +442,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="bowl &amp; go" data-hours="Mo 11:30-22:00;Tu 11:30-22:00;We 11:30-22:00;Th 11:30-22:00;Fr 11:30-22:00;Sa 11:30-22:00;Su 11:30-22:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="bowl &amp; go restaurants &amp; bars" data-hours="Mo 11:30-22:00;Tu 11:30-22:00;We 11:30-22:00;Th 11:30-22:00;Fr 11:30-22:00;Sa 11:30-22:00;Su 11:30-22:00">
             <a href="/acteur/bowl-go" class="acteur-card__media">
               <img src="/assets/photos/entreprises/bowl-go/cover.jpg" alt="BOWL &amp; GO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -451,7 +456,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="brasserie d'iraty" data-hours="Mo 06:30-15:00;Tu 06:30-15:00;We 06:30-15:00;Th 06:30-15:00;Fr 06:30-15:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="brasserie d'iraty restaurants &amp; bars" data-hours="Mo 06:30-15:00;Tu 06:30-15:00;We 06:30-15:00;Th 06:30-15:00;Fr 06:30-15:00">
             <a href="/acteur/brasserie-diraty" class="acteur-card__media">
               <img src="/assets/photos/entreprises/brasserie-diraty/cover.jpg" alt="BRASSERIE D'IRATY, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -465,7 +470,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="btm biarritz trains miniatures" data-hours="Mo 10:00-17:00;Tu 10:00-17:00;We 10:00-17:00;Th 10:00-17:00">
+          <article class="acteur-card" data-cat="commerces" data-name="btm biarritz trains miniatures commerces" data-hours="Mo 10:00-17:00;Tu 10:00-17:00;We 10:00-17:00;Th 10:00-17:00">
             <a href="/acteur/btm-biarritz-train-miniature" class="acteur-card__media">
               <img src="/assets/photos/entreprises/btm-biarritz-train-miniature/cover.jpg" alt="BTM BIARRITZ TRAINS MINIATURES, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -479,7 +484,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="bye buy car" data-hours="Tu 10:00-13:00,14:00-18:30;We 10:00-13:00,14:00-18:30;Th 10:00-13:00,14:00-18:30;Fr 10:00-13:00,14:00-18:30;Sa 10:00-13:00,14:00-17:00">
+          <article class="acteur-card" data-cat="services" data-name="bye buy car services" data-hours="Tu 10:00-13:00,14:00-18:30;We 10:00-13:00,14:00-18:30;Th 10:00-13:00,14:00-18:30;Fr 10:00-13:00,14:00-18:30;Sa 10:00-13:00,14:00-17:00">
             <a href="/acteur/bye-buy-car" class="acteur-card__media acteur-card__media--ph" aria-label="BYE BUY CAR, voir la fiche">
               <span class="acteur-card__ph" aria-hidden="true">BB</span>
               <span class="badge badge--category">Services</span>
@@ -493,7 +498,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="cabinet de radiologie dr.nomblot" data-hours="Mo 08:15-18:15;Tu 08:15-18:15;We 08:15-18:15;Th 08:15-18:15;Fr 08:15-18:15">
+          <article class="acteur-card" data-cat="sante" data-name="cabinet de radiologie dr.nomblot santé &amp; soins" data-hours="Mo 08:15-18:15;Tu 08:15-18:15;We 08:15-18:15;Th 08:15-18:15;Fr 08:15-18:15">
             <a href="/acteur/cabinet-de-radiologie-dr-nomblot" class="acteur-card__media">
               <img src="/assets/photos/entreprises/cabinet-de-radiologie-dr-nomblot/logo.jpeg" alt="CABINET DE RADIOLOGIE DR.NOMBLOT, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -507,7 +512,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="café grand biarritz" data-hours="Mo 09:00-15:00;Tu 09:00-15:00;We 09:00-15:00;Th 09:00-15:00,18:00-02:00;Fr 09:00-15:00,18:00-02:00;Sa 18:00-02:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="café grand biarritz restaurants &amp; bars" data-hours="Mo 09:00-15:00;Tu 09:00-15:00;We 09:00-15:00;Th 09:00-15:00,18:00-02:00;Fr 09:00-15:00,18:00-02:00;Sa 18:00-02:00">
             <a href="/acteur/cafe-grand-biarritz" class="acteur-card__media">
               <img src="/assets/photos/entreprises/cafe-grand-biarritz/cover.jpg" alt="CAFÉ GRAND BIARRITZ, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -521,7 +526,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="cap vital sante" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00;Sa 09:00-18:00">
+          <article class="acteur-card" data-cat="sante" data-name="cap vital sante santé &amp; soins" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00;Sa 09:00-18:00">
             <a href="/acteur/cap-vital-sante" class="acteur-card__media">
               <img src="/assets/photos/entreprises/cap-vital-sante/cover.jpg" alt="CAP VITAL SANTE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -535,7 +540,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="carrosserie jmb auto moto" data-hours="Mo 07:30-17:00;Tu 07:30-17:00;We 07:30-17:00;Th 07:30-17:00;Fr 07:30-17:00">
+          <article class="acteur-card" data-cat="services" data-name="carrosserie jmb auto moto services" data-hours="Mo 07:30-17:00;Tu 07:30-17:00;We 07:30-17:00;Th 07:30-17:00;Fr 07:30-17:00">
             <a href="/acteur/carrosserie-jmb-auto-moto" class="acteur-card__media">
               <img src="/assets/photos/entreprises/carrosserie-jmb-auto-moto/cover.jpg" alt="CARROSSERIE JMB AUTO MOTO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -549,7 +554,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="click &amp; go" data-hours="Mo 20:00-04:00;Tu 20:00-04:00;We 20:00-04:00;Th 20:00-04:00;Fr 20:00-04:00;Sa 20:00-04:00;Su 20:00-04:00">
+          <article class="acteur-card" data-cat="services" data-name="click &amp; go services" data-hours="Mo 20:00-04:00;Tu 20:00-04:00;We 20:00-04:00;Th 20:00-04:00;Fr 20:00-04:00;Sa 20:00-04:00;Su 20:00-04:00">
             <a href="/acteur/click-go" class="acteur-card__media">
               <img src="/assets/photos/entreprises/click-go/cover.jpeg" alt="CLICK &amp; GO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -563,7 +568,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="cuir factory" data-hours="Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00;Sa 09:00-17:00">
+          <article class="acteur-card" data-cat="createurs" data-name="cuir factory créateurs" data-hours="Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00;Sa 09:00-17:00">
             <a href="/acteur/cuir-factory" class="acteur-card__media">
               <img src="/assets/photos/entreprises/cuir-factory/cover.jpeg" alt="CUIR FACTORY, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -577,7 +582,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="dance wave" data-hours="Mo 18:30-21:30;Tu 18:30-21:30;We 18:30-21:30;Th 18:30-21:30;Fr 18:30-21:30">
+          <article class="acteur-card" data-cat="sport" data-name="dance wave sports &amp; loisirs" data-hours="Mo 18:30-21:30;Tu 18:30-21:30;We 18:30-21:30;Th 18:30-21:30;Fr 18:30-21:30">
             <a href="/acteur/dance-wave" class="acteur-card__media">
               <img src="/assets/photos/entreprises/dance-wave/cover.jpg" alt="DANCE WAVE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -591,7 +596,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="darrieumerlou">
+          <article class="acteur-card" data-cat="entreprises" data-name="darrieumerlou entreprises">
             <a href="/acteur/darrieumerlou" class="acteur-card__media">
               <img src="/assets/photos/entreprises/darrieumerlou/cover.webp" alt="DARRIEUMERLOU, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -605,7 +610,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="david &amp; coralie - opticien lunetier" data-hours="Tu 09:30-12:30,14:00-19:00;We 09:30-12:30,14:00-19:00;Th 09:30-12:30,14:00-19:00;Fr 09:30-12:30,14:00-19:00;Sa 09:30-12:30,14:00-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="david &amp; coralie - opticien lunetier santé &amp; soins" data-hours="Tu 09:30-12:30,14:00-19:00;We 09:30-12:30,14:00-19:00;Th 09:30-12:30,14:00-19:00;Fr 09:30-12:30,14:00-19:00;Sa 09:30-12:30,14:00-19:00">
             <a href="/acteur/david-coralie-opticien" class="acteur-card__media">
               <img src="/assets/photos/entreprises/david-coralie-opticien/cover.png" alt="DAVID &amp; CORALIE - OPTICIEN LUNETIER, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -619,7 +624,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="depann pc'64" data-hours="Mo 10:00-17:30;Tu 10:00-17:30;We 10:00-17:30;Th 10:00-17:30">
+          <article class="acteur-card" data-cat="services" data-name="depann pc'64 services" data-hours="Mo 10:00-17:30;Tu 10:00-17:30;We 10:00-17:30;Th 10:00-17:30">
             <a href="/acteur/depann-pc64" class="acteur-card__media">
               <img src="/assets/photos/entreprises/depann-pc64/cover.jpg" alt="DEPANN PC'64, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -633,7 +638,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="dietplus" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00,09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00">
+          <article class="acteur-card" data-cat="sante" data-name="dietplus santé &amp; soins" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00,09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00">
             <a href="/acteur/dietplus" class="acteur-card__media">
               <img src="/assets/photos/entreprises/dietplus/cover.jpg" alt="DIETPLUS, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -647,7 +652,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="don donuts" data-hours="Mo 09:30-20:00;Tu 09:30-20:00;We 09:30-20:00;Th 09:30-20:00;Fr 09:30-20:00;Sa 09:30-20:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="don donuts entreprises" data-hours="Mo 09:30-20:00;Tu 09:30-20:00;We 09:30-20:00;Th 09:30-20:00;Fr 09:30-20:00;Sa 09:30-20:00">
             <a href="/acteur/don-donuts" class="acteur-card__media">
               <img src="/assets/photos/entreprises/don-donuts/cover.jpg" alt="DON DONUTS, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -661,7 +666,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="eat &amp; go" data-hours="Mo 20:00-04:00;Tu 20:00-04:00;We 20:00-04:00;Th 20:00-04:00;Fr 20:00-04:00;Sa 20:00-04:00;Su 20:00-04:00">
+          <article class="acteur-card" data-cat="services" data-name="eat &amp; go services" data-hours="Mo 20:00-04:00;Tu 20:00-04:00;We 20:00-04:00;Th 20:00-04:00;Fr 20:00-04:00;Sa 20:00-04:00;Su 20:00-04:00">
             <a href="/acteur/eat-go" class="acteur-card__media">
               <img src="/assets/photos/entreprises/eat-go/cover.jpg" alt="EAT &amp; GO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -675,7 +680,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="école de cirque ballabulle" data-hours="Tu 10:00-18:00;We 10:00-18:00;Th 10:00-18:00;Fr 10:00-18:00;Sa 10:00-18:00">
+          <article class="acteur-card" data-cat="sport" data-name="école de cirque ballabulle sports &amp; loisirs" data-hours="Tu 10:00-18:00;We 10:00-18:00;Th 10:00-18:00;Fr 10:00-18:00;Sa 10:00-18:00">
             <a href="/acteur/ecole-de-cirque-ballabulle" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ecole-de-cirque-ballabulle/cover.jpg" alt="ÉCOLE DE CIRQUE BALLABULLE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -689,7 +694,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="école des métiers du sport by gtf" data-hours="Mo 08:30-18:30;Tu 08:30-18:30;We 08:30-18:30;Th 08:30-18:30;Fr 08:30-18:30">
+          <article class="acteur-card" data-cat="sport" data-name="école des métiers du sport by gtf sports &amp; loisirs" data-hours="Mo 08:30-18:30;Tu 08:30-18:30;We 08:30-18:30;Th 08:30-18:30;Fr 08:30-18:30">
             <a href="/acteur/ecole-des-metiers-du-sport-by-gtf" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ecole-des-metiers-du-sport-by-gtf/cover.jpg" alt="ÉCOLE DES MÉTIERS DU SPORT BY GTF, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -703,7 +708,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="eyesea production">
+          <article class="acteur-card" data-cat="createurs" data-name="eyesea production créateurs">
             <a href="/acteur/eyesea-production" class="acteur-card__media">
               <img src="/assets/photos/entreprises/eyesea-production/cover.jpg" alt="EYESEA PRODUCTION, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -717,7 +722,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="formatext" data-hours="Mo 09:00-18:30;Tu 09:00-18:30;We 09:00-18:30;Th 09:00-18:30;Fr 09:00-18:30;Sa 09:00-18:30">
+          <article class="acteur-card" data-cat="entreprises" data-name="formatext entreprises" data-hours="Mo 09:00-18:30;Tu 09:00-18:30;We 09:00-18:30;Th 09:00-18:30;Fr 09:00-18:30;Sa 09:00-18:30">
             <a href="/acteur/formatext" class="acteur-card__media">
               <img src="/assets/photos/entreprises/formatext/cover.jpg" alt="FORMATEXT, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -731,7 +736,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="horoa">
+          <article class="acteur-card" data-cat="createurs" data-name="horoa créateurs">
             <a href="/acteur/horoa" class="acteur-card__media">
               <img src="/assets/photos/entreprises/horoa/cover.webp" alt="HOROA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -745,7 +750,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="ingérop côte basque" data-hours="Mo 10:00-14:00;Tu 10:00-14:00;We 10:00-14:00;Th 10:00-14:00;Fr 10:00-14:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="ingérop côte basque entreprises" data-hours="Mo 10:00-14:00;Tu 10:00-14:00;We 10:00-14:00;Th 10:00-14:00;Fr 10:00-14:00">
             <a href="/acteur/ingerop-cote-basque" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ingerop-cote-basque/cover.png" alt="INGÉROP CÔTE BASQUE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -759,7 +764,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="inovie axbio - laboratoire d’analyses médicales" data-hours="Mo 07:00-12:30,14:00-18:00;Tu 07:00-12:30,14:00-18:00;We 07:00-12:30,14:00-18:00;Th 07:00-12:30,14:00-18:00;Fr 07:00-12:30,14:00-18:00;Sa 07:30-12:00">
+          <article class="acteur-card" data-cat="sante" data-name="inovie axbio - laboratoire d’analyses médicales santé &amp; soins" data-hours="Mo 07:00-12:30,14:00-18:00;Tu 07:00-12:30,14:00-18:00;We 07:00-12:30,14:00-18:00;Th 07:00-12:30,14:00-18:00;Fr 07:00-12:30,14:00-18:00;Sa 07:30-12:00">
             <a href="/acteur/inovie-axbio" class="acteur-card__media">
               <img src="/assets/photos/entreprises/inovie-axbio/cover.jpg" alt="INOVIE AXBIO - Laboratoire d’Analyses Médicales, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -773,7 +778,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="istanbul kebab" data-hours="Mo 11:00-15:00,18:00-21:00;Tu 11:00-15:00,18:00-21:00;We 11:00-15:00,18:00-21:00;Th 11:00-15:00,18:00-21:00;Fr 11:00-15:00,18:00-21:00;Sa 11:00-15:00,18:00-21:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="istanbul kebab restaurants &amp; bars" data-hours="Mo 11:00-15:00,18:00-21:00;Tu 11:00-15:00,18:00-21:00;We 11:00-15:00,18:00-21:00;Th 11:00-15:00,18:00-21:00;Fr 11:00-15:00,18:00-21:00;Sa 11:00-15:00,18:00-21:00">
             <a href="/acteur/istanbul-kebab" class="acteur-card__media">
               <img src="/assets/photos/entreprises/istanbul-kebab/cover.jpg" alt="ISTANBUL KEBAB, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -787,7 +792,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="kafe etxea" data-hours="Mo 14:00-18:00;Tu 09:00-18:00;Sa 09:00-12:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="kafe etxea entreprises" data-hours="Mo 14:00-18:00;Tu 09:00-18:00;Sa 09:00-12:00">
             <a href="/acteur/kafe-etxea" class="acteur-card__media">
               <img src="/assets/photos/entreprises/kafe-etxea/cover.jpg" alt="KAFE ETXEA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -801,7 +806,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="kinés biarritz-iraty" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00">
+          <article class="acteur-card" data-cat="sante" data-name="kinés biarritz-iraty santé &amp; soins" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00">
             <a href="/acteur/kines-biarritz-iraty" class="acteur-card__media">
               <img src="/assets/photos/entreprises/kines-biarritz-iraty/cover.jpg" alt="KINÉS BIARRITZ-IRATY, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -815,7 +820,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="l'arty chaud" data-hours="Mo 12:00-14:30;Tu 12:00-14:30;We 12:00-14:30;Th 12:00-14:30;Fr 12:00-14:30;Sa 12:00-14:30">
+          <article class="acteur-card" data-cat="restaurants" data-name="l'arty chaud restaurants &amp; bars" data-hours="Mo 12:00-14:30;Tu 12:00-14:30;We 12:00-14:30;Th 12:00-14:30;Fr 12:00-14:30;Sa 12:00-14:30">
             <a href="/acteur/larty-chaud" class="acteur-card__media">
               <img src="/assets/photos/entreprises/larty-chaud/cover.jpg" alt="L'ARTY CHAUD, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -829,7 +834,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="l’echo du silence" data-hours="Tu 10:30-19:00;We 10:30-19:00;Th 10:30-19:00;Fr 10:30-19:00;Sa 10:00-17:00">
+          <article class="acteur-card" data-cat="createurs" data-name="l’echo du silence créateurs" data-hours="Tu 10:30-19:00;We 10:30-19:00;Th 10:30-19:00;Fr 10:30-19:00;Sa 10:00-17:00">
             <a href="/acteur/lecho-du-silence" class="acteur-card__media">
               <img src="/assets/photos/entreprises/lecho-du-silence/cover.jpg" alt="L’ECHO DU SILENCE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -843,7 +848,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="la guinguette des sardines" data-hours="Tu 17:00-00:00;We 17:00-00:00;Th 17:00-02:00;Fr 18:00-02:00;Sa 18:00-02:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="la guinguette des sardines restaurants &amp; bars" data-hours="Tu 17:00-00:00;We 17:00-00:00;Th 17:00-02:00;Fr 18:00-02:00;Sa 18:00-02:00">
             <a href="/acteur/la-guinguette-des-sardines" class="acteur-card__media">
               <img src="/assets/photos/entreprises/la-guinguette-des-sardines/cover.jpg" alt="LA GUINGUETTE DES SARDINES, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -857,7 +862,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="la parqueterie basque" data-hours="Tu 09:30-12:30,14:00-19:00;We 09:30-12:30,14:00-19:00;Th 09:30-12:30,14:00-19:00;Fr 09:30-12:30,14:00-19:00;Sa 09:30-12:30,14:00-19:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="la parqueterie basque entreprises" data-hours="Tu 09:30-12:30,14:00-19:00;We 09:30-12:30,14:00-19:00;Th 09:30-12:30,14:00-19:00;Fr 09:30-12:30,14:00-19:00;Sa 09:30-12:30,14:00-19:00">
             <a href="/acteur/la-parqueterie-basque" class="acteur-card__media">
               <img src="/assets/photos/entreprises/la-parqueterie-basque/showroom.jpg" alt="LA PARQUETERIE BASQUE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -871,7 +876,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="la ptite biarrote" data-hours="Sa 08:30-14:00;Su 08:30-14:00">
+          <article class="acteur-card" data-cat="services" data-name="la ptite biarrote services" data-hours="Sa 08:30-14:00;Su 08:30-14:00">
             <a href="/acteur/la-ptite-biarrote" class="acteur-card__media">
               <img src="/assets/photos/entreprises/la-ptite-biarrote/cover.jpg" alt="LA PTITE BIARROTE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -885,7 +890,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="la vague" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="la vague entreprises" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
             <a href="/acteur/la-vague" class="acteur-card__media">
               <img src="/assets/photos/entreprises/la-vague/cover.jpg" alt="LA VAGUE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -899,7 +904,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="laminak">
+          <article class="acteur-card" data-cat="entreprises" data-name="laminak entreprises">
             <a href="/acteur/laminak" class="acteur-card__media">
               <img src="/assets/photos/entreprises/laminak/cover.jpeg" alt="LAMINAK, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -913,7 +918,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="lazeo biarritz - centres d’épilation laser &amp; soins esthétiques" data-hours="Mo 08:00-19:00;Tu 08:00-19:00;We 08:00-19:00;Th 08:00-19:00;Fr 08:00-19:00;Sa 09:00-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="lazeo biarritz - centres d’épilation laser &amp; soins esthétiques santé &amp; soins" data-hours="Mo 08:00-19:00;Tu 08:00-19:00;We 08:00-19:00;Th 08:00-19:00;Fr 08:00-19:00;Sa 09:00-19:00">
             <a href="/acteur/centre-lazeo" class="acteur-card__media">
               <img src="/assets/photos/entreprises/centre-lazeo/cover.jpg" alt="LAZEO BIARRITZ - Centres d’épilation laser &amp; Soins esthétiques, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -927,7 +932,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="lazy days" data-hours="Tu 09:30-18:00;We 09:30-18:00;Th 09:30-18:00;Fr 09:30-18:00;Sa 09:30-18:00">
+          <article class="acteur-card" data-cat="sante" data-name="lazy days santé &amp; soins" data-hours="Tu 09:30-18:00;We 09:30-18:00;Th 09:30-18:00;Fr 09:30-18:00;Sa 09:30-18:00">
             <a href="/acteur/lazy-days" class="acteur-card__media">
               <img src="/assets/photos/entreprises/lazy-days/cover.jpg" alt="LAZY DAYS, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -941,7 +946,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="le local" data-hours="Fr 20:00-02:00">
+          <article class="acteur-card" data-cat="createurs" data-name="le local créateurs" data-hours="Fr 20:00-02:00">
             <a href="/acteur/le-local" class="acteur-card__media">
               <img src="/assets/photos/entreprises/le-local/cover.jpg" alt="LE LOCAL, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -955,7 +960,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="le studio" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00;Sa 08:00-20:00">
+          <article class="acteur-card" data-cat="sport" data-name="le studio sports &amp; loisirs" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00;Sa 08:00-20:00">
             <a href="/acteur/le-studio" class="acteur-card__media">
               <img src="/assets/photos/entreprises/le-studio/cover.jpg" alt="LE STUDIO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -969,7 +974,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="le violon dans l’âme- atelier de lutherie" data-hours="Tu 10:00-18:00;We 10:00-18:00;Th 10:00-18:00;Fr 10:00-18:00;Sa 10:00-12:00">
+          <article class="acteur-card" data-cat="commerces" data-name="le violon dans l’âme- atelier de lutherie commerces" data-hours="Tu 10:00-18:00;We 10:00-18:00;Th 10:00-18:00;Fr 10:00-18:00;Sa 10:00-12:00">
             <a href="/acteur/violon-dans-lame" class="acteur-card__media">
               <img src="/assets/photos/entreprises/violon-dans-lame/cover.jpg" alt="LE VIOLON DANS l’ÂME- Atelier de lutherie, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -983,7 +988,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="les losanges" data-hours="Mo 08:00-22:00;Tu 08:00-22:00;We 08:00-22:00;Th 08:00-22:00;Fr 08:00-22:00">
+          <article class="acteur-card" data-cat="commerces" data-name="les losanges commerces" data-hours="Mo 08:00-22:00;Tu 08:00-22:00;We 08:00-22:00;Th 08:00-22:00;Fr 08:00-22:00">
             <a href="/acteur/les-losanges" class="acteur-card__media">
               <img src="/assets/photos/entreprises/les-losanges/cover.jpg" alt="LES LOSANGES, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -997,7 +1002,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="leslie morales osthéopathe">
+          <article class="acteur-card" data-cat="sante" data-name="leslie morales osthéopathe santé &amp; soins">
             <a href="/acteur/dr-leslie-morales" class="acteur-card__media">
               <img src="/assets/photos/entreprises/dr-leslie-morales/cover.webp" alt="LESLIE MORALES OSTHÉOPATHE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -1011,7 +1016,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="maison vishnu" data-hours="Mo 12:00-14:30,18:00-22:30;Tu 18:30-22:30;We 12:00-14:30,18:00-22:30;Th 18:00-22:30;Fr 18:30-22:30;Sa 12:00-14:30,18:00-22:30;Su 18:00-22:30">
+          <article class="acteur-card" data-cat="restaurants" data-name="maison vishnu restaurants &amp; bars" data-hours="Mo 12:00-14:30,18:00-22:30;Tu 18:30-22:30;We 12:00-14:30,18:00-22:30;Th 18:00-22:30;Fr 18:30-22:30;Sa 12:00-14:30,18:00-22:30;Su 18:00-22:30">
             <a href="/acteur/maison-vishnu" class="acteur-card__media">
               <img src="/assets/photos/entreprises/maison-vishnu/cover.png" alt="MAISON VISHNU, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -1025,7 +1030,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="megasun biarritz" data-hours="Mo 08:00-19:00;Tu 08:00-19:00;We 08:00-19:00;Th 08:00-19:00;Fr 08:00-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="megasun biarritz santé &amp; soins" data-hours="Mo 08:00-19:00;Tu 08:00-19:00;We 08:00-19:00;Th 08:00-19:00;Fr 08:00-19:00">
             <a href="/acteur/mega-sun-biarritz" class="acteur-card__media">
               <img src="/assets/photos/entreprises/mega-sun-biarritz/logo.png" alt="MEGASUN BIARRITZ, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -1039,7 +1044,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="monsieur brisson">
+          <article class="acteur-card" data-cat="services" data-name="monsieur brisson services">
             <a href="/acteur/monsieur-brisson" class="acteur-card__media">
               <img src="/assets/photos/entreprises/monsieur-brisson/cover.jpg" alt="MONSIEUR BRISSON, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1053,7 +1058,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="nahia" data-hours="Mo 09:00-21:00;Tu 09:00-21:00;We 09:00-21:00;Th 09:00-21:00;Fr 09:00-21:00;Sa 09:00-21:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="nahia restaurants &amp; bars" data-hours="Mo 09:00-21:00;Tu 09:00-21:00;We 09:00-21:00;Th 09:00-21:00;Fr 09:00-21:00;Sa 09:00-21:00">
             <a href="/acteur/nahia" class="acteur-card__media">
               <img src="/assets/photos/entreprises/nahia/cover.jpg" alt="NAHIA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -1067,7 +1072,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="createurs" data-name="nouvelle compagnie des arts graphiques" data-hours="Mo 00:00-23:59;Tu 00:00-23:59;We 00:00-23:59;Th 00:00-23:59;Fr 00:00-23:59;Sa 00:00-23:59;Su 00:00-23:59">
+          <article class="acteur-card" data-cat="createurs" data-name="nouvelle compagnie des arts graphiques créateurs" data-hours="Mo 00:00-23:59;Tu 00:00-23:59;We 00:00-23:59;Th 00:00-23:59;Fr 00:00-23:59;Sa 00:00-23:59;Su 00:00-23:59">
             <a href="/acteur/nouvelle-compagnie-des-arts-graphiques" class="acteur-card__media">
               <img src="/assets/photos/entreprises/nouvelle-compagnie-des-arts-graphiques/cover.jpg" alt="NOUVELLE COMPAGNIE DES ARTS GRAPHIQUES, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -1081,7 +1086,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="number one barbershop" data-hours="Mo 10:00-20:00;Tu 10:00-20:00;We 10:00-20:00;Th 10:00-20:00;Fr 10:00-20:00;Sa 10:00-20:00">
+          <article class="acteur-card" data-cat="commerces" data-name="number one barbershop commerces" data-hours="Mo 10:00-20:00;Tu 10:00-20:00;We 10:00-20:00;Th 10:00-20:00;Fr 10:00-20:00;Sa 10:00-20:00">
             <a href="/acteur/number-one-shop" class="acteur-card__media">
               <img src="/assets/photos/entreprises/number-one-shop/cover.jpg" alt="NUMBER ONE BARBERSHOP, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -1095,7 +1100,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="odette coiffure">
+          <article class="acteur-card" data-cat="commerces" data-name="odette coiffure commerces">
             <a href="/acteur/odette-coiffure" class="acteur-card__media">
               <img src="/assets/photos/entreprises/odette-coiffure/cover.jpg" alt="ODETTE COIFFURE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -1109,7 +1114,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="ongles en gel" data-hours="Mo 09:30-19:00;Tu 09:30-19:00;We 09:30-19:00;Th 09:30-19:00;Fr 09:30-19:00;Sa 09:30-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="ongles en gel santé &amp; soins" data-hours="Mo 09:30-19:00;Tu 09:30-19:00;We 09:30-19:00;Th 09:30-19:00;Fr 09:30-19:00;Sa 09:30-19:00">
             <a href="/acteur/ongles-en-gel" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ongles-en-gel/cover.jpeg" alt="ONGLES EN GEL, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -1123,7 +1128,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="ophélie hubert pédicure - podologue" data-hours="Mo 09:15-19:00;Tu 09:15-19:00;We 09:15-19:00;Th 09:15-12:30;Fr 09:15-19:00">
+          <article class="acteur-card" data-cat="sante" data-name="ophélie hubert pédicure - podologue santé &amp; soins" data-hours="Mo 09:15-19:00;Tu 09:15-19:00;We 09:15-19:00;Th 09:15-12:30;Fr 09:15-19:00">
             <a href="/acteur/ophelie-hubert" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ophelie-hubert/cover.jpg" alt="Ophélie HUBERT Pédicure - Podologue, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -1137,7 +1142,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="origins digital">
+          <article class="acteur-card" data-cat="entreprises" data-name="origins digital entreprises">
             <a href="/acteur/origins-digital" class="acteur-card__media">
               <img src="/assets/photos/entreprises/origins-digital/cover.jpg" alt="ORIGINS DIGITAL, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -1151,7 +1156,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="pharmacie biarritz iraty" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00;Sa 08:00-20:00">
+          <article class="acteur-card" data-cat="sante" data-name="pharmacie biarritz iraty santé &amp; soins" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00;Sa 08:00-20:00">
             <a href="/acteur/pharmacie-biarritz-iraty" class="acteur-card__media">
               <img src="/assets/photos/entreprises/pharmacie-biarritz-iraty/cover.png" alt="PHARMACIE BIARRITZ IRATY, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -1165,7 +1170,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="piknika" data-hours="Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00;Sa 09:00-17:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="piknika restaurants &amp; bars" data-hours="Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00;Sa 09:00-17:00">
             <a href="/acteur/piknika" class="acteur-card__media">
               <img src="/assets/photos/entreprises/piknika/cover.jpeg" alt="PIKNIKA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -1179,7 +1184,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="piuma pizza" data-hours="Tu 12:00-14:00,19:00-21:00;We 12:00-14:00,19:00-21:00;Th 12:00-14:00,19:00-21:00;Fr 12:00-14:00,19:00-21:00;Sa 19:00-21:30">
+          <article class="acteur-card" data-cat="restaurants" data-name="piuma pizza restaurants &amp; bars" data-hours="Tu 12:00-14:00,19:00-21:00;We 12:00-14:00,19:00-21:00;Th 12:00-14:00,19:00-21:00;Fr 12:00-14:00,19:00-21:00;Sa 19:00-21:30">
             <a href="/acteur/piuma-pizza" class="acteur-card__media">
               <img src="/assets/photos/entreprises/piuma-pizza/cover.jpg" alt="PIUMA PIZZA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -1193,7 +1198,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="pog64" data-hours="Mo 10:00-19:00;Tu 10:00-19:00;We 10:00-19:00;Th 10:00-19:00;Fr 10:00-19:00;Sa 10:00-19:00">
+          <article class="acteur-card" data-cat="commerces" data-name="pog64 commerces" data-hours="Mo 10:00-19:00;Tu 10:00-19:00;We 10:00-19:00;Th 10:00-19:00;Fr 10:00-19:00;Sa 10:00-19:00">
             <a href="/acteur/pog-64" class="acteur-card__media">
               <img src="/assets/photos/entreprises/pog-64/cover.jpg" alt="POG64, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -1207,7 +1212,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="porrada barber shop" data-hours="Tu 08:00-18:00;We 08:00-18:00;Th 08:00-18:00;Fr 08:00-18:00;Sa 08:00-18:00">
+          <article class="acteur-card" data-cat="commerces" data-name="porrada barber shop commerces" data-hours="Tu 08:00-18:00;We 08:00-18:00;Th 08:00-18:00;Fr 08:00-18:00;Sa 08:00-18:00">
             <a href="/acteur/porrada-barber-shop" class="acteur-card__media">
               <img src="/assets/photos/entreprises/porrada-barber-shop/cover.jpg" alt="PORRADA BARBER SHOP, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -1221,7 +1226,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="entreprises" data-name="regatta france" data-hours="Mo 10:00-18:00;Tu 10:00-18:00;We 10:00-18:00;Th 10:00-18:00;Fr 10:00-18:00;Sa 10:00-18:00;Su 10:00-18:00">
+          <article class="acteur-card" data-cat="entreprises" data-name="regatta france entreprises" data-hours="Mo 10:00-18:00;Tu 10:00-18:00;We 10:00-18:00;Th 10:00-18:00;Fr 10:00-18:00;Sa 10:00-18:00;Su 10:00-18:00">
             <a href="/acteur/regatta-france" class="acteur-card__media">
               <img src="/assets/photos/entreprises/regatta-france/cover.jpg" alt="REGATTA FRANCE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Entreprises</span>
@@ -1235,7 +1240,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sante" data-name="sos médecins côte basque" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00;Sa 08:00-20:00;Su 08:00-20:00">
+          <article class="acteur-card" data-cat="sante" data-name="sos médecins côte basque santé &amp; soins" data-hours="Mo 08:00-20:00;Tu 08:00-20:00;We 08:00-20:00;Th 08:00-20:00;Fr 08:00-20:00;Sa 08:00-20:00;Su 08:00-20:00">
             <a href="/acteur/s-o-s-medecins" class="acteur-card__media">
               <img src="/assets/photos/entreprises/s-o-s-medecins/cover.jpg" alt="SOS Médecins Côte Basque, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -1249,7 +1254,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="sud immo pro" data-hours="Mo 09:00-12:30,14:00-18:00;Tu 09:00-12:30,14:00-18:00;We 09:00-12:30,14:00-18:00;Th 09:00-12:30,14:00-18:00;Fr 09:00-12:30,14:00-18:00">
+          <article class="acteur-card" data-cat="services" data-name="sud immo pro services" data-hours="Mo 09:00-12:30,14:00-18:00;Tu 09:00-12:30,14:00-18:00;We 09:00-12:30,14:00-18:00;Th 09:00-12:30,14:00-18:00;Fr 09:00-12:30,14:00-18:00">
             <a href="/acteur/sud-immo-pro" class="acteur-card__media">
               <img src="/assets/photos/entreprises/sud-immo-pro/cover.jpeg" alt="SUD IMMO PRO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1263,7 +1268,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="sunset studio biarritz" data-hours="Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00;Sa 09:00-18:00;Su 09:00-18:00">
+          <article class="acteur-card" data-cat="services" data-name="sunset studio biarritz services" data-hours="Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00;Sa 09:00-18:00;Su 09:00-18:00">
             <a href="/acteur/sunset-studio-biarritz" class="acteur-card__media">
               <img src="/assets/photos/entreprises/sunset-studio-biarritz/cover.png" alt="SUNSET STUDIO BIARRITZ, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1277,7 +1282,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="the inspire academy" data-hours="Mo 09:00-19:30;Tu 09:00-19:30;We 09:00-19:30;Th 09:00-19:30;Fr 09:00-19:30;Sa 09:00-17:00">
+          <article class="acteur-card" data-cat="services" data-name="the inspire academy services" data-hours="Mo 09:00-19:30;Tu 09:00-19:30;We 09:00-19:30;Th 09:00-19:30;Fr 09:00-19:30;Sa 09:00-17:00">
             <a href="/acteur/the-inspire-academy" class="acteur-card__media">
               <img src="/assets/photos/entreprises/the-inspire-academy/cover.jpg" alt="THE INSPIRE ACADEMY, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1291,7 +1296,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="trikoa" data-hours="Tu 10:00-12:00,13:00-18:00;We 10:00-12:00,13:00-18:00;Th 10:00-12:00,13:00-18:00;Fr 10:00-12:00,13:00-18:00;Sa 10:00-18:00">
+          <article class="acteur-card" data-cat="commerces" data-name="trikoa commerces" data-hours="Tu 10:00-12:00,13:00-18:00;We 10:00-12:00,13:00-18:00;Th 10:00-12:00,13:00-18:00;Fr 10:00-12:00,13:00-18:00;Sa 10:00-18:00">
             <a href="/acteur/trikoa" class="acteur-card__media">
               <img src="/assets/photos/entreprises/trikoa/cover.jpg" alt="TRIKOA, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -1305,7 +1310,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="tunstall">
+          <article class="acteur-card" data-cat="services" data-name="tunstall services">
             <a href="/acteur/tunstall" class="acteur-card__media">
               <img src="/assets/photos/entreprises/tunstall/cover.webp" alt="TUNSTALL, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1319,7 +1324,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="umih pays basque" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
+          <article class="acteur-card" data-cat="services" data-name="umih pays basque services" data-hours="Mo 09:00-17:00;Tu 09:00-17:00;We 09:00-17:00;Th 09:00-17:00;Fr 09:00-17:00">
             <a href="/acteur/umih-pays-basque" class="acteur-card__media">
               <img src="/assets/photos/entreprises/umih-pays-basque/cover.jpg" alt="UMIH PAYS BASQUE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1333,7 +1338,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="uniti habitat">
+          <article class="acteur-card" data-cat="services" data-name="uniti habitat services">
             <a href="/acteur/uniti-habitat" class="acteur-card__media">
               <img src="/assets/photos/entreprises/uniti-habitat/cover.jpg" alt="UNITI HABITAT, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1347,7 +1352,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="restaurants" data-name="veloff" data-hours="Mo 09:00-15:00;Tu 09:00-15:00;We 09:00-15:00;Th 09:00-15:00;Fr 09:00-15:00;Sa 09:00-15:00">
+          <article class="acteur-card" data-cat="restaurants" data-name="veloff restaurants &amp; bars" data-hours="Mo 09:00-15:00;Tu 09:00-15:00;We 09:00-15:00;Th 09:00-15:00;Fr 09:00-15:00;Sa 09:00-15:00">
             <a href="/acteur/veloff" class="acteur-card__media">
               <img src="/assets/photos/entreprises/veloff/cover.jpg" alt="VELOFF, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; Bars</span>
@@ -1361,7 +1366,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="sport" data-name="wave pole studio" data-hours="Mo 16:00-20:30;Tu 17:00-21:00;We 09:00-13:00;Th 16:00-21:00;Sa 09:00-13:00">
+          <article class="acteur-card" data-cat="sport" data-name="wave pole studio sports &amp; loisirs" data-hours="Mo 16:00-20:30;Tu 17:00-21:00;We 09:00-13:00;Th 16:00-21:00;Sa 09:00-13:00">
             <a href="/acteur/wave-pole-studio" class="acteur-card__media">
               <img src="/assets/photos/entreprises/wave-pole-studio/cover.jpeg" alt="WAVE POLE STUDIO, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Sports &amp; Loisirs</span>
@@ -1375,7 +1380,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="commerces" data-name="west wave tatoo shop" data-hours="Tu 11:00-18:00;We 11:00-18:00;Th 11:00-18:00;Fr 11:00-18:00;Sa 11:00-18:00">
+          <article class="acteur-card" data-cat="commerces" data-name="west wave tatoo shop commerces" data-hours="Tu 11:00-18:00;We 11:00-18:00;Th 11:00-18:00;Fr 11:00-18:00;Sa 11:00-18:00">
             <a href="/acteur/west-wave-tatoo-shop" class="acteur-card__media">
               <img src="/assets/photos/entreprises/west-wave-tatoo-shop/cover.jpg" alt="WEST WAVE TATOO SHOP, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -1389,7 +1394,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="wilau propreté - nettoyage industriel" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00;Sa 09:00-18:00;Su 09:00-18:00">
+          <article class="acteur-card" data-cat="services" data-name="wilau propreté - nettoyage industriel services" data-hours="Mo 09:00-18:00;Tu 09:00-18:00;We 09:00-18:00;Th 09:00-18:00;Fr 09:00-18:00;Sa 09:00-18:00;Su 09:00-18:00">
             <a href="/acteur/wilau-proprete" class="acteur-card__media">
               <img src="/assets/photos/entreprises/wilau-proprete/cover.png" alt="WILAU PROPRETÉ - Nettoyage Industriel, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1403,7 +1408,7 @@
           </article>
         </li>
         <li>
-          <article class="acteur-card" data-cat="services" data-name="ximunaxiette" data-hours="Tu 10:00-14:00;We 10:00-17:00;Th 10:00-14:00;Fr 10:00-17:00;Sa 10:00-17:00;Su 10:00-13:30">
+          <article class="acteur-card" data-cat="services" data-name="ximunaxiette services" data-hours="Tu 10:00-14:00;We 10:00-17:00;Th 10:00-14:00;Fr 10:00-17:00;Sa 10:00-17:00;Su 10:00-13:30">
             <a href="/acteur/ximunaxiette" class="acteur-card__media">
               <img src="/assets/photos/entreprises/ximunaxiette/cover.jpg" alt="XIMUNAXIETTE, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Services</span>
@@ -1509,6 +1514,6 @@
 </footer>
 
 <script src="assets-2026/js/main.js?v=20260526a" defer></script>
-<script src="assets-2026/js/activites.js?v=20260619a" defer></script>
+<script src="assets-2026/js/activites.js?v=20260619b" defer></script>
 </body>
 </html>
