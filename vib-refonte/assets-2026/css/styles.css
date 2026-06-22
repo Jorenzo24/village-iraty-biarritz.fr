@@ -2156,6 +2156,9 @@
 }
 
 .strategie__cta { margin-top: var(--space-7); }
+@media (max-width: 767px) {
+  .strategie__cta { text-align: center; }
+}
 
 /* --- Fiche local : layout --- */
 .local-detail {
