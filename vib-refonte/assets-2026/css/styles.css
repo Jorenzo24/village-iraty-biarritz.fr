@@ -2082,31 +2082,33 @@
 
 /* --- Valeurs / Engagements (bande pleine largeur + encoche circulaire) --- */
 .values-engagements {
-  background: var(--color-bg-alt);
-  position: relative;
+  background: var(--color-grey-1, #EAEAEA);
 }
+/* Bande pleine largeur : rouge à gauche, gris à droite, jusqu'aux bords */
 .values-engagements__inner {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  max-width: var(--container-max);
-  margin-inline: auto;
-  position: relative;
 }
 @media (min-width: 768px) {
-  .values-engagements__inner { grid-template-columns: 1fr auto 1fr; }
+  .values-engagements__inner { grid-template-columns: 1fr 1fr; }
 }
 .values-engagements__col {
-  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centrage vertical */
+  align-items: center;       /* centrage horizontal */
   text-align: center;
+  padding: var(--space-8) var(--space-6);
 }
 @media (min-width: 768px) {
-  .values-engagements__col { padding: var(--space-9) var(--space-8); }
+  .values-engagements__col { padding: var(--space-10) var(--space-8); }
 }
+.values-engagements__col > * { max-width: 30rem; }
 .values-engagements__col p {
   font-size: var(--fs-body);
   line-height: var(--lh-lead);
-  margin: 0 auto var(--space-3);
-  max-width: 30rem;
+  margin: 0 0 var(--space-3);
 }
 .values-engagements__col p:last-child { margin-bottom: 0; }
 .values-engagements__col--red {
@@ -2114,7 +2116,10 @@
   color: var(--color-on-dark);
 }
 .values-engagements__col--red strong { color: var(--color-on-dark); }
-.values-engagements__col--light { color: var(--color-text); }
+.values-engagements__col--light {
+  background: var(--color-grey-1, #EAEAEA);
+  color: var(--color-text);
+}
 .values-engagements__title {
   font-family: var(--font-display);
   font-size: var(--fs-h3);
@@ -2126,24 +2131,26 @@
 }
 .values-engagements__col--red .values-engagements__title { color: var(--color-on-dark); }
 .values-engagements__title--accent { color: var(--color-accent); }
+/* Encoche : cercle rouge centré sur la jointure des deux colonnes */
 .values-engagements__divider {
   display: none;
-  position: relative;
-  width: 100px;
 }
 @media (min-width: 768px) {
-  .values-engagements__divider { display: block; }
-}
-.values-engagements__divider span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 7rem;
-  height: 7rem;
-  background: var(--color-accent);
-  border-radius: var(--radius-full);
-  z-index: 2;
+  .values-engagements__divider {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .values-engagements__divider span {
+    display: block;
+    width: 7rem;
+    height: 7rem;
+    background: var(--color-accent);
+    border-radius: var(--radius-full);
+  }
 }
 
 .strategie__cta { margin-top: var(--space-7); }
