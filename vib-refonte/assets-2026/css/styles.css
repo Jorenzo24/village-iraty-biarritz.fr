@@ -1864,13 +1864,13 @@
   border-top: 1px solid var(--color-border);
 }
 .entity-info__block p { margin: 0; }
-.entity-info__block a {
+.entity-info__block a:not(.btn) {
   color: var(--color-text);
   font-size: var(--fs-body);
   transition: color var(--transition-base);
   word-break: break-word;
 }
-.entity-info__block a:hover { color: var(--color-accent); }
+.entity-info__block a:not(.btn):hover { color: var(--color-accent); }
 .entity-info__block--cta { border-top: 0; padding-top: var(--space-4); }
 .entity-info__website {
   width: 100%;
