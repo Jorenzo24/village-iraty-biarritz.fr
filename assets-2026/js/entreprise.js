@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         const desc = e.description || `Découvrez ${e.name}, ${e.category_label.toLowerCase()} au VILLAGE Iraty-BIARRITZ.`;
         document.getElementById('page-description').setAttribute('content', desc);
 
+        // Canonical + Open Graph par acteur (URL propre /acteur/<slug>)
+        const cleanUrl = `https://village-iraty-biarritz.fr/acteur/${e.slug}`;
+        const setMeta = (sel, attr, val) => { const el = document.querySelector(sel); if (el) el.setAttribute(attr, val); };
+        setMeta('link[rel="canonical"]', 'href', cleanUrl);
+        setMeta('meta[property="og:url"]', 'content', cleanUrl);
+        setMeta('meta[property="og:title"]', 'content', `${e.name} - VILLAGE Iraty-Biarritz`);
+        setMeta('meta[property="og:description"]', 'content', desc);
+        if (e.photos && e.photos[0]) {
+            setMeta('meta[property="og:image"]', 'content', `https://village-iraty-biarritz.fr${e.photos[0]}`);
+        }
+
         heroTitle.textContent = e.name;
 
         document.getElementById('entity-name-h2').textContent = e.name;
