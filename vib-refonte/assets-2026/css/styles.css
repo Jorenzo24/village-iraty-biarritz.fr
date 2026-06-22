@@ -2058,6 +2058,8 @@
 
 /* --- Utilitaires --- */
 .container--narrow { max-width: 820px; }
+/* Centre les blocs contraints (lead a max-width 640) dans un conteneur étroit centré */
+.container--narrow.text-center .section-lead { margin-inline: auto; }
 .btn--large {
   padding: var(--space-4) var(--space-7);
   font-size: var(--fs-body);
