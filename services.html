@@ -1,193 +1,302 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nos services - VILLAGE Iraty-BIARRITZ</title>
-    <meta name="description" content="Découvrez nos fiches pratiques : commerces, espaces publics, accessibilité, Régie VIB Fastlink, services en plus. Téléchargement PDF gratuit.">
+  <title>Nos services - VILLAGE Iraty-Biarritz</title>
+  <meta name="description" content="Les fiches pratiques du VILLAGE Iraty-Biarritz à télécharger : commerces, espaces publics, accessibilité, Régie VIB, Fastlink fibre, plan du VILLAGE. PDF gratuits.">
 
-    <meta property="og:title" content="Nos services - VILLAGE Iraty-BIARRITZ">
-    <meta property="og:description" content="Fiches pratiques téléchargeables sur les services du VILLAGE Iraty-BIARRITZ.">
-    <meta property="og:image" content="https://village-iraty-biarritz.fr/assets/og/og-image.jpg">
-    <meta property="og:url" content="https://village-iraty-biarritz.fr/services.html">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="fr_FR">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nos services - VILLAGE Iraty-Biarritz">
+  <meta property="og:description" content="Fiches pratiques téléchargeables : commerces, accessibilité, Régie VIB, Fastlink fibre et plan du VILLAGE Iraty-Biarritz.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://village-iraty-biarritz.fr/services">
+  <meta property="og:site_name" content="VILLAGE Iraty-Biarritz">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://village-iraty-biarritz.fr/assets-2026/images/hero-drone.jpg">
 
-    <link rel="canonical" href="https://village-iraty-biarritz.fr/services">
-    <link rel="icon" type="image/png" href="/assets/favicon.png?v=20260505a">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://village-iraty-biarritz.fr/services">
+  <link rel="icon" type="image/png" href="assets-2026/images/logo/favicon.png">
 
-    <link rel="stylesheet" href="/css/style.css?v=20260515a">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets-2026/css/design-system.css?v=20260526a">
+  <link rel="stylesheet" href="assets-2026/css/styles.css?v=20260623b">
+
+  <!-- JSON-LD BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://village-iraty-biarritz.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Nos services", "item": "https://village-iraty-biarritz.fr/services" }
+    ]
+  }
+  </script>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Aller au contenu</a>
 
-<header class="header">
-    <div class="header__inner">
-        <a href="/" class="header__logo" aria-label="VILLAGE Iraty-BIARRITZ">
-            <img src="/assets/logo/vib-full.svg" alt="VILLAGE Iraty-BIARRITZ">
-        </a>
-        <nav class="nav" aria-label="Navigation principale">
-            <ul class="nav__list">
-                <li><a href="/le-village" class="nav__link">Votre VILLAGE</a></li>
-                <li><a href="/activites" class="nav__link">Activités</a></li>
-                <li><a href="/louer-un-local" class="nav__link">Louer un local</a></li>
-                <li><a href="/services" class="nav__link is-active">Nos services</a></li>
-            </ul>
-        </nav>
-        <div class="header__cta">
-            <a href="/contact" class="btn btn--outline">Prendre un rendez-vous</a>
-            <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
-        </div>
-        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
-        <ul class="mobile-nav__list">
-            <li><a href="/le-village" class="mobile-nav__link">Votre VILLAGE</a></li>
-            <li><a href="/activites" class="mobile-nav__link">Activités</a></li>
-            <li><a href="/louer-un-local" class="mobile-nav__link">Louer un local</a></li>
-            <li><a href="/services" class="mobile-nav__link">Nos services</a></li>
-        </ul>
-        <div class="mobile-nav__cta">
-            <a href="/contact" class="btn btn--outline">Prendre un rendez-vous</a>
-            <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
-        </div>
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header" role="banner">
+  <div class="header__inner">
+    <a href="/" class="header__logo" aria-label="VILLAGE Iraty-Biarritz, Accueil">
+      <img src="assets-2026/images/logo/vib-full.svg" alt="VILLAGE Iraty-Biarritz">
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav__list">
+        <li><a href="/le-village" class="nav__link">Votre VILLAGE</a></li>
+        <li><a href="/activites" class="nav__link">Activités</a></li>
+        <li><a href="/louer-un-local" class="nav__link">Louer un local</a></li>
+        <li><a href="/services" class="nav__link is-active" aria-current="page">Nos services</a></li>
+      </ul>
     </nav>
+
+    <div class="header__cta">
+      <a href="/contact" class="btn btn--outline-light">Prendre un rendez-vous</a>
+      <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+    <ul class="mobile-nav__list">
+      <li><a href="/le-village" class="mobile-nav__link">Votre VILLAGE</a></li>
+      <li><a href="/activites" class="mobile-nav__link">Activités</a></li>
+      <li><a href="/louer-un-local" class="mobile-nav__link">Louer un local</a></li>
+      <li><a href="/services" class="mobile-nav__link">Nos services</a></li>
+    </ul>
+    <div class="mobile-nav__cta">
+      <a href="/contact" class="btn btn--outline-dark">Prendre un rendez-vous</a>
+      <a href="/contact?sujet=installer-entreprise" class="btn btn--primary">Installer mon entreprise</a>
+    </div>
+  </nav>
 </header>
 
 <main id="main">
 
-    <section class="page-hero">
-        <h1 class="page-hero__title">Les services</h1>
-    </section>
+  <!-- ═══════════════ HERO (sans image) ═══════════════ -->
+  <section class="page-hero page-hero--compact page-hero--solid" aria-labelledby="page-hero-title">
+    <div class="page-hero__inner">
+      <span class="page-hero__eyebrow">Ressources &amp; infos pratiques</span>
+      <h1 id="page-hero-title" class="page-hero__title">Nos services</h1>
+      <p class="page-hero__lead">Découvrez les services et infrastructures du VILLAGE Iraty-Biarritz à travers nos fiches pratiques, téléchargeables gratuitement au format PDF.</p>
+    </div>
+  </section>
 
-    <section class="section">
-        <div class="container-narrow text-center">
-            <h2 class="section-title">Nos fiches pratiques</h2>
-            <p class="lead">Découvrez les services et infrastructures du VILLAGE Iraty-BIARRITZ à travers nos fiches pratiques téléchargeables au format PDF.</p>
+  <!-- ═══════════════ FICHES PRATIQUES ═══════════════ -->
+  <section class="fiches section section--cream" aria-labelledby="fiches-title">
+    <div class="container">
+      <header class="espaces__header">
+        <div>
+          <p class="eyebrow">Téléchargements</p>
+          <h2 id="fiches-title" class="section-title">Nos fiches pratiques</h2>
         </div>
+        <a href="/contact" class="btn btn--outline-dark espaces__cta-top">Une question ? Contactez-nous</a>
+      </header>
 
-        <div class="container">
-            <div class="fiches-grid">
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Commerces</h3>
-                    <a href="/assets/fiches/commerces-services.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--commerce">
-                            <span>VILLAGE<br>Iraty-BIARRITZ</span>
-                            <small>La mixité : valeur essentielle</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/commerces-services.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger la fiche</a>
-                </article>
+      <ul class="fiches-grid">
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/commerces-services.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--commerce">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Commerces</h3>
+              <p class="fiche-card__cover-sub">La mixité, valeur essentielle</p>
+            </a>
+            <a href="/assets/fiches/commerces-services.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger la fiche
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Espaces publics</h3>
-                    <a href="/assets/fiches/espaces-services-publics.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--espaces">
-                            <span>ESPACES ET<br>SERVICES PUBLICS</span>
-                            <small>Gare TGV · Aéroport · Skate Park</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/espaces-services-publics.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger la fiche</a>
-                </article>
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/espaces-services-publics.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--espaces">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Espaces &amp;<br>services publics</h3>
+              <p class="fiche-card__cover-sub">Gare TGV · Aéroport · Skate park</p>
+            </a>
+            <a href="/assets/fiches/espaces-services-publics.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger la fiche
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Accessibilité</h3>
-                    <a href="/assets/fiches/accessibilite.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--access">
-                            <span>UN VILLAGE<br>ACCESSIBLE</span>
-                            <small>Aéroport · Gare TGV · Bus · Vélo</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/accessibilite.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger la fiche</a>
-                </article>
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/accessibilite.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--access">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Un VILLAGE<br>accessible</h3>
+              <p class="fiche-card__cover-sub">Aéroport · Gare TGV · Bus · Vélo</p>
+            </a>
+            <a href="/assets/fiches/accessibilite.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger la fiche
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Régie VIB</h3>
-                    <a href="/assets/fiches/regie-vib.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--regie">
-                            <span>RÉGIE VIB</span>
-                            <small>Communication · Publicité · Display</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/regie-vib.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger la fiche</a>
-                </article>
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/regie-vib.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--regie">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Régie VIB</h3>
+              <p class="fiche-card__cover-sub">Communication · Publicité · Display</p>
+            </a>
+            <a href="/assets/fiches/regie-vib.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger la fiche
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Services en plus</h3>
-                    <a href="/assets/fiches/services-en-plus.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--plus">
-                            <span>LES SERVICES<br>EN PLUS</span>
-                            <small>Tarifs préférentiels VIB</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/services-en-plus.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger la fiche</a>
-                </article>
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/services-en-plus.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--plus">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Les services<br>en plus</h3>
+              <p class="fiche-card__cover-sub">Tarifs préférentiels VIB</p>
+            </a>
+            <a href="/assets/fiches/services-en-plus.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger la fiche
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Fastlink</h3>
-                    <a href="/regie-vib" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--fastlink">
-                            <span>RÉGIE VIB<br>FASTLINK</span>
-                            <small>Internet fibre · 10/20/50 Mbps</small>
-                        </div>
-                    </a>
-                    <a href="/regie-vib" class="btn btn--ghost-red">Découvrir l'offre</a>
-                </article>
+        <li>
+          <article class="fiche-card">
+            <a href="/regie-vib" class="fiche-card__cover fiche-card__cover--fastlink">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Régie VIB<br>Fastlink</h3>
+              <p class="fiche-card__cover-sub">Internet fibre · 10/20/50 Mbps</p>
+            </a>
+            <a href="/regie-vib" class="fiche-card__download fiche-card__download--link">
+              Découvrir l'offre
+              <span class="fiche-card__arrow" aria-hidden="true">→</span>
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Plan du VILLAGE</h3>
-                    <a href="/assets/fiches/plan-du-vib.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--plan">
-                            <span>LE PLAN<br>DU VIB</span>
-                            <small>Halles, parking et accès</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/plan-du-vib.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger le plan</a>
-                </article>
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/plan-du-vib.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--plan">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Le plan<br>du VILLAGE</h3>
+              <p class="fiche-card__cover-sub">Halles, parking et accès</p>
+            </a>
+            <a href="/assets/fiches/plan-du-vib.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger le plan
+            </a>
+          </article>
+        </li>
 
-                <article class="fiche-card">
-                    <h3 class="fiche-card__title">Commerces &amp; services 2024</h3>
-                    <a href="/assets/fiches/commerces-services-2024.pdf" target="_blank" class="fiche-card__preview">
-                        <div class="fiche-card__thumb fiche-card__thumb--catalog">
-                            <span>COMMERCES<br>&amp; SERVICES</span>
-                            <small>Annuaire 2024</small>
-                        </div>
-                    </a>
-                    <a href="/assets/fiches/commerces-services-2024.pdf" target="_blank" class="btn btn--ghost-red" download>Télécharger l'annuaire</a>
-                </article>
-            </div>
-        </div>
-    </section>
+        <li>
+          <article class="fiche-card">
+            <a href="/assets/fiches/commerces-services-2024.pdf" target="_blank" rel="noopener" class="fiche-card__cover fiche-card__cover--catalog">
+              <span class="fiche-card__tag">VIB</span>
+              <h3 class="fiche-card__cover-title">Commerces<br>&amp; services</h3>
+              <p class="fiche-card__cover-sub">Annuaire 2024</p>
+            </a>
+            <a href="/assets/fiches/commerces-services-2024.pdf" target="_blank" rel="noopener" class="fiche-card__download" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Télécharger l'annuaire
+            </a>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
 
 </main>
 
-<footer class="footer">
-    <div class="footer__inner">
-        <div class="footer__brand">VILLAGE Iraty-BIARRITZ</div>
-        <nav class="footer__nav" aria-label="Pied de page">
-            <a href="/">Accueil</a>
-            <a href="/nos-articles">Nos articles</a>
-            <a href="/contact">Contact</a>
-            <a href="/a-propos">À propos</a>
-        </nav>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="VILLAGE Iraty-Biarritz, Accueil">
+        <img src="assets-2026/images/logo/vib-full.svg" alt="VILLAGE Iraty-Biarritz">
+      </a>
+      <p class="footer__tagline">Plus de 1 200 acteurs qui font vibrer BIARRITZ depuis 2005.<br>Commerces, restaurants, coworking et services.</p>
     </div>
-    <div class="footer__bottom">
-        <span>&copy; <span id="year">2026</span> VILLAGE Iraty-BIARRITZ</span>
-        <span>
-            <a href="/mentions-legales">Mentions légales</a> ·
-            <a href="/politique-confidentialite">Politique de confidentialité</a>
-        </span>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Navigation</h2>
+      <ul class="footer__list">
+        <li><a href="/le-village">Votre VILLAGE</a></li>
+        <li><a href="/activites">Activités</a></li>
+        <li><a href="/louer-un-local">Louer un local</a></li>
+        <li><a href="/services">Nos services</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
     </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Contact</h2>
+      <ul class="footer__list footer__contact">
+        <li>
+          <span class="footer__label">Adresse</span>
+          <address>4 Rue des Mésanges,<br>64200 BIARRITZ</address>
+        </li>
+        <li>
+          <span class="footer__label">Téléphone</span>
+          <a href="tel:+33559239310">05 59 23 93 10</a>
+        </li>
+        <li>
+          <span class="footer__label">Email</span>
+          <a href="mailto:contact@v-i-b.fr">contact@v-i-b.fr</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Services associés</h2>
+      <ul class="footer__services">
+        <li>
+          <a href="https://www.biarritz-box.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Box (nouvelle fenêtre)">
+            <img src="assets-2026/images/services/biarritz-box.jpeg" alt="BIARRITZ Box" loading="lazy">
+          </a>
+        </li>
+        <li>
+          <a href="https://www.biarritz-buro.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Buro (nouvelle fenêtre)">
+            <img src="assets-2026/images/services/biarritz-buro.png" alt="BIARRITZ Buro" loading="lazy">
+          </a>
+        </li>
+        <li>
+          <a href="https://www.biarritz-domiciliation.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Domiciliation (nouvelle fenêtre)">
+            <img src="assets-2026/images/services/biarritz-domiciliation.png" alt="BIARRITZ Domiciliation" loading="lazy">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>&copy; <span id="year">2026</span> VILLAGE Iraty-Biarritz · Tous droits réservés</span>
+    <span class="footer__legal">
+      <a href="/mentions-legales">Mentions légales</a>
+      <span aria-hidden="true">·</span>
+      <a href="/politique-confidentialite">Politique de confidentialité</a>
+    </span>
+  </div>
 </footer>
 
-<script src="/js/main.js?v=20260505d"></script>
+<script src="assets-2026/js/main.js?v=20260526a" defer></script>
 </body>
 </html>
