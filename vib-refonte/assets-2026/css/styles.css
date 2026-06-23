@@ -2309,12 +2309,12 @@
 }
 
 /* =====================================================================
-   Page Nos services — fiches pratiques (PDF)
+   Page Nos services — fiches pratiques (posters PDF)
    ===================================================================== */
 .fiches-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-8) var(--space-6);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -2322,81 +2322,107 @@
 .fiche-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
   height: 100%;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-base),
-              box-shadow var(--transition-base),
-              border-color var(--transition-base);
 }
-.fiche-card:hover,
-.fiche-card:focus-within {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--color-accent);
-}
+/* --- Poster (couverture façon fiche PDF) --- */
 .fiche-card__cover {
   position: relative;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 10;
-  background: linear-gradient(135deg, rgba(172, 44, 38, 0.07), var(--color-bg-alt));
-  color: var(--color-accent);
-  transition: background var(--transition-base);
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5);
+  text-align: center;
+  color: var(--color-on-dark);
+  background: var(--color-accent);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
-.fiche-card:hover .fiche-card__cover {
-  background: linear-gradient(135deg, rgba(172, 44, 38, 0.12), var(--color-bg-alt));
+.fiche-card__cover::after {
+  /* voile sombre léger en bas pour ancrer le texte */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.22) 100%);
+  pointer-events: none;
 }
-.fiche-card__icon { width: 54px; height: 54px; }
-.fiche-card__badge {
+.fiche-card__cover:hover,
+.fiche-card__cover:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.fiche-card__tag {
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
+  z-index: 1;
   padding: 3px 10px;
   border-radius: var(--radius-full);
-  background: var(--color-text-strong);
-  color: var(--color-on-dark);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   font-family: var(--font-display);
   font-size: var(--fs-xs);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-.fiche-card__badge--accent { background: var(--color-accent); }
-.fiche-card__body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: var(--space-5);
-}
-.fiche-card__title {
+.fiche-card__cover-title {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-bold);
-  color: var(--color-text-strong);
-  margin: 0 0 var(--space-2);
-}
-.fiche-card__desc {
-  font-size: var(--fs-small);
-  line-height: 1.55;
-  color: var(--color-text-muted);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  text-transform: uppercase;
   margin: 0;
-  flex: 1;
+  color: var(--color-on-dark);
 }
-.fiche-card__cta {
-  margin-top: var(--space-4);
+.fiche-card__cover-sub {
+  position: relative;
+  z-index: 1;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+/* Gradients par fiche (repris de la maquette prod) */
+.fiche-card__cover--commerce { background: linear-gradient(135deg, #b21927 0%, #8e1320 100%); }
+.fiche-card__cover--espaces  { background: linear-gradient(135deg, #1f1f1f 0%, #4a4a4a 100%); }
+.fiche-card__cover--access   { background: linear-gradient(135deg, #b21927 0%, #d04a55 100%); }
+.fiche-card__cover--regie    { background: linear-gradient(135deg, #8e1320 0%, #b21927 50%, #d04a55 100%); }
+.fiche-card__cover--plus     { background: linear-gradient(135deg, #1e3a8a 0%, #b21927 100%); }
+.fiche-card__cover--fastlink { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #b21927 100%); }
+.fiche-card__cover--plan     { background: linear-gradient(135deg, #c8c8c5 0%, #7a7a78 100%); }
+.fiche-card__cover--catalog  { background: linear-gradient(135deg, #4a4a4a 0%, #b21927 100%); }
+/* --- Bouton télécharger sous le poster --- */
+.fiche-card__download {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
+  margin-top: auto;
+  padding: var(--space-3) var(--space-5);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-full);
   font-family: var(--font-display);
   font-size: var(--fs-small);
   font-weight: var(--fw-bold);
   color: var(--color-accent);
-  transition: gap var(--transition-base), color var(--transition-base);
+  background: transparent;
+  transition: background var(--transition-base), color var(--transition-base), gap var(--transition-base);
 }
-.fiche-card__cta:hover { color: var(--color-accent-hover); }
+.fiche-card__download:hover,
+.fiche-card__download:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-on-dark);
+}
+.fiche-card__download--link:hover { gap: var(--space-3); }
 .fiche-card__arrow { transition: transform var(--transition-base); }
-.fiche-card:hover .fiche-card__cta .fiche-card__arrow { transform: translateX(4px); }
+.fiche-card__download--link:hover .fiche-card__arrow { transform: translateX(3px); }
