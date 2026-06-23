@@ -70,6 +70,7 @@ Règles imposées par le client, à appliquer sur **toutes les pages** (live + r
 - **« VILLAGE » toujours en capitales** dès que le mot apparaît dans du texte visible (titres, baselines, nav « Votre VILLAGE », footer, corps, méta, alt/aria). Ne **jamais** toucher aux URLs/chemins/slugs (`/le-village`, `village-iraty-biarritz.fr`, noms de fichiers) ni aux sélecteurs.
 - **« zone » → « quartier »** quand le mot décrit le VIB (ex. « la zone la plus dynamique » → « le quartier le plus dynamique », accorder l'article : « de la zone » → « du quartier »). **Exception** : ne pas toucher au terme générique/au sujet d'article « zones d'activités » ni à son slug d'URL.
 - **Exception slogan** : sur la page « Le village » le titre reste **« Un village qui VIBre »** (`village` en minuscules, **VIB** en capitales). C'est le seul endroit où `village` reste en minuscules.
+- **« vib » surligné en rouge dans un gros titre = « VIB » en capitales.** Quand le radical `vib` est mis en avant via le span rouge (`<span class="hero__highlight">`) dans un titre (hero / section-title), il s'écrit **VIB** (ex. « Une histoire de **VIB**rations », « Le VILLAGE qui fait **VIB**rer BIARRITZ »). Jamais `vib` minuscule dans ce span.
 
 Balayage sûr déjà utilisé : `perl -CSD -Mutf8 -i -pe 's/(?<![-\w])([Vv]illage)(?!-)/VILLAGE/g'` (exclut `le-village`/`village-iraty`), à lancer sur toute nouvelle page.
 
