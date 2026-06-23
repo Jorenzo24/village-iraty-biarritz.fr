@@ -22,6 +22,8 @@ RewriteRule ^vib-refonte/index\.html$ / [L,R=301]
 RewriteRule ^vib-refonte/le-village(\.html)?/?$ /le-village [L,R=301]
 RewriteRule ^vib-refonte/activites(\.html)?/?$ /activites [L,R=301]
 RewriteRule ^vib-refonte/entreprise(\.html)?/?$ /activites [L,R=301]
+RewriteRule ^vib-refonte/louer-un-local(\.html)?/?$ /louer-un-local [L,R=301]
+RewriteRule ^vib-refonte/local(\.html)?/?$ /louer-un-local [L,R=301]
 
 # ============================================
 # URLs propres (sans .html)

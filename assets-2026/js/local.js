@@ -39,10 +39,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderLocal(l) {
         // Title + meta
         document.title = `${l.name} - VILLAGE Iraty-BIARRITZ`;
-        document.getElementById('page-description').setAttribute(
-            'content',
-            `${l.name} à louer au VILLAGE Iraty-BIARRITZ. ${l.surface} m², ${l.price_ht} € HT/mois.`
-        );
+        const metaDesc = `${l.name} à louer au VILLAGE Iraty-BIARRITZ. ${l.surface} m², ${l.price_ht} € HT/mois.`;
+        document.getElementById('page-description').setAttribute('content', metaDesc);
+
+        // Canonical + Open Graph par local (URL propre /local/<slug>)
+        const cleanUrl = `https://village-iraty-biarritz.fr/local/${l.slug}`;
+        const setMeta = (sel, attr, val) => { const el = document.querySelector(sel); if (el) el.setAttribute(attr, val); };
+        setMeta('link[rel="canonical"]', 'href', cleanUrl);
+        setMeta('meta[property="og:url"]', 'content', cleanUrl);
+        setMeta('meta[property="og:title"]', 'content', `${l.name} - VILLAGE Iraty-Biarritz`);
+        setMeta('meta[property="og:description"]', 'content', metaDesc);
+        if (l.photos && l.photos[0]) {
+            setMeta('meta[property="og:image"]', 'content', `https://village-iraty-biarritz.fr${l.photos[0]}`);
+        }
 
         document.getElementById('local-name').textContent = l.name;
         document.getElementById('local-address').innerHTML = `

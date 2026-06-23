@@ -17,6 +17,12 @@ Une refonte est en cours dans le sous-dossier [`vib-refonte/`](vib-refonte/). Le
 
 La homepage refonte est déjà en production (racine du site). On reconstruit maintenant **les pages internes une par une**, consultables sous `https://village-iraty-biarritz.fr/vib-refonte/`, jusqu'à validation avant promotion en prod (racine).
 
+**État d'avancement de la refonte (au fil de l'eau) :**
+- ✅ **Promues en prod** : `index.html` (homepage), `le-village.html`, `activites.html` (annuaire), `entreprise.html` (fiche acteur `/acteur/<slug>`), `louer-un-local.html` (liste) + `local.html` (fiche local `/local/<slug>`).
+- ⏳ **Restant à refondre** (encore en ancien style `/css/style.css`) : `services.html`, `a-propos.html`, `contact.html`, `nos-articles.html` + `article.html`, `regie-vib.html`.
+
+⚠️ **Templates de fiche détail servis sur URL réécrite à 2 segments** (`entreprise.html` → `/acteur/<slug>`, `local.html` → `/local/<slug>`) : utiliser des **chemins d'assets ABSOLUS** (`/assets-2026/...`) — en relatif ils se résolvent en `/acteur/assets-2026/...` (404, page nue). Les pages à 1 segment (`/activites`, `/louer-un-local`, etc.) tolèrent le relatif. Les fiches détail posent aussi `canonical`/`og:*` dynamiquement par slug via leur JS (`entreprise.js`, `local.js`).
+
 ⚠️ **Modèle de déploiement (important)** : cPanel **n'exécute PAS `.cpanel.yml`** sur ce serveur. Il fait un simple `git pull` de `main` dans `public_html/`, donc **l'URL live = le chemin dans le repo** (`vib-refonte/index.html` → `…/vib-refonte/`). Le déploiement se déclenche **manuellement** via cPanel › Git Version Control › **Deploy HEAD Commit**.
 
 Cycle pour chaque page interne :
