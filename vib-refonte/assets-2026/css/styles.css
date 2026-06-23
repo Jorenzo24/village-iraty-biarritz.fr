@@ -2307,3 +2307,96 @@
   .local-detail { grid-template-columns: 1fr; gap: var(--space-6); }
   .local-detail__info { position: static; }
 }
+
+/* =====================================================================
+   Page Nos services — fiches pratiques (PDF)
+   ===================================================================== */
+.fiches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fiche-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+}
+.fiche-card:hover,
+.fiche-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-accent);
+}
+.fiche-card__cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, rgba(172, 44, 38, 0.07), var(--color-bg-alt));
+  color: var(--color-accent);
+  transition: background var(--transition-base);
+}
+.fiche-card:hover .fiche-card__cover {
+  background: linear-gradient(135deg, rgba(172, 44, 38, 0.12), var(--color-bg-alt));
+}
+.fiche-card__icon { width: 54px; height: 54px; }
+.fiche-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-strong);
+  color: var(--color-on-dark);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.fiche-card__badge--accent { background: var(--color-accent); }
+.fiche-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-5);
+}
+.fiche-card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-strong);
+  margin: 0 0 var(--space-2);
+}
+.fiche-card__desc {
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0;
+  flex: 1;
+}
+.fiche-card__cta {
+  margin-top: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+  transition: gap var(--transition-base), color var(--transition-base);
+}
+.fiche-card__cta:hover { color: var(--color-accent-hover); }
+.fiche-card__arrow { transition: transform var(--transition-base); }
+.fiche-card:hover .fiche-card__cta .fiche-card__arrow { transform: translateX(4px); }
