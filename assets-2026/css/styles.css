@@ -2524,7 +2524,7 @@
 }
 .article-hero__cover {
   max-width: 940px;
-  margin: calc(-1 * var(--space-8)) auto 0;
+  margin: var(--space-7) auto 0;
   padding-inline: var(--container-px);
 }
 .article-hero__cover img {
