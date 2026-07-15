@@ -90,5 +90,28 @@
       "/assets/photos/locaux/lot-12-moura-45m2/exterieur-1.jpg",
       "/assets/photos/locaux/lot-12-moura-45m2/exterieur-2.jpg"
     ]
+  },
+  {
+    "slug": "lot-11a-biarritz-activites-153m2",
+    "name": "Lot 11A - Biarritz Activités 153 m²",
+    "address": "27, allée du Moura, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
+    "surface": 153,
+    "price_ht": 1430.0,
+    "charges_ht": 179.0,
+    "type": "Commerce / Artisanat",
+    "norm_pmr": false,
+    "no_fees": true,
+    "no_pas_de_porte": true,
+    "description": "Local aménagé de 153 m² au cœur du VILLAGE Iraty-BIARRITZ, idéal pour une activité artisanale ou commerciale. L'espace se compose d'une partie de plain-pied et d'une partie en duplex, sous une belle charpente bois en Treillis Eiffel offrant une grande hauteur et une belle lumière naturelle. Il est équipé d'un rideau électrique avec porte de service indépendante et de sanitaires privatifs. À l'étage, deux bureaux sont équipés de climatisations. Deux places de stationnement privatives sont comprises dans le prix. Réseaux d'eau, d'électricité et de téléphonie individuels, alimentation électrique triphasée. Les parties communes sont équipées de la vidéosurveillance pour votre confort et votre sécurité. Local disponible sans frais d'agence ni droit au bail. Situé dans le quartier commercial de BIARRITZ, à proximité du Parc d'Exposition (Halle d'Iraty) et de ses parkings gratuits (300 places), toutes commodités sur place : commerces, services, restaurants, salles de sport, prestataires de santé et de beauté, structures éducatives et le seul hypermarché de BIARRITZ. À deux pas de l'ATABAL (centre de musique amplifiée) et du nouveau centre de glisse urbaine de BIARRITZ. Gare TGV accessible à pied, aéroport international de BIARRITZ à proximité, 7 lignes de bus et accès directs vers le boulevard du BAB, la Route Nationale et deux sorties d'autoroute (Anglet Sud et Biarritz).",
+    "photos": [
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/cover.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/charpente-treillis.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/charpente-grande-hauteur.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/escalier-duplex.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/bureau-etage-1.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/bureau-etage-2.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/bureau-etage-3.jpg",
+      "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/exterieur.jpg"
+    ]
   }
 ]
