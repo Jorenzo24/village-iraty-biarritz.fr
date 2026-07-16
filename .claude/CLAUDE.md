@@ -40,6 +40,7 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 ├── .htaccess            # HTTPS, rewrites d'URL propres, cache, sécurité
 ├── robots.txt
 ├── sitemap.xml
+├── llms.txt             # Carte du site pour les LLM (aucun effet mesurable attendu)
 ├── index.html           # Pages du site, servies en /<nom> via le catch-all .htaccess
 ├── le-village.html  activites.html  louer-un-local.html  services.html
 ├── a-propos.html    contact.html    nos-articles.html    faq.html
@@ -96,9 +97,11 @@ Balayage sûr déjà utilisé : `perl -CSD -Mutf8 -i -pe 's/(?<![-\w])([Vv]illag
 - **Lazy loading** : `loading="lazy"` sur les `<img>` hors viewport initial
 
 ### CSS
-- Reset déjà fait dans `css/style.css`
 - Mobile-first (media queries `min-width`, pas `max-width`)
-- Variables CSS (`:root { --color-primary: ... }`) pour les couleurs/spacings réutilisés
+- **Toujours réutiliser les tokens de `assets-2026/css/design-system.css`** (`--color-accent` = #AC2C26 rouge basque, `--color-bg-alt` = #FBF8F4 crème, `--space-1..10`, `--radius-*`, `--fs-*`). Ne jamais coder une valeur en dur si un token existe. (Le vieux `css/style.css` a son propre reset, il ne concerne que les 3 pages en ancien style.)
+- Composants dans `assets-2026/css/styles.css`, tokens dans `design-system.css`. Ne pas mélanger.
+
+⚠️ **Alternance des fonds de section** : les sections de contenu alternent **crème / blanc** (`.section--cream` / `.section--white`), et font toutes **128px de padding** (`--section-py`). Deux sections de même fond qui se suivent produisent ~258px de vide continu sans frontière visible — ça se voit tout de suite et ça passe pour un bug de mise en page. **Vérifier le fond de la section précédente avant d'insérer une section.** Rythme actuel de l'accueil : stats (crème) → story (blanc) → annuaire (crème) → avantages (blanc) → espaces (crème) → blog (blanc) → FAQ (crème) → CTA final. Ne pas corriger un espacement jugé trop grand en réduisant le padding : c'est presque toujours un problème de fond, pas d'espacement.
 
 ### JavaScript
 - Vanilla JS, pas de jQuery
@@ -168,6 +171,23 @@ Exemple : trois modifs le 12 mai 2026 → `?v=20260512a`, puis `?v=20260512b`, p
 - **Canonical** : `<link rel="canonical">` sur chaque page
 - **Sitemap** : ajouter chaque nouvelle page dans `sitemap.xml` avec `lastmod` à jour
 - **Robots** : `robots.txt` autorise tout par défaut. Ajouter `<meta name="robots" content="noindex">` sur les pages à exclure (404, espaces privés)
+
+### État du balisage (2026-07-16)
+
+- `LocalBusiness` sur `index.html`, `@id` = `https://village-iraty-biarritz.fr/#organization` — **le référencer par `@id` depuis les autres pages** plutôt que de le dupliquer (fait sur `contact.html` via `ContactPage.mainEntity`).
+- `BreadcrumbList` sur toutes les pages clés. `FAQPage` sur `/faq` **uniquement** : les 5 questions reprises sur l'accueil sont volontairement non balisées (deux entités `FAQPage` sur le même contenu se desservent).
+- ⚠️ **Le JSON-LD `FAQPage` doit rester le miroir exact des questions/réponses visibles.** Baliser du contenu absent de la page est sanctionné par Google. Script de contrôle utilisé : comparer les `name` des `mainEntity` aux `<summary class="faq-item__q">` et vérifier que chaque `acceptedAnswer.text` existe dans le texte rendu.
+- ❌ **`Review` : absent, et à laisser absent tant qu'il n'y a pas de vrais témoignages clients.** Inventer des avis viole les guidelines Google (risque de pénalité manuelle sur le domaine) et Google n'affiche plus les avis auto-déclarés depuis 2019. Ne jamais fabriquer d'avis, de statistiques ou de citations, même si c'est démontré efficace.
+
+### Dettes connues (non traitées)
+
+- **Meta descriptions des 92 fiches acteurs** : `assets-2026/js/entreprise.js:44` recopie `e.description` **sans troncature** → 41 % dépassent 160 caractères (max 1490), médiane 48. Correctif : couper à ~155 car. sur une frontière de mot.
+- **`data/articles.json`** : deux articles (`gros-plan-sur-le-quartier-iraty…` et `le-forum-des-associations…`) partagent un `summary` **identique**, qui est de plus **hors sujet** sur le premier. Les autres `summary` sont des fragments pris en milieu d'article. `article.js:44` les sert tels quels en meta description.
+- **Longueurs** : title de `index.html` = 77 car. (coupé vers 60) ; descriptions de `louer-un-local` (179), `faq` (174), `activites` (170) débordent.
+- **Aucune meta description ne manque** : seule la 404 n'en a pas, et elle est en `noindex` — c'est normal.
+- **Volume de texte** : `le-village` (279 mots), `louer-un-local` (440), `a-propos` (234), `regie-vib` (217), `services` (125) sont sous le seuil de 600 mots visé par le plan client. `contact` (69) et `nos-articles` (27) sont hors sujet pour ce critère — un formulaire et un index n'ont pas à être gonflés, et les 27 mots de `nos-articles` viennent du rendu JS, pas d'un manque de contenu.
+
+⚠️ **Auditer le HTML au `grep` est piégeux** : les balises ont des attributs dans un ordre variable (`<title id="page-title">`, `<meta id="page-description" name="description" …>`). Un motif comme `<title>` ou `<meta name="description"` rate ces balises et fait conclure à tort qu'elles manquent. **Vérifier le rendu réel avec Playwright** (`page.title()`, `getAttribute`) plutôt que de se fier à un grep.
 
 ## Git
 
