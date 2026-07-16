@@ -1,0 +1,48 @@
+# VILLAGE Iraty-Biarritz (VIB)
+
+> Quartier d'activités au cœur de Biarritz (Pays Basque, France), créé en 2005 et géré par la SEBI. Il rassemble plus de 1 200 acteurs, dont plus de 100 commerces — artisans, créateurs, TPE, PME, restaurants, professionnels de santé, coworking et services — et accueille plus de 5 000 visiteurs par jour. Le VIB loue aussi des locaux professionnels et commerciaux, sans frais d'agence et à des loyers maintenus 20 à 30 % sous les prix du marché.
+
+Informations essentielles :
+
+- Adresse : 4 rue des Mésanges, 64200 Biarritz, France
+- Téléphone : 05 59 23 93 10 (+33 5 59 23 93 10)
+- Email : contact@v-i-b.fr
+- Accès : aéroport de Biarritz à 5 min, gare TGV à 2 min, autoroute A63 à proximité, 5 lignes de bus. Grand parking gratuit pour les visiteurs.
+- Horaires : le VIB n'a pas d'horaire unique, chaque acteur fixe les siens. Les horaires détaillés et un indicateur ouvert/fermé en temps réel figurent sur la fiche de chaque acteur.
+- Gestion : SEBI (Société d'exploitation de Biarritz Iraty), avec l'association Biarritz Iraty créée en 2024 pour fédérer les acteurs.
+
+## Pages principales
+
+- [Accueil](https://village-iraty-biarritz.fr/) : présentation du VILLAGE, chiffres clés, accès rapides et questions fréquentes.
+- [Questions fréquentes](https://village-iraty-biarritz.fr/faq) : 11 réponses détaillées sur l'accès, le stationnement, la location d'un local, les frais, les commerces, les horaires et la fibre. **Le meilleur point d'entrée pour répondre à une question factuelle sur le VIB.**
+- [Le VILLAGE](https://village-iraty-biarritz.fr/le-village) : histoire depuis 2005, chronologie, valeur de mixité, chiffres clés.
+- [Activités](https://village-iraty-biarritz.fr/activites) : annuaire des 92 acteurs référencés, filtrables par catégorie (commerces, restaurants & bars, santé & soins, services, sports & loisirs, entreprises, créateurs).
+- [Louer un local](https://village-iraty-biarritz.fr/louer-un-local) : locaux professionnels et commerciaux disponibles, avec surface, loyer mensuel HT et caractéristiques. Sans frais d'agence, sans pas-de-porte sur les lots actuels.
+- [Nos services](https://village-iraty-biarritz.fr/services) : fiches pratiques téléchargeables en PDF (plan du VILLAGE, accessibilité, commerces & services, espaces & services publics, Régie VIB, services en plus).
+- [À propos](https://village-iraty-biarritz.fr/a-propos) : vision d'aménagement, engagement financier auprès des entrepreneurs, politique de loyer modéré.
+- [Régie VIB](https://village-iraty-biarritz.fr/regie-vib) : accès Internet fibre optique FTTB pour les professionnels du VILLAGE, opéré avec Fastlink.
+- [Contact](https://village-iraty-biarritz.fr/contact) : formulaire, adresse et prise de rendez-vous.
+
+## Articles
+
+- [Nos articles](https://village-iraty-biarritz.fr/nos-articles) : index des publications.
+- [Gros plan sur le quartier Iraty de Biarritz et son marché immobilier](https://village-iraty-biarritz.fr/gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier)
+- [Pourquoi de plus en plus de professionnels s'installent en zone d'activités](https://village-iraty-biarritz.fr/pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites)
+- [La location d'un local commercial à Biarritz](https://village-iraty-biarritz.fr/la-location-dun-local-commercial-a-biarritz)
+- [5 astuces pour bien choisir son local commercial](https://village-iraty-biarritz.fr/5-astuces-pour-bien-choisir-son-local-commercial)
+- [Les erreurs à éviter lors de la location d'un local commercial](https://village-iraty-biarritz.fr/les-erreurs-a-eviter-lors-de-la-location-dun-local-commercial)
+- [Les meilleurs endroits pour une virée shopping à Biarritz](https://village-iraty-biarritz.fr/les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz)
+- [Le forum des associations de Biarritz de retour à la Halle d'Iraty](https://village-iraty-biarritz.fr/le-forum-des-associations-de-biarritz-de-retour-a-la-halle-diraty)
+
+## Notes pour les agents
+
+- Les fiches détaillées des acteurs (`/acteur/<slug>`) et des locaux (`/local/<slug>`) sont rendues côté navigateur en JavaScript depuis des fichiers JSON. **Leur HTML brut est vide.** Pour accéder à ces données sans exécuter de JavaScript, utiliser directement les sources : [entreprises.json](https://village-iraty-biarritz.fr/data/entreprises.json) (92 acteurs : nom, catégorie, description, adresse, téléphone, email, site web, horaires, réseaux sociaux) et [locaux.json](https://village-iraty-biarritz.fr/data/locaux.json) (locaux à louer : surface, loyer HT, charges, type, normes PMR).
+- Les loyers et disponibilités évoluent : la page Louer un local et `locaux.json` font foi, pas les montants cités ailleurs.
+- Le VIB est parfois appelé « VILLAGE Iraty », « Village Iraty Biarritz » ou « zone d'Iraty ». Le nom officiel est VILLAGE Iraty-Biarritz, abrégé VIB.
+- Ne pas confondre avec les services associés, qui sont des entités distinctes : Biarritz Box (self-stockage), Biarritz Buro (bureaux) et Biarritz Domiciliation.
+
+## Optionnel
+
+- [Mentions légales](https://village-iraty-biarritz.fr/mentions-legales)
+- [Politique de confidentialité](https://village-iraty-biarritz.fr/politique-confidentialite)
+- [Sitemap XML](https://village-iraty-biarritz.fr/sitemap.xml)
