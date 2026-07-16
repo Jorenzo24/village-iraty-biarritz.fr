@@ -35,7 +35,7 @@
   <link rel="preload" as="image" href="assets-2026/images/hero-drone.jpg">
 
   <link rel="stylesheet" href="assets-2026/css/design-system.css?v=20260526a">
-  <link rel="stylesheet" href="assets-2026/css/styles.css?v=20260601b">
+  <link rel="stylesheet" href="assets-2026/css/styles.css?v=20260716a">
 
   <!-- JSON-LD LocalBusiness -->
   <script type="application/ld+json">
@@ -47,6 +47,9 @@
     "alternateName": "VIB",
     "description": "Plus de 1200 acteurs, commerces, restaurants, espaces de coworking et services au cœur de BIARRITZ. Quartier d'activités géré par la SEBI.",
     "url": "https://village-iraty-biarritz.fr",
+    "logo": "https://village-iraty-biarritz.fr/assets-2026/images/logo/vib-full.svg",
+    "image": "https://village-iraty-biarritz.fr/assets-2026/images/hero-drone.jpg",
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=4+Rue+des+M%C3%A9sanges+64200+Biarritz",
     "telephone": "+33559239310",
     "email": "contact@v-i-b.fr",
     "foundingDate": "2005",
@@ -555,6 +558,65 @@
     </div>
   </section>
 
+  <!-- ═══════════════ FAQ ═══════════════ -->
+  <!-- Balisage FAQPage volontairement absent ici : il vit sur /faq uniquement, pour éviter deux entités FAQPage concurrentes sur le même contenu. -->
+  <section class="section section--white" aria-labelledby="faq-home-title">
+    <div class="container container--narrow">
+      <p class="eyebrow">Vous vous demandez…</p>
+      <h2 id="faq-home-title" class="section-title">Questions fréquentes</h2>
+
+      <ul class="faq-list">
+        <li>
+          <details class="faq-item">
+            <summary class="faq-item__q">Qu'est-ce que le VILLAGE Iraty-Biarritz ?</summary>
+            <div class="faq-item__a">
+              <p>Le VILLAGE Iraty-Biarritz est un quartier d'activités situé au cœur de BIARRITZ, né en 2005 sous l'impulsion de la SEBI. Il regroupe aujourd'hui plus de 1 200 acteurs, dont plus de 100 commerces : artisans, créateurs, TPE, PME, restaurants, professionnels de santé, espaces de coworking et prestataires de services, et accueille plus de 5 000 visiteurs par jour.</p>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details class="faq-item">
+            <summary class="faq-item__q">Où se situe le VILLAGE et comment s'y rendre ?</summary>
+            <div class="faq-item__a">
+              <p>Au 4 rue des Mésanges, 64200 BIARRITZ. L'aéroport international est à 5 minutes, la gare TGV à 2 minutes, l'autoroute A63 à proximité immédiate, et le quartier est desservi par 5 lignes de bus.</p>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details class="faq-item">
+            <summary class="faq-item__q">Y a-t-il un parking au VILLAGE Iraty-Biarritz ?</summary>
+            <div class="faq-item__a">
+              <p>Oui. Le VILLAGE dispose d'un grand parking gratuit à disposition des visiteurs, sans horodateur ni place payante à chercher.</p>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details class="faq-item">
+            <summary class="faq-item__q">Comment louer un local au VILLAGE ?</summary>
+            <div class="faq-item__a">
+              <p>Consultez les locaux disponibles sur la page Louer un local, puis demandez un rendez-vous via le formulaire de contact ou par téléphone au <a href="tel:+33559239310">05 59 23 93 10</a>. Nous vous accompagnons pendant votre installation et durant toute la vie de votre activité.</p>
+              <p><a href="/louer-un-local">Voir les locaux disponibles →</a></p>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details class="faq-item">
+            <summary class="faq-item__q">Y a-t-il des frais d'agence ou un pas-de-porte ?</summary>
+            <div class="faq-item__a">
+              <p>Non. La location se fait sans frais d'agence, et les lots actuellement proposés sont sans pas-de-porte. La SEBI maintient une politique de loyers modérés, de 20 à 30 % sous les prix du marché, pour favoriser la diversité des activités et l'entrepreneuriat local.</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+
+      <p class="faq-more"><a href="/faq">Voir toutes les questions fréquentes →</a></p>
+    </div>
+  </section>
+
   <!-- ═══════════════ CTA FINAL ═══════════════ -->
   <section class="cta-final" aria-labelledby="cta-final-title">
     <div class="cta-final__bg">
@@ -591,6 +653,7 @@
         <li><a href="/activites">Activités</a></li>
         <li><a href="/louer-un-local">Louer un local</a></li>
         <li><a href="/services">Nos services</a></li>
+        <li><a href="/faq">FAQ</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
@@ -616,21 +679,18 @@
     <div class="footer__col">
       <h2 class="footer__heading">Services associés</h2>
       <ul class="footer__services">
-        <!-- TODO: à confirmer, URL exacte du site BIARRITZ Box -->
         <li>
-          <a href="https://www.biarritz-box.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Box (nouvelle fenêtre)">
+          <a href="https://biarritz-box.com" target="_blank" rel="noopener" aria-label="BIARRITZ Box (nouvelle fenêtre)">
             <img src="assets-2026/images/services/biarritz-box.jpeg" alt="BIARRITZ Box" loading="lazy">
           </a>
         </li>
-        <!-- TODO: à confirmer, URL exacte du site BIARRITZ Buro -->
         <li>
-          <a href="https://www.biarritz-buro.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Buro (nouvelle fenêtre)">
+          <a href="https://biarritzburo.com" target="_blank" rel="noopener" aria-label="BIARRITZ Buro (nouvelle fenêtre)">
             <img src="assets-2026/images/services/biarritz-buro.png" alt="BIARRITZ Buro" loading="lazy">
           </a>
         </li>
-        <!-- TODO: à confirmer, URL exacte du site BIARRITZ Domiciliation -->
         <li>
-          <a href="https://www.biarritz-domiciliation.fr" target="_blank" rel="noopener" aria-label="BIARRITZ Domiciliation (nouvelle fenêtre)">
+          <a href="https://biarritzdomiciliation.com" target="_blank" rel="noopener" aria-label="BIARRITZ Domiciliation (nouvelle fenêtre)">
             <img src="assets-2026/images/services/biarritz-domiciliation.png" alt="BIARRITZ Domiciliation" loading="lazy">
           </a>
         </li>
@@ -647,9 +707,6 @@
     </span>
   </div>
 </footer>
-
-<!-- ═══════════════ FOOTER ═══════════════ -->
-<!-- TODO: footer à coder -->
 
 <script src="assets-2026/js/main.js?v=20260526a" defer></script>
 </body>
