@@ -1,38 +1,25 @@
 # village-iraty-biarritz.fr
 
-## ⚠️ Chantier actif : refonte (homepage en prod, pages internes en cours)
+## Refonte 2026 : quasi terminée, on travaille en prod directe
 
-Une refonte est en cours dans le sous-dossier [`vib-refonte/`](vib-refonte/). Le dossier est **tracké et commité** sur `main` (la homepage refonte est déjà en production à la racine du site).
+**Le design 2026 est en production à la racine du repo.** Il n'y a plus de préproduction : le sous-dossier `vib-refonte/` ne contient plus que de la documentation, plus aucune page ni asset servi.
 
-**Avant de répondre à toute question liée à la refonte, lire [`vib-refonte/CLAUDE.md`](vib-refonte/CLAUDE.md)** — il contient la méthode imposée (capture Playwright de la maquette `https://vib-site.vercel.app/` avant chaque section, boucle de vérification visuelle, etc.).
+**État d'avancement :**
+- ✅ **En prod (nouveau design `assets-2026/`)** : `index.html`, `le-village.html`, `activites.html` (annuaire), `entreprise.html` (fiche acteur `/acteur/<slug>`), `louer-un-local.html` + `local.html` (fiche local `/local/<slug>`), `services.html`, `a-propos.html`, `contact.html`, `nos-articles.html` + `article.html`, `faq.html`.
+- ⏳ **Restant à refondre** (encore en ancien style `css/style.css`) : `regie-vib.html`, `mentions-legales.html`, `politique-confidentialite.html`.
+- `404.html` est autonome (CSS inline, aucune feuille externe) et sans footer — le laisser tel quel.
 
-**Fichiers actifs de la refonte :**
-- [`vib-refonte/index.html`](vib-refonte/index.html)
-- [`vib-refonte/assets-2026/css/styles.css`](vib-refonte/assets-2026/css/styles.css) + [`design-system.css`](vib-refonte/assets-2026/css/design-system.css)
-- [`vib-refonte/assets-2026/js/main.js`](vib-refonte/assets-2026/js/main.js)
-- Captures de référence et rendus locaux : [`vib-refonte/references/`](vib-refonte/references/)
-- Scripts Playwright : [`vib-refonte/scripts/`](vib-refonte/scripts/)
+**Workflow : on édite directement les fichiers à la racine, puis on vérifie sur l'URL live.**
+1. Éditer le HTML à la racine + `assets-2026/`.
+2. Bumper le `?v=` si `assets-2026/css/*.css` ou `assets-2026/js/*.js` a changé (voir Cache-busting plus bas).
+3. Commit + push sur `main`, puis cliquer **Deploy HEAD Commit** dans cPanel.
+4. Vérifier le rendu sur l'URL live (capture Playwright). Playwright est installé dans `vib-refonte/node_modules/` : un script qui l'importe doit être exécuté **depuis `vib-refonte/`**, sinon `ERR_MODULE_NOT_FOUND`.
 
-**Workflow de travail : on bosse directement sur l'URL live `/vib-refonte/`, plus de serveur local.**
-
-La homepage refonte est déjà en production (racine du site). On reconstruit maintenant **les pages internes une par une**, consultables sous `https://village-iraty-biarritz.fr/vib-refonte/`, jusqu'à validation avant promotion en prod (racine).
-
-**État d'avancement de la refonte (au fil de l'eau) :**
-- ✅ **Promues en prod** : `index.html` (homepage), `le-village.html`, `activites.html` (annuaire), `entreprise.html` (fiche acteur `/acteur/<slug>`), `louer-un-local.html` (liste) + `local.html` (fiche local `/local/<slug>`), `services.html` (fiches pratiques PDF).
-- ⏳ **Restant à refondre** (encore en ancien style `/css/style.css`) : `a-propos.html`, `contact.html`, `nos-articles.html` + `article.html`, `regie-vib.html`.
+**Documentation du chantier** (référence, pas du code) : [`vib-refonte/DESIGN_SYSTEM.md`](vib-refonte/DESIGN_SYSTEM.md), [`BRIEF_HOMEPAGE.md`](vib-refonte/BRIEF_HOMEPAGE.md), [`CONTENT_HOMEPAGE.md`](vib-refonte/CONTENT_HOMEPAGE.md), [`CLAUDE.md`](vib-refonte/CLAUDE.md) (méthode Playwright + maquette `https://vib-site.vercel.app/`). Ces fichiers décrivent l'ancien cycle de préprod sous `/vib-refonte/` — **il n'a plus cours**, mais le design system et les briefs restent valables.
 
 ⚠️ **Templates de fiche détail servis sur URL réécrite à 2 segments** (`entreprise.html` → `/acteur/<slug>`, `local.html` → `/local/<slug>`) : utiliser des **chemins d'assets ABSOLUS** (`/assets-2026/...`) — en relatif ils se résolvent en `/acteur/assets-2026/...` (404, page nue). Les pages à 1 segment (`/activites`, `/louer-un-local`, etc.) tolèrent le relatif. Les fiches détail posent aussi `canonical`/`og:*` dynamiquement par slug via leur JS (`entreprise.js`, `local.js`).
 
-⚠️ **Modèle de déploiement (important)** : cPanel **n'exécute PAS `.cpanel.yml`** sur ce serveur. Il fait un simple `git pull` de `main` dans `public_html/`, donc **l'URL live = le chemin dans le repo** (`vib-refonte/index.html` → `…/vib-refonte/`). Le déploiement se déclenche **manuellement** via cPanel › Git Version Control › **Deploy HEAD Commit**.
-
-Cycle pour chaque page interne :
-1. Éditer les fichiers dans [`vib-refonte/`](vib-refonte/) (HTML + `assets-2026/`).
-2. Commit + push sur `main`, puis cliquer **Deploy HEAD Commit** dans cPanel.
-3. Vérifier le rendu **sur l'URL live** `https://village-iraty-biarritz.fr/vib-refonte/<page>.html` (capture Playwright sur l'URL live, pas sur localhost).
-
-`/vib-refonte/` est exclu de l'indexation (`Disallow: /vib-refonte/` dans `robots.txt` + `<meta name="robots" content="noindex,nofollow,…">` dans chaque page) pour ne pas dupliquer la prod.
-
-Le site **live** (décrit dans la suite de ce fichier) reste à la racine du repo. Ne pas confondre les deux : la refonte ne touche **aucun** fichier hors de `vib-refonte/`.
+⚠️ **Fiches acteur/local rendues en JavaScript** : `entreprise.html` et `local.html` sont des coquilles vides remplies par JS depuis `data/*.json`. Googlebot exécute le JS et les indexe correctement, **mais les crawlers IA (GPTBot, ClaudeBot, PerplexityBot) ne l'exécutent pas** : pour eux ces pages sont vides. Tout balisage Schema.org injecté en JS y serait donc invisible. Une pré-génération HTML statique depuis `data/entreprises.json` reste à arbitrer.
 
 ---
 
@@ -41,7 +28,7 @@ Le site **live** (décrit dans la suite de ce fichier) reste à la racine du rep
 - **Panneau** : cPanel
 - **Username cPanel** : `villageiratybiar`
 - **Deploy path** : `/home/villageiratybiar/public_html/`
-- **Déploiement** : via `.cpanel.yml` (cPanel > Git Version Control, déclenché à chaque push sur `main`)
+- **Déploiement** : ⚠️ cPanel **n'exécute PAS `.cpanel.yml`** sur ce serveur, malgré la présence du fichier. Il fait un simple `git pull` de `main` dans `public_html/`, donc **l'URL live = le chemin dans le repo**. Le déploiement n'est **pas automatique au push** : il faut cliquer **Deploy HEAD Commit** dans cPanel › Git Version Control.
 
 ## Stack
 HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fichiers du repo sont copiés tels quels sur le serveur.
@@ -49,19 +36,38 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 ## Structure
 ```
 .
-├── .cpanel.yml          # Script de déploiement cPanel
-├── .htaccess            # HTTPS, redirections, cache, sécurité
-├── .gitignore
+├── .cpanel.yml          # Présent mais NON exécuté par cPanel (cf. Hébergement)
+├── .htaccess            # HTTPS, rewrites d'URL propres, cache, sécurité
 ├── robots.txt
 ├── sitemap.xml
-├── index.html
-├── 404.html
-├── css/
-│   └── style.css
-├── js/
-│   └── main.js
-└── assets/              # Images, fonts, favicon, etc.
+├── index.html           # Pages du site, servies en /<nom> via le catch-all .htaccess
+├── le-village.html  activites.html  louer-un-local.html  services.html
+├── a-propos.html    contact.html    nos-articles.html    faq.html
+├── entreprise.html      # Template fiche acteur → /acteur/<slug>   (rendu JS)
+├── local.html           # Template fiche local  → /local/<slug>    (rendu JS)
+├── article.html         # Template article      → /<slug>          (rendu JS)
+├── regie-vib.html  mentions-legales.html  politique-confidentialite.html  404.html
+├── send.php             # Backend du formulaire de contact (SMTP, cf. .env)
+├── data/                # Source de vérité du contenu data-driven
+│   ├── entreprises.json #   92 acteurs
+│   ├── locaux.json      #   locaux à louer
+│   ├── articles.json    #   articles du blog
+│   └── entreprises-a-integrer.json   # file d'attente, non servie
+├── assets-2026/         # ✅ Design 2026 — utilisé par les pages refondues
+│   ├── css/  design-system.css (tokens) + styles.css (composants)
+│   ├── js/   main.js, activites.js, entreprise.js, local.js, article.js,
+│   │         articles-list.js, open-status.js
+│   └── images/
+├── css/style.css        # ⚠️ Ancien design — regie-vib + pages légales uniquement
+├── js/                  # ⚠️ Mixte : voir l'avertissement ci-dessous
+├── assets/              # Photos, fiches PDF, etc.
+└── vib-refonte/         # Documentation du chantier uniquement (+ node_modules Playwright)
 ```
+
+⚠️ **Deux jeux d'assets coexistent — vérifier ce que la page charge AVANT d'éditer.**
+- Les pages refondues chargent `assets-2026/`. `css/style.css` ne sert plus qu'à `regie-vib.html`, `mentions-legales.html` et `politique-confidentialite.html`.
+- **`js/` est un piège** : la plupart de ses fichiers sont des doublons périmés de `assets-2026/js/` (éditer `js/entreprise.js` n'a aucun effet, `entreprise.html` charge `/assets-2026/js/entreprise.js`) — **sauf `js/contact.js`, qui est bien vivant** : il n'existe pas dans `assets-2026/` et `contact.html`, pourtant refondue, le charge depuis `/js/contact.js`. Il câble le formulaire en AJAX vers `send.php`.
+- Réflexe : `grep -o '<script src="[^"]*"' <page>.html` avant toute modif de JS.
 
 ## Conventions de marque (retours client — valables sur TOUT le site)
 
@@ -165,10 +171,10 @@ Exemple : trois modifs le 12 mai 2026 → `?v=20260512a`, puis `?v=20260512b`, p
 
 ## Git
 
-- **`main`** = branche de production. Chaque push sur `main` déclenche un déploiement cPanel automatique
-- **Jamais de push direct sur `main`** pour les modifs non-triviales : créer une branche `feature/xxx` ou `fix/xxx`, puis PR
+- **`main`** = branche de production. Le push **ne déploie pas tout seul** (voir Hébergement).
 - **Commits** : messages clairs en français ou anglais, présent de l'indicatif (`Ajoute la section contact`, `Fix typo dans le footer`)
-- **Déploiement** : push sur `main` → cPanel exécute `.cpanel.yml` → fichiers copiés dans `public_html/`. Vérifier le déploiement dans cPanel > Git Version Control > Pull or Deploy
+- **Déploiement** : push sur `main`, puis cliquer **Deploy HEAD Commit** dans cPanel › Git Version Control. cPanel fait un `git pull`, il n'exécute pas `.cpanel.yml`. Vérifier ensuite le rendu sur l'URL live.
+- **Pratique en vigueur** : la refonte se fait en prod directe sur `main` (cf. commits `Refonte (prod direct) : …`). Pour un chantier risqué ou long, préférer une branche `feature/xxx` / `fix/xxx` puis une PR.
 
 ## Sécurité
 
