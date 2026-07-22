@@ -145,6 +145,16 @@ try {
     // Destinataire
     $mail->addAddress($env['SMTP_TO'], $env['SMTP_TO_NAME'] ?? '');
 
+    // Copies (CC) — liste séparée par des virgules dans SMTP_CC, optionnel
+    if (!empty($env['SMTP_CC'])) {
+        foreach (explode(',', $env['SMTP_CC']) as $cc) {
+            $cc = trim($cc);
+            if ($cc !== '' && filter_var($cc, FILTER_VALIDATE_EMAIL)) {
+                $mail->addCC($cc);
+            }
+        }
+    }
+
     // Contenu
     $mail->Subject = '[VIB] ' . $sujet_libelle . ' - ' . $nom;
 
