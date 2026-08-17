@@ -1,25 +1,23 @@
 [
   {
-    "slug": "duplex-commercial-de-90mm2-ref-dar41",
-    "name": "Lot 38 - Duplex commercial 90 m² (REF-DAR41)",
-    "address": "Lot 38 - Halle DARLA, VILLAGE Iraty-BIARRITZ",
+    "slug": "lot-50-darla-90m2",
+    "name": "Lot 50 - Duplex commercial 90 m²",
+    "address": "10 rue des Mésanges, Halle DARLA, VILLAGE Iraty-BIARRITZ, 64200 BIARRITZ",
     "surface": 90,
     "price_ht": 1165.0,
-    "charges_ht": 0,
-    "type": "Commerce / Bureau",
+    "charges_ht": 150.19,
+    "type": "Bureau / Showroom / Atelier",
     "norm_pmr": true,
     "no_fees": true,
     "no_pas_de_porte": true,
-    "description": "Beau local professionnel en duplex aménagé de 90 m² (surface nette certifiée après travaux) en rez-de-chaussée et premier étage.",
+    "description": "Beau local professionnel en duplex aménagé de 90 m² (surface nette certifiée après travaux) en rez-de-chaussée et premier étage. Localisé dans la Rue des Créateurs de la Halle DARLA, galerie ouverte au public. Possibilité de bureaux, showrooms, ateliers de création, espaces sport, santé et bien-être. Une place de stationnement privative est incluse dans le bail. Ce local est aux normes PMR, pour faciliter son accès aux personnes à mobilité réduite. Belle visibilité commerciale grâce à sa devanture entièrement vitrée. Il possède également une belle hauteur sous plafond avec charpente en bois au rez-de-chaussée. Sol surfacé avec du quartz (couleur gris anthracite) au rez-de-chaussée, et parquet flottant à l'étage. Les murs sont recouverts de bardages en bois, ce qui apporte de la chaleur au local. Nombreuses prises électriques. Double porte d'entrée à larges vantaux avec vitres anti-effraction. Parkings gratuits facilement accessibles pour les clients. Pour votre sécurité et celle de vos clients, les parties communes sont dotées d'équipements de télésurveillance. Facilement accessible grâce à la sortie d'autoroute et à la gare TGV à proximité, toutes commodités et services disponibles sur place pour vous permettre un précieux gain de temps.",
     "photos": [
-      "/assets/photos/locaux/lot-38-duplex-90m2/facade-halle-darla.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-1.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-2.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-3.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-4.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/interieur-5.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/galerie-1.jpg",
-      "/assets/photos/locaux/lot-38-duplex-90m2/galerie-2.jpg"
+      "/assets/photos/locaux/lot-50-darla-90m2/cover.jpg",
+      "/assets/photos/locaux/lot-50-darla-90m2/photo-01.jpg",
+      "/assets/photos/locaux/lot-50-darla-90m2/photo-02.jpg",
+      "/assets/photos/locaux/lot-50-darla-90m2/photo-03.jpg",
+      "/assets/photos/locaux/lot-50-darla-90m2/photo-04.jpg",
+      "/assets/photos/locaux/lot-50-darla-90m2/photo-05.jpg"
     ]
   },
   {

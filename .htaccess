@@ -36,6 +36,10 @@ RewriteRule ^acteurs-coworking/?$ /activites [L,R=301]
 RewriteRule ^fastlink/?$ /regie-vib [L,R=301]
 RewriteRule ^les-services/?$ /services [L,R=301]
 
+# Lot 38 loué : son URL etait indexee, on la renvoie vers la liste des locaux
+# plutot que de laisser une fiche vide (local.js ne trouve plus le slug).
+RewriteRule ^local/duplex-commercial-de-90mm2-ref-dar41/?$ /louer-un-local [L,R=301]
+
 # /entreprise?slug=X → /acteur/X (301, URL canonique propre)
 RewriteCond %{THE_REQUEST} \s/+entreprise\?slug=([a-z0-9\-]+)\s [NC]
 RewriteRule ^ /acteur/%1? [R=301,L]
