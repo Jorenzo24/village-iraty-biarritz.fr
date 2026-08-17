@@ -64,6 +64,31 @@ RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]
 
 # ============================================
+# WebP : négociation de contenu automatique
+# ============================================
+# Chaque JPEG/PNG servi a un jumeau .webp genere a cote de lui (meme nom, meme
+# dossier). Si le navigateur annonce accepter le WebP ET que le jumeau existe,
+# on le sert a sa place — sans rien changer dans le HTML, le JS ou les JSON.
+# Les navigateurs sans support WebP recoivent le JPEG/PNG d'origine.
+# Indispensable ici : les fiches /acteur/<slug> et /local/<slug> construisent
+# leurs <img> en JavaScript depuis data/*.json, hors de portee d'un <picture>.
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+    RewriteRule ^(.+)\.(jpe?g|png)$ /$1.webp [T=image/webp,E=accept:1,L]
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
+
+# Le contenu varie selon l'en-tete Accept : sans ce Vary, un proxy ou un CDN
+# pourrait servir le WebP a un navigateur qui ne le comprend pas.
+<IfModule mod_headers.c>
+    Header append Vary Accept env=REDIRECT_accept
+</IfModule>
+
+# ============================================
 # Pages d'erreur personnalisées
 # ============================================
 ErrorDocument 404 /404.html
