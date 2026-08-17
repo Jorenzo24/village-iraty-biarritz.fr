@@ -58,10 +58,12 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 │   ├── css/  design-system.css (tokens) + styles.css (composants)
 │   ├── js/   main.js, activites.js, entreprise.js, local.js, article.js,
 │   │         articles-list.js, open-status.js
-│   └── images/
+│   └── images/          # chaque .jpg/.png a un jumeau .webp (cf. Images)
 ├── css/style.css        # ⚠️ Ancien design — regie-vib + pages légales uniquement
 ├── js/                  # ⚠️ Mixte : voir l'avertissement ci-dessous
-├── assets/              # Photos, fiches PDF, etc.
+├── assets/              # Photos, fiches PDF, etc. (idem : jumeaux .webp)
+│   ├── photos/_originaux_lourds/   # archive 51 Mo, servie par AUCUNE page — ne pas optimiser
+│   └── og/og-image.jpg             # PAS de jumeau .webp (aperçus de partage)
 └── vib-refonte/         # Documentation du chantier uniquement (+ node_modules Playwright)
 ```
 
@@ -91,10 +93,41 @@ Balayage sûr déjà utilisé : `perl -CSD -Mutf8 -i -pe 's/(?<![-\w])([Vv]illag
 - **Sémantique** : utiliser `<header>`, `<main>`, `<nav>`, `<article>`, `<section>`, `<footer>`
 
 ### Images
-- **WebP** par défaut, JPEG/PNG en fallback si nécessaire
 - **SVG inline** pour les icônes (permet de styler en CSS)
 - **Jamais de hotlink** : toutes les images doivent être hébergées dans `assets/`
-- **Lazy loading** : `loading="lazy"` sur les `<img>` hors viewport initial
+- **Lazy loading** : `loading="lazy"` sur les `<img>` hors viewport initial (déjà en place partout ; ne PAS le mettre sur le logo du header ni sur l'image de hero, qui sont above-the-fold)
+
+⚠️ **Le WebP n'est PAS référencé dans le HTML — il est servi par négociation de contenu.**
+Le HTML, le JS et `data/*.json` pointent tous vers le `.jpg`/`.png`. Un bloc de
+[`.htaccess`](../.htaccess) réécrit la requête vers le `.webp` **jumeau** (même nom, même dossier)
+quand le navigateur envoie `Accept: image/webp` et que le fichier existe :
+
+```apache
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+RewriteRule ^(.+)\.(jpe?g|png)$ /$1.webp [T=image/webp,E=accept:1,L]
+```
+
+Conséquences à connaître :
+- **Ne jamais écrire `.webp` dans un `src`, ni de `<picture>`/`srcset`.** On référence le JPEG/PNG, point. C'est ce qui permet aux fiches `/acteur/<slug>` et `/local/<slug>`, dont les `<img>` sont construites en JS, d'en bénéficier aussi — un `<picture>` y serait impossible.
+- **Toute nouvelle image doit avoir son jumeau `.webp`**, sinon elle est servie en JPEG à tout le monde (dégradation silencieuse, aucune erreur visible).
+- Les scrapers sociaux envoient `Accept: */*` → ils reçoivent le JPEG. C'est voulu : `assets/og/og-image.jpg` n'a **volontairement pas** de jumeau `.webp`, pour ne pas risquer de casser les aperçus de partage.
+
+**Pipeline à appliquer à toute image ajoutée** (`magick`, `cwebp`, `exiftool`, `sips` sont installés) :
+
+```bash
+# 1. Redimensionner : 1400px max sur le grand côté (1920 pour un fond de hero,
+#    600 pour un logo). -auto-orient règle l'EXIF, -strip purge les métadonnées.
+magick in.jpg -auto-orient -resize '1400x1400>' -colorspace sRGB -strip \
+       -sampling-factor 4:2:0 -interlace JPEG -quality 82 out.jpg
+# 2. Générer le jumeau webp (-lossless pour un logo, lossy pour une photo)
+cwebp -quiet -q 82 -m 6 -alpha_q 100 out.jpg -o out.webp
+```
+
+Repères : aucune image n'est jamais affichée plus grande que son conteneur (**il n'y a pas de
+lightbox**), les cartes sont en `aspect-ratio: 4/3` sur ~400px. 1400px couvre donc le retina
+partout. Vérifier `-colorspace sRGB` : deux logos étaient en **CMYK** et s'affichaient délavés
+hors Safari.
 
 ### CSS
 - Mobile-first (media queries `min-width`, pas `max-width`)
@@ -116,8 +149,17 @@ Les **fiches détail** sont générées dynamiquement à partir de fichiers JSON
 - **Données** : [`data/locaux.json`](../data/locaux.json) — champs : `slug`, `name`, `address`, `surface` (nb), `price_ht` (nb), `charges_ht` (nb, 0 si aucune), `type`, `norm_pmr`/`no_fees`/`no_pas_de_porte` (bool → chips), `description`, `photos` (liste de chemins `/assets/...`, le 1er = cover).
 - **Fiche détail** : `local.html` rendue par [`js/local.js`](../js/local.js). URL `/local/<slug>` (rewrite `.htaccess` → `local.html?slug=`). Si `photos` vide → placeholder auto.
 - **Carte liste (en dur)** : ajouter un `<article class="local-card">` dans [`louer-un-local.html`](../louer-un-local.html) (grid `.locaux-grid`).
+- ⚠️ **L'accueil affiche AUSSI 2 cartes de locaux en dur** (section « espaces », grid `.espaces-grid`), avec leur propre image dans `assets-2026/images/locaux/`. C'est un 4ᵉ endroit à toucher, facile à oublier : `grep -rn '<slug>' index.html louer-un-local.html data/locaux.json sitemap.xml` avant de conclure.
 - **Sitemap** : ajouter `/local/<slug>`.
-- **Photos** : `assets/photos/locaux/<slug>/` (dossier = slug), `cover.jpg` en premier.
+- **Photos** : `assets/photos/locaux/<slug>/` (dossier = slug), `cover.jpg` en premier, puis `photo-01.jpg`, `photo-02.jpg`… + jumeaux `.webp` (cf. section Images).
+- `description` : `local.js` remplace chaque `. ` par un `<br>` — la description se rend donc **une phrase par ligne**. Rédiger en phrases courtes ; ni `\n` ni puces (contrairement à `entreprise.js`).
+- `charges_ht: 0` **masque** le bloc charges sur la fiche (`local-charges-block`). Ne mettre 0 que s'il n'y a réellement aucune charge.
+
+⚠️ **Quand un local est loué**, ne pas se contenter de le retirer : son URL `/local/<slug>` est
+indexée et référencée au sitemap. Sans redirection, `local.js` ne trouve plus le slug et sert une
+**fiche vide** (pas un 404). Ajouter une 301 vers `/louer-un-local` dans `.htaccess`, à côté des
+autres redirections historiques. Exemple en place : `local/duplex-commercial-de-90mm2-ref-dar41`
+(lot 38, loué en août 2026, remplacé par le lot 50).
 
 ### Acteurs (entreprises)
 - **Données** : [`data/entreprises.json`](../data/entreprises.json) — champs : `slug`, `name`, `category`, `category_label`, `description`, `address`, `phone`, `email`, `website`, `hours`, `photos` (1er = cover), `logo`, `social` (objet). Champs vides = `""` ou `[]`/`{}` (tout est conditionnel côté JS).
@@ -134,17 +176,30 @@ Texte libre parsé par [`js/open-status.js`](../js/open-status.js). Format : seg
 - Vide ou `Sur rendez-vous` → pas de badge.
 
 ### ⚠️ Orientation EXIF des photos (piège iPhone)
-Les photos prises au téléphone ont souvent un tag EXIF `Orientation=6` (« Rotate 90 CW ») : elles s'affichent droites dans certains contextes mais **de travers** ailleurs (aperçus OG, vieux navigateurs). **Toujours redresser physiquement + purger l'EXIF** avant de committer :
+Les photos prises au téléphone ont souvent un tag EXIF `Orientation=6` (« Rotate 90 CW ») : elles s'affichent droites dans certains contextes mais **de travers** ailleurs (aperçus OG, vieux navigateurs).
+
+Le pipeline de la section **Images** règle ça tout seul : `-auto-orient` applique la rotation aux
+pixels et `-strip` purge le tag. Si on traite une image hors pipeline, le faire à la main :
 ```bash
 sips -r 90 photo.jpg                                  # redresse les pixels (90° CW pour orientation 6)
 exiftool -Orientation=1 -n -overwrite_original photo.jpg
 exiftool -Orientation -filename -T photo.jpg          # vérifier : doit afficher "Horizontal (normal)"
 ```
-Vérifier le sens réel avec `exiftool -Orientation <f>` avant de redresser, puis contrôler visuellement (Read sur l'image). `sips`/`exiftool` sont dispos sur la machine.
+Dans tous les cas, contrôler visuellement le résultat (`Read` sur l'image) — un tag corrigé ne
+garantit pas que les pixels sont dans le bon sens.
 
 ## Cache-busting
 
-**À chaque modification de `css/style.css` ou `js/main.js`**, il faut bumper le query string `?v=AAAAMMJJx` dans `index.html` (et toutes les pages qui référencent ces fichiers).
+**À chaque modification d'un CSS ou d'un JS**, il faut bumper le query string `?v=AAAAMMJJx` sur toutes les pages qui référencent le fichier touché — en pratique `assets-2026/css/*.css` et `assets-2026/js/*.js` pour les pages refondues, `css/style.css` et `js/main.js` pour les 3 pages restées en ancien style.
+
+Ne concerne **que** les CSS/JS : le HTML est en cache 1 heure et `data/*.json` n'a pas de règle `Expires` (il n'est que compressé), donc une modif de contenu se voit sans bump.
+
+⚠️ **Les images sont en cache navigateur 1 an et n'ont pas de `?v=`.** Remplacer une image en
+gardant son nom ne rafraîchit donc rien chez un visiteur qui l'a déjà en cache. Pour un vrai
+changement visuel (photo différente), **créer un nouveau nom de fichier**. C'est acceptable
+uniquement quand l'image reste la même et que seul son poids change — c'est le cas de
+l'optimisation d'août 2026 : les visiteurs récurrents gardent l'ancienne version lourde jusqu'à
+expiration, les nouveaux profitent du gain immédiatement.
 
 ```html
 <link rel="stylesheet" href="css/style.css?v=20260505a">
