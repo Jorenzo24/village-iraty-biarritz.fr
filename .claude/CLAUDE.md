@@ -28,7 +28,9 @@
 - **Panneau** : cPanel
 - **Username cPanel** : `villageiratybiar`
 - **Deploy path** : `/home/villageiratybiar/public_html/`
+- **CDN** : ⚠️ **le site est derrière Cloudflare** (en proxy : les réponses portent `server: cloudflare`, `cf-cache-status`, `cf-ray`). Conséquence majeure sur les images et le cache — voir la section **Images**. Après un déploiement qui remplace des fichiers statiques, **purger le cache Cloudflare**, sinon l'ancienne version reste servie malgré le `git pull`.
 - **Déploiement** : ⚠️ cPanel **n'exécute PAS `.cpanel.yml`** sur ce serveur, malgré la présence du fichier. Il fait un simple `git pull` de `main` dans `public_html/`, donc **l'URL live = le chemin dans le repo**. Le déploiement n'est **pas automatique au push** : il faut cliquer **Deploy HEAD Commit** dans cPanel › Git Version Control.
+- **Vérifier le live** : toujours contourner le cache CDN avec un query string unique par requête (`?x=$RANDOM`) et lire `cf-cache-status`, sinon on teste le cache et pas le serveur.
 
 ## Stack
 HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fichiers du repo sont copiés tels quels sur le serveur.
@@ -111,7 +113,28 @@ RewriteRule ^(.+)\.(jpe?g|png)$ /$1.webp [T=image/webp,E=accept:1,L]
 Conséquences à connaître :
 - **Ne jamais écrire `.webp` dans un `src`, ni de `<picture>`/`srcset`.** On référence le JPEG/PNG, point. C'est ce qui permet aux fiches `/acteur/<slug>` et `/local/<slug>`, dont les `<img>` sont construites en JS, d'en bénéficier aussi — un `<picture>` y serait impossible.
 - **Toute nouvelle image doit avoir son jumeau `.webp`**, sinon elle est servie en JPEG à tout le monde (dégradation silencieuse, aucune erreur visible).
-- Les scrapers sociaux envoient `Accept: */*` → ils reçoivent le JPEG. C'est voulu : `assets/og/og-image.jpg` n'a **volontairement pas** de jumeau `.webp`, pour ne pas risquer de casser les aperçus de partage.
+
+⚠️⚠️ **Le site est derrière Cloudflare, et Cloudflare IGNORE `Vary: Accept`.**
+L'origine répond correctement (JPEG sans l'en-tête, WebP avec, `Vary: Accept` posé), mais
+Cloudflare ne garde **qu'une seule variante par URL** : celle de la première requête après une
+purge. En pratique c'est presque toujours le WebP, ensuite servi à *tout le monde* — y compris aux
+navigateurs qui ne l'acceptent pas. Le repli JPEG n'est donc **pas** garanti en bout de chaîne.
+
+Ce que ça impose :
+- **Une image utilisée en `og:image`/`twitter:image` ne doit JAMAIS avoir de jumeau `.webp`** : c'est
+  la seule façon de garantir qu'un scraper social reçoive du JPEG. Concernées à ce jour :
+  `assets-2026/images/hero-drone.jpg` (9 pages), `assets-2026/images/story-interieur.jpg` (2),
+  `assets/photos/drone-aerien.jpg`, `assets/og/og-image.jpg`. Avant d'ajouter une image d'aperçu,
+  supprimer son `.webp` s'il existe.
+- **Après tout remplacement d'image, purger le cache Cloudflare**, sinon l'ancienne version continue
+  d'être servie (cache navigateur *et* CDN à 1 an). C'est ce qui s'est passé au déploiement d'août
+  2026 : une partie des images restait à la version pré-optimisation.
+- Piège de test : deux `curl` sur la même URL ne prouvent rien, le second tape le cache CF. Utiliser
+  un query string **différent à chaque requête** et lire `cf-cache-status`.
+
+Si le plan Cloudflare le permet, **activer Polish** (conversion WebP/AVIF au niveau CDN) serait plus
+propre : il gère la négociation nativement et permettrait de supprimer et la règle `.htaccess` et
+tous les jumeaux `.webp` du repo.
 
 **Pipeline à appliquer à toute image ajoutée** (`magick`, `cwebp`, `exiftool`, `sips` sont installés) :
 
