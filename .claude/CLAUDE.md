@@ -60,12 +60,13 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 │   ├── css/  design-system.css (tokens) + styles.css (composants)
 │   ├── js/   main.js, activites.js, entreprise.js, local.js, article.js,
 │   │         articles-list.js, open-status.js
-│   └── images/          # chaque .jpg/.png a un jumeau .webp (cf. Images)
+│   └── images/          # jumeau .webp par image, SAUF les og:image (cf. Images)
 ├── css/style.css        # ⚠️ Ancien design — regie-vib + pages légales uniquement
 ├── js/                  # ⚠️ Mixte : voir l'avertissement ci-dessous
 ├── assets/              # Photos, fiches PDF, etc. (idem : jumeaux .webp)
 │   ├── photos/_originaux_lourds/   # archive 51 Mo, servie par AUCUNE page — ne pas optimiser
-│   └── og/og-image.jpg             # PAS de jumeau .webp (aperçus de partage)
+│   └── og/og-image.jpg             # PAS de jumeau .webp — comme hero-drone.jpg,
+│                                   # story-interieur.jpg, photos/drone-aerien.jpg
 └── vib-refonte/         # Documentation du chantier uniquement (+ node_modules Playwright)
 ```
 
@@ -258,6 +259,29 @@ Exemple : trois modifs le 12 mai 2026 → `?v=20260512a`, puis `?v=20260512b`, p
 - ❌ **`Review` : absent, et à laisser absent tant qu'il n'y a pas de vrais témoignages clients.** Inventer des avis viole les guidelines Google (risque de pénalité manuelle sur le domaine) et Google n'affiche plus les avis auto-déclarés depuis 2019. Ne jamais fabriquer d'avis, de statistiques ou de citations, même si c'est démontré efficace.
 
 ### Dettes connues (non traitées)
+
+#### ⏳ En attente d'action manuelle (au 18/08/2026)
+
+Ces trois points sont **hors du repo** — aucun commit ne les résoudra, ils demandent un accès au
+dashboard Cloudflare. Tant qu'ils ne sont pas faits, l'optimisation d'images d'août 2026 n'est que
+partiellement effective en production.
+
+1. **Déployer le commit `1505012`** (cPanel › Deploy HEAD Commit). Il supprime les jumeaux `.webp`
+   des images d'aperçu — à faire **avant** la purge, sinon Cloudflare peut mettre en cache leur
+   variante WebP et la servir aux scrapers sociaux.
+2. **Purger le cache Cloudflare** (Caching › Purge Everything). Sans ça, une partie des images reste
+   servie en version pré-optimisation : `hero-drone` 748 Ko, `story-halle` 979 Ko,
+   `boulangerie-enneartz` 1 051 Ko, `last-modified` du 1er juin 2026, alors que l'origine sert bien
+   les nouvelles.
+3. **Arbitrer Cloudflare Polish** (Speed › Optimization) — dépend du plan souscrit, non vérifié.
+   S'il est disponible, il gère conversion **et** négociation au niveau CDN : on pourrait alors
+   supprimer la règle WebP de `.htaccess` **et** les 299 jumeaux `.webp` du repo, et le risque
+   résiduel ci-dessous disparaîtrait.
+
+**Risque résiduel assumé en attendant** : Cloudflare ignorant `Vary: Accept`, les navigateurs sans
+support WebP (< 3 %, très vieux Safari/IE) peuvent recevoir du WebP sur les images de contenu. Les
+images d'aperçu, elles, sont protégées (aucun jumeau `.webp`). Détail dans la section **Images**.
+
 
 - **Meta descriptions des 92 fiches acteurs** : `assets-2026/js/entreprise.js:44` recopie `e.description` **sans troncature** → 41 % dépassent 160 caractères (max 1490), médiane 48. Correctif : couper à ~155 car. sur une frontière de mot.
 - **`data/articles.json`** : deux articles (`gros-plan-sur-le-quartier-iraty…` et `le-forum-des-associations…`) partagent un `summary` **identique**, qui est de plus **hors sujet** sur le premier. Les autres `summary` sont des fragments pris en milieu d'article. `article.js:44` les sert tels quels en meta description.
