@@ -134,8 +134,10 @@
           <form id="contact-form" class="form" action="/send.php" method="POST" novalidate>
             <input type="hidden" name="sujet" id="sujet-input" value="general">
 
-            <!-- Honeypot anti-spam (caché aux humains, visible aux bots) -->
-            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <!-- Honeypot anti-spam : hors ecran (JAMAIS display:none, certains bots
+                 le detectent), invisible aux lecteurs d'ecran, hors tabulation.
+                 S'il est rempli, send.php simule un succes sans rien envoyer. -->
+            <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
               <label for="website">Site web</label>
               <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
             </div>
@@ -158,6 +160,16 @@
             <div class="form__field">
               <label class="sr-only" for="message">Message</label>
               <textarea name="message" id="message" placeholder="Message *" required minlength="10" maxlength="5000" rows="5"></textarea>
+            </div>
+
+            <!-- Cloudflare Turnstile : verification invisible/low-friction.
+                 La site key est publique. Le token est poste sous le nom
+                 "cf-turnstile-response" et verifie cote serveur par send.php. -->
+            <div class="form__field">
+              <div class="cf-turnstile"
+                   data-sitekey="0x4AAAAAAEYV4oBSyXnwfKR-"
+                   data-language="fr"
+                   data-theme="light"></div>
             </div>
 
             <div id="form-feedback" class="form__feedback" role="status" aria-live="polite"></div>
@@ -248,6 +260,7 @@
 </footer>
 
 <script src="assets-2026/js/main.js?v=20260526a" defer></script>
-<script src="/js/contact.js?v=20260505a" defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="/js/contact.js?v=20260822a" defer></script>
 </body>
 </html>

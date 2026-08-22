@@ -40,6 +40,134 @@ function load_env(string $path): array {
 
 $env = load_env(__DIR__ . '/.env');
 
+// ─── 2 bis. Outils anti-spam ───────────────────────────────────────────────
+
+/**
+ * IP reelle du visiteur.
+ * Le site est derriere Cloudflare : REMOTE_ADDR est l'IP d'un edge Cloudflare,
+ * pas celle du visiteur. La vraie IP arrive dans CF-Connecting-IP.
+ */
+function client_ip(): string {
+    $cf = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? '';
+    if ($cf !== '' && filter_var($cf, FILTER_VALIDATE_IP)) {
+        return $cf;
+    }
+    $remote = $_SERVER['REMOTE_ADDR'] ?? '';
+    return filter_var($remote, FILTER_VALIDATE_IP) ? $remote : 'unknown';
+}
+
+/**
+ * Journalise un rejet dans logs/spam.log (TSV : date, IP, raison, detail, extrait).
+ * Sert a verifier qu'il n'y a pas de faux positifs. Le dossier logs/ est
+ * interdit d'acces par .htaccess et ignore par Git.
+ */
+function spam_log(string $reason, string $ip, string $message, string $detail = ''): void {
+    $dir = __DIR__ . '/logs';
+    if (!is_dir($dir)) {
+        @mkdir($dir, 0755, true);
+    }
+    $excerpt = (string) preg_replace('/\s+/u', ' ', $message);
+    $excerpt = mb_substr(trim($excerpt), 0, 100);
+    $line = sprintf(
+        "%s\t%s\t%s\t%s\t%s\n",
+        date('c'),
+        $ip,
+        $reason,
+        str_replace(["\t", "\n"], ' ', $detail),
+        $excerpt
+    );
+    @file_put_contents($dir . '/spam.log', $line, FILE_APPEND | LOCK_EX);
+}
+
+/**
+ * Reponse « faux succes » : strictement identique a un envoi reussi, pour ne
+ * donner aucun indice au bot (honeypot + filtrage de contenu).
+ */
+function fake_success(): void {
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['ok' => true, 'message' => 'Message envoyé avec succès']);
+    exit;
+}
+
+/**
+ * Verifie un token Turnstile aupres de Cloudflare (cURL, timeout 10 s).
+ * Retourne ['ok' => bool, 'reason' => string, 'transport' => bool]
+ * transport = true → panne reseau/API (on laisse passer, cf. commentaire plus bas).
+ */
+function turnstile_verify(string $secret, string $token, string $ip): array {
+    if (!function_exists('curl_init')) {
+        return ['ok' => false, 'reason' => 'curl_absent', 'transport' => true];
+    }
+
+    $fields = ['secret' => $secret, 'response' => $token];
+    if ($ip !== 'unknown') {
+        $fields['remoteip'] = $ip;
+    }
+
+    $ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
+    curl_setopt_array($ch, [
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => http_build_query($fields),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_SSL_VERIFYHOST => 2,
+    ]);
+    $raw = curl_exec($ch);
+    $err = curl_error($ch);
+    curl_close($ch);
+
+    if ($raw === false) {
+        return ['ok' => false, 'reason' => 'curl:' . $err, 'transport' => true];
+    }
+
+    $json = json_decode((string) $raw, true);
+    if (!is_array($json) || !array_key_exists('success', $json)) {
+        return ['ok' => false, 'reason' => 'reponse_illisible', 'transport' => true];
+    }
+
+    if ($json['success'] === true) {
+        return ['ok' => true, 'reason' => '', 'transport' => false];
+    }
+
+    $codes = $json['error-codes'] ?? [];
+    return [
+        'ok'        => false,
+        'reason'    => is_array($codes) ? implode(',', $codes) : 'echec',
+        'transport' => false,
+    ];
+}
+
+/**
+ * Filtrage de contenu (couche 3). Retourne la raison du rejet, ou null si OK.
+ */
+function spam_reason(string $message): ?string {
+    // a) Toute URL est refusee : les vrais visiteurs n'en mettent pas.
+    if (preg_match('~https?://|www\.~i', $message)) {
+        return 'url';
+    }
+
+    // b) Vocabulaire typique des spams crypto.
+    foreach (['token', 'tokens', 'USD', 'crypto', 'bitcoin', 'balance', 'credited'] as $mot) {
+        if (preg_match('/\b' . preg_quote($mot, '/') . '\b/i', $message)) {
+            return 'mot_cle:' . strtolower($mot);
+        }
+    }
+
+    // c) Message d'une certaine longueur sans le moindre mot francais courant.
+    if (mb_strlen($message) > 20) {
+        $fr = ['le', 'la', 'les', 'de', 'des', 'un', 'une', 'pour', 'bonjour', 'merci', 'je', 'nous', 'vous'];
+        if (!preg_match('/\b(' . implode('|', $fr) . ')\b/i', $message)) {
+            return 'aucun_mot_francais';
+        }
+    }
+
+    return null;
+}
+
+$ip = client_ip();
+
 if (empty($env['SMTP_HOST']) || empty($env['SMTP_USER']) || empty($env['SMTP_PASS']) || empty($env['SMTP_TO'])) {
     http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
@@ -47,17 +175,15 @@ if (empty($env['SMTP_HOST']) || empty($env['SMTP_USER']) || empty($env['SMTP_PAS
     exit;
 }
 
-// ─── 3. Honeypot anti-spam ───
-// Champ caché "website" : s'il est rempli, c'est un bot.
-if (!empty($_POST['website'] ?? '')) {
-    // Faux succès pour les bots
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['ok' => true, 'message' => 'Message envoyé']);
-    exit;
+// ─── 3. Couche 2 : honeypot ───
+// Champ caché "website" (hors écran dans contact.html) : s'il est rempli,
+// c'est un bot. On simule un succès pour ne pas lui apprendre qu'il est filtré.
+if (trim((string) ($_POST['website'] ?? '')) !== '') {
+    spam_log('honeypot', $ip, (string) ($_POST['message'] ?? ''), (string) ($_POST['email'] ?? ''));
+    fake_success();
 }
 
 // ─── 4. Rate limit basique (par IP, fichier temp) ───
-$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $rate_file = sys_get_temp_dir() . '/vib_rate_' . md5($ip) . '.txt';
 $now = time();
 if (file_exists($rate_file)) {
@@ -96,6 +222,55 @@ if (!empty($errors)) {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(['ok' => false, 'error' => implode(', ', $errors)]);
     exit;
+}
+
+// ─── 5 bis. Couche 1 : Cloudflare Turnstile ───
+// Verification du token AVANT tout envoi de mail.
+$turnstile_secret = trim((string) ($env['TURNSTILE_SECRET_KEY'] ?? ''));
+
+if ($turnstile_secret === '' || $turnstile_secret === 'replace_me') {
+    // Pas de secret configure : on ne bloque pas le formulaire (les couches 2
+    // et 3 restent actives), mais on le trace pour que ce ne soit pas silencieux.
+    spam_log('turnstile_non_configure', $ip, $message, $email);
+} else {
+    $token = (string) ($_POST['cf-turnstile-response'] ?? '');
+
+    if ($token === '') {
+        spam_log('turnstile_token_absent', $ip, $message, $email);
+        http_response_code(403);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'ok'    => false,
+            'error' => 'Vérification anti-robot manquante. Merci de cocher la case de sécurité puis de renvoyer le message.',
+        ]);
+        exit;
+    }
+
+    $check = turnstile_verify($turnstile_secret, $token, $ip);
+
+    if (!$check['ok'] && $check['transport']) {
+        // Panne reseau ou API Cloudflare injoignable : on laisse passer plutot
+        // que de couper le seul canal de contact du site. C'est trace dans le log.
+        spam_log('turnstile_indisponible', $ip, $message, $check['reason']);
+    } elseif (!$check['ok']) {
+        // Verdict negatif de Cloudflare : rejet ferme.
+        spam_log('turnstile_echec', $ip, $message, $check['reason']);
+        http_response_code(403);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'ok'    => false,
+            'error' => 'La vérification anti-robot a échoué. Merci de réessayer ; si le problème persiste, contactez-nous par téléphone.',
+        ]);
+        exit;
+    }
+}
+
+// ─── 5 ter. Couche 3 : filtrage du contenu ───
+// Même stratégie que le honeypot : faux succès silencieux, aucun mail envoyé.
+$reason = spam_reason($message);
+if ($reason !== null) {
+    spam_log('contenu:' . $reason, $ip, $message, $email);
+    fake_success();
 }
 
 // ─── 6. Envoyer l'email via PHPMailer ───

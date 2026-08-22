@@ -212,6 +212,40 @@ exiftool -Orientation -filename -T photo.jpg          # vérifier : doit affiche
 Dans tous les cas, contrôler visuellement le résultat (`Read` sur l'image) — un tag corrigé ne
 garantit pas que les pixels sont dans le bon sens.
 
+## Anti-spam du formulaire de contact
+
+Trois couches dans [`send.php`](../send.php), posees en aout 2026 (3 a 5 spams crypto/jour avant).
+
+1. **Cloudflare Turnstile** — widget `.cf-turnstile` dans `contact.html` (site key publique en dur),
+   token verifie en cURL cote serveur (timeout 10 s) avant tout envoi. Echec → **403** + message FR.
+2. **Honeypot** — champ `website` pousse hors ecran (`position:absolute;left:-9999px`,
+   `tabindex="-1"`, `autocomplete="off"`). **Jamais `display:none`** : des bots le detectent.
+3. **Filtrage de contenu** — rejet si URL, si mot-cle crypto (`token`, `USD`, `bitcoin`, `balance`...),
+   ou si un message de plus de 20 caracteres ne contient aucun mot francais courant.
+
+⚠️ **Les couches 2 et 3 repondent un faux succes** (HTTP 200 + « Message envoyé avec succès »)
+sans envoyer de mail : le bot ne doit pas apprendre qu'il est filtre. Consequence directe : **un
+faux positif est invisible cote visiteur**. C'est a ca que sert le log ci-dessous, a relire les
+premieres semaines.
+
+⚠️ **`TURNSTILE_SECRET_KEY` vit dans `.env`, qui est gitignore** : un `git pull` sur cPanel ne le
+transporte pas. Il faut l'ajouter **a la main** dans `/home/villageiratybiar/public_html/.env`.
+Si le secret est absent, `send.php` **n'applique pas** la couche 1 (le formulaire continue de
+marcher, protege par les couches 2 et 3) et ecrit `turnstile_non_configure` dans le log — c'est
+volontaire : mieux vaut un formulaire ouvert qu'un formulaire casse, mais ce n'est pas silencieux.
+Meme logique si l'API Cloudflare est injoignable → `turnstile_indisponible`, on laisse passer.
+
+**Log des rejets** : `logs/spam.log`, TSV `date · IP · raison · detail · extrait (100 car.)`.
+Le dossier est protege par `logs/.htaccess` et le fichier par la regle `\.log$` du `.htaccess`
+racine ; `*.log` est gitignore. Aucune rotation automatique — le purger de temps en temps.
+L'IP journalisee est `CF-Connecting-IP` (le site est derriere Cloudflare, `REMOTE_ADDR` ne donne
+que l'edge CF) ; le rate limit par IP utilise desormais la meme source, il etait jusqu'ici
+inoperant puisqu'il regroupait tous les visiteurs derriere quelques IP Cloudflare.
+
+Faux positifs a surveiller en priorite : **`balance`** (mot francais courant : « balance de
+cuisine », un commercant du VILLAGE peut l'ecrire) et la **regle URL**, qui rejette un visiteur
+qui donne l'adresse de son propre site.
+
 ## Cache-busting
 
 **À chaque modification d'un CSS ou d'un JS**, il faut bumper le query string `?v=AAAAMMJJx` sur toutes les pages qui référencent le fichier touché — en pratique `assets-2026/css/*.css` et `assets-2026/js/*.js` pour les pages refondues, `css/style.css` et `js/main.js` pour les 3 pages restées en ancien style.

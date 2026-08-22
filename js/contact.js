@@ -14,6 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!form) return;
 
+    // Le token Turnstile est a usage unique : apres chaque soumission (reussie
+    // ou non) il faut reinitialiser le widget, sinon la 2e tentative part avec
+    // un token deja consomme et se fait rejeter en 403.
+    const resetTurnstile = () => {
+        try {
+            if (window.turnstile) window.turnstile.reset();
+        } catch (err) {
+            /* widget absent ou pas encore charge : sans effet */
+        }
+    };
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -45,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             feedback.className = 'form__feedback is-error';
             feedback.textContent = 'Impossible d\'envoyer le message. Vérifiez votre connexion.';
         } finally {
+            resetTurnstile();
             submit.disabled = false;
             submit.textContent = originalText;
         }
