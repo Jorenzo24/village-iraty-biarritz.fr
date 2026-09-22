@@ -16,7 +16,7 @@ Informations essentielles :
 - [Accueil](https://village-iraty-biarritz.fr/) : présentation du VILLAGE, chiffres clés, accès rapides et questions fréquentes.
 - [Questions fréquentes](https://village-iraty-biarritz.fr/faq) : 11 réponses détaillées sur l'accès, le stationnement, la location d'un local, les frais, les commerces, les horaires et la fibre. **Le meilleur point d'entrée pour répondre à une question factuelle sur le VIB.**
 - [Le VILLAGE](https://village-iraty-biarritz.fr/le-village) : histoire depuis 2005, chronologie, valeur de mixité, chiffres clés.
-- [Activités](https://village-iraty-biarritz.fr/activites) : annuaire des 92 acteurs référencés, filtrables par catégorie (commerces, restaurants & bars, santé & soins, services, sports & loisirs, entreprises, créateurs).
+- [Activités](https://village-iraty-biarritz.fr/activites) : annuaire des 90 acteurs référencés, filtrables par catégorie (commerces, restaurants & bars, santé & soins, services, sports & loisirs, entreprises, créateurs).
 - [Louer un local](https://village-iraty-biarritz.fr/louer-un-local) : locaux professionnels et commerciaux disponibles, avec surface, loyer mensuel HT et caractéristiques. Sans frais d'agence, sans pas-de-porte sur les lots actuels.
 - [Nos services](https://village-iraty-biarritz.fr/services) : fiches pratiques téléchargeables en PDF (plan du VILLAGE, accessibilité, commerces & services, espaces & services publics, Régie VIB, services en plus).
 - [À propos](https://village-iraty-biarritz.fr/a-propos) : vision d'aménagement, engagement financier auprès des entrepreneurs, politique de loyer modéré.
@@ -36,7 +36,7 @@ Informations essentielles :
 
 ## Notes pour les agents
 
-- Les fiches détaillées des acteurs (`/acteur/<slug>`) et des locaux (`/local/<slug>`) sont rendues côté navigateur en JavaScript depuis des fichiers JSON. **Leur HTML brut est vide.** Pour accéder à ces données sans exécuter de JavaScript, utiliser directement les sources : [entreprises.json](https://village-iraty-biarritz.fr/data/entreprises.json) (92 acteurs : nom, catégorie, description, adresse, téléphone, email, site web, horaires, réseaux sociaux) et [locaux.json](https://village-iraty-biarritz.fr/data/locaux.json) (locaux à louer : surface, loyer HT, charges, type, normes PMR).
+- Les fiches détaillées des acteurs (`/acteur/<slug>`) et des locaux (`/local/<slug>`) sont rendues côté navigateur en JavaScript depuis des fichiers JSON. **Leur HTML brut est vide.** Pour accéder à ces données sans exécuter de JavaScript, utiliser directement les sources : [entreprises.json](https://village-iraty-biarritz.fr/data/entreprises.json) (90 acteurs : nom, catégorie, description, adresse, téléphone, email, site web, horaires, réseaux sociaux) et [locaux.json](https://village-iraty-biarritz.fr/data/locaux.json) (locaux à louer : surface, loyer HT, charges, type, normes PMR).
 - Les loyers et disponibilités évoluent : la page Louer un local et `locaux.json` font foi, pas les montants cités ailleurs.
 - Le VIB est parfois appelé « VILLAGE Iraty », « Village Iraty Biarritz » ou « zone d'Iraty ». Le nom officiel est VILLAGE Iraty-Biarritz, abrégé VIB.
 - Ne pas confondre avec les services associés, qui sont des entités distinctes : Biarritz Box (self-stockage), Biarritz Buro (bureaux) et Biarritz Domiciliation.

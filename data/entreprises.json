@@ -571,6 +571,27 @@
     }
   },
   {
+    "slug": "clairement-sucre",
+    "name": "CLAIREMENT SUCRÉ",
+    "category": "createurs",
+    "category_label": "Créateurs",
+    "description": "Pâtisserie artisanale sur commande.\nNée d'une reconversion professionnelle et d'une formation en pâtisserie, CLAIREMENT SUCRÉ propose des douceurs où l'élégance rencontre la gourmandise, entre tradition et modernité, avec des ingrédients choisis au fil des saisons.\nÀ la carte :\n• Saint-Honoré chocolat & vanille\n• Tarte noisette, poire & chocolat\n• Pavlova agrumes\n• Tarte citron, romarin & sésame noir\n• Cookie cacahuète & caramel beurre salé\nGrandes pâtisseries de 4 à 12 parts, sur commande.\nAtelier de création, sans boutique ouverte au public : les commandes se passent en ligne sur le site ou par WhatsApp.",
+    "address": "",
+    "phone": "06 18 29 79 46",
+    "email": "claire.bldn@gmail.com",
+    "website": "https://www.clairement-sucre.fr",
+    "hours": "",
+    "photos": [
+      "/assets/photos/entreprises/clairement-sucre/cover.jpg",
+      "/assets/photos/entreprises/clairement-sucre/photo-01.jpg",
+      "/assets/photos/entreprises/clairement-sucre/photo-02.jpg"
+    ],
+    "logo": "/assets/photos/entreprises/clairement-sucre/logo.jpg",
+    "social": {
+      "instagram": "https://www.instagram.com/clairementsucre"
+    }
+  },
+  {
     "slug": "click-go",
     "name": "CLICK & GO",
     "category": "services",
@@ -986,26 +1007,6 @@
     }
   },
   {
-    "slug": "la-guinguette-des-sardines",
-    "name": "LA GUINGUETTE DES SARDINES",
-    "category": "restaurants",
-    "category_label": "Restaurants & Bars",
-    "description": "Bar à tapas",
-    "address": "Halles DARLA, 10 rue des Mésanges, 64200 BIARRITZ",
-    "phone": "06 81 81 21 23",
-    "email": "contact@lessardinesbar.fr",
-    "website": "https://www.sardines-guinguettes.com/reservation",
-    "hours": "Mardi-mercredi de 17h à 00h · Jeudi de 17h à 2h · Vendredi et samedi de 18h à 2h",
-    "photos": [
-      "/assets/photos/entreprises/la-guinguette-des-sardines/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/la-guinguette-des-sardines/logo.jpg",
-    "social": {
-      "facebook": "https://www.facebook.com/sardinesanglet",
-      "instagram": "https://www.instagram.com/guinguettedessardines_biarritz"
-    }
-  },
-  {
     "slug": "la-parqueterie-basque",
     "name": "LA PARQUETERIE BASQUE",
     "category": "entreprises",
@@ -1158,26 +1159,6 @@
     "social": {
       "facebook": "https://www.facebook.com/lestudiopilatesbtz",
       "instagram": "https://www.instagram.com/lestudiopilatesetcoaching"
-    }
-  },
-  {
-    "slug": "lecho-du-silence",
-    "name": "L’ECHO DU SILENCE",
-    "category": "createurs",
-    "category_label": "Créateurs",
-    "description": "Course de poterie",
-    "address": "Halles DARLA, 10 rue des Mésanges, 64200 BIARRITZ",
-    "phone": "06 63 95 47 25",
-    "email": "contact@lechodusilence.com",
-    "website": "https://www.lechodusilence.com/contact",
-    "hours": "Du mardi au vendredi de 10h30 à 19h · Le samedi de 10h à 17h",
-    "photos": [
-      "/assets/photos/entreprises/lecho-du-silence/cover.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/lecho-du-silence/logo.jpg",
-    "social": {
-      "facebook": "https://www.facebook.com/L.EchoduSilence.atelier.de.ceramique.et.azulejos",
-      "instagram": "https://www.instagram.com/l_echo_du_silence_ceramique"
     }
   },
   {
@@ -1731,33 +1712,6 @@
     "logo": "/assets/photos/entreprises/west-wave-tatoo-shop/logo.jpg",
     "social": {
       "instagram": "https://www.instagram.com/westwave_tattooshop"
-    }
-  },
-  {
-    "slug": "wilau-proprete",
-    "name": "WILAU PROPRETÉ - Nettoyage Industriel",
-    "category": "services",
-    "category_label": "Services",
-    "description": "Grâce à ces 30 ans d’expertise dans le nettoyage industriel pour les professionnels, WILAU PROPRETÉ propose aujourd’hui des services sur-mesure aux entreprises, et garantit des prestations de nettoyage de qualité dans l’Industrie, la Grande Distribution, l’Hôtellerie - Restauration et le Tertiaire. Nous proposons un service structuré et performant, grâce à un encadrement toujours disponible, des équipes qualifiées et polyvalentes, ainsi qu’un contrôle qualité digitalisé permettent un suivi précis et réactif. Cette rigueur garantit des prestations adaptées aux besoins des clients, tout en assurant un niveau de qualité élevé et une gestion efficace de chaque intervention de nettoyage.\n\nPropreté et entretien au Pays Basque et dans le Sud des Landes, Wilau Propreté est là pour vous !",
-    "address": "VILLAGE Iraty-BIARRITZ, 4 rue des Mésanges, 64200 BIARRITZ",
-    "phone": "05 62 35 09 85",
-    "email": "",
-    "website": "https://www.groupe-wilau.com/contact",
-    "hours": "De 9h00 à 18h00",
-    "photos": [
-      "/assets/photos/entreprises/wilau-proprete/cover.png",
-      "/assets/photos/entreprises/wilau-proprete/photo-01.png",
-      "/assets/photos/entreprises/wilau-proprete/photo-02.png",
-      "/assets/photos/entreprises/wilau-proprete/photo-03.jpg",
-      "/assets/photos/entreprises/wilau-proprete/photo-04.jpg",
-      "/assets/photos/entreprises/wilau-proprete/photo-05.jpg",
-      "/assets/photos/entreprises/wilau-proprete/photo-06.jpg",
-      "/assets/photos/entreprises/wilau-proprete/photo-07.jpg"
-    ],
-    "logo": "/assets/photos/entreprises/wilau-proprete/logo.png",
-    "social": {
-      "facebook": "https://www.facebook.com/WilauProprete/?locale=fr_FR",
-      "instagram": "https://www.instagram.com/wilauproprete"
     }
   },
   {

@@ -40,6 +40,13 @@ RewriteRule ^les-services/?$ /services [L,R=301]
 # plutot que de laisser une fiche vide (local.js ne trouve plus le slug).
 RewriteRule ^local/duplex-commercial-de-90mm2-ref-dar41/?$ /louer-un-local [L,R=301]
 
+# Acteurs retires de l'annuaire : leurs URL etaient indexees et au sitemap, on les
+# renvoie vers l'annuaire plutot que de laisser une fiche vide (entreprise.js ne
+# trouve plus le slug et ne rend rien, ce n'est pas un 404).
+RewriteRule ^acteur/la-guinguette-des-sardines/?$ /activites [L,R=301]
+RewriteRule ^acteur/lecho-du-silence/?$ /activites [L,R=301]
+RewriteRule ^acteur/wilau-proprete/?$ /activites [L,R=301]
+
 # /entreprise?slug=X → /acteur/X (301, URL canonique propre)
 RewriteCond %{THE_REQUEST} \s/+entreprise\?slug=([a-z0-9\-]+)\s [NC]
 RewriteRule ^ /acteur/%1? [R=301,L]
