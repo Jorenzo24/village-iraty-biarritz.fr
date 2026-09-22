@@ -169,14 +169,21 @@ document.addEventListener('DOMContentLoaded', async () => {
      * Si une ligne contient un nom de jour suivi de plages, on aligne via <strong>.
      */
     function renderHours(text) {
-        const DAY_RE = /^(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\b/i;
+        // Un libellé peut être un jour seul ("Samedi"), une liste ("Lundi, mardi, jeudi")
+        // ou une plage ("Lundi - Vendredi"), suivie ou non d'un ":" avant les horaires.
+        const DAY = 'lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche';
+        const SEP = '\\s*(?:,|/|-|–|et|à|au)\\s*';
+        const DAY_LIST_RE = new RegExp(`^((?:${DAY})(?:${SEP}(?:${DAY}))*)\\s*:?\\s*`, 'i');
         const items = text.split(/\s*·\s*|\n+/).map(s => s.trim()).filter(Boolean);
         return items.map(item => {
-            const m = item.match(DAY_RE);
+            const m = item.match(DAY_LIST_RE);
             if (m) {
-                const day = m[1];
+                const days = m[1].trim();
                 const rest = item.slice(m[0].length).trim();
-                return `<span class="hours-row"><strong>${escape(day)}</strong> <span>${escape(rest || 'Fermé')}</span></span>`;
+                // Une liste ou une plage de jours est trop longue pour tenir en vis-à-vis
+                // des horaires dans la colonne : on empile au lieu de laisser tout wrapper.
+                const stacked = /(,|\/|-|–|\bet\b|\bà\b|\bau\b)/i.test(days) ? ' hours-row--stacked' : '';
+                return `<span class="hours-row${stacked}"><strong>${escape(days)}</strong> <span>${escape(rest || 'Fermé')}</span></span>`;
             }
             return `<span class="hours-row">${escape(item)}</span>`;
         }).join('');
