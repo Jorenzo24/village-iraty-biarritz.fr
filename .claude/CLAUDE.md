@@ -12,8 +12,16 @@
 **Workflow : on édite directement les fichiers à la racine, puis on vérifie sur l'URL live.**
 1. Éditer le HTML à la racine + `assets-2026/`.
 2. Bumper le `?v=` si `assets-2026/css/*.css` ou `assets-2026/js/*.js` a changé (voir Cache-busting plus bas).
-3. Commit + push sur `main`, puis cliquer **Deploy HEAD Commit** dans cPanel.
-4. Vérifier le rendu sur l'URL live (capture Playwright). Playwright est installé dans `vib-refonte/node_modules/` : un script qui l'importe doit être exécuté **depuis `vib-refonte/`**, sinon `ERR_MODULE_NOT_FOUND`.
+3. **Vérifier AVANT de pousser**, en local — un aller-retour de déploiement coûte cher (deploy manuel + purge CDN) :
+   ```bash
+   python3 -m http.server 8765 --bind 127.0.0.1   # depuis la racine du repo
+   ```
+   puis `http://127.0.0.1:8765/entreprise.html?slug=<slug>` (les URL réécrites `/acteur/<slug>`
+   n'existent pas sans Apache, mais le formulaire `?slug=` que vise la réécriture, si).
+   Indispensable pour tout ce qui est rendu en JS : c'est ce qui a permis de voir en une passe que
+   `renderHours` cassait 3 fiches, et de tester le rendu à 2000/1280/390 px.
+4. Commit + push sur `main`, puis cliquer **Deploy HEAD Commit** dans cPanel.
+5. Vérifier le rendu sur l'URL live (capture Playwright). Playwright est installé dans `vib-refonte/node_modules/` : un script qui l'importe doit être exécuté **depuis `vib-refonte/`**, sinon `ERR_MODULE_NOT_FOUND` — y compris un script écrit ailleurs, donc le copier dans `vib-refonte/` avant de le lancer.
 
 **Documentation du chantier** (référence, pas du code) : [`vib-refonte/DESIGN_SYSTEM.md`](vib-refonte/DESIGN_SYSTEM.md), [`BRIEF_HOMEPAGE.md`](vib-refonte/BRIEF_HOMEPAGE.md), [`CONTENT_HOMEPAGE.md`](vib-refonte/CONTENT_HOMEPAGE.md), [`CLAUDE.md`](vib-refonte/CLAUDE.md) (méthode Playwright + maquette `https://vib-site.vercel.app/`). Ces fichiers décrivent l'ancien cycle de préprod sous `/vib-refonte/` — **il n'a plus cours**, mais le design system et les briefs restent valables.
 
@@ -52,7 +60,7 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 ├── regie-vib.html  mentions-legales.html  politique-confidentialite.html  404.html
 ├── send.php             # Backend du formulaire de contact (SMTP, cf. .env)
 ├── data/                # Source de vérité du contenu data-driven
-│   ├── entreprises.json #   92 acteurs
+│   ├── entreprises.json #   90 acteurs
 │   ├── locaux.json      #   locaux à louer
 │   ├── articles.json    #   articles du blog
 │   └── entreprises-a-integrer.json   # file d'attente, non servie
@@ -171,7 +179,7 @@ Les **fiches détail** sont générées dynamiquement à partir de fichiers JSON
 
 ### Locaux à louer
 - **Données** : [`data/locaux.json`](../data/locaux.json) — champs : `slug`, `name`, `address`, `surface` (nb), `price_ht` (nb), `charges_ht` (nb, 0 si aucune), `type`, `norm_pmr`/`no_fees`/`no_pas_de_porte` (bool → chips), `description`, `photos` (liste de chemins `/assets/...`, le 1er = cover).
-- **Fiche détail** : `local.html` rendue par [`js/local.js`](../js/local.js). URL `/local/<slug>` (rewrite `.htaccess` → `local.html?slug=`). Si `photos` vide → placeholder auto.
+- **Fiche détail** : `local.html` rendue par [`assets-2026/js/local.js`](../assets-2026/js/local.js). URL `/local/<slug>` (rewrite `.htaccess` → `local.html?slug=`). Si `photos` vide → placeholder auto.
 - **Carte liste (en dur)** : ajouter un `<article class="local-card">` dans [`louer-un-local.html`](../louer-un-local.html) (grid `.locaux-grid`).
 - ⚠️ **L'accueil affiche AUSSI 2 cartes de locaux en dur** (section « espaces », grid `.espaces-grid`), avec leur propre image dans `assets-2026/images/locaux/`. C'est un 4ᵉ endroit à toucher, facile à oublier : `grep -rn '<slug>' index.html louer-un-local.html data/locaux.json sitemap.xml` avant de conclure.
 - **Sitemap** : ajouter `/local/<slug>`.
@@ -186,18 +194,72 @@ autres redirections historiques. Exemple en place : `local/duplex-commercial-de-
 (lot 38, loué en août 2026, remplacé par le lot 50).
 
 ### Acteurs (entreprises)
-- **Données** : [`data/entreprises.json`](../data/entreprises.json) — champs : `slug`, `name`, `category`, `category_label`, `description`, `address`, `phone`, `email`, `website`, `hours`, `photos` (1er = cover), `logo`, `social` (objet). Champs vides = `""` ou `[]`/`{}` (tout est conditionnel côté JS).
+- **Données** : [`data/entreprises.json`](../data/entreprises.json) — champs : `slug`, `name`, `category`, `category_label`, `description`, `address`, `phone`, `email`, `website`, `hours`, `photos` (1er = cover), `logo`, `social` (objet). Champs vides = `""` ou `[]`/`{}` (tout est conditionnel côté JS). `address: ""` est supporté et ne laisse aucun trou visuel ; `hours: ""` masque le bloc horaires et le badge — cas typique de l'atelier sur commande sans boutique ouverte au public (`clairement-sucre`, septembre 2026).
 - **Catégories** (`category` → `category_label`) : `commerces`→Commerces, `restaurants`→Restaurants & Bars, `sante`→Santé & soins, `services`→Services, `sport`→Sports & Loisirs, `entreprises`→Entreprises, `createurs`→Créateurs. (Immobilier/agences = `services`.)
-- **Fiche détail** : `entreprise.html` rendue par [`js/entreprise.js`](../js/entreprise.js). URL `/acteur/<slug>`. `description` multi-paragraphes via `\n` (les lignes commençant par •/- deviennent des `<ul>`).
-- **Carte liste (en dur)** : ajouter un `<article class="card" data-cat="<category>" data-name="<nom en minuscules>">` dans [`activites.html`](../activites.html) (grid `#cards-grid`). Le filtre/recherche JS ([`js/activites.js`](../js/activites.js)) s'appuie sur `data-cat`/`data-name`. Badge statut : `<span class="status" hidden></span>` (rempli au chargement).
-- **Sitemap** : ajouter `/acteur/<slug>`.
+- **Fiche détail** : `entreprise.html` rendue par [`assets-2026/js/entreprise.js`](../assets-2026/js/entreprise.js). URL `/acteur/<slug>`. `description` multi-paragraphes via `\n` (les lignes commençant par •/- deviennent des `<ul>`).
+- **Carte liste (en dur)** : ajouter un `<li>` dans [`activites.html`](../activites.html) (grid `#acteurs-grid`). Markup réel — **pas** `class="card"` ni `#cards-grid`, que documentaient à tort les versions précédentes de ce fichier :
+  ```html
+  <article class="acteur-card" data-cat="<category>" data-name="<nom en minuscules> <category_label en minuscules>" data-hours="<format OSM, cf. Horaires>">
+    <a href="/acteur/<slug>" class="acteur-card__media">
+      <img src="/assets/photos/entreprises/<slug>/cover.jpg" alt="<NOM>, VILLAGE Iraty-Biarritz" loading="lazy">
+      <span class="badge badge--category"><category_label></span>
+      <span class="badge acteur-card__status" data-status hidden></span>
+    </a>
+    <div class="acteur-card__body">
+      <h3 class="acteur-card__name"><NOM></h3>
+      <p class="acteur-card__desc"><~100 car., tronqué par « … » si coupé></p>
+      <a href="/acteur/<slug>" class="acteur-card__more">Voir la fiche →</a>
+    </div>
+  </article>
+  ```
+  Les cartes sont **triées alphabétiquement par nom**, toutes catégories confondues. Le filtre/recherche ([`assets-2026/js/activites.js`](../assets-2026/js/activites.js)) s'appuie sur `data-cat`/`data-name` ; `data-hours` est lu par `main.js`, pas par `activites.js`. Omettre `data-hours` si l'acteur n'a pas d'horaires : la carte n'aura pas de badge.
+- ⚠️ **Compteurs en dur, 6 endroits à corriger à chaque ajout/suppression.** Dans [`activites.html`](../activites.html) : la `<meta name="description">`, le `page-hero__lead`, la pastille `data-cat="all"` et la pastille de la catégorie touchée. Dans [`llms.txt`](../llms.txt) : deux mentions du nombre d'acteurs. Le compteur `#acteur-count` sous les filtres, lui, est calculé en JS — il ne se corrige pas à la main et **trahit immédiatement une pastille fausse**.
+- ⚠️ **L'accueil affiche AUSSI 6 cartes vedettes en dur** ([`index.html`](../index.html), grid `.acteurs-grid`), avec leur **propre image** dans `assets-2026/images/acteurs/<slug>.jpg` (jeu distinct de `assets/photos/entreprises/`). C'est un 5ᵉ endroit à toucher, facile à oublier. La grille fait 3 colonnes : **garder un multiple de 3**, sinon la dernière rangée est bancale. Réflexe : `grep -rn '<slug>' index.html activites.html data/entreprises.json sitemap.xml` avant de conclure.
+- **Sitemap** : ajouter `/acteur/<slug>` (le fichier est trié alphabétiquement).
 - **Photos** : `assets/photos/entreprises/<slug>/` (dossier = slug), `cover.jpg` + `logo.png|jpg`.
+- ⚠️ **`photos[0]` sert d'`og:image`** à la fiche (`entreprise.js`). C'est en tension avec la règle Cloudflare de la section **Images** (une image d'aperçu ne doit pas avoir de jumeau `.webp`) : **80 des 88 covers en ont un**. Arbitrage assumé — supprimer un seul jumeau n'aiderait qu'une fiche tout en alourdissant la grille des 90 cartes. À trancher globalement, pas fiche par fiche.
 
-### Horaires (champ `hours`) → badge « Ouvert / Fermé »
-Texte libre parsé par [`js/open-status.js`](../js/open-status.js). Format : segments séparés par ` · `, plages multiples par jour avec « et », plages d'horaires « de Xh à Yh ». Le passage minuit est géré (ex. `de 18h à 2h`). Exemples :
+⚠️ **Quand un acteur est retiré**, même piège que pour les locaux : son URL `/acteur/<slug>` est indexée
+et au sitemap. Sans redirection, `entreprise.js` ne trouve plus le slug et sert une **fiche vide**
+(pas un 404). Ajouter une 301 vers `/activites` dans `.htaccess`, **avant** la règle de réécriture
+`^acteur/([a-z0-9\-]+)`. Exemples en place : `la-guinguette-des-sardines`, `lecho-du-silence`,
+`wilau-proprete` (retirés en septembre 2026).
+
+### Horaires : DEUX systèmes indépendants, à saisir deux fois
+
+C'est le piège le moins évident de l'ajout d'un acteur : **les horaires existent dans deux formats
+différents, dans deux fichiers différents, lus par deux scripts différents.** Oublier l'un des deux
+ne casse rien visiblement — la fiche ou la carte perd juste son badge.
+
+| | Fiche `/acteur/<slug>` | Cartes (accueil + `/activites`) |
+|---|---|---|
+| **Source** | champ `hours` de `entreprises.json` | attribut `data-hours` sur `.acteur-card` |
+| **Format** | texte libre français | OSM : `Mo 09:00-17:00;Tu 09:00-17:00` |
+| **Badge** | `assets-2026/js/open-status.js` | `assets-2026/js/main.js` |
+| **Affichage** | `renderHours()` dans `entreprise.js` | — |
+
+**Format du champ `hours`** (texte libre) : segments séparés par ` · `, plages multiples par jour
+avec « et », plages d'horaires « de Xh à Yh ». Le passage minuit est géré (ex. `de 18h à 2h`).
 - `Du mardi au vendredi de 10h à 12h et de 13h à 18h · Samedi de 10h à 18h`
 - `Du lundi au mercredi de 9h à 15h · Du jeudi au vendredi de 9h à 15h et de 18h à 2h · Samedi de 18h à 2h`
-- Vide ou `Sur rendez-vous` → pas de badge.
+- Vide ou `Sur rendez-vous` → pas de badge, et le bloc horaires de la fiche est masqué.
+
+⚠️ **Le ` · ` sépare des segments, jamais un jour de sa valeur.** `Dimanche · Fermé` produit une
+ligne « Dimanche » sans horaire **plus** une ligne « Fermé » orpheline. Écrire `Dimanche Fermé`.
+(Coquille corrigée sur `centre-lazeo` en septembre 2026.)
+
+**Rendu dans la colonne de la fiche** (`renderHours`) : la carte ne fait que **340 px**, la mise en
+page est donc contrainte. Le libellé de jour est à gauche en gras, les horaires à droite, et :
+- une suite de **3 jours consécutifs ou plus est compactée en plage** (`Lundi, mardi, mercredi,
+  jeudi, vendredi` → `Lundi - Vendredi`) ;
+- une liste **non consécutive est laissée telle quelle** (`Lundi - Mercredi - Vendredi` = lundi,
+  mercredi et vendredi — le tiret y sépare des jours distincts, la compacter publierait un horaire faux) ;
+- le libellé est `nowrap`, seule la colonne des horaires se replie ;
+- chaque plage est insécable (`.hours-slot`), « de » introductif compris.
+
+Ne pas « réparer » un affichage d'horaires en empilant la ligne : si une ligne déborde, c'est le
+libellé qui est trop long, pas la mise en page qui est mauvaise. Empiler une ligne parmi des lignes
+en vis-à-vis casse l'alignement de toute la colonne.
 
 ### ⚠️ Orientation EXIF des photos (piège iPhone)
 Les photos prises au téléphone ont souvent un tag EXIF `Orientation=6` (« Rotate 90 CW ») : elles s'affichent droites dans certains contextes mais **de travers** ailleurs (aperçus OG, vieux navigateurs).
@@ -317,7 +379,7 @@ support WebP (< 3 %, très vieux Safari/IE) peuvent recevoir du WebP sur les ima
 images d'aperçu, elles, sont protégées (aucun jumeau `.webp`). Détail dans la section **Images**.
 
 
-- **Meta descriptions des 92 fiches acteurs** : `assets-2026/js/entreprise.js:44` recopie `e.description` **sans troncature** → 41 % dépassent 160 caractères (max 1490), médiane 48. Correctif : couper à ~155 car. sur une frontière de mot.
+- **Meta descriptions des 90 fiches acteurs** : `assets-2026/js/entreprise.js:44` recopie `e.description` **sans troncature** → 41 % dépassent 160 caractères (max 1490), médiane 48. Correctif : couper à ~155 car. sur une frontière de mot.
 - **`data/articles.json`** : deux articles (`gros-plan-sur-le-quartier-iraty…` et `le-forum-des-associations…`) partagent un `summary` **identique**, qui est de plus **hors sujet** sur le premier. Les autres `summary` sont des fragments pris en milieu d'article. `article.js:44` les sert tels quels en meta description.
 - **Longueurs** : title de `index.html` = 77 car. (coupé vers 60) ; descriptions de `louer-un-local` (179), `faq` (174), `activites` (170) débordent.
 - **Aucune meta description ne manque** : seule la 404 n'en a pas, et elle est en `noindex` — c'est normal.
