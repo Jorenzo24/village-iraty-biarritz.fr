@@ -1900,18 +1900,14 @@
   color: var(--color-text-strong);
   font-weight: var(--fw-semibold);
   text-transform: capitalize;
+  /* La colonne fait ~340px : sans ça "Lundi - Vendredi" se casse en deux et la
+     ligne perd son alignement par rapport aux jours simples. Seule la colonne
+     des horaires est autorisée à se replier. */
+  white-space: nowrap;
 }
 .hours-row > span:last-child { text-align: right; color: var(--color-text-muted); }
-
-/* Liste ou plage de jours ("Lundi, mardi, jeudi", "Lundi - Vendredi") : trop long
-   pour tenir en vis-à-vis des horaires dans la colonne, on empile les deux. */
-.hours-row--stacked {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-}
-.hours-row--stacked strong { text-transform: none; }
-.hours-row--stacked > span:last-child { text-align: left; }
+/* Une plage horaire reste d'un seul tenant : le repli tombe entre deux plages. */
+.hours-slot { white-space: nowrap; }
 
 /* --- Badge Ouvert / Fermé --- */
 .status {

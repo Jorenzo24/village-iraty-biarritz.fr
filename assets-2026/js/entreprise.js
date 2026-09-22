@@ -171,21 +171,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderHours(text) {
         // Un libellé peut être un jour seul ("Samedi"), une liste ("Lundi, mardi, jeudi")
         // ou une plage ("Lundi - Vendredi"), suivie ou non d'un ":" avant les horaires.
-        const DAY = 'lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche';
+        const DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+        const DAY = DAYS.join('|');
         const SEP = '\\s*(?:,|/|-|–|et|à|au)\\s*';
         const DAY_LIST_RE = new RegExp(`^((?:${DAY})(?:${SEP}(?:${DAY}))*)\\s*:?\\s*`, 'i');
+
+        // "Lundi, mardi, mercredi, jeudi, vendredi" ne tient pas en vis-à-vis des horaires
+        // dans la colonne. Une suite de 3 jours consécutifs ou plus est donc compactée en
+        // plage ("Lundi - Vendredi"), forme deja utilisee ailleurs dans les donnees.
+        // Une liste non consécutive ("Lundi - Mercredi - Vendredi") est laissée telle quelle :
+        // le tiret y sépare des jours distincts, ce n'est pas une plage.
+        function compactDays(label) {
+            const found = label.toLowerCase().match(new RegExp(DAY, 'g')) || [];
+            if (found.length < 3) return label;
+            const idx = found.map(d => DAYS.indexOf(d));
+            if (!idx.every((v, i) => i === 0 || v === idx[i - 1] + 1)) return label;
+            const cap = d => d.charAt(0).toUpperCase() + d.slice(1);
+            return `${cap(found[0])} - ${cap(found[found.length - 1])}`;
+        }
+
+        // Une plage ("14:00-18:00", "08:00 - 19:00") ne doit pas se couper sur son tiret :
+        // quand deux plages se suivent, le repli doit tomber entre elles, pas au milieu.
+        const RANGE_RE = /(?:de\s+)?\d{1,2}\s*[h:]\s*\d{0,2}\s*(?:[-–]|à)\s*\d{1,2}\s*[h:]?\s*\d{0,2}/gi;
+        const renderSlots = str =>
+            escape(str).replace(RANGE_RE, r => `<span class="hours-slot">${r}</span>`);
+
         const items = text.split(/\s*·\s*|\n+/).map(s => s.trim()).filter(Boolean);
         return items.map(item => {
             const m = item.match(DAY_LIST_RE);
             if (m) {
-                const days = m[1].trim();
+                const days = compactDays(m[1].trim());
                 const rest = item.slice(m[0].length).trim();
-                // Une liste ou une plage de jours est trop longue pour tenir en vis-à-vis
-                // des horaires dans la colonne : on empile au lieu de laisser tout wrapper.
-                const stacked = /(,|\/|-|–|\bet\b|\bà\b|\bau\b)/i.test(days) ? ' hours-row--stacked' : '';
-                return `<span class="hours-row${stacked}"><strong>${escape(days)}</strong> <span>${escape(rest || 'Fermé')}</span></span>`;
+                return `<span class="hours-row"><strong>${escape(days)}</strong> <span>${renderSlots(rest || 'Fermé')}</span></span>`;
             }
-            return `<span class="hours-row">${escape(item)}</span>`;
+            return `<span class="hours-row">${renderSlots(item)}</span>`;
         }).join('');
     }
 
