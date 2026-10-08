@@ -33,3 +33,7 @@ vib-refonte/package.json
 vib-refonte/package-lock.json
 references/
 
+
+# Réponses de la page de validation des fiches acteurs (données serveur, pas de repo)
+validation-acteurs/data/*.json
+validation-acteurs/data/historique/

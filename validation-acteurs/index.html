@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mise à jour des fiches acteurs - VILLAGE Iraty-BIARRITZ</title>
+<link rel="icon" type="image/png" href="/assets-2026/images/logo/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/assets-2026/css/design-system.css?v=20260526a">
+<style>
+  /* Outil interne : une colonne, sections empilées, barre d'enregistrement fixe en bas. */
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); font: var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-body); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: var(--space-7) var(--space-4) 140px; display: grid; gap: var(--space-7); }
+  h1, h2, h3 { font-family: var(--font-display); color: var(--color-text-strong); margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(28px, 5vw, 40px); font-weight: var(--fw-black); line-height: 1.1; letter-spacing: -0.02em; }
+  h2 { font-size: 24px; font-weight: var(--fw-bold); letter-spacing: -0.01em; }
+  p { margin: 0; max-width: 68ch; }
+  .eyebrow { font: var(--fw-bold) var(--fs-xs)/1 var(--font-display); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent); }
+  .logo { height: 44px; width: auto; display: block; }
+
+  header { display: grid; gap: var(--space-4); }
+  .how { display: grid; gap: var(--space-3); padding: var(--space-5); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .how ol { margin: 0; padding-left: 1.3em; list-style: decimal; display: grid; gap: var(--space-2); }
+
+  /* Sommaire / avancement */
+  .summary { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .summary a { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--space-4); padding: var(--space-3) var(--space-4);
+    background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); color: inherit; text-decoration: none; }
+  .summary a:hover { border-color: var(--color-accent); }
+  .summary .name { font-weight: var(--fw-semibold); }
+  .meter { display: flex; align-items: center; gap: var(--space-3); font-variant-numeric: tabular-nums; font-size: var(--fs-small); color: var(--color-text-muted); white-space: nowrap; }
+  .bar { width: 120px; height: 6px; border-radius: var(--radius-full); background: var(--color-border); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--color-accent); width: 0; transition: width var(--transition-base); }
+  .done .bar i { background: var(--color-success); }
+  .done .count { color: var(--color-success); font-weight: var(--fw-semibold); }
+
+  /* Sections */
+  section.block { display: grid; gap: var(--space-4); scroll-margin-top: var(--space-5); }
+  .block-head { display: grid; gap: var(--space-2); }
+  .block-head .row1 { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-3); }
+  .rows { display: grid; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .item { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-5); padding: var(--space-5); border-top: 1px solid var(--color-border); }
+  .item:first-child { border-top: 0; }
+  .item.is-done { background: #F4FAF5; }
+  .who { display: grid; gap: var(--space-1); align-content: start; min-width: 0; }
+  .who h3 { font-size: 17px; font-weight: var(--fw-bold); display: flex; gap: var(--space-2); align-items: center; }
+  .who a { font-size: var(--fs-small); color: var(--color-accent); }
+  .current { font-size: var(--fs-small); color: var(--color-text-muted); overflow-wrap: anywhere; white-space: pre-line; }
+  .current b { color: var(--color-text); font-weight: var(--fw-medium); }
+  .check { width: 20px; height: 20px; flex: none; border-radius: 50%; border: 2px solid var(--color-border); display: inline-grid; place-items: center; }
+  .is-done .check { background: var(--color-success); border-color: var(--color-success); }
+  .is-done .check::after { content: ""; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+  .answer { display: grid; gap: var(--space-3); align-content: start; min-width: 0; }
+  label.lbl { font-size: var(--fs-small); font-weight: var(--fw-semibold); }
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea {
+    width: 100%; font: inherit; color: inherit; padding: 10px 12px; background: #fff; border: 1px solid #CFC9C0; border-radius: var(--radius-md); }
+  textarea { min-height: 120px; resize: vertical; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  input:disabled, textarea:disabled { background: var(--color-bg-alt); color: var(--color-text-muted); }
+  .pair { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-3); }
+  .pair > div { display: grid; gap: var(--space-1); }
+  .none { display: flex; gap: var(--space-2); align-items: center; font-size: var(--fs-small); color: var(--color-text-muted); width: fit-content; cursor: pointer; }
+  .choices { display: grid; gap: var(--space-2); }
+  .choice { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; }
+  .choice:has(input:checked) { border-color: var(--color-accent); background: #FBF1F0; }
+  .choice input { margin-top: 3px; accent-color: var(--color-accent); }
+  .none input { accent-color: var(--color-accent); }
+  .facts { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-3); font-size: var(--fs-small); }
+  .facts dt { color: var(--color-text-muted); } .facts dd { margin: 0; overflow-wrap: anywhere; }
+  .question { font-weight: var(--fw-semibold); }
+
+  /* Barre d'enregistrement */
+  .savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: var(--color-text-strong); color: #fff;
+    padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0px)); }
+  .savebar .in { max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+  .savebar .total { font-family: var(--font-display); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+  .savebar .status { font-size: var(--fs-small); color: #C9C4BD; flex: 1; min-width: 180px; }
+  .savebar .status.err { color: #FFB4AE; }
+  .btn { font: var(--fw-semibold) 15px/1 var(--font-body); padding: 12px 22px; border-radius: var(--radius-full); border: 0; cursor: pointer; background: var(--color-accent); color: #fff; }
+  .btn:hover { background: var(--color-accent-hover); }
+  .btn:disabled { opacity: .5; cursor: default; }
+
+  .gate { padding: var(--space-6); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); display: grid; gap: var(--space-3); }
+
+  @media (max-width: 720px) {
+    .item { grid-template-columns: 1fr; gap: var(--space-3); padding: var(--space-4); }
+    .bar { width: 64px; }
+    .pair { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<main class="wrap" id="app">
+  <header>
+    <img class="logo" src="/assets-2026/images/logo/vib-full.svg" alt="VILLAGE Iraty-BIARRITZ">
+    <p class="eyebrow">Annuaire des acteurs</p>
+    <h1>Mise à jour des fiches acteurs</h1>
+    <p>Les 90 fiches de l’annuaire ont été corrigées. Il reste des informations que vous seuls pouvez nous donner. Elles sont rangées ci-dessous par thème, acteur par acteur.</p>
+  </header>
+  <div id="content"></div>
+</main>
+
+<div class="savebar" id="savebar" hidden>
+  <div class="in">
+    <span class="total" id="total"></span>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+    <button class="btn" id="save" type="button">Enregistrer</button>
+  </div>
+</div>
+
+<script>
+const DATA = {"sections": [{"id": "questions", "title": "Questions à trancher", "intro": "Deux sources se contredisent. Cochez la bonne réponse, ou indiquez-la dans « Autre ».", "items": [{"id": "q:laminak-tel", "kind": "choice", "actors": [{"slug": "laminak", "name": "LAMINAK"}], "question": "Quel est le bon numéro de téléphone ?", "options": ["06 22 12 02 28 (ancien site internet)", "06 22 12 20 28 (formulaire rempli par l’acteur)"], "other": true}, {"id": "q:aimery-email", "kind": "choice", "actors": [{"slug": "aimery-chemin", "name": "AIMERY CHEMIN"}], "question": "Quelle est la bonne adresse email ?", "options": ["aimerychemin@free.fr (ancien site internet)", "aimerychemin@icloud.com (formulaire rempli par l’acteur)"], "other": true}, {"id": "q:bistrot-tel", "kind": "choice", "actors": [{"slug": "bistrot-toque", "name": "BISTROT TOQUÉ"}], "question": "Quel numéro afficher sur la fiche ?", "options": ["05 59 47 34 28 (ancien site internet)", "06 42 64 95 99 (formulaire, numéro de réservation)"], "other": true}, {"id": "q:tunstall-email", "kind": "choice", "actors": [{"slug": "tunstall", "name": "TUNSTALL"}], "question": "Quelle adresse email afficher ? Celle de l’ancien site appartient à une agence de communication.", "options": ["tunstall-france@escalconsulting.com (ancien site internet)", "le64teleassistance@tunstall.com (site de Tunstall)", "Ne pas afficher d’email"], "other": true}, {"id": "q:istanbul-horaires", "kind": "choice", "actors": [{"slug": "istanbul-kebab", "name": "ISTANBUL KEBAB"}], "question": "Quels sont les bons horaires ? Le texte de présentation et les horaires de l’ancien site se contredisent.", "options": ["Du lundi au samedi de 13h à 23h, sauf le jeudi de 11h à 21h (ancien site)", "Tous les jours de 11h à 21h (texte de présentation)"], "other": true}, {"id": "q:halle-dalba", "kind": "choice", "actors": [{"slug": "beauty-success", "name": "BEAUTY SUCCES"}, {"slug": "boulangerie-enneartz", "name": "BOULANGERIE ENNEARTZ"}, {"slug": "istanbul-kebab", "name": "ISTANBUL KEBAB"}, {"slug": "la-ptite-biarrote", "name": "LA PTITE BIARROTE"}, {"slug": "lazy-days", "name": "LAZY DAYS"}, {"slug": "tunstall", "name": "TUNSTALL"}], "question": "Ces acteurs sont notés « Halle DALBA ». S’agit-il d’un bâtiment différent de la Halle DARLA ?", "options": ["Oui, la Halle DALBA est un bâtiment à part", "Non, c’est une faute de frappe pour Halle DARLA"], "other": false}]}, {"id": "emails", "title": "Emails manquants", "intro": "Ces fiches n’ont pas d’email. Pour 13 d’entre elles, l’adresse assist.co@v-i-b.fr s’affichait par erreur à la place de celle de l’acteur. Elle a été retirée.", "items": [{"id": "email:bab-cardio-respi", "kind": "text", "input": "email", "actors": [{"slug": "bab-cardio-respi", "name": "BAB CARDIO RESPI"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:boucherie-diraty", "kind": "text", "input": "email", "actors": [{"slug": "boucherie-diraty", "name": "BOUCHERIE D'IRATY"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:boulangerie-enneartz", "kind": "text", "input": "email", "actors": [{"slug": "boulangerie-enneartz", "name": "BOULANGERIE ENNEARTZ"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:bowl-go", "kind": "text", "input": "email", "actors": [{"slug": "bowl-go", "name": "BOWL & GO"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:btm-biarritz-train-miniature", "kind": "text", "input": "email", "actors": [{"slug": "btm-biarritz-train-miniature", "name": "BTM BIARRITZ TRAINS MINIATURES"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:bye-buy-car", "kind": "text", "input": "email", "actors": [{"slug": "bye-buy-car", "name": "BYE BUY CAR"}], "current": "Aucun email", "placeholder": "adresse@exemple.fr"}, {"id": "email:cabinet-de-radiologie-dr-nomblot", "kind": "text", "input": "email", "actors": [{"slug": "cabinet-de-radiologie-dr-nomblot", "name": "CABINET DE RADIOLOGIE DR.NOMBLOT"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:click-go", "kind": "text", "input": "email", "actors": [{"slug": "click-go", "name": "CLICK & GO"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:inovie-axbio", "kind": "text", "input": "email", "actors": [{"slug": "inovie-axbio", "name": "INOVIE AXBIO"}], "current": "Aucun email", "placeholder": "adresse@exemple.fr"}, {"id": "email:larty-chaud", "kind": "text", "input": "email", "actors": [{"slug": "larty-chaud", "name": "L'ARTY CHAUD"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:la-parqueterie-basque", "kind": "text", "input": "email", "actors": [{"slug": "la-parqueterie-basque", "name": "LA PARQUETERIE BASQUE"}], "current": "Aucun email", "placeholder": "adresse@exemple.fr"}, {"id": "email:la-ptite-biarrote", "kind": "text", "input": "email", "actors": [{"slug": "la-ptite-biarrote", "name": "LA PTITE BIARROTE"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:origins-digital", "kind": "text", "input": "email", "actors": [{"slug": "origins-digital", "name": "ORIGINS DIGITAL"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:pog-64", "kind": "text", "input": "email", "actors": [{"slug": "pog-64", "name": "POG64"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:s-o-s-medecins", "kind": "text", "input": "email", "actors": [{"slug": "s-o-s-medecins", "name": "SOS Médecins Côte Basque"}], "current": "Aucun email", "placeholder": "adresse@exemple.fr"}, {"id": "email:trikoa", "kind": "text", "input": "email", "actors": [{"slug": "trikoa", "name": "TRIKOA"}], "current": "Aucun email", "placeholder": "adresse@exemple.fr"}, {"id": "email:uniti-habitat", "kind": "text", "input": "email", "actors": [{"slug": "uniti-habitat", "name": "UNITI HABITAT"}], "current": "Aucun email", "placeholder": "adresse@exemple.fr"}, {"id": "email:veloff", "kind": "text", "input": "email", "actors": [{"slug": "veloff", "name": "VELOFF"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}, {"id": "email:wave-pole-studio", "kind": "text", "input": "email", "actors": [{"slug": "wave-pole-studio", "name": "WAVE POLE STUDIO"}], "current": "assist.co@v-i-b.fr s’affichait par erreur", "placeholder": "adresse@exemple.fr"}]}, {"id": "telephones", "title": "Téléphones manquants", "intro": "Ces fiches n’affichent aucun numéro de téléphone.", "items": [{"id": "tel:biarritz-corp", "kind": "text", "input": "tel", "actors": [{"slug": "biarritz-corp", "name": "BIARRITZ CORP"}], "current": "Aucun téléphone", "placeholder": "05 59 00 00 00"}, {"id": "tel:horoa", "kind": "text", "input": "tel", "actors": [{"slug": "horoa", "name": "HOROA"}], "current": "Aucun téléphone", "placeholder": "05 59 00 00 00"}, {"id": "tel:la-parqueterie-basque", "kind": "text", "input": "tel", "actors": [{"slug": "la-parqueterie-basque", "name": "LA PARQUETERIE BASQUE"}], "current": "Aucun téléphone", "placeholder": "05 59 00 00 00"}, {"id": "tel:trikoa", "kind": "text", "input": "tel", "actors": [{"slug": "trikoa", "name": "TRIKOA"}], "current": "Aucun téléphone", "placeholder": "05 59 00 00 00"}, {"id": "tel:uniti-habitat", "kind": "text", "input": "tel", "actors": [{"slug": "uniti-habitat", "name": "UNITI HABITAT"}], "current": "Aucun téléphone", "placeholder": "05 59 00 00 00"}]}, {"id": "adresses", "title": "Adresses à compléter", "intro": "Format attendu sur chaque fiche : bâtiment, numéro et rue, numéro de lot, 64200 BIARRITZ. Complétez ce qui manque.", "items": [{"id": "adresse:al-mounia", "kind": "address", "actors": [{"slug": "al-mounia", "name": "AL MOUNIA"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:ds-wash", "kind": "address", "actors": [{"slug": "ds-wash", "name": "ANTONIO WASH"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:astra", "kind": "address", "actors": [{"slug": "astra", "name": "ASTRA Bar Audiophile"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:atlantic-service", "kind": "address", "actors": [{"slug": "atlantic-service", "name": "ATLANTIC SERVICE"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:avad", "kind": "address", "actors": [{"slug": "avad", "name": "AVAD"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:axe-eco-energie", "kind": "address", "actors": [{"slug": "axe-eco-energie", "name": "AXE ECO ENERGIE"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:b-ocean", "kind": "address", "actors": [{"slug": "b-ocean", "name": "B.Ocean"}], "current": "Aucune adresse"}, {"id": "adresse:bab-cardio-respi", "kind": "address", "actors": [{"slug": "bab-cardio-respi", "name": "BAB CARDIO RESPI"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:beauty-success", "kind": "address", "actors": [{"slug": "beauty-success", "name": "BEAUTY SUCCES"}], "current": "Halle DALBA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:biarritz-box", "kind": "address", "actors": [{"slug": "biarritz-box", "name": "BIARRITZ BOX"}], "current": "Aucune adresse"}, {"id": "adresse:biarritz-buro", "kind": "address", "actors": [{"slug": "biarritz-buro", "name": "BIARRITZ BURO"}], "current": "Halle DARLA - 4 rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:biarritz-corp", "kind": "address", "actors": [{"slug": "biarritz-corp", "name": "BIARRITZ CORP"}], "current": "Aucune adresse"}, {"id": "adresse:biarritz-domiciliation", "kind": "address", "actors": [{"slug": "biarritz-domiciliation", "name": "BIARRITZ DOMICILIATION"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:bistrot-toque", "kind": "address", "actors": [{"slug": "bistrot-toque", "name": "BISTROT TOQUÉ"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:boucherie-diraty", "kind": "address", "actors": [{"slug": "boucherie-diraty", "name": "BOUCHERIE D'IRATY"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:boulangerie-enneartz", "kind": "address", "actors": [{"slug": "boulangerie-enneartz", "name": "BOULANGERIE ENNEARTZ"}], "current": "Halle DALBA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:bowl-go", "kind": "address", "actors": [{"slug": "bowl-go", "name": "BOWL & GO"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:brasserie-diraty", "kind": "address", "actors": [{"slug": "brasserie-diraty", "name": "BRASSERIE D'IRATY"}], "current": "Halle OCCABE - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:btm-biarritz-train-miniature", "kind": "address", "actors": [{"slug": "btm-biarritz-train-miniature", "name": "BTM BIARRITZ TRAINS MINIATURES"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:bye-buy-car", "kind": "address", "actors": [{"slug": "bye-buy-car", "name": "BYE BUY CAR"}], "current": "27 Allée du Moura, 64200 BIARRITZ"}, {"id": "adresse:cabinet-de-radiologie-dr-nomblot", "kind": "address", "actors": [{"slug": "cabinet-de-radiologie-dr-nomblot", "name": "CABINET DE RADIOLOGIE DR.NOMBLOT"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:cafe-grand-biarritz", "kind": "address", "actors": [{"slug": "cafe-grand-biarritz", "name": "CAFÉ GRAND BIARRITZ"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:cap-vital-sante", "kind": "address", "actors": [{"slug": "cap-vital-sante", "name": "CAP VITAL SANTE"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:carrosserie-jmb-auto-moto", "kind": "address", "actors": [{"slug": "carrosserie-jmb-auto-moto", "name": "CARROSSERIE JMB AUTO MOTO"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:clairement-sucre", "kind": "address", "actors": [{"slug": "clairement-sucre", "name": "CLAIREMENT SUCRÉ"}], "current": "Aucune adresse"}, {"id": "adresse:click-go", "kind": "address", "actors": [{"slug": "click-go", "name": "CLICK & GO"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:dance-wave", "kind": "address", "actors": [{"slug": "dance-wave", "name": "DANCE WAVE"}], "current": "BIARRITZ Activités - 25 allée du Moura - 64200 BIARRITZ"}, {"id": "adresse:depann-pc64", "kind": "address", "actors": [{"slug": "depann-pc64", "name": "DEPANN PC'64"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:dietplus", "kind": "address", "actors": [{"slug": "dietplus", "name": "DIETPLUS"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:eat-go", "kind": "address", "actors": [{"slug": "eat-go", "name": "EAT & GO"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:eyesea-production", "kind": "address", "actors": [{"slug": "eyesea-production", "name": "EYESEA PRODUCTION"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:formatext", "kind": "address", "actors": [{"slug": "formatext", "name": "FORMATEXT"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:ingerop-cote-basque", "kind": "address", "actors": [{"slug": "ingerop-cote-basque", "name": "INGÉROP CÔTE BASQUE"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:kafe-etxea", "kind": "address", "actors": [{"slug": "kafe-etxea", "name": "KAFE ETXEA"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:kines-biarritz-iraty", "kind": "address", "actors": [{"slug": "kines-biarritz-iraty", "name": "KINÉS BIARRITZ-IRATY"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:larty-chaud", "kind": "address", "actors": [{"slug": "larty-chaud", "name": "L'ARTY CHAUD"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:la-ptite-biarrote", "kind": "address", "actors": [{"slug": "la-ptite-biarrote", "name": "LA PTITE BIARROTE"}], "current": "Halle DALBA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:la-vague", "kind": "address", "actors": [{"slug": "la-vague", "name": "LA VAGUE"}], "current": "BIARRITZ Activités - 27 allée du Moura - 64200 BIARRITZ"}, {"id": "adresse:lazy-days", "kind": "address", "actors": [{"slug": "lazy-days", "name": "LAZY DAYS"}], "current": "Halle DALBA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:le-local", "kind": "address", "actors": [{"slug": "le-local", "name": "LE LOCAL"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:le-studio", "kind": "address", "actors": [{"slug": "le-studio", "name": "LE STUDIO"}], "current": "Halle DARLA - 14 rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:dr-leslie-morales", "kind": "address", "actors": [{"slug": "dr-leslie-morales", "name": "LESLIE MORALES OSTHÉOPATHE"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:mega-sun-biarritz", "kind": "address", "actors": [{"slug": "mega-sun-biarritz", "name": "MEGASUN BIARRITZ"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:monsieur-brisson", "kind": "address", "actors": [{"slug": "monsieur-brisson", "name": "MONSIEUR BRISSON"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:nahia", "kind": "address", "actors": [{"slug": "nahia", "name": "NAHIA"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:number-one-shop", "kind": "address", "actors": [{"slug": "number-one-shop", "name": "NUMBER ONE BARBERSHOP"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:ongles-en-gel", "kind": "address", "actors": [{"slug": "ongles-en-gel", "name": "ONGLES EN GEL"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:origins-digital", "kind": "address", "actors": [{"slug": "origins-digital", "name": "ORIGINS DIGITAL"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:pharmacie-biarritz-iraty", "kind": "address", "actors": [{"slug": "pharmacie-biarritz-iraty", "name": "PHARMACIE BIARRITZ IRATY"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:piuma-pizza", "kind": "address", "actors": [{"slug": "piuma-pizza", "name": "PIUMA PIZZA"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:pog-64", "kind": "address", "actors": [{"slug": "pog-64", "name": "POG64"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:porrada-barber-shop", "kind": "address", "actors": [{"slug": "porrada-barber-shop", "name": "PORRADA BARBER SHOP"}], "current": "Les ALDADES - 2 rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:regatta-france", "kind": "address", "actors": [{"slug": "regatta-france", "name": "REGATTA FRANCE"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:sud-immo-pro", "kind": "address", "actors": [{"slug": "sud-immo-pro", "name": "SUD IMMO PRO"}], "current": "Les ALDADES - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:sunset-studio-biarritz", "kind": "address", "actors": [{"slug": "sunset-studio-biarritz", "name": "SUNSET STUDIO BIARRITZ"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:the-inspire-academy", "kind": "address", "actors": [{"slug": "the-inspire-academy", "name": "THE INSPIRE ACADEMY"}], "current": "BIARRITZ Activités - 64200 BIARRITZ"}, {"id": "adresse:umih-pays-basque", "kind": "address", "actors": [{"slug": "umih-pays-basque", "name": "UMIH PAYS BASQUE"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:uniti-habitat", "kind": "address", "actors": [{"slug": "uniti-habitat", "name": "UNITI HABITAT"}], "current": "VILLAGE Iraty-BIARRITZ, 4 rue des Mésanges, 64200 BIARRITZ"}, {"id": "adresse:veloff", "kind": "address", "actors": [{"slug": "veloff", "name": "VELOFF"}], "current": "Halle DARLA - rue des Mésanges - 64200 BIARRITZ"}, {"id": "adresse:west-wave-tatoo-shop", "kind": "address", "actors": [{"slug": "west-wave-tatoo-shop", "name": "WEST WAVE TATOO SHOP"}], "current": "16 Rue des Mésanges, 64200 BIARRITZ"}, {"id": "adresse:ecole-de-cirque-ballabulle", "kind": "address", "actors": [{"slug": "ecole-de-cirque-ballabulle", "name": "ÉCOLE DE CIRQUE BALLABULLE"}], "current": "BIARRITZ Activités - 25 allée du Moura - 64200 BIARRITZ"}]}, {"id": "horaires", "title": "Horaires manquants", "intro": "Ces fiches n’affichent pas d’horaires d’ouverture. Écrivez-les comme vous les diriez.", "items": [{"id": "horaires:association-blak", "kind": "text", "input": "text", "actors": [{"slug": "association-blak", "name": "ASSOCIATION BLAK"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:avad", "kind": "text", "input": "text", "actors": [{"slug": "avad", "name": "AVAD"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:b-ocean", "kind": "text", "input": "text", "actors": [{"slug": "b-ocean", "name": "B.Ocean"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:biarritz-box", "kind": "text", "input": "text", "actors": [{"slug": "biarritz-box", "name": "BIARRITZ BOX"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:biarritz-corp", "kind": "text", "input": "text", "actors": [{"slug": "biarritz-corp", "name": "BIARRITZ CORP"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:clairement-sucre", "kind": "text", "input": "text", "actors": [{"slug": "clairement-sucre", "name": "CLAIREMENT SUCRÉ"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:darrieumerlou", "kind": "text", "input": "text", "actors": [{"slug": "darrieumerlou", "name": "DARRIEUMERLOU"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:eyesea-production", "kind": "text", "input": "text", "actors": [{"slug": "eyesea-production", "name": "EYESEA PRODUCTION"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:horoa", "kind": "text", "input": "text", "actors": [{"slug": "horoa", "name": "HOROA"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:dr-leslie-morales", "kind": "text", "input": "text", "actors": [{"slug": "dr-leslie-morales", "name": "LESLIE MORALES OSTHÉOPATHE"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:origins-digital", "kind": "text", "input": "text", "actors": [{"slug": "origins-digital", "name": "ORIGINS DIGITAL"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:tunstall", "kind": "text", "input": "text", "actors": [{"slug": "tunstall", "name": "TUNSTALL"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}, {"id": "horaires:uniti-habitat", "kind": "text", "input": "text", "actors": [{"slug": "uniti-habitat", "name": "UNITI HABITAT"}], "current": "Aucun horaire", "placeholder": "ex. Du lundi au vendredi de 9h à 12h et de 14h à 18h"}]}, {"id": "sites", "title": "Sites internet manquants", "intro": "Ces fiches n’ont pas de lien vers un site internet. Une page Facebook ou Instagram convient aussi.", "items": [{"id": "site:ajoupa-rhumerie", "kind": "text", "input": "url", "actors": [{"slug": "ajoupa-rhumerie", "name": "AJOUPA RHUMERIE"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:ds-wash", "kind": "text", "input": "url", "actors": [{"slug": "ds-wash", "name": "ANTONIO WASH"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:astra", "kind": "text", "input": "url", "actors": [{"slug": "astra", "name": "ASTRA Bar Audiophile"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:b-ocean", "kind": "text", "input": "url", "actors": [{"slug": "b-ocean", "name": "B.Ocean"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:biarritz-corp", "kind": "text", "input": "url", "actors": [{"slug": "biarritz-corp", "name": "BIARRITZ CORP"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:brasserie-diraty", "kind": "text", "input": "url", "actors": [{"slug": "brasserie-diraty", "name": "BRASSERIE D'IRATY"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:istanbul-kebab", "kind": "text", "input": "url", "actors": [{"slug": "istanbul-kebab", "name": "ISTANBUL KEBAB"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:kines-biarritz-iraty", "kind": "text", "input": "url", "actors": [{"slug": "kines-biarritz-iraty", "name": "KINÉS BIARRITZ-IRATY"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:larty-chaud", "kind": "text", "input": "url", "actors": [{"slug": "larty-chaud", "name": "L'ARTY CHAUD"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:la-parqueterie-basque", "kind": "text", "input": "url", "actors": [{"slug": "la-parqueterie-basque", "name": "LA PARQUETERIE BASQUE"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:la-ptite-biarrote", "kind": "text", "input": "url", "actors": [{"slug": "la-ptite-biarrote", "name": "LA PTITE BIARROTE"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:laminak", "kind": "text", "input": "url", "actors": [{"slug": "laminak", "name": "LAMINAK"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:le-local", "kind": "text", "input": "url", "actors": [{"slug": "le-local", "name": "LE LOCAL"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:dr-leslie-morales", "kind": "text", "input": "url", "actors": [{"slug": "dr-leslie-morales", "name": "LESLIE MORALES OSTHÉOPATHE"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:nahia", "kind": "text", "input": "url", "actors": [{"slug": "nahia", "name": "NAHIA"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:odette-coiffure", "kind": "text", "input": "url", "actors": [{"slug": "odette-coiffure", "name": "ODETTE COIFFURE"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:ongles-en-gel", "kind": "text", "input": "url", "actors": [{"slug": "ongles-en-gel", "name": "ONGLES EN GEL"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:trikoa", "kind": "text", "input": "url", "actors": [{"slug": "trikoa", "name": "TRIKOA"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:umih-pays-basque", "kind": "text", "input": "url", "actors": [{"slug": "umih-pays-basque", "name": "UMIH PAYS BASQUE"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:uniti-habitat", "kind": "text", "input": "url", "actors": [{"slug": "uniti-habitat", "name": "UNITI HABITAT"}], "current": "Aucun site", "placeholder": "https://"}, {"id": "site:west-wave-tatoo-shop", "kind": "text", "input": "url", "actors": [{"slug": "west-wave-tatoo-shop", "name": "WEST WAVE TATOO SHOP"}], "current": "Aucun site", "placeholder": "https://"}]}, {"id": "descriptions", "title": "Descriptions à enrichir", "intro": "Ces textes de présentation sont trop courts, ou en anglais pour la Nouvelle Compagnie des Arts Graphiques. Trois à cinq phrases suffisent : activité, spécialités, ce qui distingue l’acteur.", "items": [{"id": "description:al-mounia", "kind": "textarea", "actors": [{"slug": "al-mounia", "name": "AL MOUNIA"}], "current": "Restaurant marocain", "placeholder": "Présentation de l’activité…"}, {"id": "description:ds-wash", "kind": "textarea", "actors": [{"slug": "ds-wash", "name": "ANTONIO WASH"}], "current": "Station de lavage", "placeholder": "Présentation de l’activité…"}, {"id": "description:astra", "kind": "textarea", "actors": [{"slug": "astra", "name": "ASTRA Bar Audiophile"}], "current": "BAR", "placeholder": "Présentation de l’activité…"}, {"id": "description:atlantic-service", "kind": "textarea", "actors": [{"slug": "atlantic-service", "name": "ATLANTIC SERVICE"}], "current": "Entreprise de nettoyage et entretien des locaux", "placeholder": "Présentation de l’activité…"}, {"id": "description:avad", "kind": "textarea", "actors": [{"slug": "avad", "name": "AVAD"}], "current": "Service de prestation à domicile", "placeholder": "Présentation de l’activité…"}, {"id": "description:axe-eco-energie", "kind": "textarea", "actors": [{"slug": "axe-eco-energie", "name": "AXE ECO ENERGIE"}], "current": "Etude des énergies renouvables", "placeholder": "Présentation de l’activité…"}, {"id": "description:b-ocean", "kind": "textarea", "actors": [{"slug": "b-ocean", "name": "B.Ocean"}], "current": "Charpentier", "placeholder": "Présentation de l’activité…"}, {"id": "description:beauty-success", "kind": "textarea", "actors": [{"slug": "beauty-success", "name": "BEAUTY SUCCES"}], "current": "Institut de beauté", "placeholder": "Présentation de l’activité…"}, {"id": "description:biarritz-training", "kind": "textarea", "actors": [{"slug": "biarritz-training", "name": "BEST TRAINING à BIARRITZ TRAINING"}], "current": "Entrainement de sport", "placeholder": "Présentation de l’activité…"}, {"id": "description:biarritz-box", "kind": "textarea", "actors": [{"slug": "biarritz-box", "name": "BIARRITZ BOX"}], "current": "Aucune description", "placeholder": "Présentation de l’activité…"}, {"id": "description:biarritz-corp", "kind": "textarea", "actors": [{"slug": "biarritz-corp", "name": "BIARRITZ CORP"}], "current": "Conciergerie", "placeholder": "Présentation de l’activité…"}, {"id": "description:biarritz-domiciliation", "kind": "textarea", "actors": [{"slug": "biarritz-domiciliation", "name": "BIARRITZ DOMICILIATION"}], "current": "Création de boite aux lettres pour des entreprises", "placeholder": "Présentation de l’activité…"}, {"id": "description:boucherie-diraty", "kind": "textarea", "actors": [{"slug": "boucherie-diraty", "name": "BOUCHERIE D'IRATY"}], "current": "Vente de viandes", "placeholder": "Présentation de l’activité…"}, {"id": "description:boulangerie-enneartz", "kind": "textarea", "actors": [{"slug": "boulangerie-enneartz", "name": "BOULANGERIE ENNEARTZ"}], "current": "Boulangerie biologique", "placeholder": "Présentation de l’activité…"}, {"id": "description:bowl-go", "kind": "textarea", "actors": [{"slug": "bowl-go", "name": "BOWL & GO"}], "current": "Livraison de nourriture", "placeholder": "Présentation de l’activité…"}, {"id": "description:brasserie-diraty", "kind": "textarea", "actors": [{"slug": "brasserie-diraty", "name": "BRASSERIE D'IRATY"}], "current": "Brasserie", "placeholder": "Présentation de l’activité…"}, {"id": "description:btm-biarritz-train-miniature", "kind": "textarea", "actors": [{"slug": "btm-biarritz-train-miniature", "name": "BTM BIARRITZ TRAINS MINIATURES"}], "current": "Vente de trains miniatures", "placeholder": "Présentation de l’activité…"}, {"id": "description:cabinet-de-radiologie-dr-nomblot", "kind": "textarea", "actors": [{"slug": "cabinet-de-radiologie-dr-nomblot", "name": "CABINET DE RADIOLOGIE DR.NOMBLOT"}], "current": "Centre d’imagerie médicale", "placeholder": "Présentation de l’activité…"}, {"id": "description:cap-vital-sante", "kind": "textarea", "actors": [{"slug": "cap-vital-sante", "name": "CAP VITAL SANTE"}], "current": "Vente de matériels medicaux", "placeholder": "Présentation de l’activité…"}, {"id": "description:carrosserie-jmb-auto-moto", "kind": "textarea", "actors": [{"slug": "carrosserie-jmb-auto-moto", "name": "CARROSSERIE JMB AUTO MOTO"}], "current": "Carrosserie de voitures motos", "placeholder": "Présentation de l’activité…"}, {"id": "description:click-go", "kind": "textarea", "actors": [{"slug": "click-go", "name": "CLICK & GO"}], "current": "Livraison à domicile de course", "placeholder": "Présentation de l’activité…"}, {"id": "description:depann-pc64", "kind": "textarea", "actors": [{"slug": "depann-pc64", "name": "DEPANN PC'64"}], "current": "Réparation de portables, ordinateur, connecteur ..", "placeholder": "Présentation de l’activité…"}, {"id": "description:dietplus", "kind": "textarea", "actors": [{"slug": "dietplus", "name": "DIETPLUS"}], "current": "Conseil en nutrition", "placeholder": "Présentation de l’activité…"}, {"id": "description:don-donuts", "kind": "textarea", "actors": [{"slug": "don-donuts", "name": "DON DONUTS"}], "current": "Boutique de donuts", "placeholder": "Présentation de l’activité…"}, {"id": "description:eat-go", "kind": "textarea", "actors": [{"slug": "eat-go", "name": "EAT & GO"}], "current": "Vente et livraison de nourriture", "placeholder": "Présentation de l’activité…"}, {"id": "description:eyesea-production", "kind": "textarea", "actors": [{"slug": "eyesea-production", "name": "EYESEA PRODUCTION"}], "current": "Production de films", "placeholder": "Présentation de l’activité…"}, {"id": "description:formatext", "kind": "textarea", "actors": [{"slug": "formatext", "name": "FORMATEXT"}], "current": "Propose des solutions de formations pour des entreprises", "placeholder": "Présentation de l’activité…"}, {"id": "description:kafe-etxea", "kind": "textarea", "actors": [{"slug": "kafe-etxea", "name": "KAFE ETXEA"}], "current": "Café restauration", "placeholder": "Présentation de l’activité…"}, {"id": "description:kines-biarritz-iraty", "kind": "textarea", "actors": [{"slug": "kines-biarritz-iraty", "name": "KINÉS BIARRITZ-IRATY"}], "current": "Aucune description", "placeholder": "Présentation de l’activité…"}, {"id": "description:larty-chaud", "kind": "textarea", "actors": [{"slug": "larty-chaud", "name": "L'ARTY CHAUD"}], "current": "Cuisine de bistro", "placeholder": "Présentation de l’activité…"}, {"id": "description:la-ptite-biarrote", "kind": "textarea", "actors": [{"slug": "la-ptite-biarrote", "name": "LA PTITE BIARROTE"}], "current": "Restaurant", "placeholder": "Présentation de l’activité…"}, {"id": "description:lazy-days", "kind": "textarea", "actors": [{"slug": "lazy-days", "name": "LAZY DAYS"}], "current": "Salon de détente", "placeholder": "Présentation de l’activité…"}, {"id": "description:le-local", "kind": "textarea", "actors": [{"slug": "le-local", "name": "LE LOCAL"}], "current": "Club de musique", "placeholder": "Présentation de l’activité…"}, {"id": "description:dr-leslie-morales", "kind": "textarea", "actors": [{"slug": "dr-leslie-morales", "name": "LESLIE MORALES OSTHÉOPATHE"}], "current": "Médecin Ostéopathe", "placeholder": "Présentation de l’activité…"}, {"id": "description:mega-sun-biarritz", "kind": "textarea", "actors": [{"slug": "mega-sun-biarritz", "name": "MEGASUN BIARRITZ"}], "current": "Centre de bronzage", "placeholder": "Présentation de l’activité…"}, {"id": "description:monsieur-brisson", "kind": "textarea", "actors": [{"slug": "monsieur-brisson", "name": "MONSIEUR BRISSON"}], "current": "Politique", "placeholder": "Présentation de l’activité…"}, {"id": "description:nahia", "kind": "textarea", "actors": [{"slug": "nahia", "name": "NAHIA"}], "current": "Restaurant", "placeholder": "Présentation de l’activité…"}, {"id": "description:number-one-shop", "kind": "textarea", "actors": [{"slug": "number-one-shop", "name": "NUMBER ONE BARBERSHOP"}], "current": "Barbier", "placeholder": "Présentation de l’activité…"}, {"id": "description:ongles-en-gel", "kind": "textarea", "actors": [{"slug": "ongles-en-gel", "name": "ONGLES EN GEL"}], "current": "Prothésiste ongulaire", "placeholder": "Présentation de l’activité…"}, {"id": "description:origins-digital", "kind": "textarea", "actors": [{"slug": "origins-digital", "name": "ORIGINS DIGITAL"}], "current": "Vente de matériels digitales", "placeholder": "Présentation de l’activité…"}, {"id": "description:pharmacie-biarritz-iraty", "kind": "textarea", "actors": [{"slug": "pharmacie-biarritz-iraty", "name": "PHARMACIE BIARRITZ IRATY"}], "current": "Pharmacie vente de produits de santé", "placeholder": "Présentation de l’activité…"}, {"id": "description:piuma-pizza", "kind": "textarea", "actors": [{"slug": "piuma-pizza", "name": "PIUMA PIZZA"}], "current": "Vente de pizza", "placeholder": "Présentation de l’activité…"}, {"id": "description:pog-64", "kind": "textarea", "actors": [{"slug": "pog-64", "name": "POG64"}], "current": "Concept de cuisines", "placeholder": "Présentation de l’activité…"}, {"id": "description:regatta-france", "kind": "textarea", "actors": [{"slug": "regatta-france", "name": "REGATTA FRANCE"}], "current": "Vente des produits pour la randonnée, montagne", "placeholder": "Présentation de l’activité…"}, {"id": "description:sud-immo-pro", "kind": "textarea", "actors": [{"slug": "sud-immo-pro", "name": "SUD IMMO PRO"}], "current": "Aménageur et Constructeur", "placeholder": "Présentation de l’activité…"}, {"id": "description:sunset-studio-biarritz", "kind": "textarea", "actors": [{"slug": "sunset-studio-biarritz", "name": "SUNSET STUDIO BIARRITZ"}], "current": "Location de studio photo", "placeholder": "Présentation de l’activité…"}, {"id": "description:the-inspire-academy", "kind": "textarea", "actors": [{"slug": "the-inspire-academy", "name": "THE INSPIRE ACADEMY"}], "current": "Formation linguistique", "placeholder": "Présentation de l’activité…"}, {"id": "description:umih-pays-basque", "kind": "textarea", "actors": [{"slug": "umih-pays-basque", "name": "UMIH PAYS BASQUE"}], "current": "Accompagne au quotidien de nombreuses entreprises", "placeholder": "Présentation de l’activité…"}, {"id": "description:veloff", "kind": "textarea", "actors": [{"slug": "veloff", "name": "VELOFF"}], "current": "Vente de cafés", "placeholder": "Présentation de l’activité…"}, {"id": "description:nouvelle-compagnie-des-arts-graphiques", "kind": "textarea", "actors": [{"slug": "nouvelle-compagnie-des-arts-graphiques", "name": "NOUVELLE COMPAGNIE DES ARTS GRAPHIQUES"}], "current": "Original Prints and Posters | Mucha Warhol Dali Miro Chagall | Quality rarety authenticity 19th & 20th Century we ship worldwide", "placeholder": "Présentation de l’activité…"}]}, {"id": "verifier", "title": "Fiches à relire entièrement", "intro": "Aucun formulaire n’a été reçu pour ces acteurs : leurs informations viennent de recherches en ligne. Relisez-les et indiquez ce qui est faux.", "items": [{"id": "verifier:bye-buy-car", "kind": "review", "actors": [{"slug": "bye-buy-car", "name": "BYE BUY CAR"}], "facts": [["Adresse", "27 Allée du Moura, 64200 BIARRITZ"], ["Téléphone", "05 59 24 60 21"], ["Site", "https://bye-buy-car.com"], ["Horaires", "Mar-Ven : 10h-13h / 14h-18h30 · Sam : 10h-13h / 14h-17h"]]}, {"id": "verifier:clairement-sucre", "kind": "review", "actors": [{"slug": "clairement-sucre", "name": "CLAIREMENT SUCRÉ"}], "facts": [["Téléphone", "06 18 29 79 46"], ["Email", "claire.bldn@gmail.com"], ["Site", "https://www.clairement-sucre.fr"]]}, {"id": "verifier:la-parqueterie-basque", "kind": "review", "actors": [{"slug": "la-parqueterie-basque", "name": "LA PARQUETERIE BASQUE"}], "facts": [["Adresse", "Halle DARLA - Lot n°7 - 64200 BIARRITZ"], ["Horaires", "Du mardi au samedi : 9h30-12h30 et 14h-19h"]]}, {"id": "verifier:trikoa", "kind": "review", "actors": [{"slug": "trikoa", "name": "TRIKOA"}], "facts": [["Adresse", "VILLAGE Iraty-BIARRITZ, 14 rue des Mésanges - Halle DARLA (Lot 58), 64200 BIARRITZ"], ["Horaires", "Du mardi au vendredi de 10h à 12h et de 13h à 18h · Samedi de 10h à 18h"]]}, {"id": "verifier:uniti-habitat", "kind": "review", "actors": [{"slug": "uniti-habitat", "name": "UNITI HABITAT"}], "facts": [["Adresse", "VILLAGE Iraty-BIARRITZ, 4 rue des Mésanges, 64200 BIARRITZ"]]}]}]};
+const API = '/validation-acteurs/save.php';
+const KEY = new URLSearchParams(location.search).get('cle') || '';
+const LOCAL = 'vib-validation-' + KEY.slice(0, 6);
+
+let answers = {}, comment = '', dirty = false, saving = false, timer = null;
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function isDone(item) {
+  const a = answers[item.id] || {};
+  if (a.none) return true;
+  switch (item.kind) {
+    case 'choice': return a.choice === '__autre' ? !!(a.other || '').trim() : !!a.choice;
+    case 'address': return !!((a.rue || '').trim() || (a.lot || '').trim());
+    case 'review': return a.ok === 'ok' || (a.ok === 'ko' && !!(a.note || '').trim());
+    default: return !!(a.value || '').trim();
+  }
+}
+
+function actorHead(item) {
+  return item.actors.map(a => `<h3><span class="check" aria-hidden="true"></span>${esc(a.name)}</h3>
+    <a href="/acteur/${esc(a.slug)}" target="_blank" rel="noopener">Voir la fiche en ligne ↗</a>`).join('');
+}
+
+function noneBox(item) {
+  return `<label class="none"><input type="checkbox" data-k="none"> Pas d’information disponible</label>`;
+}
+
+function renderItem(item) {
+  const id = esc(item.id), uid = 'f-' + item.id.replace(/[^a-z0-9]/gi, '-');
+  let left = `<div class="who">${actorHead(item)}`, right = '';
+  if (item.kind === 'choice') {
+    left = `<div class="who">${item.actors.length > 1
+      ? `<h3><span class="check" aria-hidden="true"></span>${item.actors.length} acteurs concernés</h3><p class="current">${item.actors.map(a => esc(a.name)).join('\n')}</p>`
+      : actorHead(item)}`;
+    right = `<p class="question">${esc(item.question)}</p><div class="choices" role="radiogroup">` +
+      item.options.map((o, i) => `<label class="choice"><input type="radio" name="${uid}" value="${esc(o)}" data-k="choice"> <span>${esc(o)}</span></label>`).join('') +
+      (item.other ? `<label class="choice"><input type="radio" name="${uid}" value="__autre" data-k="choice"> <span>Autre réponse</span></label>
+        <input type="text" data-k="other" aria-label="Autre réponse" placeholder="Précisez la bonne réponse">` : '') + '</div>';
+  } else if (item.kind === 'address') {
+    left += `<p class="current">Adresse actuelle :\n<b>${esc(item.current)}</b></p>`;
+    right = `<div class="pair">
+      <div><label class="lbl" for="${uid}-rue">Numéro et rue</label><input type="text" id="${uid}-rue" data-k="rue" placeholder="ex. 10 rue des Mésanges"></div>
+      <div><label class="lbl" for="${uid}-lot">N° de lot</label><input type="text" id="${uid}-lot" data-k="lot" placeholder="ex. 24"></div>
+    </div>${noneBox(item)}`;
+  } else if (item.kind === 'review') {
+    left += `<dl class="facts">${item.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
+    right = `<div class="choices" role="radiogroup">
+      <label class="choice"><input type="radio" name="${uid}" value="ok" data-k="ok"> <span>Tout est exact</span></label>
+      <label class="choice"><input type="radio" name="${uid}" value="ko" data-k="ok"> <span>Il y a des erreurs</span></label></div>
+      <label class="lbl" for="${uid}-note">Corrections</label>
+      <textarea id="${uid}-note" data-k="note" placeholder="Indiquez les informations à corriger"></textarea>`;
+  } else {
+    left += `<p class="current">${item.kind === 'textarea' ? 'Texte actuel :\n' : ''}<b>${esc(item.current)}</b></p>`;
+    const tag = item.kind === 'textarea'
+      ? `<textarea id="${uid}" data-k="value" placeholder="${esc(item.placeholder)}"></textarea>`
+      : `<input type="${item.input === 'text' ? 'text' : item.input}" id="${uid}" data-k="value" placeholder="${esc(item.placeholder)}" autocomplete="off">`;
+    right = `<label class="lbl" for="${uid}">${item.kind === 'textarea' ? 'Nouveau texte' : 'Information à ajouter'}</label>${tag}${noneBox(item)}`;
+  }
+  return `<div class="item" data-id="${id}">${left}</div><div class="answer">${right}</div></div>`;
+}
+
+function render() {
+  const c = $('#content');
+  c.innerHTML = `
+    <div class="how">
+      <h2>Comment ça marche</h2>
+      <ol>
+        <li>Pour chaque acteur, remplissez le champ prévu. Le lien « Voir la fiche en ligne » montre la fiche telle qu’elle apparaît sur le site.</li>
+        <li>Si vous n’avez pas l’information, cochez « Pas d’information disponible ». La ligne compte alors comme traitée.</li>
+        <li>Cliquez sur <b>Enregistrer</b> en bas de l’écran. Vos réponses sont aussi enregistrées automatiquement quelques secondes après chaque saisie. Vous pouvez fermer la page et revenir plus tard, depuis n’importe quel ordinateur, avec le même lien.</li>
+      </ol>
+    </div>
+    <nav aria-label="Avancement par thème"><ul class="summary">${DATA.sections.map(s =>
+      `<li><a href="#${s.id}" data-sum="${s.id}"><span class="name">${esc(s.title)}</span><span class="meter"><span class="count"></span><span class="bar"><i></i></span></span></a></li>`).join('')}</ul></nav>
+    ${DATA.sections.map(s => `
+      <section class="block" id="${s.id}">
+        <div class="block-head"><div class="row1"><h2>${esc(s.title)}</h2><span class="meter" data-meter="${s.id}"><span class="count"></span></span></div><p>${esc(s.intro)}</p></div>
+        <div class="rows">${s.items.map(renderItem).join('')}</div>
+      </section>`).join('')}
+    <section class="block" id="commentaire">
+      <div class="block-head"><h2>Autres remarques</h2><p>Une erreur que nous n’avons pas listée, un acteur parti ou arrivé ? Notez-le ici.</p></div>
+      <textarea id="comment" aria-label="Autres remarques" placeholder="Vos remarques"></textarea>
+    </section>`;
+}
+
+function fill() {
+  document.querySelectorAll('.item').forEach(row => {
+    const a = answers[row.dataset.id] || {};
+    row.querySelectorAll('[data-k]').forEach(el => {
+      const k = el.dataset.k;
+      if (el.type === 'radio') el.checked = a[k] === el.value;
+      else if (el.type === 'checkbox') el.checked = !!a[k];
+      else el.value = a[k] || '';
+    });
+  });
+  $('#comment').value = comment;
+  refresh();
+}
+
+function refresh() {
+  let total = 0, done = 0;
+  DATA.sections.forEach(s => {
+    const d = s.items.filter(isDone).length;
+    total += s.items.length; done += d;
+    const full = d === s.items.length;
+    document.querySelectorAll(`[data-sum="${s.id}"], [data-meter="${s.id}"]`).forEach(el => {
+      el.classList.toggle('done', full);
+      el.querySelector('.count').textContent = full ? `Terminé (${d})` : `${d} sur ${s.items.length} traitées`;
+      const bar = el.querySelector('.bar i'); if (bar) bar.style.width = (100 * d / s.items.length) + '%';
+    });
+  });
+  document.querySelectorAll('.item').forEach(row => {
+    const item = itemById[row.dataset.id];
+    const a = answers[item.id] || {};
+    row.classList.toggle('is-done', isDone(item));
+    row.querySelectorAll('input:not([type=checkbox]):not([type=radio]), textarea').forEach(el => el.disabled = !!a.none);
+    const other = row.querySelector('[data-k=other]'); if (other) other.disabled = a.choice !== '__autre';
+  });
+  $('#total').textContent = `${done} sur ${total} lignes traitées`;
+}
+
+function setStatus(text, err) { const s = $('#status'); s.textContent = text; s.classList.toggle('err', !!err); }
+const hhmm = d => d.toLocaleString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+
+function changed() {
+  dirty = true; refresh();
+  setStatus('Modifications non enregistrées');
+  try { localStorage.setItem(LOCAL, JSON.stringify({ answers, comment })); } catch (e) {}
+  clearTimeout(timer); timer = setTimeout(save, 4000);
+}
+
+async function save() {
+  clearTimeout(timer);
+  if (saving || !dirty) { if (!dirty) setStatus($('#status').textContent || 'Rien à enregistrer'); return; }
+  saving = true; $('#save').disabled = true; setStatus('Enregistrement…');
+  try {
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true, body: JSON.stringify({ cle: KEY, answers, comment }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) throw new Error(j.error || 'Erreur ' + r.status);
+    dirty = false; setStatus('Enregistré le ' + hhmm(new Date(j.saved_at)));
+  } catch (e) {
+    setStatus('Échec de l’enregistrement : ' + e.message + '. Vos réponses restent sur cet ordinateur, réessayez dans un instant.', true);
+  } finally { saving = false; $('#save').disabled = false; }
+}
+
+function gate(msg) {
+  $('#content').innerHTML = `<div class="gate"><h2>Ce lien est incomplet</h2><p>${msg}</p></div>`;
+}
+
+const itemById = {};
+DATA.sections.forEach(s => s.items.forEach(i => itemById[i.id] = i));
+
+(async function start() {
+  if (!KEY) return gate('Utilisez le lien complet qui vous a été transmis : il contient une clé d’accès après « ?cle= ».');
+  let saved = null;
+  try {
+    const r = await fetch(API + '?cle=' + encodeURIComponent(KEY), { cache: 'no-store' });
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 403) return gate('La clé d’accès de ce lien n’est pas reconnue. Vérifiez que le lien a été copié en entier.');
+    if (!r.ok || !j.ok) throw new Error(j.error || 'Erreur ' + r.status);
+    saved = j;
+  } catch (e) {
+    setTimeout(() => setStatus('Impossible de récupérer les réponses enregistrées (' + e.message + '). Ne saisissez rien pour l’instant et rechargez la page.', true));
+  }
+  let local = null;
+  try { local = JSON.parse(localStorage.getItem(LOCAL) || 'null'); } catch (e) {}
+  if (saved && saved.data) { answers = saved.data.answers || {}; comment = saved.data.comment || ''; }
+  else if (!saved && local) { answers = local.answers || {}; comment = local.comment || ''; }
+  render(); fill();
+  $('#savebar').hidden = false;
+  if (saved && saved.saved_at) setStatus('Dernier enregistrement le ' + hhmm(new Date(saved.saved_at)));
+  else if (saved) setStatus('Aucune réponse enregistrée pour l’instant');
+
+  $('#content').addEventListener('input', onEdit);
+  $('#content').addEventListener('change', onEdit);
+  $('#save').addEventListener('click', () => { if (!dirty) { setStatus('Tout est déjà enregistré'); return; } save(); });
+  window.addEventListener('beforeunload', e => { if (dirty) { save(); e.preventDefault(); e.returnValue = ''; } });
+})();
+
+function onEdit(e) {
+  const el = e.target;
+  if (el.id === 'comment') { comment = el.value; return changed(); }
+  const row = el.closest('.item'); if (!row || !el.dataset.k) return;
+  const a = answers[row.dataset.id] = answers[row.dataset.id] || {};
+  if (el.type === 'checkbox') a[el.dataset.k] = el.checked;
+  else if (el.type === 'radio') { if (el.checked) a[el.dataset.k] = el.value; }
+  else a[el.dataset.k] = el.value;
+  a.at = new Date().toISOString();
+  changed();
+}
+</script>
+</body>
+</html>

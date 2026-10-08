@@ -1,0 +1,6 @@
+# Page de validation des fiches acteurs : outil interne, jamais indexé.
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow"
+    Header set Cache-Control "no-store, max-age=0"
+</IfModule>
+DirectoryIndex index.html
