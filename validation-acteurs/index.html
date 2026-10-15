@@ -288,10 +288,24 @@ function refresh() {
 function setStatus(text, err) { const s = $('#status'); s.textContent = text; s.classList.toggle('err', !!err); }
 const hhmm = d => d.toLocaleString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
 
+const CLIENT_VERSION = 2;   // doit être >= MIN_CLIENT de save.php
+let commentAt = '';
+
+// Fusionne deux jeux de réponses : pour chaque ligne, la plus récente (champ `at`) l'emporte.
+function mergeAnswers(base, other) {
+  const out = { ...base };
+  Object.entries(other || {}).forEach(([id, a]) => {
+    const cur = out[id];
+    if (!a || !a.at) return;
+    if (!cur || !cur.at || a.at > cur.at) out[id] = a;
+  });
+  return out;
+}
+
 function changed() {
   dirty = true; refresh();
   setStatus('Modifications non enregistrées');
-  try { localStorage.setItem(LOCAL, JSON.stringify({ answers, comment })); } catch (e) {}
+  try { localStorage.setItem(LOCAL, JSON.stringify({ answers, comment, commentAt })); } catch (e) {}
   clearTimeout(timer); timer = setTimeout(save, 4000);
 }
 
@@ -300,7 +314,8 @@ async function save() {
   if (saving || !dirty) { if (!dirty) setStatus($('#status').textContent || 'Rien à enregistrer'); return; }
   saving = true; $('#save').disabled = true; setStatus('Enregistrement…');
   try {
-    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true, body: JSON.stringify({ cle: KEY, answers, comment }) });
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+      body: JSON.stringify({ cle: KEY, v: CLIENT_VERSION, answers, comment, comment_at: commentAt }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error || 'Erreur ' + r.status);
     dirty = false; setStatus('Enregistré le ' + hhmm(new Date(j.saved_at)));
@@ -309,8 +324,8 @@ async function save() {
   } finally { saving = false; $('#save').disabled = false; }
 }
 
-function gate(msg) {
-  $('#content').innerHTML = `<div class="gate"><h2>Ce lien est incomplet</h2><p>${msg}</p></div>`;
+function gate(msg, title) {
+  $('#content').innerHTML = `<div class="gate"><h2>${title || 'Ce lien est incomplet'}</h2><p>${msg}</p></div>`;
 }
 
 const itemById = {};
@@ -318,7 +333,7 @@ DATA.sections.forEach(s => s.items.forEach(i => itemById[i.id] = i));
 
 (async function start() {
   if (!KEY) return gate('Utilisez le lien complet qui vous a été transmis : il contient une clé d’accès après « ?cle= ».');
-  let saved = null;
+  let saved;
   try {
     const r = await fetch(API + '?cle=' + encodeURIComponent(KEY), { cache: 'no-store' });
     const j = await r.json().catch(() => ({}));
@@ -326,16 +341,26 @@ DATA.sections.forEach(s => s.items.forEach(i => itemById[i.id] = i));
     if (!r.ok || !j.ok) throw new Error(j.error || 'Erreur ' + r.status);
     saved = j;
   } catch (e) {
-    setTimeout(() => setStatus('Impossible de récupérer les réponses enregistrées (' + e.message + '). Ne saisissez rien pour l’instant et rechargez la page.', true));
+    // Sans les réponses du serveur, on ne laisse rien saisir : un enregistrement partiel pourrait faire croire à une perte.
+    return gate('Vos réponses enregistrées n’ont pas pu être chargées (' + esc(e.message) + '). Rien n’est perdu : rechargez la page dans un instant.', 'Chargement impossible');
   }
-  let local = null;
+  const data = saved.data || {};
+  answers = data.answers || {}; comment = data.comment || ''; commentAt = data.comment_at || '';
+
+  // Réponses restées sur cet ordinateur et plus récentes que celles du serveur : on les récupère.
+  let local = null, recovered = 0;
   try { local = JSON.parse(localStorage.getItem(LOCAL) || 'null'); } catch (e) {}
-  if (saved && saved.data) { answers = saved.data.answers || {}; comment = saved.data.comment || ''; }
-  else if (!saved && local) { answers = local.answers || {}; comment = local.comment || ''; }
+  if (local && local.answers) {
+    const merged = mergeAnswers(answers, local.answers);
+    recovered = Object.keys(merged).filter(id => merged[id] !== answers[id]).length;
+    answers = merged;
+    if (local.commentAt && local.commentAt > commentAt) { comment = local.comment || ''; commentAt = local.commentAt; recovered++; }
+  }
   seed(); render(); fill();
   $('#savebar').hidden = false;
-  if (saved && saved.saved_at) setStatus('Dernier enregistrement le ' + hhmm(new Date(saved.saved_at)));
-  else if (saved) setStatus('Aucune réponse enregistrée pour l’instant');
+  if (recovered) { dirty = true; setStatus(`${recovered} réponse${recovered > 1 ? 's' : ''} retrouvée${recovered > 1 ? 's' : ''} sur cet ordinateur, enregistrement…`); save(); }
+  else if (saved.saved_at) setStatus('Dernier enregistrement le ' + hhmm(new Date(saved.saved_at)));
+  else setStatus('Aucune réponse enregistrée pour l’instant');
 
   $('#content').addEventListener('input', onEdit);
   $('#content').addEventListener('change', onEdit);
@@ -345,9 +370,9 @@ DATA.sections.forEach(s => s.items.forEach(i => itemById[i.id] = i));
 
 function onEdit(e) {
   const el = e.target;
-  if (el.id === 'comment') { comment = el.value; return changed(); }
+  if (el.id === 'comment') { comment = el.value; commentAt = new Date().toISOString(); return changed(); }
   const row = el.closest('.item'); if (!row || !el.dataset.k) return;
-  const a = answers[row.dataset.id] = answers[row.dataset.id] || {};
+  const a = answers[row.dataset.id] = { ...(answers[row.dataset.id] || {}) };
   if (el.type === 'checkbox') a[el.dataset.k] = el.checked;
   else if (el.type === 'radio') { if (el.checked) a[el.dataset.k] = el.value; }
   else a[el.dataset.k] = el.value;
