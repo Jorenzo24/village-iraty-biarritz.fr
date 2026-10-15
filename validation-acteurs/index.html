@@ -291,6 +291,10 @@ const hhmm = d => d.toLocaleString('fr-FR', { weekday: 'long', day: 'numeric', m
 const CLIENT_VERSION = 2;   // doit être >= MIN_CLIENT de save.php
 let commentAt = '';
 
+// Toujours un objet simple : un tableau JS (renvoyé par PHP pour un ensemble vide, `[]`) perd ses clés
+// nommées à la sérialisation JSON, c'est ce qui a vidé tous les enregistrements jusqu'au 15/10/2026.
+const asObj = x => (x && typeof x === 'object' && !Array.isArray(x)) ? { ...x } : {};
+
 // Fusionne deux jeux de réponses : pour chaque ligne, la plus récente (champ `at`) l'emporte.
 function mergeAnswers(base, other) {
   const out = { ...base };
@@ -345,13 +349,13 @@ DATA.sections.forEach(s => s.items.forEach(i => itemById[i.id] = i));
     return gate('Vos réponses enregistrées n’ont pas pu être chargées (' + esc(e.message) + '). Rien n’est perdu : rechargez la page dans un instant.', 'Chargement impossible');
   }
   const data = saved.data || {};
-  answers = data.answers || {}; comment = data.comment || ''; commentAt = data.comment_at || '';
+  answers = asObj(data.answers); comment = data.comment || ''; commentAt = data.comment_at || '';
 
   // Réponses restées sur cet ordinateur et plus récentes que celles du serveur : on les récupère.
   let local = null, recovered = 0;
   try { local = JSON.parse(localStorage.getItem(LOCAL) || 'null'); } catch (e) {}
   if (local && local.answers) {
-    const merged = mergeAnswers(answers, local.answers);
+    const merged = mergeAnswers(answers, asObj(local.answers));
     recovered = Object.keys(merged).filter(id => merged[id] !== answers[id]).length;
     answers = merged;
     if (local.commentAt && local.commentAt > commentAt) { comment = local.comment || ''; commentAt = local.commentAt; recovered++; }

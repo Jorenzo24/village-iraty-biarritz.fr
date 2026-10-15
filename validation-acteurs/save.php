@@ -50,6 +50,13 @@ function load_file(string $path): array {
     return $stored;
 }
 
+// Les réponses partent toujours en objet JSON, jamais en liste : un `[]` vide renvoyé à la page
+// devenait un tableau JS dont JSON.stringify ignorait les clés nommées (cause de la perte du 15/10/2026).
+function as_payload(array $data): array {
+    $data['answers'] = (object) ($data['answers'] ?? []);
+    return $data;
+}
+
 // Nombre de lignes réellement renseignées (hors horodatage et hors propositions non vérifiées).
 function count_filled(array $answers): int {
     $n = 0;
@@ -84,11 +91,11 @@ if ($method === 'GET') {
             reply(404, ['ok' => false, 'error' => 'Version introuvable']);
         }
         $h = load_file(HIST_DIR . '/' . $v);
-        reply(200, ['ok' => true, 'data' => $h['data'], 'saved_at' => $h['saved_at'] ?? null]);
+        reply(200, ['ok' => true, 'data' => as_payload($h['data']), 'saved_at' => $h['saved_at'] ?? null]);
     }
 
     $stored = load_file(DATA_FILE);
-    reply(200, ['ok' => true, 'data' => $stored['data'], 'saved_at' => $stored['saved_at']]);
+    reply(200, ['ok' => true, 'data' => as_payload($stored['data']), 'saved_at' => $stored['saved_at']]);
 }
 
 if ($method !== 'POST') reply(405, ['ok' => false, 'error' => 'Méthode non autorisée']);
@@ -140,7 +147,7 @@ if (is_string($in['comment'] ?? null) && $inAt !== '' && $inAt >= $commentAt) {
 $now = (new DateTimeImmutable('now', new DateTimeZone('Europe/Paris')))->format(DATE_ATOM);
 $payload = json_encode(
     ['saved_at' => $now, 'ip' => $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '',
-     'data' => ['answers' => $merged, 'comment' => $comment, 'comment_at' => $commentAt]],
+     'data' => as_payload(['answers' => $merged, 'comment' => $comment, 'comment_at' => $commentAt])],
     JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
 );
 
@@ -156,4 +163,4 @@ if (is_file($hist)) $hist = substr($hist, 0, -5) . '-' . bin2hex(random_bytes(2)
 flock($lock, LOCK_UN);
 fclose($lock);
 
-reply(200, ['ok' => true, 'saved_at' => $now, 'data' => ['answers' => $merged, 'comment' => $comment, 'comment_at' => $commentAt]]);
+reply(200, ['ok' => true, 'saved_at' => $now, 'data' => as_payload(['answers' => $merged, 'comment' => $comment, 'comment_at' => $commentAt])]);
