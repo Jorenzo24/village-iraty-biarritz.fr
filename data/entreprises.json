@@ -1783,5 +1783,84 @@
     ],
     "logo": "/assets/photos/entreprises/uniti-habitat/logo.png",
     "social": {}
+  },
+  {
+    "slug": "bloc-session-biarritz",
+    "name": "BLOC SESSION BIARRITZ",
+    "category": "sport",
+    "category_label": "Sports & Loisirs",
+    "description": "Bloc Session BIARRITZ est une salle et un club d'escalade de bloc installés au VILLAGE Iraty-BIARRITZ, à proximité de Bayonne et d'Anglet.\nL'équipe accueille les grimpeurs 7 jours sur 7 sur 300 m² d'escalade, avec une centaine de blocs, de l'escalade sur enrouleurs et un espace enfant.\nLa salle propose une école d'escalade ouverte de 4 à 77 ans, ainsi que des stages et des séances à la carte pour les jeunes dès 4 ans.\nPour une première venue, des séances découverte encadrées par un moniteur permettent de prendre les bons réflexes, et les grimpeurs autonomes peuvent remplir leur fiche de renseignement en ligne avant de venir.\nBloc Session BIARRITZ organise aussi des anniversaires d'enfants : une séance d'escalade encadrée d'1h ou 1h30, suivie d'un goûter sur un espace mis à disposition.",
+    "address": "Halle OCCABE - 18 rue des Mésanges - Lot n°71 - 64200 BIARRITZ",
+    "phone": "06 87 79 46 06",
+    "email": "biarritz@blocsession.com",
+    "website": "https://www.blocsession.com/salle-escalade/salle-club-escalade-biarritz-baynone-anglet/",
+    "hours": "Lundi de 15h à 20h · Mardi de 15h à 21h · Mercredi de 12h à 21h · Jeudi de 10h à 21h · Vendredi de 15h à 20h · Du samedi au dimanche de 10h à 19h",
+    "photos": [
+      "/assets/photos/entreprises/bloc-session-biarritz/cover.jpg"
+    ],
+    "logo": "/assets/photos/entreprises/bloc-session-biarritz/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=61583652394850",
+      "instagram": "https://www.instagram.com/blocsession_biarritz/"
+    }
+  },
+  {
+    "slug": "aloha-real-estate",
+    "name": "ALOHA REAL ESTATE",
+    "category": "services",
+    "category_label": "Services",
+    "description": "ALOHA Real Estate est une agence immobilière installée à la Halle DARLA, dans le VILLAGE Iraty-BIARRITZ.\nAffiliée au réseau eXp, elle est spécialisée dans la transaction immobilière, les biens résidentiels et les propriétés de caractère au Pays Basque.\nElle accompagne les acquéreurs dans leur recherche, notamment grâce à un service de chasseur immobilier, ainsi que les propriétaires qui souhaitent vendre.\nL'agence propose une estimation en ligne gratuite et sans engagement, qui peut être affinée par un avis de valeur établi par un conseiller.\nPour valoriser les biens, elle s'appuie sur les visites virtuelles, la diffusion sur les portails immobiliers et les réseaux sociaux, et un réseau de partenaires pour le home staging.\nChaque vendeur dispose d'un espace propriétaire en ligne pour suivre les visites et les diffusions et échanger avec son conseiller.",
+    "address": "Halle DARLA - 16 rue des Mésanges - Lot n°38 - 64200 BIARRITZ",
+    "phone": "07 81 43 04 12",
+    "email": "",
+    "website": "https://www.aloha-real-estate.com/",
+    "hours": "",
+    "photos": [
+      "/assets/photos/entreprises/aloha-real-estate/cover.jpg"
+    ],
+    "logo": "/assets/photos/entreprises/aloha-real-estate/logo.png",
+    "social": {}
+  },
+  {
+    "slug": "gaia-destockage",
+    "name": "GAÏA DESTOCKAGE",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Gaïa Destockage est un entrepôt de déstockage de vaisselle et d'art de la table, installé dans la Halle DARLA du VILLAGE Iraty-BIARRITZ.\nOn y trouve des assiettes, des plats, des tasses, des mugs, des saladiers et des pichets, à prix déstockés.\nLes pièces sont sélectionnées auprès de fabricants et d'artisans européens, pour leur savoir-faire et leur durabilité.\nLes stocks sont limités et renouvelés en permanence au fil des arrivages.\nL'entrepôt accueille les particuliers comme les professionnels, revendeurs, artisans ou restaurateurs, qui peuvent prendre rendez-vous sur place ou en visio.",
+    "address": "Halle DARLA - 12 rue des Mésanges - Lot n°16 - 64200 BIARRITZ",
+    "phone": "07 85 45 81 63",
+    "email": "team@gaiadestockage.com",
+    "website": "https://www.gaiadestockage.com/",
+    "hours": "",
+    "photos": [
+      "/assets/photos/entreprises/gaia-destockage/cover.jpg",
+      "/assets/photos/entreprises/gaia-destockage/photo-01.jpg",
+      "/assets/photos/entreprises/gaia-destockage/photo-02.jpg",
+      "/assets/photos/entreprises/gaia-destockage/photo-03.jpg"
+    ],
+    "logo": "/assets/photos/entreprises/gaia-destockage/logo.png",
+    "social": {
+      "instagram": "https://www.instagram.com/gaia_destockage/"
+    }
+  },
+  {
+    "slug": "jet-records",
+    "name": "JET RECORDS",
+    "category": "commerces",
+    "category_label": "Commerces",
+    "description": "Jet Records est un disquaire de BIARRITZ spécialisé dans les vinyles et les CD, neufs et d'occasion.\nSon fonds couvre surtout les années 60 à 80, du rock à la soul en passant par la surf music, la Northern Soul et le boogaloo.\nJacob, qui tient la maison, achète et vend des disques dans des conventions à travers l'Europe et dispose d'un entrepôt de plusieurs milliers de vinyles.\nLe catalogue est aussi en vente sur jetrecords.fr, boutique en ligne adossée à la marketplace CDandLP, du rock au jazz en passant par les bandes originales de films.\nChaque article en ligne est décrit avec l'état détaillé de la pochette et du disque.",
+    "address": "BIARRITZ Activités - 25 allée du Moura - Lot n°7B - 64200 BIARRITZ",
+    "phone": "06 17 65 75 77",
+    "email": "contact@jetrecords.fr",
+    "website": "https://www.jetrecords.fr/fr/",
+    "hours": "",
+    "photos": [
+      "/assets/photos/entreprises/jet-records/cover.jpg"
+    ],
+    "logo": "/assets/photos/entreprises/jet-records/logo.png",
+    "social": {
+      "facebook": "https://www.facebook.com/jetrecordsbtz.biarritz/",
+      "instagram": "https://www.instagram.com/jetrecords_biarritz/"
+    }
   }
 ]
