@@ -95,6 +95,9 @@
   .item.to-check { background: #FFFCF4; }
   .to-check .check { border-color: var(--color-warning); }
   .meter .pend { color: #7A4F00; font-weight: var(--fw-semibold); }
+  .sug[hidden] { display: none; }
+  .auto { display: block; font-size: var(--fs-small); color: #1F5130; background: #EEF7F0; border: 1px solid #B9DCC3; border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); overflow-wrap: anywhere; }
+  .auto a { color: inherit; }
   .gate { padding: var(--space-6); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); display: grid; gap: var(--space-3); }
 
   @media (max-width: 720px) {
@@ -140,6 +143,7 @@ const SUGGESTABLE = ['text', 'textarea', 'address'];
 function isDone(item) {
   const a = answers[item.id] || {};
   if (a.none) return true;
+  if (a.by === 'auto' && a.confirm === false) return false;   // pré-rempli mais incomplet (ex. adresse sans lot)
   const sg = item.suggest;
   if (sg && SUGGESTABLE.includes(item.kind)) {
     if (a.confirm) return true;
@@ -163,7 +167,7 @@ function actorHead(item) {
     <a href="/acteur/${esc(a.slug)}" target="_blank" rel="noopener">Voir la fiche en ligne ↗</a>`).join('');
 }
 
-const isPending = item => !!item.suggest && !isDone(item) && item.kind !== 'review';
+const isPending = item => (!!item.suggest || (answers[item.id] || {}).by === 'auto') && !isDone(item) && item.kind !== 'review';
 function host(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return u || ''; } }
 function sugBox(item, withConfirm) {
   const sg = item.suggest; if (!sg) return '';
@@ -221,6 +225,7 @@ function render() {
       <ol>
         <li>Pour chaque acteur, remplissez le champ prévu. Le lien « Voir la fiche en ligne » montre la fiche telle qu’elle apparaît sur le site.</li>
         <li>Certaines réponses ont été pré-remplies à partir d’internet (encadré jaune « Trouvé en ligne, à vérifier », avec la source). Vérifiez-les : cochez « C’est correct » ou corrigez le champ. Elles ne comptent comme traitées qu’après votre vérification.</li>
+        <li>Les lignes avec un encadré vert « Rempli automatiquement » ont été complétées pour vous à partir de Google Maps, PagesJaunes ou du site de l’acteur : elles comptent déjà comme traitées. Un coup d’œil suffit, corrigez seulement ce qui est faux.</li>
         <li>Si vous n’avez pas l’information, cochez « Pas d’information disponible ». La ligne compte alors comme traitée.</li>
         <li>Cliquez sur <b>Enregistrer</b> en bas de l’écran. Vos réponses sont aussi enregistrées automatiquement quelques secondes après chaque saisie. Vous pouvez fermer la page et revenir plus tard, depuis n’importe quel ordinateur, avec le même lien.</li>
       </ol>
@@ -248,9 +253,20 @@ function seed() {
   });
 }
 
+function autoNote(row, a) {
+  row.querySelector('.auto')?.remove();
+  const sug = row.querySelector('.sug'); if (sug) sug.hidden = a.by === 'auto';
+  if (a.by !== 'auto') return;
+  const p = document.createElement('p'); p.className = 'auto';
+  const src = a.src_url ? `<a href="${esc(a.src_url)}" target="_blank" rel="noopener">${esc(a.src || 'internet')}</a>` : esc(a.src || 'internet');
+  p.innerHTML = a.confirm === false ? `Pré-rempli d’après ${src}. Il manque le n° de lot : complétez-le.` : `Rempli automatiquement d’après ${src}. Corrigez si besoin.`;
+  row.querySelector('.answer').prepend(p);
+}
+
 function fill() {
   document.querySelectorAll('.item').forEach(row => {
     const a = answers[row.dataset.id] || {};
+    autoNote(row, a);
     row.querySelectorAll('[data-k]').forEach(el => {
       const k = el.dataset.k;
       if (el.type === 'radio') el.checked = a[k] === el.value;
@@ -282,7 +298,8 @@ function refresh() {
     row.querySelectorAll('input:not([type=checkbox]):not([type=radio]), textarea').forEach(el => el.disabled = !!a.none);
     const other = row.querySelector('[data-k=other]'); if (other) other.disabled = a.choice !== '__autre';
   });
-  $('#total').textContent = `${done} sur ${total} lignes traitées`;
+  const auto = Object.values(itemById).filter(i => (answers[i.id] || {}).by === 'auto' && isDone(i)).length;
+  $('#total').textContent = `${done} sur ${total} lignes traitées` + (auto ? ` (dont ${auto} remplies automatiquement)` : '');
 }
 
 function setStatus(text, err) { const s = $('#status'); s.textContent = text; s.classList.toggle('err', !!err); }
@@ -381,6 +398,7 @@ function onEdit(e) {
   else if (el.type === 'radio') { if (el.checked) a[el.dataset.k] = el.value; }
   else a[el.dataset.k] = el.value;
   a.at = new Date().toISOString();
+  if (a.by === 'auto') { delete a.by; delete a.src; delete a.src_url; autoNote(row, a); }
   changed();
 }
 </script>
