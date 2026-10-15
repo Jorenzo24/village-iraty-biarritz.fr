@@ -37,3 +37,5 @@ references/
 # Réponses de la page de validation des fiches acteurs (données serveur, pas de repo)
 validation-acteurs/data/*.json
 validation-acteurs/data/historique/
+validation-acteurs/data/*.lock
+validation-acteurs/data/*.tmp
