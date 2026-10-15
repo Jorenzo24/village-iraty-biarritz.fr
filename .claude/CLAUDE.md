@@ -198,8 +198,9 @@ autres redirections historiques. Exemple en place : `local/duplex-commercial-de-
 - **Adresses** : format imposé par la méthodologie client, `Bâtiment - N° rue des Mésanges - Lot n°X - 64200 BIARRITZ`. Bâtiments : Halle DARLA, **Halle DALBA (bâtiment distinct de la Halle DARLA, confirmé par le client en octobre 2026, ce n'est pas une coquille)**, Halle OCCABE, Les ALDADES, BIARRITZ Activités (allée du Moura).
 - **Catégories** (`category` → `category_label`) : `commerces`→Commerces, `restaurants`→Restaurants & Bars, `sante`→Santé & soins, `services`→Services, `sport`→Sports & Loisirs, `entreprises`→Entreprises, `createurs`→Créateurs. (Immobilier/agences = `services`.)
 - **Fiche détail** : `entreprise.html` rendue par [`assets-2026/js/entreprise.js`](../assets-2026/js/entreprise.js). URL `/acteur/<slug>`. `description` multi-paragraphes via `\n` (les lignes commençant par •/- deviennent des `<ul>`).
-- **Carte liste (en dur)** : ajouter un `<li>` dans [`activites.html`](../activites.html) (grid `#acteurs-grid`). Markup réel — **pas** `class="card"` ni `#cards-grid`, que documentaient à tort les versions précédentes de ce fichier :
+- **Carte liste (en dur)** : ajouter un `<li>` dans [`activites.html`](../activites.html) (grid `#acteurs-grid`). ⚠️ **Chaque `<article>` est enveloppé dans son propre `<li>`** : `activites.js` compte et filtre les `<li>` enfants de la grille. Une carte insérée sans `<li>` se retrouve dans le `<li>` de sa voisine : le compteur ne la voit pas et le filtre la masque avec l'autre. Le tri alphabétique ignore les accents (« ÉCOLE » est classé à E). Markup réel — **pas** `class="card"` ni `#cards-grid`, que documentaient à tort les versions précédentes de ce fichier :
   ```html
+  <li>
   <article class="acteur-card" data-cat="<category>" data-name="<nom en minuscules> <category_label en minuscules>" data-hours="<format OSM, cf. Horaires>">
     <a href="/acteur/<slug>" class="acteur-card__media">
       <img src="/assets/photos/entreprises/<slug>/cover.jpg" alt="<NOM>, VILLAGE Iraty-Biarritz" loading="lazy">
@@ -212,6 +213,7 @@ autres redirections historiques. Exemple en place : `local/duplex-commercial-de-
       <a href="/acteur/<slug>" class="acteur-card__more">Voir la fiche →</a>
     </div>
   </article>
+  </li>
   ```
   Les cartes sont **triées alphabétiquement par nom**, toutes catégories confondues. Le filtre/recherche ([`assets-2026/js/activites.js`](../assets-2026/js/activites.js)) s'appuie sur `data-cat`/`data-name` ; `data-hours` est lu par `main.js`, pas par `activites.js`. Omettre `data-hours` si l'acteur n'a pas d'horaires : la carte n'aura pas de badge.
 - ⚠️ **Deux générateurs historiques traînent en local et ne sont PAS dans le repo** :
