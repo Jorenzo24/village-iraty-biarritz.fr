@@ -298,8 +298,7 @@ function refresh() {
     row.querySelectorAll('input:not([type=checkbox]):not([type=radio]), textarea').forEach(el => el.disabled = !!a.none);
     const other = row.querySelector('[data-k=other]'); if (other) other.disabled = a.choice !== '__autre';
   });
-  const auto = Object.values(itemById).filter(i => (answers[i.id] || {}).by === 'auto' && isDone(i)).length;
-  $('#total').textContent = `${done} sur ${total} lignes traitées` + (auto ? ` (dont ${auto} remplies automatiquement)` : '');
+  $('#total').textContent = `${done} sur ${total} lignes traitées`;
 }
 
 function setStatus(text, err) { const s = $('#status'); s.textContent = text; s.classList.toggle('err', !!err); }
