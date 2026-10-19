@@ -46,6 +46,13 @@ RewriteRule ^local/duplex-commercial-de-90mm2-ref-dar41/?$ /louer-un-local [L,R=
 RewriteRule ^acteur/la-guinguette-des-sardines/?$ /activites [L,R=301]
 RewriteRule ^acteur/lecho-du-silence/?$ /activites [L,R=301]
 RewriteRule ^acteur/wilau-proprete/?$ /activites [L,R=301]
+RewriteRule ^acteur/axe-eco-energie/?$ /activites [L,R=301]
+RewriteRule ^acteur/b-ocean/?$ /activites [L,R=301]
+RewriteRule ^acteur/bab-cardio-respi/?$ /activites [L,R=301]
+RewriteRule ^acteur/biarritz-corp/?$ /activites [L,R=301]
+RewriteRule ^acteur/kafe-etxea/?$ /activites [L,R=301]
+RewriteRule ^acteur/le-studio/?$ /activites [L,R=301]
+RewriteRule ^acteur/the-inspire-academy/?$ /activites [L,R=301]
 
 # /entreprise?slug=X → /acteur/X (301, URL canonique propre)
 RewriteCond %{THE_REQUEST} \s/+entreprise\?slug=([a-z0-9\-]+)\s [NC]
