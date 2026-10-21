@@ -80,7 +80,7 @@ function vib_valid_email(string $e): bool
 const VIB_ACTOR_LABELS = [
     'name' => 'nom', 'category' => 'catégorie', 'description' => 'description', 'address' => 'adresse',
     'phone' => 'téléphone', 'email' => 'e-mail', 'website' => 'site web', 'social' => 'réseaux sociaux', 'hours' => 'horaires',
-    'photos' => 'photos', 'logo' => 'logo',
+    'photos' => 'photos', 'logo' => 'logo', 'card_desc' => 'accroche de la carte',
 ];
 
 const VIB_MAX_PHOTOS = 15;
@@ -182,6 +182,9 @@ function vib_actor_apply(array $cur, array $post): array
     else { $new['category'] = $cat; $new['category_label'] = VIB_CATEGORIES[$cat]; }
 
     $new['description'] = $t('description');
+    // Accroche de la carte (annuaire) : une ligne ; vide = début de la description, coupé automatiquement
+    $new['card_desc'] = trim(preg_replace('/\s+/u', ' ', $t('card_desc')));
+    if (mb_strlen($new['card_desc']) > 160) $errors['card_desc'] = 'Accroche de la carte trop longue (160 caractères au maximum).';
 
     $new['address'] = ($post['address_mode'] ?? '') === 'libre'
         ? $t('address_free')
@@ -242,6 +245,7 @@ function vib_actor_form_values(array $e): array
         'phone' => $e['phone'] ?? '', 'email' => $e['email'] ?? '', 'website' => $e['website'] ?? '',
         'social' => is_array($e['social'] ?? null) ? $e['social'] : [],
         'photos' => array_values($e['photos'] ?? []), 'logo' => (string) ($e['logo'] ?? ''),
+        'card_desc' => (string) ($e['card_desc'] ?? ''),
     ] + vib_hours_form_values((string) ($e['hours'] ?? ''));
 }
 
@@ -266,7 +270,7 @@ function vib_fold(string $s): string
 function vib_form_merge(array $orig, array $mine, array $fresh): array
 {
     $n = fn($s): string => vib_merge_norm($s);
-    $labels = ['name' => 'nom', 'category' => 'catégorie', 'description' => 'description', 'phone' => 'téléphone', 'email' => 'e-mail',
+    $labels = ['name' => 'nom', 'category' => 'catégorie', 'description' => 'description', 'card_desc' => 'accroche de la carte', 'phone' => 'téléphone', 'email' => 'e-mail',
                'website' => 'site web', 'building' => 'adresse', 'street' => 'adresse', 'lot' => 'adresse', 'address_free' => 'adresse', 'address_mode' => 'adresse'];
     $out = $fresh;
     $conflicts = [];
@@ -349,5 +353,5 @@ function vib_actor_new(string $slug, string $name, string $category): array
 {
     return ['slug' => $slug, 'name' => $name, 'category' => $category, 'category_label' => VIB_CATEGORIES[$category],
             'description' => '', 'address' => '', 'phone' => '', 'email' => '', 'website' => '', 'hours' => '',
-            'photos' => [], 'logo' => '', 'social' => []];
+            'photos' => [], 'logo' => '', 'social' => [], 'card_desc' => ''];
 }

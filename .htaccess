@@ -80,6 +80,16 @@ RewriteRule ^local/([a-z0-9\-]+)/?$ /local.php?slug=$1 [L,QSA]
 # Articles au root : liste explicite des slugs
 RewriteRule ^(gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier|le-forum-des-associations-de-biarritz-de-retour-a-la-halle-diraty|pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites|5-astuces-pour-bien-choisir-son-local-commercial|les-erreurs-a-eviter-lors-de-la-location-dun-local-commercial|les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz|la-location-dun-local-commercial-a-biarritz)/?$ /article.html?slug=$1 [L,QSA]
 
+# Pages fabriquées par le serveur depuis le coffre du back-office (cartes, compteurs, plan du site).
+# Adresses inchangées ; l'appel direct au fichier .php ou à l'ancien .html est redirigé vers l'adresse propre.
+DirectoryIndex index.php index.html
+RewriteCond %{THE_REQUEST} \s/+index(?:\.php|\.html)?[\s?] [NC]
+RewriteRule ^ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(activites|louer-un-local)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+RewriteRule ^(activites|louer-un-local)/?$ /$1.php [L,QSA]
+RewriteRule ^sitemap\.xml$ /sitemap.php [L]
+
 # 2. Sert /foo en lisant /foo.html en interne (pour les pages restantes)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

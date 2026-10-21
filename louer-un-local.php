@@ -1,3 +1,16 @@
+<?php
+/**
+ * Locaux à louer (/louer-un-local), fabriqué par le serveur depuis les fiches du coffre :
+ * un local ajouté ou retiré dans le back-office apparaît ou disparaît ici. Cartes : lib/cards.php.
+ */
+declare(strict_types=1);
+require __DIR__ . '/lib/cards.php';
+
+$locaux = vib_public_items('locaux');
+header('Content-Type: text/html; charset=utf-8');
+header('Cache-Control: no-cache');
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -109,115 +122,12 @@
       </header>
 
       <ul class="espaces-grid">
-        <li>
-          <article class="local-card">
-            <a href="/local/lot-50-darla-90m2" class="local-card__media" aria-label="Lot 50, Duplex commercial 90 m²">
-              <img src="/assets/photos/locaux/lot-50-darla-90m2/cover.jpg" alt="Lot 50, Halle DARLA, duplex commercial 90 m² au VILLAGE Iraty-BIARRITZ" loading="lazy">
-              <span class="badge badge--available"><span class="badge__dot"></span>Disponible</span>
-            </a>
-            <div class="local-card__body">
-              <p class="local-card__ref">Lot 50, Halle DARLA</p>
-              <h3 class="local-card__title">Duplex commercial 90 m²</h3>
-              <p class="local-card__meta">
-                <span class="local-card__surface">90 m²</span>
-                <span aria-hidden="true" class="local-card__dot">·</span>
-                <span class="local-card__price"><span>1&nbsp;165&nbsp;€</span><span class="local-card__price-unit">/mois HT</span></span>
-              </p>
-              <p class="local-card__sub">Rez-de-chaussée et premier étage, aménagé, normes PMR.</p>
-              <a href="/local/lot-50-darla-90m2" class="local-card__cta">
-                En savoir plus <span class="local-card__arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-        </li>
-
-        <li>
-          <article class="local-card">
-            <a href="/local/lots-7-10-aldades-270m2" class="local-card__media" aria-label="Lots 7 et 10, Les Aldades 270 m²">
-              <img src="/assets/photos/locaux/lots-7-10-aldades-270m2/cover.jpg" alt="Lots 7 et 10, Les Aldades, plain-pied 270 m² au VILLAGE Iraty-Biarritz" loading="lazy">
-              <span class="badge badge--available"><span class="badge__dot"></span>Disponible</span>
-            </a>
-            <div class="local-card__body">
-              <p class="local-card__ref">Lots 7 &amp; 10, Les Aldades</p>
-              <h3 class="local-card__title">Plain-pied 270 m²</h3>
-              <p class="local-card__meta">
-                <span class="local-card__surface">270 m²</span>
-                <span aria-hidden="true" class="local-card__dot">·</span>
-                <span class="local-card__price"><span>4&nbsp;960&nbsp;€</span><span class="local-card__price-unit">/mois HT</span></span>
-              </p>
-              <p class="local-card__sub">Pôle Santé, Services et Commerces, 8 places de parking incluses.</p>
-              <a href="/local/lots-7-10-aldades-270m2" class="local-card__cta">
-                En savoir plus <span class="local-card__arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-        </li>
-
-        <li>
-          <article class="local-card">
-            <a href="/local/lot-21-aldades-42m2" class="local-card__media" aria-label="Lot 21, Les Aldades 42 m²">
-              <img src="/assets/photos/locaux/lot-21-aldades-42m2/cover.jpg" alt="Lot 21, Les Aldades, bureau 42 m² au VILLAGE Iraty-Biarritz" loading="lazy">
-              <span class="badge badge--available"><span class="badge__dot"></span>Disponible</span>
-            </a>
-            <div class="local-card__body">
-              <p class="local-card__ref">Lot 21, Les Aldades</p>
-              <h3 class="local-card__title">Bureau 42 m²</h3>
-              <p class="local-card__meta">
-                <span class="local-card__surface">42 m²</span>
-                <span aria-hidden="true" class="local-card__dot">·</span>
-                <span class="local-card__price"><span>906&nbsp;€</span><span class="local-card__price-unit">/mois HT</span></span>
-              </p>
-              <p class="local-card__sub">Profession libérale, 1er étage avec ascenseur, normes PMR.</p>
-              <a href="/local/lot-21-aldades-42m2" class="local-card__cta">
-                En savoir plus <span class="local-card__arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-        </li>
-
-        <li>
-          <article class="local-card">
-            <a href="/local/lot-12-moura-45m2" class="local-card__media" aria-label="Lot 12, Biarritz La Négresse 45 m²">
-              <img src="/assets/photos/locaux/lot-12-moura-45m2/cover.jpg" alt="Lot 12, Biarritz La Négresse, local 45 m² face à la gare" loading="lazy">
-              <span class="badge badge--available"><span class="badge__dot"></span>Disponible</span>
-            </a>
-            <div class="local-card__body">
-              <p class="local-card__ref">Lot 12, Biarritz La Négresse</p>
-              <h3 class="local-card__title">Local 45 m²</h3>
-              <p class="local-card__meta">
-                <span class="local-card__surface">45 m²</span>
-                <span aria-hidden="true" class="local-card__dot">·</span>
-                <span class="local-card__price"><span>880&nbsp;€</span><span class="local-card__price-unit">/mois HT</span></span>
-              </p>
-              <p class="local-card__sub">Face à la gare SNCF, plein sud, rez-de-chaussée.</p>
-              <a href="/local/lot-12-moura-45m2" class="local-card__cta">
-                En savoir plus <span class="local-card__arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-        </li>
-
-        <li>
-          <article class="local-card">
-            <a href="/local/lot-11a-biarritz-activites-153m2" class="local-card__media" aria-label="Lot 11A, Biarritz Activités 153 m²">
-              <img src="/assets/photos/locaux/lot-11a-biarritz-activites-153m2/cover.jpg" alt="Lot 11A, Biarritz Activités, duplex 153 m² sous charpente Eiffel au VILLAGE Iraty-Biarritz" loading="lazy">
-              <span class="badge badge--available"><span class="badge__dot"></span>Disponible</span>
-            </a>
-            <div class="local-card__body">
-              <p class="local-card__ref">Lot 11A, Biarritz Activités</p>
-              <h3 class="local-card__title">Duplex 153 m²</h3>
-              <p class="local-card__meta">
-                <span class="local-card__surface">153 m²</span>
-                <span aria-hidden="true" class="local-card__dot">·</span>
-                <span class="local-card__price"><span>1&nbsp;430&nbsp;€</span><span class="local-card__price-unit">/mois HT</span></span>
-              </p>
-              <p class="local-card__sub">Charpente bois Treillis Eiffel, grande hauteur, 2 bureaux climatisés à l'étage.</p>
-              <a href="/local/lot-11a-biarritz-activites-153m2" class="local-card__cta">
-                En savoir plus <span class="local-card__arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-        </li>
+<?php foreach ($locaux as $l): ?>
+        <?= vib_card_local($l) ?>
+<?php endforeach; ?>
+<?php if (!$locaux): ?>
+        <li><p class="section-lead">Tous nos locaux sont loués pour le moment. Contactez-nous pour être informé des prochaines disponibilités.</p></li>
+<?php endif; ?>
       </ul>
     </div>
   </section>

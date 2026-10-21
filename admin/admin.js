@@ -54,6 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Accroche de carte : reprendre le début de la description (même règle que vib_card_excerpt_auto, lib/cards.php)
+  document.querySelectorAll('[data-excerpt]').forEach((btn) => btn.addEventListener('click', () => {
+    const input = $(btn.dataset.excerpt);
+    let s = $(input.dataset.excerptFrom).value.replace(/\n\s*[•\-]\s*/g, ' ').replace(/\s+/g, ' ').trim();
+    if (s.length > 100) { s = s.slice(0, 100); if (s.includes(' ')) s = s.slice(0, s.lastIndexOf(' ')); s = s.replace(/[\s,;:.\-–]+$/, '') + '…'; }
+    input.value = s;
+    form.dispatchEvent(new Event('input'));
+  }));
+
   // --- Horaires : même règles que lib/hours.php (aperçu seulement, le serveur recalcule)
   const hoursBox = $('hours');
   if (hoursBox) {

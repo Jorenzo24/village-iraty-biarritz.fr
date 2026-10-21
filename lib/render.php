@@ -26,7 +26,7 @@ function jtrim(string $s): string { return preg_replace('/(*UCP)^\s+|\s+$/u', ''
 function vib_public_items(string $collection): array
 {
     $s = new Store($collection);
-    $s->seedIfEmpty();
+    $s->seedIfEmpty();   // import initial, puis mise à jour du format si besoin
     return $s->read()['items'];
 }
 

@@ -79,7 +79,7 @@ function vib_admin_flash(array $col, string $slug, ?array $last, ?array $conflic
     $ok = $_SERVER['REQUEST_METHOD'] !== 'POST' ? (string) ($_GET['ok'] ?? '') : '';
     $box = fn(string $html, bool $good = true) => print('<div class="adm-flash adm-flash--' . ($good ? 'ok" role="status"' : 'ko" role="alert"') . '>' . $html . "</div>\n");
     if ($ok === '1') $box('<strong>Modifications enregistrées.</strong> ' . ($last ? 'Champs modifiés : ' . e(preg_replace('/^.*\) : /u', '', $last['message'])) . '. ' : '') . 'Elles sont déjà visibles sur ' . $pub . 'la fiche en ligne</a>.');
-    elseif ($ok === 'nouveau') $box('<strong>Fiche créée.</strong> Complétez-la ci-dessous puis enregistrez. Elle est déjà consultable à l’adresse ' . $pub . e($col['public'] . $slug) . '</a> ; sa carte dans les listes du site arrivera dans une prochaine version.');
+    elseif ($ok === 'nouveau') $box('<strong>Fiche créée</strong> et déjà en ligne, à l’adresse ' . $pub . e($col['public'] . $slug) . '</a>, avec sa carte dans ' . e($col['list_label']) . '. Complétez-la ci-dessous puis enregistrez.');
     elseif ($ok === 'restaure') $box('<strong>Version restaurée.</strong> La fiche a repris son contenu d’alors, déjà visible sur ' . $pub . 'la fiche en ligne</a>. Ce retour en arrière est lui-même annulable depuis l’historique ci-dessous.');
     elseif ($ok === 'reintegre') $box('<strong>Fiche réintégrée</strong>, telle qu’elle était au moment du retrait. Elle est de nouveau visible sur ' . $pub . 'le site</a>.');
     elseif ($ok === '0') $box('Aucune modification : la fiche était déjà à jour.');
@@ -130,6 +130,5 @@ function vib_admin_item_footer(Store $store, array $col, string $slug): void
         echo '</ol>';
     }
     echo '</section>';
-    echo '<p class="adm-muted">Les listes du site (cartes, compteurs, plan du site) seront reliées à cette fiche dans une prochaine version. · '
-       . '<a href="' . e(vib_admin_url($col, 'retirer.php', ['slug' => $slug])) . '">Retirer cette fiche du site…</a></p>';
+    echo '<p class="adm-muted"><a href="' . e(vib_admin_url($col, 'retirer.php', ['slug' => $slug])) . '">Retirer cette fiche du site…</a></p>';
 }

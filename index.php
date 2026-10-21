@@ -1,3 +1,34 @@
+<?php
+/**
+ * Accueil, fabriqué par le serveur. Les cartes vedettes (acteurs, espaces) restent une vitrine
+ * éditoriale (photos et textes choisis), mais suivent le back-office :
+ *  - une vedette dont la fiche est retirée est remplacée par un autre acteur avec photo (grille de 6) ;
+ *  - un local vedette loué est remplacé par un autre local disponible ;
+ *  - le badge « Ouvert / Fermé » est calculé depuis les horaires de la fiche.
+ */
+declare(strict_types=1);
+require __DIR__ . '/lib/cards.php';
+
+$acteurs = [];
+foreach (vib_public_items('entreprises') as $e) $acteurs[$e['slug']] = $e;
+$vedettes = array_values(array_filter(['maison-vishnu', 'inovie-axbio', 'clairement-sucre', 'centre-lazeo', 'ajoupa-rhumerie', 'boulangerie-enneartz'], fn($s) => isset($acteurs[$s])));
+// Vedette retirée : remplacée par d'autres acteurs avec photo (ordre alphabétique), pour garder 6 cartes
+$suppleants = array_slice(array_values(array_filter(vib_sort_actors(array_values($acteurs)),
+    fn($e) => !in_array($e['slug'], $vedettes, true) && !empty($e['photos']) && ($e['card_desc'] ?? '') !== '')), 0, 6 - count($vedettes));
+$hoursAttr = function (string $slug) use ($acteurs): string {
+    $osm = vib_hours_osm((string) ($acteurs[$slug]['hours'] ?? ''));
+    return $osm !== '' ? ' data-hours="' . ha($osm) . '"' : '';
+};
+
+$locaux = [];
+foreach (vib_public_items('locaux') as $l) $locaux[$l['slug']] = $l;
+$espaces = array_values(array_filter(['lots-7-10-aldades-270m2', 'lot-50-darla-90m2'], fn($s) => isset($locaux[$s])));
+$remplacants = array_slice(array_values(array_diff_key($locaux, array_flip($espaces))), 0, 2 - count($espaces));
+
+header('Content-Type: text/html; charset=utf-8');
+header('Cache-Control: no-cache');
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -277,8 +308,9 @@
       </header>
 
       <ul class="acteurs-grid">
+        <?php if (in_array('maison-vishnu', $vedettes, true)): ?>
         <li>
-          <article class="acteur-card" data-hours="Mo-Sa 11:30-14:30,18:30-22:00">
+          <article class="acteur-card"<?= $hoursAttr('maison-vishnu') ?>>
             <a href="/acteur/maison-vishnu" class="acteur-card__media">
               <img src="assets-2026/images/acteurs/maison-vishnu.png" alt="Maison Vishnu, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants</span>
@@ -291,9 +323,11 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
 
+        <?php if (in_array('inovie-axbio', $vedettes, true)): ?>
         <li>
-          <article class="acteur-card" data-hours="Mo-Fr 07:30-18:00;Sa 08:00-12:00">
+          <article class="acteur-card"<?= $hoursAttr('inovie-axbio') ?>>
             <a href="/acteur/inovie-axbio" class="acteur-card__media">
               <img src="assets-2026/images/acteurs/inovie-axbio.jpg" alt="Inovie Axbio, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -306,9 +340,11 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
 
+        <?php if (in_array('clairement-sucre', $vedettes, true)): ?>
         <li>
-          <article class="acteur-card">
+          <article class="acteur-card"<?= $hoursAttr('clairement-sucre') ?>>
             <a href="/acteur/clairement-sucre" class="acteur-card__media">
               <img src="assets-2026/images/acteurs/clairement-sucre.jpg" alt="CLAIREMENT SUCRÉ, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Créateurs</span>
@@ -321,9 +357,11 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
 
+        <?php if (in_array('centre-lazeo', $vedettes, true)): ?>
         <li>
-          <article class="acteur-card" data-hours="Mo-Sa 09:30-19:00">
+          <article class="acteur-card"<?= $hoursAttr('centre-lazeo') ?>>
             <a href="/acteur/centre-lazeo" class="acteur-card__media">
               <img src="assets-2026/images/acteurs/centre-lazeo.jpg" alt="Centre Lazeo, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Santé &amp; soins</span>
@@ -336,9 +374,11 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
 
+        <?php if (in_array('ajoupa-rhumerie', $vedettes, true)): ?>
         <li>
-          <article class="acteur-card" data-hours="Tu 12:00-16:30;We 12:00-16:30;Th 12:00-02:00;Fr 12:00-02:00;Sa 12:00-02:00">
+          <article class="acteur-card"<?= $hoursAttr('ajoupa-rhumerie') ?>>
             <a href="/acteur/ajoupa-rhumerie" class="acteur-card__media">
               <img src="assets-2026/images/acteurs/ajoupa-rhumerie.jpg" alt="Ajoupa Rhumerie, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Restaurants &amp; bars</span>
@@ -351,9 +391,11 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
 
+        <?php if (in_array('boulangerie-enneartz', $vedettes, true)): ?>
         <li>
-          <article class="acteur-card" data-hours="We 08:00-14:00;Th 08:00-14:00;Fr 08:00-14:00;Sa 08:30-12:45">
+          <article class="acteur-card"<?= $hoursAttr('boulangerie-enneartz') ?>>
             <a href="/acteur/boulangerie-enneartz" class="acteur-card__media">
               <img src="assets-2026/images/acteurs/boulangerie-enneartz.jpg" alt="Boulangerie Enneartz, VILLAGE Iraty-Biarritz" loading="lazy">
               <span class="badge badge--category">Commerces</span>
@@ -366,6 +408,10 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
+<?php foreach ($suppleants as $e): ?>
+        <?= vib_card_actor($e) ?>
+<?php endforeach; ?>
       </ul>
 
       <div class="annuaire__cta">
@@ -443,6 +489,7 @@
       </header>
 
       <ul class="espaces-grid">
+        <?php if (in_array('lots-7-10-aldades-270m2', $espaces, true)): ?>
         <li>
           <article class="local-card">
             <div class="local-card__media">
@@ -465,7 +512,9 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
 
+        <?php if (in_array('lot-50-darla-90m2', $espaces, true)): ?>
         <li>
           <article class="local-card">
             <div class="local-card__media">
@@ -488,6 +537,10 @@
             </div>
           </article>
         </li>
+<?php endif; ?>
+<?php foreach ($remplacants as $l): ?>
+        <?= vib_card_local($l) ?>
+<?php endforeach; ?>
       </ul>
     </div>
   </section>

@@ -44,4 +44,4 @@ vib_admin_header('Acteurs', $user, 'acteurs');
     <?php endforeach; ?>
     <li class="adm-empty" id="adm-none" hidden>Aucune fiche ne correspond.</li>
   </ul>
-<?php vib_admin_footer('/admin/admin.js?v=20261021e');
+<?php vib_admin_footer('/admin/admin.js?v=20261021f');

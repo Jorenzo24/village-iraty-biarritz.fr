@@ -46,8 +46,12 @@ function vib_config(): array {
             // 'objects' : champs qui sont des OBJETS JSON ({}), même vides. PHP ne distingue pas un objet
             // vide d'une liste vide : sans cette liste, « social »: {} redeviendrait [] à la réécriture
             // (même famille de piège que la perte des réponses de la page de validation).
-            'entreprises' => ['seed' => dirname(__DIR__) . '/data/entreprises.json', 'key' => 'slug', 'objects' => ['social']],
-            'locaux'      => ['seed' => dirname(__DIR__) . '/data/locaux.json', 'key' => 'slug', 'objects' => []],
+            // 'fields' : champs ajoutés après la mise en service ; une fiche du coffre qui ne les a pas encore les
+            // reçoit une fois (valeur du fichier du dépôt pour la même fiche, sinon valeur par défaut). Cf. Store::migrate().
+            'entreprises' => ['seed' => dirname(__DIR__) . '/data/entreprises.json', 'key' => 'slug', 'objects' => ['social'],
+                              'fields' => ['card_desc' => '']],
+            'locaux'      => ['seed' => dirname(__DIR__) . '/data/locaux.json', 'key' => 'slug', 'objects' => [],
+                              'fields' => ['card_ref' => '', 'card_title' => '', 'card_sub' => '', 'card_alt' => '']],
         ],
         // Cloudflare Access (porte d'entrée du back-office), renseigné à l'étape 1.
         'access' => [

@@ -275,6 +275,13 @@ final class Store
      */
     public function seedIfEmpty(): bool
     {
+        $seeded = $this->seed();
+        $this->migrate();   // champs apparus depuis l'import
+        return $seeded;
+    }
+
+    private function seed(): bool
+    {
         $lock = $this->lock(LOCK_EX);
         try {
             if (is_file($this->file())) return false;
@@ -287,6 +294,42 @@ final class Store
             $this->atomicWrite($this->histDir() . "/$id.json", $raw);
             $this->appendLog(['id' => $id, 'version' => self::versionOf($raw), 'base' => '', 'at' => date(DATE_ATOM),
                               'author' => 'système', 'message' => 'Import initial depuis ' . basename($seed), 'count' => count($items)]);
+            return true;
+        } finally {
+            $this->unlock($lock);
+        }
+    }
+
+    /**
+     * Ajoute aux fiches du coffre les champs apparus depuis leur import (config « fields »). Une seule fois :
+     * ne fait RIEN si toutes les fiches les ont déjà. Valeur reprise du fichier du dépôt pour la même fiche
+     * (ex. texte de carte rédigé à la main), sinon valeur par défaut. Les autres champs ne sont pas touchés.
+     */
+    public function migrate(): bool
+    {
+        $cfg = vib_config()['collections'][$this->collection];
+        $fields = $cfg['fields'] ?? [];
+        if (!$fields) return false;
+        $needs = fn(array $items): bool => (bool) array_filter($items, fn($it) => array_diff_key($fields, $it));
+        if (!$needs($this->read()['items'])) return false;
+        $lock = $this->lock(LOCK_EX);
+        try {
+            $current = $this->readUnlocked();
+            if (!$needs($current['items'])) return false;
+            $seed = [];
+            foreach ((array) json_decode((string) @file_get_contents($cfg['seed']), true) as $s) if (isset($s[$cfg['key']])) $seed[$s[$cfg['key']]] = $s;
+            $items = $current['items'];
+            $added = [];
+            foreach ($items as &$it) {
+                foreach ($fields as $f => $default) {
+                    if (array_key_exists($f, $it)) continue;
+                    $it[$f] = $seed[$it[$cfg['key']]][$f] ?? $default;
+                    $added[$f] = true;
+                }
+            }
+            unset($it);
+            $raw = $this->validateAndEncode($items);
+            $this->commitUnlocked($raw, $current['version'], 'système', 'Mise à jour du format : ajout de ' . implode(', ', array_keys($added)), count($items));
             return true;
         } finally {
             $this->unlock($lock);

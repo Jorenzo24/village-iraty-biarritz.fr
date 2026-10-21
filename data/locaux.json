@@ -18,7 +18,11 @@
       "/assets/photos/locaux/lot-50-darla-90m2/photo-03.jpg",
       "/assets/photos/locaux/lot-50-darla-90m2/photo-04.jpg",
       "/assets/photos/locaux/lot-50-darla-90m2/photo-05.jpg"
-    ]
+    ],
+    "card_ref": "Lot 50, Halle DARLA",
+    "card_title": "Duplex commercial 90 m²",
+    "card_sub": "Rez-de-chaussée et premier étage, aménagé, normes PMR.",
+    "card_alt": "Lot 50, Halle DARLA, duplex commercial 90 m² au VILLAGE Iraty-BIARRITZ"
   },
   {
     "slug": "lots-7-10-aldades-270m2",
@@ -41,7 +45,11 @@
       "/assets/photos/locaux/lots-7-10-aldades-270m2/lot-7-interieur-2.jpg",
       "/assets/photos/locaux/lots-7-10-aldades-270m2/lot-10-interieur-1.jpg",
       "/assets/photos/locaux/lots-7-10-aldades-270m2/lot-10-interieur-2.jpg"
-    ]
+    ],
+    "card_ref": "Lots 7 & 10, Les Aldades",
+    "card_title": "Plain-pied 270 m²",
+    "card_sub": "Pôle Santé, Services et Commerces, 8 places de parking incluses.",
+    "card_alt": "Lots 7 et 10, Les Aldades, plain-pied 270 m² au VILLAGE Iraty-Biarritz"
   },
   {
     "slug": "lot-21-aldades-42m2",
@@ -64,7 +72,11 @@
       "/assets/photos/locaux/lot-21-aldades-42m2/piece-rangement.jpg",
       "/assets/photos/locaux/lot-21-aldades-42m2/sanitaire.jpg",
       "/assets/photos/locaux/lot-21-aldades-42m2/parties-communes.jpg"
-    ]
+    ],
+    "card_ref": "Lot 21, Les Aldades",
+    "card_title": "Bureau 42 m²",
+    "card_sub": "Profession libérale, 1er étage avec ascenseur, normes PMR.",
+    "card_alt": "Lot 21, Les Aldades, bureau 42 m² au VILLAGE Iraty-Biarritz"
   },
   {
     "slug": "lot-12-moura-45m2",
@@ -87,7 +99,11 @@
       "/assets/photos/locaux/lot-12-moura-45m2/point-deau.jpg",
       "/assets/photos/locaux/lot-12-moura-45m2/exterieur-1.jpg",
       "/assets/photos/locaux/lot-12-moura-45m2/exterieur-2.jpg"
-    ]
+    ],
+    "card_ref": "Lot 12, Biarritz La Négresse",
+    "card_title": "Local 45 m²",
+    "card_sub": "Face à la gare SNCF, plein sud, rez-de-chaussée.",
+    "card_alt": "Lot 12, Biarritz La Négresse, local 45 m² face à la gare"
   },
   {
     "slug": "lot-11a-biarritz-activites-153m2",
@@ -110,6 +126,10 @@
       "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/bureau-etage-2.jpg",
       "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/bureau-etage-3.jpg",
       "/assets/photos/locaux/lot-11a-biarritz-activites-153m2/exterieur.jpg"
-    ]
+    ],
+    "card_ref": "Lot 11A, Biarritz Activités",
+    "card_title": "Duplex 153 m²",
+    "card_sub": "Charpente bois Treillis Eiffel, grande hauteur, 2 bureaux climatisés à l'étage.",
+    "card_alt": "Lot 11A, Biarritz Activités, duplex 153 m² sous charpente Eiffel au VILLAGE Iraty-Biarritz"
   }
 ]

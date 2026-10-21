@@ -111,6 +111,9 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-compare__row:not(.adm-compare__head) > span:nth-child(2)::before { content: "Cette version : "; font-weight: 600; }
 .adm-compare__row:not(.adm-compare__head) > span:nth-child(3)::before { content: "Actuelle : "; font-weight: 600; }
 
+/* Bouton d'apparence lien (dans une aide) */
+.adm-linkbtn { font: inherit; color: var(--color-accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+
 /* Locaux */
 .adm-flags { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); }
 .adm-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

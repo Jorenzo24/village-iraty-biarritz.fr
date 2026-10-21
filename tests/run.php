@@ -251,6 +251,36 @@ $sl->addItem($new, 'a@x', 'Ajout');
 check('nouveau local : identifiant propre, forme exacte', $new['slug'] === 'lot-9-bureau-30-m2' && array_keys($new) === array_keys($locs[0]) && vib_local_apply($new, vib_local_form_values($new))['changed'] === []);
 check('identifiant redirigé par le .htaccess réservé (local loué en août)', in_array('duplex-commercial-de-90mm2-ref-dar41', vib_taken_slugs($sl, 'local'), true));
 
+echo "\nCartes des listes publiques\n";
+require_once __DIR__ . '/../lib/cards.php';
+check('badge : « Du lundi au vendredi de 9h à 12h et de 14h à 18h » → Mo…Fr 09:00-12:00,14:00-18:00',
+    vib_hours_osm('Du lundi au vendredi de 9h à 12h et de 14h à 18h') === 'Mo 09:00-12:00,14:00-18:00;Tu 09:00-12:00,14:00-18:00;We 09:00-12:00,14:00-18:00;Th 09:00-12:00,14:00-18:00;Fr 09:00-12:00,14:00-18:00');
+check('badge : après minuit, jours en boucle (dimanche → jeudi)', vib_hours_osm('Du dimanche au jeudi de 20h à 4h') === 'Mo 20:00-04:00;Tu 20:00-04:00;We 20:00-04:00;Th 20:00-04:00;Su 20:00-04:00');
+check('badge : 24h/24, comme la carte d’origine', str_starts_with(vib_hours_osm('Du lundi au dimanche 24h/24h'), 'Mo 00:00-23:59;'));
+check('badge : sur rendez-vous, sans heures, vide → pas de badge', vib_hours_osm('Sur rendez-vous') === '' && vib_hours_osm('Du lundi au vendredi') === '' && vib_hours_osm('') === '');
+check('badge : « Dimanche Fermé » ignoré', vib_hours_osm('Samedi de 9h à 12h · Dimanche Fermé') === 'Sa 09:00-12:00');
+$okOsm = 0; $withH = 0;
+foreach ($all as $a) { $p = vib_hours_parse($a['hours']); if (!$p) continue; $withH++; $g = []; foreach ($p['grid'] as $d => $sl) foreach ($sl as [$x, $y]) $g[] = [$d, $x, $y === 1440 ? 1440 : $y]; $l = vib_hours_intervals($a['hours']) ?? []; sort($g); sort($l); if ($l === $g) $okOsm++; }
+check("badge de carte = horaires de la fiche ($okOsm / $withH fiches en grille)", $okOsm === $withH);
+check('accroche automatique : coupée sur un mot, ≈ 100 caractères', vib_card_excerpt_auto(str_repeat('mot ', 40)) === rtrim(str_repeat('mot ', 25)) . '…' && vib_card_excerpt_auto('Court.') === 'Court.');
+check('initiales : « ASSOCIATION BLAK » → « AB »', vib_initials('ASSOCIATION BLAK') === 'AB');
+$card = vib_card_actor(['slug' => 'x', 'name' => 'Café <b>', 'category' => 'restaurants', 'category_label' => 'Restaurants & Bars', 'description' => 'D', 'hours' => '', 'photos' => [], 'card_desc' => '']);
+check('carte : nom échappé, pas de badge sans horaires, initiales sans photo', str_contains($card, 'Café &lt;b&gt;') && !str_contains($card, 'data-hours') && str_contains($card, 'acteur-card__ph'));
+check('prix de carte : 1165.0 → « 1 165 € », 906.5 → « 906,50 € »', vib_card_price(1165.0) === "1\u{00A0}165\u{00A0}€" && vib_card_price(906.5) === "906,50\u{00A0}€");
+
+echo "\nMise à jour du format du coffre\n";
+$sm = new Store('entreprises', $tmp . '/migr'); $sm->seedIfEmpty();
+$r0 = $sm->read();
+$stripped = array_map(function ($it) { unset($it['card_desc']); return $it; }, $r0['items']);
+$stripped[0]['name'] = 'Nom modifié entre-temps';
+$sm->write($stripped, $r0['version'], 'a@x', 'coffre d’avant la mise à jour');
+check('coffre sans le nouveau champ → complété', $sm->migrate() === true);
+$items = $sm->read()['items'];
+check('valeur reprise du fichier du dépôt pour la même fiche', $items[1]['card_desc'] === $all[1]['card_desc'] && $items[1]['card_desc'] !== '');
+check('autres champs non touchés (modification intermédiaire gardée)', $items[0]['name'] === 'Nom modifié entre-temps');
+check('une seule fois : ne refait rien ensuite', $sm->migrate() === false);
+check('tracée dans l’historique', str_starts_with($sm->history(1)[0]['message'], 'Mise à jour du format'));
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

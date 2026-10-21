@@ -1,5 +1,19 @@
 # village-iraty-biarritz.fr
 
+> ⚠️ **Branche `feature/back-office` (octobre 2026)** : sur cette branche, une partie de ce document décrit
+> encore la production actuelle (`main`) et sera réécrite à la fusion. Ce qui change ici :
+> - les fiches `/acteur/<slug>` et `/local/<slug>` sont rendues par le serveur (`entreprise.php`, `local.php`) ;
+> - les données vivent dans un coffre hors Git (`lib/store.php`, dossier `vib-data` hors du site), gérées
+>   depuis `/admin` (Cloudflare Access) ; `data/*.json` ne sert plus que d'import initial ;
+> - **l'annuaire, « Louer un local », l'accueil et `sitemap.xml` sont fabriqués par le serveur**
+>   (`activites.php`, `louer-un-local.php`, `index.php`, `sitemap.php`, cartes dans `lib/cards.php`) :
+>   plus aucune carte, aucun compteur ni aucune entrée de sitemap à écrire à la main ;
+> - **un seul horaire par acteur** : le badge des cartes est calculé depuis le champ `hours` de la fiche
+>   (plus de `data-hours` à saisir) ;
+> - textes des cartes : champs `card_desc` (acteurs), `card_ref` / `card_title` / `card_sub` / `card_alt` (locaux) ;
+> - la grille de « Louer un local » est `.espaces-grid` (et non `.locaux-grid`, comme écrit plus bas).
+> Tests : `php tests/run.php` (binaire PHP 8.2).
+
 ## Refonte 2026 : quasi terminée, on travaille en prod directe
 
 **Le design 2026 est en production à la racine du repo.** Il n'y a plus de préproduction : le sous-dossier `vib-refonte/` ne contient plus que de la documentation, plus aucune page ni asset servi.

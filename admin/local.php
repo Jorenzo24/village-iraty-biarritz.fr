@@ -102,6 +102,26 @@ vib_admin_header($item['name'], $user, 'locaux');
       </div>
     </section>
 
+    <section class="adm-card">
+      <h2>Carte dans la liste des locaux</h2>
+      <p class="adm-hint">Textes de la carte sur la page « Louer un local » (et sur l’accueil si le local y est mis en avant). Laissés vides, ils sont tirés du titre et de la description.</p>
+      <div class="adm-grid adm-grid--2">
+        <div class="adm-field">
+          <label for="f-card-ref">Référence</label>
+          <input type="text" id="f-card-ref" name="card_ref" value="<?= $v('card_ref') ?>" placeholder="Lot 50, Halle DARLA">
+        </div>
+        <div class="adm-field">
+          <label for="f-card-title">Titre court</label>
+          <input type="text" id="f-card-title" name="card_title" value="<?= $v('card_title') ?>" placeholder="Duplex commercial 90 m²">
+        </div>
+      </div>
+      <div class="adm-field">
+        <label for="f-card-sub">Accroche</label>
+        <input type="text" id="f-card-sub" name="card_sub" value="<?= $v('card_sub') ?>" maxlength="160" placeholder="Rez-de-chaussée et premier étage, aménagé, normes PMR."<?= $inv('card_sub') ?>>
+        <?= $err('card_sub') ?>
+      </div>
+    </section>
+
     <section class="adm-card" id="photos" data-slug="<?= e($slug) ?>" data-c="locaux">
       <h2>Photos</h2>
       <p class="adm-hint">La première photo est la couverture (en grand sur la fiche, et image d’aperçu quand l’annonce est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
@@ -135,4 +155,4 @@ vib_admin_header($item['name'], $user, 'locaux');
   </form>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261021e');
+<?php vib_admin_footer('/admin/admin.js?v=20261021f');

@@ -79,6 +79,12 @@ vib_admin_header($item['name'], $user, 'acteurs');
         <textarea id="f-description" name="description"><?= $v('description') ?></textarea>
         <p class="adm-hint">Un retour à la ligne = un nouveau paragraphe. Une ligne qui commence par « • » ou « - » devient une puce.</p>
       </div>
+      <div class="adm-field">
+        <label for="f-card-desc">Accroche de la carte (annuaire)</label>
+        <input type="text" id="f-card-desc" name="card_desc" value="<?= $v('card_desc') ?>" maxlength="160" data-excerpt-from="f-description"<?= $inv('card_desc') ?>>
+        <?= $err('card_desc') ?>
+        <p class="adm-hint">Une phrase courte (100 caractères environ) sous le nom, sur la carte de l’annuaire. Vide : le début de la description est repris automatiquement. <button type="button" class="adm-linkbtn" data-excerpt="f-card-desc">Reprendre le début de la description</button></p>
+      </div>
     </section>
 
     <section class="adm-card">
@@ -230,4 +236,4 @@ vib_admin_header($item['name'], $user, 'acteurs');
   </form>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261021e');
+<?php vib_admin_footer('/admin/admin.js?v=20261021f');
