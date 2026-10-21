@@ -39,9 +39,8 @@ function vib_image_store(string $tmp, string $kind, string $slug): string
     if (!$src) throw new ImageRejected('Image illisible ou endommagée.');
 
     // Photo de téléphone : appliquer la rotation indiquée par l'EXIF (sinon elle s'affiche couchée)
-    if ($info[2] === IMAGETYPE_JPEG && function_exists('exif_read_data')) {
-        $o = (int) (@exif_read_data($tmp)['Orientation'] ?? 1);
-        $rot = [3 => 180, 6 => -90, 8 => 90][$o] ?? 0;
+    if ($info[2] === IMAGETYPE_JPEG) {
+        $rot = [3 => 180, 6 => -90, 8 => 90][vib_jpeg_orientation($tmp)] ?? 0;
         if ($rot) { $r = imagerotate($src, $rot, 0); if ($r) { imagedestroy($src); $src = $r; } }
     }
 
@@ -82,4 +81,42 @@ function vib_image_store(string $tmp, string $kind, string $slug): string
     }
     @chmod($file, 0644); @chmod("$dir/$base.webp", 0644);
     return "/uploads$rel/$base.$ext";
+}
+
+/**
+ * Orientation EXIF d'un JPEG (1 = normale), lue directement dans le fichier :
+ * l'extension exif de PHP n'est pas installée sur le serveur.
+ */
+function vib_jpeg_orientation(string $file): int
+{
+    $f = @fopen($file, 'rb');
+    if (!$f) return 1;
+    try {
+        if (fread($f, 2) !== "\xFF\xD8") return 1;
+        while (!feof($f)) {
+            $m = fread($f, 4);
+            if (strlen($m) < 4 || $m[0] !== "\xFF") return 1;
+            $len = unpack('n', substr($m, 2))[1] - 2;
+            if ($m[1] === "\xDA" || $len < 0) return 1;              // début de l'image : pas d'EXIF avant
+            if ($m[1] !== "\xE1") { fseek($f, $len, SEEK_CUR); continue; }
+            $d = fread($f, $len);
+            if (substr($d, 0, 6) !== "Exif\0\0") continue;
+            $t = substr($d, 6);
+            $le = substr($t, 0, 2) === 'II';
+            $u16 = fn(int $o) => unpack($le ? 'v' : 'n', substr($t, $o, 2))[1] ?? 0;
+            $u32 = fn(int $o) => unpack($le ? 'V' : 'N', substr($t, $o, 4))[1] ?? 0;
+            if (strlen($t) < 8) return 1;
+            $ifd = $u32(4);
+            $n = $u16($ifd);
+            for ($i = 0; $i < $n; $i++) {
+                $e = $ifd + 2 + 12 * $i;
+                if ($e + 12 > strlen($t)) break;
+                if ($u16($e) === 0x0112) { $o = $u16($e + 8); return $o >= 1 && $o <= 8 ? $o : 1; }
+            }
+            return 1;
+        }
+        return 1;
+    } finally {
+        fclose($f);
+    }
 }

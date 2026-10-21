@@ -213,6 +213,23 @@ check('photo d’une autre fiche refusée', isset($r['errors']['photos']));
 $r = vib_actor_apply($baseP, ['photos' => [], 'logo' => ''] + $form);
 check('toutes les photos et le logo retirés', $r['item']['photos'] === [] && $r['item']['logo'] === '' && $r['changed'] === ['photos', 'logo']);
 
+echo "\nImages envoyées\n";
+require_once __DIR__ . '/../lib/images.php';
+$jp = $tmp . '/o.jpg';
+$im = imagecreatetruecolor(400, 300); imagejpeg($im, $jp);
+check('JPEG sans EXIF → orientation normale', vib_jpeg_orientation($jp) === 1);
+// EXIF minimal « Orientation = 6 » (photo de téléphone tenue droite), inséré après le marqueur SOI
+foreach (['II' => 'v', 'MM' => 'n'] as $bo => $f16) {
+    $f32 = $bo === 'II' ? 'V' : 'N';
+    $tiff = $bo . pack($f16, 42) . pack($f32, 8) . pack($f16, 1) . pack($f16, 0x0112) . pack($f16, 3) . pack($f32, 1) . pack($f16, 6) . "\0\0" . pack($f32, 0);
+    $app1 = "\xFF\xE1" . pack('n', strlen($tiff) + 8) . "Exif\0\0" . $tiff;
+    $raw = (string) file_get_contents($jp);
+    file_put_contents($tmp . "/o6$bo.jpg", substr($raw, 0, 2) . $app1 . substr($raw, 2));
+    check("orientation EXIF lue sans l’extension exif ($bo)", vib_jpeg_orientation($tmp . "/o6$bo.jpg") === 6);
+}
+file_put_contents($tmp . '/tronque.jpg', "\xFF\xD8\xFF\xE1\x00");
+check('JPEG tronqué → pas d’erreur, orientation normale', vib_jpeg_orientation($tmp . '/tronque.jpg') === 1);
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);
