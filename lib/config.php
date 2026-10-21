@@ -13,6 +13,8 @@
 
 declare(strict_types=1);
 
+date_default_timezone_set('Europe/Paris');   // dates de l'historique en heure française
+
 function vib_env(): string {
     $host = strtolower($_SERVER['HTTP_HOST'] ?? '');
     if ($host === 'village-iraty-biarritz.fr' || $host === 'www.village-iraty-biarritz.fr') return 'prod';
@@ -41,8 +43,10 @@ function vib_config(): array {
         ],
         // Cloudflare Access (porte d'entrée du back-office), renseigné à l'étape 1.
         'access' => [
-            'team_domain' => getenv('CF_ACCESS_TEAM_DOMAIN') ?: '',   // ex. https://vib.cloudflareaccess.com
-            'aud'         => getenv('CF_ACCESS_AUD') ?: '',           // Application Audience (AUD) Tag
+            // Valeurs publiques (pas des secrets) de l'application « Back-office VIB » dans Cloudflare Zero Trust.
+            // Les variables d'environnement ne servent qu'aux tests automatiques.
+            'team_domain' => getenv('CF_ACCESS_TEAM_DOMAIN') ?: 'https://weathered-dust-af22.cloudflareaccess.com',
+            'aud'         => getenv('CF_ACCESS_AUD') ?: 'cc9710bff155f6c5bda27e39a751365c033d56fc3f19651973c79ae1f8d1d707',
         ],
     ];
     return $cfg;
