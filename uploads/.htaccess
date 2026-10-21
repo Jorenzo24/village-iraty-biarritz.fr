@@ -1,0 +1,13 @@
+# Photos envoyées depuis le back-office : seules des images sont servies, rien ne s'exécute ici.
+# (Le back-office ne crée que des .jpg / .png / .webp à nom contrôlé ; ceci est la seconde barrière.)
+Options -Indexes
+RemoveHandler .php .phtml .phar .php5 .php7 .php8 .cgi .pl .py
+<FilesMatch ".">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^[a-z0-9-]+\.(jpg|png|webp)$">
+    Require all granted
+</FilesMatch>
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

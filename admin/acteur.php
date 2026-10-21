@@ -41,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mine = array_merge($values, array_intersect_key($_POST, $values));
     if (!is_array($mine['social'])) $mine['social'] = [];
     $mine['h'] = vib_hours_form_norm($mine['h']);
+    $mine['photos'] = array_values(array_filter(is_array($mine['photos']) ? $mine['photos'] : [], fn($p) => is_string($p) && $p !== ''));
+    if (!is_string($mine['logo'])) $mine['logo'] = '';
     $mine['address_mode'] = ($_POST['address_mode'] ?? '') === 'libre' ? 'libre' : 'structuree';   // case décochée = absente du formulaire
     $values = $mine;
 
@@ -79,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Dernière modification de cette fiche (affichée après enregistrement et en bas de page)
 $last = null;
 foreach ($store->history(200) as $h) {
-    if (str_contains((string) $h['message'], '(' . $slug . ')')) { $last = $h; break; }
+    if (($h['key'] ?? null) === $slug || str_contains((string) $h['message'], '(' . $slug . ')')) { $last = $h; break; }
 }
 
 $v = fn(string $k): string => e((string) ($values[$k] ?? ''));
@@ -101,6 +103,13 @@ vib_admin_header($item['name'], $user, 'acteurs');
     <div class="adm-flash adm-flash--ok" role="status"><strong>Modifications enregistrées.</strong>
       <?= $last ? 'Champs modifiés : ' . e(preg_replace('/^.*\) : /u', '', $last['message'])) . '.' : '' ?>
       Elles sont déjà visibles sur <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">la fiche en ligne</a>.</div>
+  <?php elseif (($_GET['ok'] ?? '') === 'nouveau' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>Fiche créée.</strong> Complétez-la ci-dessous puis enregistrez.
+      Elle est déjà consultable à l’adresse <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">/acteur/<?= e($slug) ?></a> ; sa carte dans l’annuaire arrivera dans une prochaine version.</div>
+  <?php elseif (($_GET['ok'] ?? '') === 'restaure' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>Version restaurée.</strong> La fiche a repris son contenu d’alors, déjà visible sur <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">la fiche en ligne</a>. Ce retour en arrière est lui-même annulable depuis l’historique ci-dessous.</div>
+  <?php elseif (($_GET['ok'] ?? '') === 'reintegre' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>Fiche réintégrée</strong>, telle qu’elle était au moment du retrait. Elle est de nouveau visible sur <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">le site</a>.</div>
   <?php elseif (($_GET['ok'] ?? '') === '0' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
     <div class="adm-flash adm-flash--ok" role="status">Aucune modification : la fiche était déjà à jour.</div>
   <?php endif; ?>
@@ -257,18 +266,39 @@ vib_admin_header($item['name'], $user, 'acteurs');
       <p class="adm-preview">Texte affiché sur la fiche : <span id="hours-preview" data-original="<?= e((string) $item['hours']) ?>"></span></p>
     </section>
 
-    <section class="adm-card">
-      <h2>Photos et logo</h2>
-      <p class="adm-hint">Modifiables dans une prochaine version du back-office.</p>
-      <?php if ($item['photos'] || $item['logo']): ?>
-        <div class="adm-thumbs">
-          <?php foreach (array_filter(array_merge($item['photos'], [$item['logo']])) as $src): ?>
+    <section class="adm-card" id="photos" data-slug="<?= e($slug) ?>">
+      <h2>Photos</h2>
+      <p class="adm-hint">La première photo est la couverture (en grand sur la fiche, et image d’aperçu quand la fiche est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
+      <ul class="adm-photos" id="photo-list">
+        <?php foreach ($values['photos'] as $src): ?>
+          <li class="adm-photo">
             <img src="<?= e($src) ?>" alt="" loading="lazy">
-          <?php endforeach; ?>
-        </div>
-      <?php else: ?>
-        <p class="adm-muted">Aucune photo.</p>
-      <?php endif; ?>
+            <input type="hidden" name="photos[]" value="<?= e($src) ?>">
+            <span class="adm-photo__cover">Couverture</span>
+            <span class="adm-photo__tools">
+              <button type="button" data-photo="left" aria-label="Avancer">←</button>
+              <button type="button" data-photo="right" aria-label="Reculer">→</button>
+              <button type="button" data-photo="cover">En couverture</button>
+              <button type="button" data-photo="remove">Retirer</button>
+            </span>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+      <input type="hidden" name="photos[]" value="" data-keep>
+      <p class="adm-muted" id="photo-none"<?= $values['photos'] ? ' hidden' : '' ?>>Aucune photo : la fiche affiche le nom à la place.</p>
+      <?= $err('photos') ?>
+      <label class="adm-btn adm-btn--ghost adm-upload">Ajouter des photos<input type="file" accept="image/jpeg,image/png,image/webp" multiple data-upload="photo" hidden></label>
+      <p class="adm-hint" id="photo-status" role="status"></p>
+
+      <h2 class="adm-subtitle">Logo</h2>
+      <div class="adm-logo" id="logo-box">
+        <img id="logo-img" src="<?= e($values['logo']) ?>" alt=""<?= $values['logo'] ? '' : ' hidden' ?>>
+        <span class="adm-muted" id="logo-none"<?= $values['logo'] ? ' hidden' : '' ?>>Aucun logo</span>
+        <input type="hidden" name="logo" id="logo-input" value="<?= e($values['logo']) ?>">
+        <label class="adm-btn adm-btn--ghost adm-upload"><?= $values['logo'] ? 'Remplacer' : 'Ajouter un logo' ?><input type="file" accept="image/jpeg,image/png,image/webp" data-upload="logo" hidden></label>
+        <button type="button" class="adm-btn adm-btn--ghost" id="logo-remove"<?= $values['logo'] ? '' : ' hidden' ?>>Retirer</button>
+      </div>
+      <?= $err('logo') ?>
     </section>
 
     <div class="adm-actions">
@@ -278,8 +308,27 @@ vib_admin_header($item['name'], $user, 'acteurs');
     </div>
   </form>
 
+  <section class="adm-card" id="historique">
+    <h2>Historique de cette fiche</h2>
+    <?php $hist = $store->itemHistory($slug, 15); ?>
+    <?php if (!$hist): ?>
+      <p class="adm-muted">Aucune version enregistrée.</p>
+    <?php else: ?>
+      <ol class="adm-history">
+        <?php foreach ($hist as $i => $hv): $en = $hv['entry']; ?>
+          <li>
+            <span><strong><?= e(date('d/m/Y à H:i', strtotime($en['at']))) ?></strong> · <?= e($en['author']) ?></span>
+            <span class="adm-muted"><?= e(($en['base'] ?? '') === '' ? 'Version de départ (mise en place du back-office)' : preg_replace('/^Fiche « .* » \([a-z0-9-]+\) : /u', 'Modifié : ', (string) $en['message'])) ?></span>
+            <?php if ($i === 0): ?><span class="adm-tag">version actuelle</span>
+            <?php elseif ($hv['item']): ?><a href="/admin/version.php?slug=<?= e(rawurlencode($slug)) ?>&amp;id=<?= e(rawurlencode($en['id'])) ?>">Voir et revenir à cette version</a><?php endif; ?>
+          </li>
+        <?php endforeach; ?>
+      </ol>
+    <?php endif; ?>
+  </section>
+
   <p class="adm-muted">
-    <?= $last ? 'Dernière modification le ' . e(date('d/m/Y à H:i', strtotime($last['at']))) . ' par ' . e($last['author']) . '.' : 'Aucune modification depuis la mise en place du back-office.' ?>
-    Le nom et la catégorie de la carte dans l’annuaire seront reliés à cette fiche dans une prochaine version.
+    La carte de l’annuaire (nom, photo, horaires) et le plan du site seront reliés à cette fiche dans une prochaine version.
+    · <a href="/admin/retirer.php?slug=<?= e(rawurlencode($slug)) ?>">Retirer cette fiche du site…</a>
   </p>
-<?php vib_admin_footer('/admin/admin.js?v=20261021b');
+<?php vib_admin_footer('/admin/admin.js?v=20261021c');

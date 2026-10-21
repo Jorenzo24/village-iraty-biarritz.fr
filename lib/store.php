@@ -103,11 +103,97 @@ final class Store
             if (!is_array($new) || ($new[$key] ?? null) !== $keyValue) throw new InvalidArgumentException('Modification invalide');
             $items[$idx] = $new;
             $raw = $this->validateAndEncode($items);
-            $version = $this->commitUnlocked($raw, $current['version'], $author, $message, count($items));
+            $version = $this->commitUnlocked($raw, $current['version'], $author, $message, count($items), $keyValue);
             return ['version' => $version, 'item' => $new];
         } finally {
             $this->unlock($lock);
         }
+    }
+
+    /** Ajoute une fiche. Refusé si la clé existe déjà (fiche publiée ou retirée). */
+    public function addItem(array $item, string $author, string $message): string
+    {
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $kv = (string) ($item[$key] ?? '');
+        $lock = $this->lock(LOCK_EX);
+        try {
+            $current = $this->readUnlocked();
+            foreach ($current['items'] as $it) if (($it[$key] ?? null) === $kv) throw new StoreConflict('Une fiche porte déjà cet identifiant.');
+            $retired = $this->readRetiredUnlocked();
+            $items = $current['items'];
+            $items[] = $item;
+            $raw = $this->validateAndEncode($items);
+            $version = $this->commitUnlocked($raw, $current['version'], $author, $message, count($items), $kv);
+            // Fiche réintégrée : elle quitte la liste des fiches retirées
+            $left = array_values(array_filter($retired, fn($r) => ($r['item'][$key] ?? null) !== $kv));
+            if (count($left) !== count($retired)) $this->writeRetiredUnlocked($left);
+            return $version;
+        } finally {
+            $this->unlock($lock);
+        }
+    }
+
+    /**
+     * Retire une fiche du site. Elle est conservée dans la liste des fiches retirées (réintégrable),
+     * et son adresse publique redirige vers l'annuaire.
+     */
+    public function retireItem(string $keyValue, string $expectedHash, string $author): string
+    {
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $lock = $this->lock(LOCK_EX);
+        try {
+            $current = $this->readUnlocked();
+            $items = $current['items'];
+            $idx = null;
+            foreach ($items as $i => $it) if (($it[$key] ?? null) === $keyValue) { $idx = $i; break; }
+            if ($idx === null) throw new StoreConflict('Cette fiche n’existe plus (retirée entre-temps).');
+            if (self::itemHash($items[$idx]) !== $expectedHash) throw new StoreConflict('Cette fiche a été modifiée entre-temps. Rechargez-la avant de la retirer.');
+            $item = $items[$idx];
+            array_splice($items, $idx, 1);
+            $raw = $this->validateAndEncode($items);
+            $retired = $this->readRetiredUnlocked();
+            $retired[] = ['item' => $item, 'at' => date(DATE_ATOM), 'author' => $author];
+            $this->writeRetiredUnlocked($retired);
+            return $this->commitUnlocked($raw, $current['version'], $author, 'Retrait de la fiche « ' . ($item['name'] ?? $keyValue) . ' » (' . $keyValue . ')', count($items), $keyValue);
+        } finally {
+            $this->unlock($lock);
+        }
+    }
+
+    /** @return list<array{item: array, at: string, author: string}> fiches retirées, la plus récente d'abord */
+    public function retired(): array
+    {
+        $lock = $this->lock(LOCK_SH);
+        try { return array_reverse($this->readRetiredUnlocked()); } finally { $this->unlock($lock); }
+    }
+
+    /**
+     * Versions successives d'UNE fiche (la plus récente d'abord), avec son contenu à chaque version.
+     * @return list<array{entry: array, item: ?array}> item null = fiche absente à cette version (retirée)
+     */
+    public function itemHistory(string $keyValue, int $limit = 20): array
+    {
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $all = [];
+        foreach ($this->history(5000) as $e) {
+            // Opérations sur une fiche : marquées de sa clé. Opérations sans clé (import, restauration
+            // globale) : retenues seulement si elles ont changé cette fiche (filtre ci-dessous).
+            if (isset($e['key']) && $e['key'] !== $keyValue) continue;
+            try { $items = $this->historyItems((string) $e['id']); } catch (Throwable) { continue; }
+            $it = null;
+            foreach ($items as $x) if (($x[$key] ?? null) === $keyValue) { $it = $x; break; }
+            $all[] = ['entry' => $e, 'item' => $it];
+            if (count($all) > $limit * 3) break;
+        }
+        $out = [];
+        foreach ($all as $i => $v) {
+            $older = $all[$i + 1] ?? null;
+            if ($older !== null && $older['item'] === $v['item']) continue;   // n'a pas changé cette fiche
+            if ($older === null && $v['item'] === null) continue;
+            $out[] = $v;
+            if (count($out) >= $limit) break;
+        }
+        return $out;
     }
 
     private function validateAndEncode(array $items): string
@@ -124,14 +210,14 @@ final class Store
     }
 
     /** Écrit la nouvelle version + l'historique. Doit être appelé verrou exclusif tenu. */
-    private function commitUnlocked(string $raw, string $base, string $author, string $message, int $count): string
+    private function commitUnlocked(string $raw, string $base, string $author, string $message, int $count, string $key = ''): string
     {
         $this->atomicWrite($this->file(), $raw);
         $version = self::versionOf($raw);
         $id = date('Ymd-His') . '-' . bin2hex(random_bytes(3));
         $this->atomicWrite($this->histDir() . "/$id.json", $raw);
         $this->appendLog(['id' => $id, 'version' => $version, 'base' => $base, 'at' => date(DATE_ATOM),
-                          'author' => $author, 'message' => $message, 'count' => $count]);
+                          'author' => $author, 'message' => $message, 'count' => $count] + ($key !== '' ? ['key' => $key] : []));
         return $version;
     }
 
@@ -208,6 +294,24 @@ final class Store
     }
 
     // --- interne ---------------------------------------------------------------------------
+
+    private function retiredFile(): string { return "{$this->dir}/{$this->collection}.retires.json"; }
+
+    private function readRetiredUnlocked(): array
+    {
+        if (!is_file($this->retiredFile())) return [];
+        $r = json_decode((string) file_get_contents($this->retiredFile()), true);
+        if (!is_array($r) || !array_is_list($r)) throw new RuntimeException('Liste des fiches retirées illisible');
+        return $r;
+    }
+
+    private function writeRetiredUnlocked(array $list): void
+    {
+        $objects = vib_config()['collections'][$this->collection]['objects'] ?? [];
+        foreach ($list as &$r) foreach ($objects as $f) if (isset($r['item'][$f]) && $r['item'][$f] === []) $r['item'][$f] = new stdClass();
+        unset($r);
+        $this->atomicWrite($this->retiredFile(), json_encode($list, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_PRESERVE_ZERO_FRACTION) . "\n");
+    }
 
     private function readUnlocked(): array
     {

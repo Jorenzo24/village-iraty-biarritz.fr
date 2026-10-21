@@ -117,6 +117,93 @@ document.addEventListener('DOMContentLoaded', () => {
     update();
   }
 
+  // --- Photos et logo : réduites dans le navigateur (le serveur refuse au-delà de 2 Mo), puis envoyées.
+  // L'envoi ne modifie pas la fiche : elle change au clic sur « Enregistrer ».
+  const photosBox = $('photos');
+  let uploading = 0;
+  if (photosBox) {
+    const list = $('photo-list'), status = $('photo-status');
+    const changed = () => { $('photo-none').hidden = list.children.length > 0; form.dispatchEvent(new Event('input')); };
+    list.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('[data-photo]');
+      if (!btn) return;
+      const li = btn.closest('li');
+      const act = btn.dataset.photo;
+      if (act === 'left' && li.previousElementSibling) li.previousElementSibling.before(li);
+      if (act === 'right' && li.nextElementSibling) li.nextElementSibling.after(li);
+      if (act === 'cover') list.prepend(li);
+      if (act === 'remove') li.remove();
+      changed();
+    });
+
+    const shrink = async (file, kind) => {
+      const max = kind === 'logo' ? 600 : 1400;
+      let bmp;
+      try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch {
+        if (file.size < 1.9e6) return file;   // format que le navigateur ne sait pas lire : le serveur tranchera
+        throw new Error('Format non pris en charge : envoyez une photo JPEG ou PNG.');
+      }
+      const scale = Math.min(1, max / Math.max(bmp.width, bmp.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(bmp.width * scale); c.height = Math.round(bmp.height * scale);
+      const ctx = c.getContext('2d');
+      if (kind !== 'logo') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); }
+      ctx.drawImage(bmp, 0, 0, c.width, c.height);
+      return new Promise((ok) => c.toBlob(ok, kind === 'logo' ? 'image/png' : 'image/jpeg', 0.88));
+    };
+    const send = async (file, kind) => {
+      const blob = await shrink(file, kind);
+      const fd = new FormData();
+      fd.append('csrf', form.elements.csrf.value);
+      fd.append('slug', photosBox.dataset.slug);
+      fd.append('kind', kind);
+      fd.append('file', blob, kind === 'logo' ? 'logo.png' : 'photo.jpg');
+      const res = await fetch('/admin/upload.php', { method: 'POST', body: fd, credentials: 'same-origin' });
+      let data = null;
+      try { data = await res.json(); } catch { /* réponse non JSON : session expirée, etc. */ }
+      if (!res.ok || !data?.ok) throw new Error(data?.error || 'Envoi impossible (session expirée ?) : rechargez la page.');
+      return data.path;
+    };
+
+    photosBox.querySelectorAll('input[data-upload]').forEach((input) => input.addEventListener('change', async () => {
+      const kind = input.dataset.upload;
+      const files = [...input.files];
+      input.value = '';
+      const errors = [];
+      uploading++;
+      for (const [i, file] of files.entries()) {
+        status.textContent = `Envoi ${files.length > 1 ? `${i + 1} / ${files.length} ` : ''}en cours…`;
+        let li = null;
+        if (kind === 'photo') {
+          li = list.querySelector('li')?.cloneNode(true) || (() => {
+            const t = document.createElement('li'); t.className = 'adm-photo';
+            t.innerHTML = '<img alt=""><input type="hidden" name="photos[]"><span class="adm-photo__cover">Couverture</span><span class="adm-photo__tools"><button type="button" data-photo="left" aria-label="Avancer">←</button><button type="button" data-photo="right" aria-label="Reculer">→</button><button type="button" data-photo="cover">En couverture</button><button type="button" data-photo="remove">Retirer</button></span>';
+            return t;
+          })();
+          li.classList.add('is-uploading');
+          li.querySelector('img').src = URL.createObjectURL(file);
+          li.querySelector('input').value = '';
+          list.append(li);
+        }
+        try {
+          const path = await send(file, kind);
+          if (kind === 'photo') { li.querySelector('img').src = path; li.querySelector('input').value = path; li.classList.remove('is-uploading'); }
+          else { $('logo-img').src = path; $('logo-img').hidden = false; $('logo-none').hidden = true; $('logo-remove').hidden = false; $('logo-input').value = path; }
+        } catch (err) {
+          if (li) li.remove();
+          errors.push(`${file.name} : ${err.message}`);
+        }
+        changed();
+      }
+      uploading--;
+      status.textContent = errors.length ? errors.join(' ') : 'Envoyé. Cliquez sur « Enregistrer » pour publier.';
+    }));
+    $('logo-remove').addEventListener('click', () => {
+      $('logo-input').value = ''; $('logo-img').hidden = true; $('logo-none').hidden = false; $('logo-remove').hidden = true;
+      changed();
+    });
+  }
+
   // Prévenir avant de quitter une saisie non enregistrée
   const snapshot = () => new URLSearchParams(new FormData(form)).toString();
   // Formulaire réaffiché après un refus (erreur, conflit) : la saisie à l'écran n'est pas enregistrée
@@ -130,7 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('beforeunload', (ev) => {
     if (!submitting && snapshot() !== initial) { ev.preventDefault(); ev.returnValue = ''; }
   });
-  form.addEventListener('submit', () => {
+  form.addEventListener('submit', (ev) => {
+    if (uploading) { ev.preventDefault(); alert('Une image est en cours d’envoi : attendez la fin avant d’enregistrer.'); return; }
     submitting = true;
     form.querySelector('button[type=submit]').disabled = true;   // pas de double envoi
   });

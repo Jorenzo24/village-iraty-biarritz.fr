@@ -177,6 +177,42 @@ check('aucun jour coché → refusé', (bool) vib_hours_apply('', $gridPost([]))
 check('« Non renseignés » → vide ; « Sur rendez-vous »', vib_hours_apply('Lundi de 9h à 12h', ['hours_mode' => 'aucun'])['text'] === '' && vib_hours_apply('', ['hours_mode' => 'rdv'])['text'] === 'Sur rendez-vous');
 check('texte libre : retours à la ligne → « · »', vib_hours_apply('', ['hours_mode' => 'libre', 'hours_free' => "Lundi de 9h à 12h\r\nMardi sur RDV"])['text'] === 'Lundi de 9h à 12h · Mardi sur RDV');
 
+echo "\nAjout, retrait, historique d’une fiche\n";
+$sd = $tmp . '/ajout';
+$st = new Store('entreprises', $sd); $st->seedIfEmpty();
+$n0 = count($st->read()['items']);
+$taken = array_column($st->read()['items'], 'slug');
+$new = vib_actor_new(vib_unique_slug('Café du Port', $taken), 'Café du Port', 'restaurants');
+$st->addItem($new, 'a@x', 'Ajout');
+check('ajout : fiche créée avec un identifiant propre', vib_find($st->read()['items'], 'cafe-du-port') !== null && count($st->read()['items']) === $n0 + 1);
+check('ajout : identifiant déjà pris → refusé', throws(fn() => $st->addItem($new, 'a@x', 'Ajout'), StoreConflict::class));
+check('ajout : forme exacte d’une fiche (social = {})', str_contains($st->encode([$new]), '"social": {}') && array_keys($new) === array_keys($all[0]));
+$it = vib_find($st->read()['items'], 'veloff');
+check('retrait : empreinte périmée → refusé', throws(fn() => $st->retireItem('veloff', 'perime', 'a@x'), StoreConflict::class));
+$st->retireItem('veloff', Store::itemHash($it), 'a@x');
+check('retrait : fiche hors du site, gardée dans les retirées', vib_find($st->read()['items'], 'veloff') === null && ($st->retired()[0]['item'] ?? null) === $it);
+check('retrait : identifiant toujours réservé', in_array('veloff', vib_taken_slugs($st), true));
+check('identifiants redirigés par le .htaccess réservés (b-ocean)', in_array('b-ocean', vib_taken_slugs($st), true));
+$st->addItem($it, 'a@x', 'Réintégration');
+check('réintégration : fiche identique, sortie des retirées', vib_find($st->read()['items'], 'veloff') === $it && $st->retired() === []);
+$h0 = Store::itemHash($it);
+$st->updateItem('veloff', $h0, fn($c) => ['phone' => '01 00 00 00 00'] + $c, 'a@x', 'Fiche « VELOFF » (veloff) : téléphone');
+$st->updateItem('tunstall', Store::itemHash(vib_find($st->read()['items'], 'tunstall')), fn($c) => ['phone' => '02'] + $c, 'a@x', 'autre fiche');
+$hist = $st->itemHistory('veloff');
+check('historique d’une fiche : seulement ses propres changements', count($hist) === 4 && $hist[0]['item']['phone'] === '01 00 00 00 00' && $hist[1]['item'] === $it && $hist[2]['item'] === null);
+check('historique : la version de départ y figure', ($hist[3]['entry']['base'] ?? 'x') === '' && $hist[3]['item'] === $it);
+
+echo "\nPhotos de la fiche\n";
+$baseP = $base;
+$r = vib_actor_apply($baseP, ['photos' => ['', '/a.jpg']] + $form);
+check('photo existante gardée, champ vide ignoré', $r['item']['photos'] === ['/a.jpg'] && !$r['errors']);
+$r = vib_actor_apply($baseP, ['photos' => ['/etc/passwd']] + $form);
+check('chemin arbitraire refusé', isset($r['errors']['photos']));
+$r = vib_actor_apply($baseP, ['photos' => ['/uploads/entreprises/autre/photo-20261021-120000-abcdef.jpg']] + $form);
+check('photo d’une autre fiche refusée', isset($r['errors']['photos']));
+$r = vib_actor_apply($baseP, ['photos' => [], 'logo' => ''] + $form);
+check('toutes les photos et le logo retirés', $r['item']['photos'] === [] && $r['item']['logo'] === '' && $r['changed'] === ['photos', 'logo']);
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

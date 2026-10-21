@@ -42,3 +42,8 @@ validation-acteurs/data/*.tmp
 
 # Données locales du back-office (poste de dev) : jamais dans Git
 .local-data/
+
+# Photos envoyées depuis le back-office : propres à chaque site (production, test), jamais dans Git.
+# Seule la protection du dossier est versionnée.
+uploads/*
+!uploads/.htaccess

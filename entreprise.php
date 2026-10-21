@@ -9,6 +9,12 @@ require __DIR__ . '/lib/render.php';
 
 $slug = (string) ($_GET['slug'] ?? '');
 $e = preg_match('/^[a-z0-9-]+$/', $slug) ? vib_find(vib_public_items('entreprises'), $slug) : null;
+if (!$e && $slug !== '') {
+    // Fiche retirée depuis le back-office : son adresse a pu être indexée → redirection permanente vers l'annuaire
+    foreach ((new Store('entreprises'))->retired() as $r) {
+        if (($r['item']['slug'] ?? null) === $slug) { header('Location: /activites', true, 301); exit; }
+    }
+}
 if (!$e) http_response_code(404);
 header('Content-Type: text/html; charset=utf-8');
 // Toujours revalider : une modification faite dans le back-office doit se voir au rechargement suivant

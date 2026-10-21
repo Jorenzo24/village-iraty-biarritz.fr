@@ -38,6 +38,9 @@ function vib_config(): array {
         'env'        => $env,
         'data_dir'   => $dataDir,
         'repo_dir'   => dirname(__DIR__),
+        // Photos envoyées depuis le back-office : dans le dossier du site (servies directement, avec leur
+        // jumeau .webp), mais exclues de Git. Jamais supprimées : une ancienne version restaurée les retrouve.
+        'uploads_dir' => getenv('VIB_UPLOADS_DIR') ?: dirname(__DIR__) . '/uploads',
         // Collections gérées par le moteur. Le fichier du dépôt sert de point de départ (migration).
         'collections' => [
             // 'objects' : champs qui sont des OBJETS JSON ({}), même vides. PHP ne distingue pas un objet
