@@ -10,6 +10,10 @@ $slug = (string) ($_GET['slug'] ?? '');
 $l = preg_match('/^[a-z0-9-]+$/', $slug) ? vib_find(vib_public_items('locaux'), $slug) : null;
 if (!$l) http_response_code(404);
 header('Content-Type: text/html; charset=utf-8');
+// Toujours revalider : une modification faite dans le back-office doit se voir au rechargement suivant
+// (sans Expires posé ici, le .htaccess appliquerait le cache HTML d'une heure).
+header('Cache-Control: no-cache');
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 
 $url = $l ? 'https://village-iraty-biarritz.fr/local/' . $l['slug'] : 'https://village-iraty-biarritz.fr/louer-un-local';
 $desc = $l ? $l['name'] . ' à louer au VILLAGE Iraty-BIARRITZ. ' . vib_jsnum($l['surface']) . ' m², ' . vib_jsnum($l['price_ht']) . ' € HT/mois.' : 'Local commercial à louer au VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.';

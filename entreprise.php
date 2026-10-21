@@ -11,6 +11,10 @@ $slug = (string) ($_GET['slug'] ?? '');
 $e = preg_match('/^[a-z0-9-]+$/', $slug) ? vib_find(vib_public_items('entreprises'), $slug) : null;
 if (!$e) http_response_code(404);
 header('Content-Type: text/html; charset=utf-8');
+// Toujours revalider : une modification faite dans le back-office doit se voir au rechargement suivant
+// (sans Expires posé ici, le .htaccess appliquerait le cache HTML d'une heure).
+header('Cache-Control: no-cache');
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 
 $url = $e ? 'https://village-iraty-biarritz.fr/acteur/' . $e['slug'] : 'https://village-iraty-biarritz.fr/activites';
 $desc = $e ? ($e['description'] ?: 'Découvrez ' . $e['name'] . ', ' . mb_strtolower($e['category_label']) . ' au VILLAGE Iraty-BIARRITZ.') : 'Fiche acteur du VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.';

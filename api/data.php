@@ -18,6 +18,7 @@ try {
     exit;
 }
 header('Content-Type: application/json; charset=utf-8');
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 header('Cache-Control: no-cache');   // une modification du back-office doit se voir tout de suite
 header('X-Robots-Tag: noindex');
 echo $raw;

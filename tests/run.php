@@ -117,6 +117,42 @@ $hh = $b64(json_encode(['alg' => 'RS256', 'kid' => 'k1'])); $pp = $b64(json_enco
 check('signé par une autre clé → refusé', throws(fn() => vib_access_identity("$hh.$pp." . $b64($bad), $jwks, $now), AccessDenied::class));
 check('algorithme « none » → refusé', throws(fn() => vib_access_identity($b64(json_encode(['alg' => 'none', 'kid' => 'k1'])) . ".$pp.", $jwks, $now), AccessDenied::class));
 
+echo "\nFormulaire du back-office (fiche acteur)\n";
+require_once __DIR__ . '/../lib/fields.php';
+$all = json_decode((string) file_get_contents(__DIR__ . '/../data/entreprises.json'), true);
+$same = 0; foreach ($all as $a) { $r = vib_actor_apply($a, vib_actor_form_values($a)); if ($r['item'] === $a && !$r['changed'] && !$r['errors']) $same++; }
+check("réenregistrer sans rien toucher laisse chaque fiche identique ($same / " . count($all) . ')', $same === count($all));
+$base = ['slug' => 'x', 'name' => 'Ancien', 'category' => 'commerces', 'category_label' => 'Commerces', 'description' => 'D', 'address' => '',
+         'phone' => '', 'email' => '', 'website' => '', 'hours' => 'Lundi de 9h à 12h', 'photos' => ['/a.jpg'], 'logo' => '/l.png',
+         'social' => ['instagram' => 'https://instagram.com/a', 'facebook' => 'https://facebook.com/a'], 'champ_inconnu' => 1];
+$form = vib_actor_form_values($base);
+$r = vib_actor_apply($base, ['category' => 'sante', 'phone' => '0559239310', 'website' => 'www.exemple.fr', 'building' => 'Halle DALBA', 'street' => '5 rue des Mésanges', 'lot' => '9-10'] + $form);
+check('catégorie → libellé mis à jour', $r['item']['category_label'] === 'Santé & soins');
+check('téléphone remis au format « 05 59 23 93 10 »', $r['item']['phone'] === '05 59 23 93 10');
+check('site sans https:// → complété', $r['item']['website'] === 'https://www.exemple.fr');
+check('adresse composée au format client', $r['item']['address'] === 'Halle DALBA - 5 rue des Mésanges - Lots 9 et 10 - 64200 BIARRITZ');
+check('horaires, photos, logo et champs inconnus intacts', [$r['item']['hours'], $r['item']['photos'], $r['item']['logo'], $r['item']['champ_inconnu']] === [$base['hours'], $base['photos'], $base['logo'], 1]);
+check('historique : liste des champs modifiés', $r['changed'] === ['catégorie', 'adresse', 'téléphone', 'site web']);
+$r = vib_actor_apply($base, ['social' => ['instagram' => '', 'facebook' => 'https://facebook.com/a', 'tiktok' => 'tiktok.com/@a']] + $form);
+check('réseaux : vidé = retiré, ordre gardé, nouveau à la suite', $r['item']['social'] === ['facebook' => 'https://facebook.com/a', 'tiktok' => 'https://tiktok.com/@a']);
+$r = vib_actor_apply($base, ['social' => []] + $form);
+check('tous les réseaux vidés → enregistré en objet vide {}', str_contains((new Store('entreprises', $tmp))->encode([$r['item']]), '"social": {}'));
+$r = vib_actor_apply($base, ['name' => '  ', 'email' => 'pas-un-mail', 'website' => 'javascript:alert(1)', 'category' => 'pirate'] + $form);
+check('nom vide, e-mail, lien et catégorie invalides → refusés', array_keys($r['errors']) === ['name', 'category', 'email', 'website']);
+check('lien social « javascript: » refusé', isset(vib_actor_apply($base, ['social' => ['facebook' => 'javascript:alert(1)']] + $form)['errors']['social']));
+$r = vib_actor_apply($base, ['address_mode' => 'libre', 'address_free' => 'Ailleurs, 64200 BIARRITZ'] + $form);
+check('adresse libre enregistrée telle quelle', $r['item']['address'] === 'Ailleurs, 64200 BIARRITZ');
+check('numéro vert laissé tel quel', vib_phone_format('0 800 19 92 28') === '0 800 19 92 28');
+
+$o = vib_actor_form_values($base);
+$f = array_merge($o, ['website' => 'https://autre.fr', 'description' => 'Sa description']);
+$m = vib_form_merge($o, array_merge($o, ['phone' => '05 59 00 00 01', 'description' => "Ma description\r\n"]), $f);
+check('conflit : champ modifié par l’autre seul → sa valeur reprise', $m['values']['website'] === 'https://autre.fr');
+check('conflit : champ modifié par moi seul → ma valeur gardée', $m['values']['phone'] === '05 59 00 00 01');
+check('conflit : même champ modifié des deux côtés → signalé, ma valeur affichée', $m['conflicts'] === ['description' => 'Sa description'] && $m['values']['description'] === "Ma description\r\n");
+$m = vib_form_merge($o, array_merge($o, ['social' => ['instagram' => '', 'facebook' => 'https://facebook.com/a']]), array_merge($o, ['social' => $o['social'] + ['tiktok' => 'https://tiktok.com/@a']]));
+check('conflit : réseaux fusionnés un par un', $m['values']['social'] === ['facebook' => 'https://facebook.com/a', 'tiktok' => 'https://tiktok.com/@a'] && !$m['conflicts']);
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);
