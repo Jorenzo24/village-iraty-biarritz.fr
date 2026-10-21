@@ -88,6 +88,13 @@ final class Store
         }
     }
 
+    /** Contenu exact du fichier (servi tel quel au public par api/data.php). */
+    public function rawJson(): string
+    {
+        $lock = $this->lock(LOCK_SH);
+        try { $this->readUnlocked(); return (string) file_get_contents($this->file()); } finally { $this->unlock($lock); }
+    }
+
     /** @return list<array> entrées du journal, la plus récente d'abord */
     public function history(int $limit = 100): array
     {

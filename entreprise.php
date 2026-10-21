@@ -1,25 +1,48 @@
+<?php
+/**
+ * Fiche acteur, rendue par le serveur : /acteur/<slug> (réécriture .htaccess → entreprise.php?slug=).
+ * La page arrive complète (visiteurs, Google, IA, aperçus de partage). Seul le badge
+ * « Ouvert / Fermé », qui dépend de l'heure du visiteur, est posé par le navigateur.
+ */
+declare(strict_types=1);
+require __DIR__ . '/lib/render.php';
+
+$slug = (string) ($_GET['slug'] ?? '');
+$e = preg_match('/^[a-z0-9-]+$/', $slug) ? vib_find(vib_public_items('entreprises'), $slug) : null;
+if (!$e) http_response_code(404);
+header('Content-Type: text/html; charset=utf-8');
+
+$url = $e ? 'https://village-iraty-biarritz.fr/acteur/' . $e['slug'] : 'https://village-iraty-biarritz.fr/activites';
+$desc = $e ? ($e['description'] ?: 'Découvrez ' . $e['name'] . ', ' . mb_strtolower($e['category_label']) . ' au VILLAGE Iraty-BIARRITZ.') : 'Fiche acteur du VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.';
+$title = $e ? $e['name'] . ' - VILLAGE Iraty-BIARRITZ' : 'Fiche introuvable - VILLAGE Iraty-BIARRITZ';
+$ogImage = ($e && !empty($e['photos'][0])) ? 'https://village-iraty-biarritz.fr' . $e['photos'][0] : 'https://village-iraty-biarritz.fr/assets-2026/images/hero-drone.jpg';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title id="page-title">Acteur - VILLAGE Iraty-Biarritz</title>
-  <meta id="page-description" name="description" content="Fiche acteur du VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.">
+  <title id="page-title"><?= h($title) ?></title>
+  <meta id="page-description" name="description" content="<?= ha($desc) ?>">
+<?php if (!$e): ?>  <meta name="robots" content="noindex">
+<?php endif; ?>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Acteur - VILLAGE Iraty-Biarritz">
-  <meta property="og:description" content="Découvrez cet acteur du VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.">
+  <meta property="og:title" content="<?= ha($e ? $e['name'] . ' - VILLAGE Iraty-Biarritz' : 'Acteur - VILLAGE Iraty-Biarritz') ?>">
+  <meta property="og:description" content="<?= ha($e ? $desc : 'Découvrez cet acteur du VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.') ?>">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://village-iraty-biarritz.fr/activites">
+  <meta property="og:url" content="<?= ha($url) ?>">
   <meta property="og:site_name" content="VILLAGE Iraty-Biarritz">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://village-iraty-biarritz.fr/assets-2026/images/hero-drone.jpg">
+  <meta property="og:image" content="<?= ha($ogImage) ?>">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="canonical" href="https://village-iraty-biarritz.fr/activites">
+  <link rel="canonical" href="<?= ha($url) ?>">
+<?php if ($e): ?>  <script type="application/ld+json"><?= vib_jsonld_actor($e, $url) ?></script>
+<?php endif; ?>
   <link rel="icon" type="image/png" href="/assets-2026/images/logo/favicon.png">
 
   <!-- Fonts -->
@@ -76,71 +99,75 @@
 
 <main id="main">
 
-  <!-- Hero acteur (titre injecté par entreprise.js) -->
+  <!-- Hero acteur -->
   <section class="acteur-hero" id="entity-hero">
     <div class="container acteur-hero__inner">
       <a href="/activites" class="acteur-hero__back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         Tous les acteurs
       </a>
-      <h1 class="acteur-hero__title" id="entity-name">Chargement…</h1>
+      <h1 class="acteur-hero__title" id="entity-name"><?= h($e ? $e['name'] : 'Fiche introuvable') ?></h1>
     </div>
   </section>
 
-  <!-- Contenu (rempli par entreprise.js) -->
-  <section class="acteur-detail" id="entity-content" hidden>
+  <!-- Contenu -->
+  <section class="acteur-detail" id="entity-content"<?= $e ? '' : ' hidden' ?>>
+<?php if ($e): ?>
     <div class="container">
       <div class="entity-grid">
 
         <aside class="entity-info">
-          <div class="entity-info__logo" id="entity-logo-block" hidden>
-            <img id="entity-logo" src="" alt="">
+          <div class="entity-info__logo" id="entity-logo-block"<?= $e['logo'] ? '' : ' hidden' ?>>
+            <img id="entity-logo" src="<?= ha($e['logo']) ?>" alt="<?= $e['logo'] ? ha('Logo ' . $e['name']) : '' ?>">
           </div>
 
-          <p class="entity-info__category" id="entity-category"></p>
-          <h2 class="entity-info__name" id="entity-name-h2"></h2>
-          <p class="entity-info__address" id="entity-address"></p>
+          <p class="entity-info__category" id="entity-category"><?= h($e['category_label'] ?? '') ?></p>
+          <h2 class="entity-info__name" id="entity-name-h2"><?= h($e['name']) ?></h2>
+          <p class="entity-info__address" id="entity-address"><?= h($e['address'] ?? '') ?></p>
 
-          <div class="entity-info__block" id="entity-hours-block" hidden>
-            <p class="contact-info__label">Horaires <span id="entity-status" class="status" hidden></span></p>
-            <p class="entity-info__hours" id="entity-hours"></p>
+          <div class="entity-info__block" id="entity-hours-block"<?= $e['hours'] ? '' : ' hidden' ?>>
+            <p class="contact-info__label">Horaires <span id="entity-status" class="status" data-hours="<?= ha($e['hours']) ?>" hidden></span></p>
+            <p class="entity-info__hours" id="entity-hours"><?= $e['hours'] ? vib_render_hours($e['hours']) : '' ?></p>
           </div>
 
-          <div class="entity-info__block" id="entity-phone-block" hidden>
+          <div class="entity-info__block" id="entity-phone-block"<?= $e['phone'] ? '' : ' hidden' ?>>
             <p class="contact-info__label">Téléphone</p>
-            <p><a id="entity-phone" href="#"></a></p>
+            <p><a id="entity-phone" href="<?= $e['phone'] ? ha('tel:' . preg_replace('/\s/u', '', $e['phone'])) : '#' ?>"><?= h($e['phone']) ?></a></p>
           </div>
 
-          <div class="entity-info__block entity-info__block--cta" id="entity-website-block" hidden>
-            <a id="entity-website" href="#" target="_blank" rel="noopener" class="btn btn--primary entity-info__website">
+          <div class="entity-info__block entity-info__block--cta" id="entity-website-block"<?= $e['website'] ? '' : ' hidden' ?>>
+            <a id="entity-website" href="<?= $e['website'] ? ha($e['website']) : '#' ?>" target="_blank" rel="noopener" class="btn btn--primary entity-info__website">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              <span id="entity-website-label">Visiter le site web</span>
+              <span id="entity-website-label"><?= $e['website'] ? 'Site web' : 'Visiter le site web' ?></span>
             </a>
           </div>
 
-          <div class="entity-info__block" id="entity-email-block" hidden>
+          <div class="entity-info__block" id="entity-email-block"<?= $e['email'] ? '' : ' hidden' ?>>
             <p class="contact-info__label">Email</p>
-            <p><a id="entity-email" href="#"></a></p>
+            <p><a id="entity-email" href="<?= $e['email'] ? ha('mailto:' . $e['email']) : '#' ?>"><?= h($e['email']) ?></a></p>
           </div>
 
-          <div class="entity-info__social" id="entity-social-block" hidden>
+<?php $socialHtml = vib_render_social($e['social'] ?? []); ?>
+          <div class="entity-info__social" id="entity-social-block"<?= $socialHtml !== '' ? '' : ' hidden' ?>>
             <p class="contact-info__label">Suivez-les</p>
-            <ul class="entity-social__list" id="entity-social-list"></ul>
+            <ul class="entity-social__list" id="entity-social-list"><?= $socialHtml ?></ul>
           </div>
         </aside>
 
         <div class="entity-detail">
-          <div class="entity-detail__main-photo" id="entity-main-photo"></div>
-          <div class="entity-detail__description prose" id="entity-description"></div>
-          <div class="entity-detail__photos" id="entity-photos"></div>
+<?php $photos = $e['photos'] ?? []; ?>
+          <div class="entity-detail__main-photo" id="entity-main-photo"><?php if ($photos): ?><img src="<?= ha($photos[0]) ?>" alt="<?= ha($e['name']) ?>" loading="eager"><?php else: ?><div class="entity-detail__placeholder"><?= h($e['name']) ?></div><?php endif; ?></div>
+          <div class="entity-detail__description prose" id="entity-description"><?= $e['description'] ? vib_render_description($e['description']) : '<p style="color:var(--color-text-muted);font-style:italic;">Description en cours de rédaction. Pour en savoir plus, n\'hésitez pas à <a href="/contact" style="color:var(--color-accent);">nous contacter</a>.</p>' ?></div>
+          <div class="entity-detail__photos" id="entity-photos"><?php foreach (array_slice($photos, 1) as $p): ?><div class="entity-detail__thumb"><img src="<?= ha($p) ?>" alt="<?= ha($e['name']) ?>" loading="lazy"></div><?php endforeach; ?></div>
         </div>
 
       </div>
     </div>
+<?php endif; ?>
   </section>
 
   <!-- Fiche introuvable -->
-  <section class="acteur-detail acteur-detail--empty" id="entity-not-found" hidden>
+  <section class="acteur-detail acteur-detail--empty" id="entity-not-found"<?= $e ? ' hidden' : '' ?>>
     <div class="container entity-notfound">
       <h2 class="entity-notfound__title">Fiche introuvable</h2>
       <p class="entity-notfound__lead">Désolé, l'acteur que vous cherchez n'a pas (encore) de fiche dédiée.</p>
@@ -227,6 +254,6 @@
 
 <script src="/assets-2026/js/main.js?v=20260526a" defer></script>
 <script src="/assets-2026/js/open-status.js?v=20260622a" defer></script>
-<script src="/assets-2026/js/entreprise.js?v=20260922b" defer></script>
+<script src="/assets-2026/js/entreprise.js?v=20261021a" defer></script>
 </body>
 </html>
