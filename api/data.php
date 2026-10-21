@@ -1,7 +1,7 @@
 <?php
 /**
  * Données publiques des fiches (/data/entreprises.json, /data/locaux.json, via .htaccess),
- * lues dans le coffre du back-office. Contenu identique, octet pour octet, au fichier du coffre.
+ * lues dans le coffre du back-office, avec la forme exacte de chaque champ (objets vides compris).
  */
 declare(strict_types=1);
 require __DIR__ . '/../lib/render.php';
@@ -11,7 +11,7 @@ if (!in_array($c, ['entreprises', 'locaux'], true)) { http_response_code(404); e
 try {
     $s = new Store($c);
     $s->seedIfEmpty();
-    $raw = $s->rawJson();
+    $raw = $s->publicJson();
 } catch (Throwable $e) {
     error_log('VIB api/data : ' . $e->getMessage());
     http_response_code(503);

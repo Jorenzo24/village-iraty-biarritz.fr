@@ -64,7 +64,7 @@ final class Store
             if (isset($seen[$it[$key]])) throw new InvalidArgumentException("« $key » en double : {$it[$key]}");
             $seen[$it[$key]] = true;
         }
-        $raw = json_encode($items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_PRESERVE_ZERO_FRACTION) . "\n";
+        $raw = $this->encode($items);
 
         $lock = $this->lock(LOCK_EX);
         try {
@@ -88,11 +88,21 @@ final class Store
         }
     }
 
-    /** Contenu exact du fichier (servi tel quel au public par api/data.php). */
-    public function rawJson(): string
+    /** JSON public (api/data.php) : fiches réencodées avec la forme attendue de chaque champ. */
+    public function publicJson(): string
     {
-        $lock = $this->lock(LOCK_SH);
-        try { $this->readUnlocked(); return (string) file_get_contents($this->file()); } finally { $this->unlock($lock); }
+        return $this->encode($this->read()['items']);
+    }
+
+    /** Encodage unique de toute la collection : objets vides gardés en {}, nombres réécrits à l'identique. */
+    public function encode(array $items): string
+    {
+        $objects = vib_config()['collections'][$this->collection]['objects'] ?? [];
+        foreach ($items as &$it) {
+            foreach ($objects as $f) if (array_key_exists($f, $it) && is_array($it[$f]) && $it[$f] === []) $it[$f] = new stdClass();
+        }
+        unset($it);
+        return json_encode($items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_PRESERVE_ZERO_FRACTION) . "\n";
     }
 
     /** @return list<array> entrées du journal, la plus récente d'abord */
@@ -138,7 +148,7 @@ final class Store
             $seed = vib_config()['collections'][$this->collection]['seed'];
             $items = json_decode((string) @file_get_contents($seed), true);
             if (!is_array($items) || !array_is_list($items) || !$items) throw new RuntimeException("Fichier de départ illisible : $seed");
-            $raw = json_encode($items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_PRESERVE_ZERO_FRACTION) . "\n";
+            $raw = $this->encode($items);
             $this->atomicWrite($this->file(), $raw);
             $id = date('Ymd-His') . '-' . bin2hex(random_bytes(3));
             $this->atomicWrite($this->histDir() . "/$id.json", $raw);

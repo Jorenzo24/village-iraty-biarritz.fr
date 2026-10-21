@@ -40,8 +40,11 @@ function vib_config(): array {
         'repo_dir'   => dirname(__DIR__),
         // Collections gérées par le moteur. Le fichier du dépôt sert de point de départ (migration).
         'collections' => [
-            'entreprises' => ['seed' => dirname(__DIR__) . '/data/entreprises.json', 'key' => 'slug'],
-            'locaux'      => ['seed' => dirname(__DIR__) . '/data/locaux.json', 'key' => 'slug'],
+            // 'objects' : champs qui sont des OBJETS JSON ({}), même vides. PHP ne distingue pas un objet
+            // vide d'une liste vide : sans cette liste, « social »: {} redeviendrait [] à la réécriture
+            // (même famille de piège que la perte des réponses de la page de validation).
+            'entreprises' => ['seed' => dirname(__DIR__) . '/data/entreprises.json', 'key' => 'slug', 'objects' => ['social']],
+            'locaux'      => ['seed' => dirname(__DIR__) . '/data/locaux.json', 'key' => 'slug', 'objects' => []],
         ],
         // Cloudflare Access (porte d'entrée du back-office), renseigné à l'étape 1.
         'access' => [

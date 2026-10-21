@@ -48,6 +48,15 @@ check('nombres réécrits à l’identique (107.87, 179.0)', str_contains($raw, 
 $seed = json_decode(file_get_contents(__DIR__ . '/../data/locaux.json'), true);
 check('import fidèle : contenu identique au fichier d’origine', $loc->read()['items'] === $seed);
 
+// Fidélité de FORME, pas seulement de valeur : json_decode(..., false) distingue {} de []
+$ent = new Store('entreprises'); $ent->restore($ent->history(100)[count($ent->history(100)) - 1]['id'], $ent->read()['version'], 'test@vib');
+$seedE = json_decode(file_get_contents(__DIR__ . '/../data/entreprises.json'), false);
+check('entreprises : contenu ET forme identiques au fichier d’origine ({} reste {})', json_decode($ent->publicJson(), false) == $seedE && !str_contains($ent->publicJson(), '"social": []'));
+$it = $ent->read(); $w = $it['items']; $w[0]['social'] = []; $ent->write($w, $it['version'], 'test@vib', 'social vidé');
+check('un « social » vidé dans le back-office est réécrit {} et non []', str_contains(file_get_contents("$tmp/entreprises.json"), '"social": {}') && !str_contains(file_get_contents("$tmp/entreprises.json"), '"social": []'));
+$seedL = json_decode(file_get_contents(__DIR__ . '/../data/locaux.json'), false);
+check('locaux : contenu ET forme identiques au fichier d’origine', json_decode($loc->publicJson(), false) == $seedL);
+
 echo "\nÉcritures simultanées (8 processus × 10 ajouts, avec relecture en cas de conflit)\n";
 $php = PHP_BINARY; $workers = 8; $per = 10; $procs = [];
 $worker = __DIR__ . '/worker.php';
@@ -58,7 +67,7 @@ $final = (new Store('entreprises'))->read()['items'];
 $added = count(array_filter($final, fn($e) => str_starts_with($e['slug'], 'test-w')));
 check("aucune écriture perdue : $added ajouts sur " . ($workers * $per) . " ($conflicts conflits détectés puis rejoués)", $added === $workers * $per);
 check('fichier final valide et sans doublon', count($final) === count(array_unique(array_column($final, 'slug'))));
-check('historique complet : une version par écriture', count((new Store('entreprises'))->history(1000)) === 3 + $workers * $per);
+check('historique complet : une version par écriture', count((new Store('entreprises'))->history(1000)) === 5 + $workers * $per);
 check('aucun fichier temporaire oublié', !glob("$tmp/*.tmp-*") && !glob("$tmp/historique/*/*.tmp-*"));
 
 echo "\nVérification Cloudflare Access (2e verrou)\n";
