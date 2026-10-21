@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (is_array($sentOrig) && !array_diff_key($values, $sentOrig)) $orig = $sentOrig;
     $mine = array_merge($values, array_intersect_key($_POST, $values));
     if (!is_array($mine['social'])) $mine['social'] = [];
+    $mine['h'] = vib_hours_form_norm($mine['h']);
     $mine['address_mode'] = ($_POST['address_mode'] ?? '') === 'libre' ? 'libre' : 'structuree';   // case décochée = absente du formulaire
     $values = $mine;
 
@@ -218,22 +219,55 @@ vib_admin_header($item['name'], $user, 'acteurs');
       <?= $err('social') ?>
     </section>
 
-    <section class="adm-card">
-      <h2>Horaires et photos</h2>
-      <p class="adm-hint">Modifiables dans une prochaine version du back-office.</p>
-      <div class="adm-field">
-        <span class="adm-label">Horaires</span>
-        <p class="adm-readonly"><?= e(str_replace(' · ', "\n", (string) $item['hours']) ?: 'Non renseignés') ?></p>
+    <section class="adm-card" id="hours">
+      <h2>Horaires</h2>
+      <?php $hm = $values['hours_mode']; ?>
+      <div class="adm-modes" role="radiogroup" aria-label="Type d’horaires">
+        <?php foreach (['grille' => 'Horaires d’ouverture', 'rdv' => 'Sur rendez-vous', 'aucun' => 'Non renseignés', 'libre' => 'Texte libre'] as $k => $label): ?>
+          <label class="adm-mode"><input type="radio" name="hours_mode" value="<?= e($k) ?>"<?= $hm === $k ? ' checked' : '' ?>> <?= e($label) ?></label>
+        <?php endforeach; ?>
       </div>
-      <?php if ($item['photos'] || $item['logo']): ?>
-        <div class="adm-field">
-          <span class="adm-label">Photos et logo</span>
-          <div class="adm-thumbs">
-            <?php foreach (array_filter(array_merge($item['photos'], [$item['logo']])) as $src): ?>
-              <img src="<?= e($src) ?>" alt="" loading="lazy">
-            <?php endforeach; ?>
+      <?= $err('hours') ?>
+
+      <div class="adm-hours" data-hours-panel="grille"<?= $hm === 'grille' ? '' : ' hidden' ?>>
+        <?php foreach (VIB_DAYS as $d => $day): $r = $values['h'][$d]; ?>
+          <div class="adm-day<?= $r['open'] ? '' : ' is-closed' ?>" data-day="<?= $d ?>">
+            <label class="adm-day__name"><input type="checkbox" name="h[<?= $d ?>][open]" value="1"<?= $r['open'] ? ' checked' : '' ?>> <?= e(ucfirst($day)) ?></label>
+            <span class="adm-day__closed">Fermé</span>
+            <span class="adm-day__slots">
+              <span class="adm-slot"><input type="time" name="h[<?= $d ?>][s1]" value="<?= e($r['s1']) ?>" aria-label="<?= e(ucfirst($day)) ?>, ouverture"> à <input type="time" name="h[<?= $d ?>][e1]" value="<?= e($r['e1']) ?>" aria-label="<?= e(ucfirst($day)) ?>, fermeture"></span>
+              <span class="adm-slot adm-slot--2">et <input type="time" name="h[<?= $d ?>][s2]" value="<?= e($r['s2']) ?>" aria-label="<?= e(ucfirst($day)) ?>, réouverture"> à <input type="time" name="h[<?= $d ?>][e2]" value="<?= e($r['e2']) ?>" aria-label="<?= e(ucfirst($day)) ?>, 2e fermeture"></span>
+            </span>
+            <?php if ($d < 6): ?><button type="button" class="adm-day__copy" data-copy="<?= $d ?>" title="Recopier sur <?= e(VIB_DAYS[$d + 1]) ?>">Recopier sur <?= e(VIB_DAYS[$d + 1]) ?> ↓</button><?php endif; ?>
           </div>
+        <?php endforeach; ?>
+        <p class="adm-hint">Pause du midi : remplissez la 2e plage (« et … à … »), sinon laissez-la vide. Fermeture après minuit : indiquez simplement l’heure (ex. de 18:00 à 02:00).</p>
+        <div class="adm-field">
+          <label for="f-hours-note">Précision (facultatif)</label>
+          <input type="text" id="f-hours-note" name="hours_note" value="<?= $v('hours_note') ?>" placeholder="Ex. : Le soir sur réservation">
         </div>
+      </div>
+
+      <div class="adm-field" data-hours-panel="libre"<?= $hm === 'libre' ? '' : ' hidden' ?>>
+        <label for="f-hours-free">Horaires</label>
+        <textarea id="f-hours-free" name="hours_free" class="adm-textarea--short"><?= $v('hours_free') ?></textarea>
+        <p class="adm-hint">Une ligne par jour ou groupe de jours, ex. « Du lundi au vendredi de 9h à 18h ». À réserver aux cas que la grille ne permet pas : le badge « Ouvert / Fermé » peut ne pas s’afficher.</p>
+      </div>
+
+      <p class="adm-preview">Texte affiché sur la fiche : <span id="hours-preview" data-original="<?= e((string) $item['hours']) ?>"></span></p>
+    </section>
+
+    <section class="adm-card">
+      <h2>Photos et logo</h2>
+      <p class="adm-hint">Modifiables dans une prochaine version du back-office.</p>
+      <?php if ($item['photos'] || $item['logo']): ?>
+        <div class="adm-thumbs">
+          <?php foreach (array_filter(array_merge($item['photos'], [$item['logo']])) as $src): ?>
+            <img src="<?= e($src) ?>" alt="" loading="lazy">
+          <?php endforeach; ?>
+        </div>
+      <?php else: ?>
+        <p class="adm-muted">Aucune photo.</p>
       <?php endif; ?>
     </section>
 
@@ -248,4 +282,4 @@ vib_admin_header($item['name'], $user, 'acteurs');
     <?= $last ? 'Dernière modification le ' . e(date('d/m/Y à H:i', strtotime($last['at']))) . ' par ' . e($last['author']) . '.' : 'Aucune modification depuis la mise en place du back-office.' ?>
     Le nom et la catégorie de la carte dans l’annuaire seront reliés à cette fiche dans une prochaine version.
   </p>
-<?php vib_admin_footer('/admin/admin.js?v=20261021a');
+<?php vib_admin_footer('/admin/admin.js?v=20261021b');

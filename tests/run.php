@@ -153,6 +153,30 @@ check('conflit : même champ modifié des deux côtés → signalé, ma valeur a
 $m = vib_form_merge($o, array_merge($o, ['social' => ['instagram' => '', 'facebook' => 'https://facebook.com/a']]), array_merge($o, ['social' => $o['social'] + ['tiktok' => 'https://tiktok.com/@a']]));
 check('conflit : réseaux fusionnés un par un', $m['values']['social'] === ['facebook' => 'https://facebook.com/a', 'tiktok' => 'https://tiktok.com/@a'] && !$m['conflicts']);
 
+echo "\nHoraires : grille ⇄ texte\n";
+$ok87 = 0; $grid87 = 0;
+foreach ($all as $a) {
+    $p = vib_hours_parse($a['hours']);
+    if ($p) { $grid87++; $q = vib_hours_parse(vib_hours_compose($p['grid'], $p['note'])); if ($q == $p) $ok87++; }
+}
+check("chaque horaire lisible en grille se réécrit à l’identique ($ok87 / $grid87)", $ok87 === $grid87 && $grid87 >= 70);
+check('« 15h3à » (coquille) → texte libre, pas de devinette', vib_hours_parse('Du lundi au vendredi de 6h30 à 15h3à') === null);
+check('« sur RDV » → texte libre (rien de perdu)', vib_hours_parse('Du mardi au jeudi de 10h à 12h · Du vendredi au samedi sur RDV') === null);
+check('« Mardi - Jeudi » ambigu → texte libre', vib_hours_parse('Lundi - Mercredi - Vendredi de 9h à 18h · Mardi - Jeudi de 9h à 18h30') === null);
+check('précision en fin de texte gardée', vib_hours_parse('Du lundi au samedi de 12h à 14h · Le soir sur réservation')['note'] === 'Le soir sur réservation');
+$hb = vib_hours_form_values('');
+$gridPost = function (array $days) use ($hb) { $h = $hb['h']; foreach ($days as $d => $v) $h[$d] = array_merge(['open' => '1', 's1' => '', 'e1' => '', 's2' => '', 'e2' => ''], $v); return ['hours_mode' => 'grille', 'h' => $h, 'hours_note' => '']; };
+$wk = ['s1' => '09:00', 'e1' => '12:00', 's2' => '14:00', 'e2' => '18:00'];
+check('grille → « Du lundi au vendredi de 9h à 12h et de 14h à 18h · Samedi de 9h à 12h »',
+    vib_hours_apply('', $gridPost([0 => $wk, 1 => $wk, 2 => $wk, 3 => $wk, 4 => $wk, 5 => ['s1' => '09:00', 'e1' => '12:00']]))['text'] === 'Du lundi au vendredi de 9h à 12h et de 14h à 18h · Samedi de 9h à 12h');
+check('après minuit et minuit : « de 18h à 2h », « de 20h à 24h »', vib_hours_apply('', $gridPost([4 => ['s1' => '18:00', 'e1' => '02:00'], 5 => ['s1' => '20:00', 'e1' => '00:00']]))['text'] === 'Vendredi de 18h à 2h · Samedi de 20h à 24h');
+check('grille inchangée → texte d’origine gardé mot pour mot', vib_hours_apply('Lundi - Vendredi 08:00 - 19:00 · Dimanche Fermé', vib_hours_form_values('Lundi - Vendredi 08:00 - 19:00 · Dimanche Fermé'))['text'] === 'Lundi - Vendredi 08:00 - 19:00 · Dimanche Fermé');
+check('jour coché sans heure → refusé', (bool) vib_hours_apply('', $gridPost([0 => []]))['error']);
+check('2e plage avant la 1re → refusée', (bool) vib_hours_apply('', $gridPost([0 => ['s1' => '14:00', 'e1' => '18:00', 's2' => '09:00', 'e2' => '12:00']]))['error']);
+check('aucun jour coché → refusé', (bool) vib_hours_apply('', $gridPost([]))['error']);
+check('« Non renseignés » → vide ; « Sur rendez-vous »', vib_hours_apply('Lundi de 9h à 12h', ['hours_mode' => 'aucun'])['text'] === '' && vib_hours_apply('', ['hours_mode' => 'rdv'])['text'] === 'Sur rendez-vous');
+check('texte libre : retours à la ligne → « · »', vib_hours_apply('', ['hours_mode' => 'libre', 'hours_free' => "Lundi de 9h à 12h\r\nMardi sur RDV"])['text'] === 'Lundi de 9h à 12h · Mardi sur RDV');
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

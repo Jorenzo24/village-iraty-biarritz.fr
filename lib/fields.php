@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/render.php';   // VIB_SOCIAL : réseaux affichables sur la fiche
+require_once __DIR__ . '/hours.php';
 
 const VIB_CATEGORIES = [
     'commerces'   => 'Commerces',
@@ -78,8 +79,72 @@ function vib_valid_email(string $e): bool
 /** Libellés des champs, pour les messages d'erreur et l'historique. */
 const VIB_ACTOR_LABELS = [
     'name' => 'nom', 'category' => 'catégorie', 'description' => 'description', 'address' => 'adresse',
-    'phone' => 'téléphone', 'email' => 'e-mail', 'website' => 'site web', 'social' => 'réseaux sociaux',
+    'phone' => 'téléphone', 'email' => 'e-mail', 'website' => 'site web', 'social' => 'réseaux sociaux', 'hours' => 'horaires',
 ];
+
+/** Grille du formulaire, normalisée : 7 jours × {open, s1, e1, s2, e2} (case décochée = absente du formulaire). */
+function vib_hours_form_norm($h): array
+{
+    $out = [];
+    for ($d = 0; $d < 7; $d++) {
+        $r = is_array($h) && is_array($h[$d] ?? null) ? $h[$d] : [];
+        $out[$d] = ['open' => ($r['open'] ?? '') !== '' ? '1' : ''];
+        foreach (['s1', 'e1', 's2', 'e2'] as $k) $out[$d][$k] = trim((string) ($r[$k] ?? ''));
+    }
+    return $out;
+}
+
+/** Valeurs du formulaire pour un texte d'horaires. */
+function vib_hours_form_values(string $text): array
+{
+    $h = vib_hours_form_norm([]);
+    $p = vib_hours_parse($text);
+    if ($p) foreach ($p['grid'] as $d => $slots) {
+        if (!$slots) continue;
+        $h[$d]['open'] = '1';
+        foreach ($slots as $i => [$a, $b]) { $h[$d]['s' . ($i + 1)] = vib_hours_to_input($a); $h[$d]['e' . ($i + 1)] = vib_hours_to_input($b); }
+    }
+    $mode = trim($text) === '' ? 'aucun' : (preg_match('/^sur (rendez-vous|rdv)\.?$/iu', trim($text)) ? 'rdv' : ($p ? 'grille' : 'libre'));
+    return ['hours_mode' => $mode, 'hours_free' => $text, 'hours_note' => $p['note'] ?? '', 'h' => $h];
+}
+
+/**
+ * Texte d'horaires à enregistrer d'après le formulaire.
+ * Grille identique à celle relue depuis le texte actuel → texte actuel gardé mot pour mot.
+ * @return array{text: string, error: ?string}
+ */
+function vib_hours_apply(string $current, array $post): array
+{
+    $mode = (string) ($post['hours_mode'] ?? 'grille');
+    if ($mode === 'aucun') return ['text' => '', 'error' => null];
+    if ($mode === 'rdv') return ['text' => preg_match('/^sur (rendez-vous|rdv)\.?$/iu', trim($current)) ? $current : 'Sur rendez-vous', 'error' => null];
+    if ($mode === 'libre') {
+        $t = trim(preg_replace('/\s*(\r\n|\r|\n)+\s*/u', ' · ', (string) ($post['hours_free'] ?? '')));
+        return ['text' => $t === trim($current) ? $current : $t, 'error' => null];
+    }
+    $grid = array_fill(0, 7, []);
+    $errs = [];
+    foreach (vib_hours_form_norm($post['h'] ?? []) as $d => $r) {
+        if ($r['open'] === '') continue;
+        $day = ucfirst(VIB_DAYS[$d]);
+        $s1 = vib_hours_from_input($r['s1'], false); $e1 = vib_hours_from_input($r['e1'], true);
+        if ($s1 === null || $e1 === null) { $errs[] = "$day : indiquez l’heure d’ouverture et de fermeture."; continue; }
+        if ($s1 === $e1 % 1440) { $errs[] = "$day : l’ouverture et la fermeture sont à la même heure."; continue; }
+        $grid[$d][] = [$s1, $e1];
+        if ($r['s2'] === '' && $r['e2'] === '') continue;
+        $s2 = vib_hours_from_input($r['s2'], false); $e2 = vib_hours_from_input($r['e2'], true);
+        if ($s2 === null || $e2 === null) { $errs[] = "$day : la 2e plage est incomplète (ou videz-la)."; continue; }
+        if ($e1 < $s1 || $s2 < $e1) { $errs[] = "$day : la 2e plage doit commencer après la fin de la 1re."; continue; }
+        if ($s2 === $e2 % 1440) { $errs[] = "$day : la 2e plage ouvre et ferme à la même heure."; continue; }
+        $grid[$d][] = [$s2, $e2];
+    }
+    if ($errs) return ['text' => $current, 'error' => implode(' ', $errs)];
+    if (!array_filter($grid)) return ['text' => $current, 'error' => 'Aucun jour ouvert : cochez au moins un jour, ou choisissez « Non renseignés ».'];
+    $note = trim(str_replace(["\r\n", "\r", "\n"], ' ', (string) ($post['hours_note'] ?? '')));
+    $p = vib_hours_parse($current);
+    if ($p && $p['grid'] === $grid && $p['note'] === $note) return ['text' => $current, 'error' => null];
+    return ['text' => vib_hours_compose($grid, $note), 'error' => null];
+}
 
 /** Adresse web saisie sans protocole (« www.exemple.fr ») → https:// ajouté. */
 function vib_url_normalize(string $u): string
@@ -132,6 +197,10 @@ function vib_actor_apply(array $cur, array $post): array
     }
     $new['social'] = $social;
 
+    $h = vib_hours_apply((string) ($cur['hours'] ?? ''), $post);
+    $new['hours'] = $h['text'];
+    if ($h['error']) $errors['hours'] = $h['error'];
+
     $changed = [];
     foreach (VIB_ACTOR_LABELS as $k => $label) {
         if (($cur[$k] ?? null) != ($new[$k] ?? null) || ($k === 'social' && array_keys($cur[$k] ?? []) !== array_keys($new[$k]))) $changed[] = $label;
@@ -149,7 +218,7 @@ function vib_actor_form_values(array $e): array
         'building' => $a['building'], 'street' => $a['street'], 'lot' => $a['lot'],
         'phone' => $e['phone'] ?? '', 'email' => $e['email'] ?? '', 'website' => $e['website'] ?? '',
         'social' => is_array($e['social'] ?? null) ? $e['social'] : [],
-    ];
+    ] + vib_hours_form_values((string) ($e['hours'] ?? ''));
 }
 
 /** Clé de tri et de recherche : minuscules sans accents (« Élan » se range avec les E). */
@@ -187,6 +256,13 @@ function vib_form_merge(array $orig, array $mine, array $fresh): array
         if ($k === 'category') $show = VIB_CATEGORIES[$fresh[$k]] ?? $fresh[$k];
         $out[$k] = $pick($orig[$k] ?? '', $mine[$k] ?? '', $fresh[$k] ?? '', $label, $show);
     }
+    // Horaires : un seul bloc (grille, mode, texte libre et précision vont ensemble)
+    $hb = fn(array $v): string => json_encode([$v['hours_mode'] ?? '', $n($v['hours_free'] ?? ''), $n($v['hours_note'] ?? ''), vib_hours_form_norm($v['h'] ?? [])]);
+    $mineHours = $hb($mine) !== $hb($orig);
+    if ($mineHours && $hb($fresh) !== $hb($orig) && $hb($fresh) !== $hb($mine)) $conflicts['horaires'] = (string) $fresh['hours_free'];
+    foreach (['hours_mode', 'hours_free', 'hours_note', 'h'] as $k) $out[$k] = $mineHours ? ($mine[$k] ?? '') : $fresh[$k];
+    if ($mineHours) $out['h'] = vib_hours_form_norm($out['h']);
+
     $out['social'] = [];
     foreach (array_keys(VIB_SOCIAL) as $k) {
         $v = $pick($orig['social'][$k] ?? '', $mine['social'][$k] ?? '', $fresh['social'][$k] ?? '', 'réseau ' . VIB_SOCIAL[$k][0], $fresh['social'][$k] ?? '');

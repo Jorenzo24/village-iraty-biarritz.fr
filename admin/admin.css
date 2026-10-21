@@ -72,7 +72,27 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-btn--ghost:hover { background: var(--color-bg-alt); border-color: var(--color-text-muted); }
 .adm-dirty { font-size: var(--fs-small); color: var(--color-warning); }
 
+/* Horaires */
+.adm-modes { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-4); }
+.adm-mode { display: flex; gap: var(--space-2); align-items: center; font-size: var(--fs-small); }
+.adm-hours { display: grid; gap: var(--space-2); }
+.adm-day { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-3); align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); }
+.adm-day__name { display: flex; gap: var(--space-2); align-items: center; font-weight: 600; }
+.adm-day__slots { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: var(--fs-small); }
+.adm-slot { display: inline-flex; gap: var(--space-2); align-items: center; white-space: nowrap; }
+.adm-slot input { font: inherit; padding: var(--space-1) var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg); }
+.adm-day__closed { display: none; font-size: var(--fs-small); color: var(--color-text-muted); }
+.adm-day.is-closed .adm-day__slots { display: none; }
+.adm-day.is-closed .adm-day__closed { display: block; }
+.adm-day__copy { justify-self: end; font: inherit; font-size: var(--fs-xs); color: var(--color-text-muted); background: none; border: 0; padding: var(--space-1); cursor: pointer; text-decoration: underline; }
+.adm-day.is-closed .adm-day__copy { display: none; }
+.adm-hours .adm-field { margin-top: var(--space-3); }
+.adm-form textarea.adm-textarea--short { min-height: 96px; }
+
 @media (min-width: 720px) {
+  .adm-day { grid-template-columns: 9rem 1fr auto; }
+  .adm-day__slots { grid-column: auto; }
+  .adm-day.is-closed .adm-day__closed { grid-column: 2; }
   .adm-main { padding-inline: var(--space-6); }
   .adm-tiles { grid-template-columns: 1fr 1fr; }
   .adm-filters { grid-template-columns: 2fr 1fr; }

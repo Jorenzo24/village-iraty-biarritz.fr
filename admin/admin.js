@@ -52,6 +52,71 @@ document.addEventListener('DOMContentLoaded', () => {
     $('addr-free').hidden = !free;
   });
 
+  // --- Horaires : même règles que lib/hours.php (aperçu seulement, le serveur recalcule)
+  const hoursBox = $('hours');
+  if (hoursBox) {
+    const DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+    const hPreview = $('hours-preview');
+    const field = (d, k) => form.elements[`h[${d}][${k}]`];
+    const toMin = (v, isEnd) => {
+      const m = /^(\d{1,2}):(\d{2})$/.exec(v || '');
+      if (!m) return null;
+      const n = +m[1] * 60 + +m[2];
+      return isEnd && n === 0 ? 1440 : n;
+    };
+    const fmt = (n) => Math.floor(n / 60) + 'h' + (n % 60 ? String(n % 60).padStart(2, '0') : '');
+    const readGrid = () => DAYS.map((_, d) => {
+      if (!field(d, 'open').checked) return [];
+      const out = [];
+      for (const i of [1, 2]) {
+        const a = toMin(field(d, 's' + i).value, false), b = toMin(field(d, 'e' + i).value, true);
+        if (a !== null && b !== null) out.push([a, b]);
+      }
+      return out;
+    });
+    const compose = (grid, note) => {
+      const slots = (s) => s.map(([a, b]) => `de ${fmt(a)} à ${fmt(b)}`).join(' et ');
+      const segs = [];
+      for (let d = 0; d < 7; d++) {
+        if (!grid[d].length) continue;
+        let e = d;
+        while (e < 6 && JSON.stringify(grid[e + 1]) === JSON.stringify(grid[d])) e++;
+        const name = DAYS[d][0].toUpperCase() + DAYS[d].slice(1);
+        segs.push((e - d === 6 ? 'Tous les jours' : e === d ? name : `Du ${DAYS[d]} au ${DAYS[e]}`) + ' ' + slots(grid[d]));
+        d = e;
+      }
+      if (note.trim()) segs.push(note.trim());
+      return segs.join(' · ');
+    };
+    const mode = () => form.querySelector('input[name=hours_mode]:checked')?.value;
+    const initialGrid = JSON.stringify(readGrid()), initialNote = $('f-hours-note').value.trim();
+    const gridText = () => (JSON.stringify(readGrid()) === initialGrid && $('f-hours-note').value.trim() === initialNote && hPreview.dataset.original)
+      ? hPreview.dataset.original : compose(readGrid(), $('f-hours-note').value);
+    const update = () => {
+      const m = mode();
+      hoursBox.querySelectorAll('[data-hours-panel]').forEach((p) => { p.hidden = p.dataset.hoursPanel !== m; });
+      DAYS.forEach((_, d) => hoursBox.querySelector(`[data-day="${d}"]`).classList.toggle('is-closed', !field(d, 'open').checked));
+      const text = m === 'aucun' ? '' : m === 'rdv' ? 'Sur rendez-vous' : m === 'libre' ? $('f-hours-free').value.trim().replace(/\s*\n+\s*/g, ' · ') : gridText();
+      hPreview.textContent = text || '(aucun horaire : le bloc n’apparaît pas sur la fiche)';
+    };
+    hoursBox.addEventListener('input', update);
+    hoursBox.addEventListener('change', (ev) => {
+      // Passage en texte libre : partir des horaires de la grille plutôt que d'un texte périmé
+      if (ev.target.name === 'hours_mode' && ev.target.value === 'libre' && JSON.stringify(readGrid()) !== initialGrid && readGrid().some((s) => s.length)) {
+        $('f-hours-free').value = compose(readGrid(), $('f-hours-note').value);
+      }
+      update();
+    });
+    hoursBox.querySelectorAll('[data-copy]').forEach((btn) => btn.addEventListener('click', () => {
+      const d = +btn.dataset.copy;
+      field(d + 1, 'open').checked = field(d, 'open').checked;
+      for (const k of ['s1', 'e1', 's2', 'e2']) field(d + 1, k).value = field(d, k).value;
+      update();
+      form.dispatchEvent(new Event('input'));   // indicateur « non enregistré »
+    }));
+    update();
+  }
+
   // Prévenir avant de quitter une saisie non enregistrée
   const snapshot = () => new URLSearchParams(new FormData(form)).toString();
   // Formulaire réaffiché après un refus (erreur, conflit) : la saisie à l'écran n'est pas enregistrée
