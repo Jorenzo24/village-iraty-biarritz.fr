@@ -70,6 +70,17 @@ check('fichier final valide et sans doublon', count($final) === count(array_uniq
 check('historique complet : une version par écriture', count((new Store('entreprises'))->history(1000)) === 5 + $workers * $per);
 check('aucun fichier temporaire oublié', !glob("$tmp/*.tmp-*") && !glob("$tmp/historique/*/*.tmp-*"));
 
+echo "\nRendu des horaires (fiches)\n";
+require_once __DIR__ . '/../lib/render.php';
+$lab = fn(string $t) => preg_match_all('#<strong>(.*?)</strong>#u', vib_render_hours($t), $m) ? implode(' | ', $m[1]) : '(aucun libellé)';
+check('« Du mardi au samedi » → « Mardi - Samedi » en colonne', $lab('Du mardi au samedi de 7h30 à 13h et de 15h30 à 18h30') === 'Mardi - Samedi');
+check('« Tous les jours » reconnu', $lab('Tous les jours de 11h30 à 14h30 et de 18h30 à 22h') === 'Tous les jours');
+check('« Le samedi » → « Samedi »', $lab('Du mardi au vendredi de 12h à 14h · Le samedi de 19h à 21h30') === 'Mardi - Vendredi | Samedi');
+check('« Le soir … » n’est pas pris pour un jour', $lab('Le soir sur réservation') === '(aucun libellé)');
+check('liste non consécutive laissée telle quelle', $lab('Lundi - Mercredi - Vendredi de 9h à 12h') === 'Lundi - Mercredi - Vendredi');
+check('3 jours consécutifs compactés', $lab('Lundi, mardi, mercredi de 9h à 12h') === 'Lundi - Mercredi');
+check('plage insécable (« de 7h30 à 13h » dans un seul bloc)', str_contains(vib_render_hours('Mardi de 7h30 à 13h'), '<span class="hours-slot">de 7h30 à 13h</span>'));
+
 echo "\nVérification Cloudflare Access (2e verrou)\n";
 $key = openssl_pkey_new(['private_key_bits' => 2048, 'private_key_type' => OPENSSL_KEYTYPE_RSA]);
 $d = openssl_pkey_get_details($key);

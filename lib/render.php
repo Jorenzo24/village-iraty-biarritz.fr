@@ -42,18 +42,23 @@ function vib_render_hours(string $text): string
     $DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
     $DAY = implode('|', $DAYS);
     $SEP = '\s*(?:,|\/|-|–|et|à|au)\s*';
-    $DAY_LIST_RE = "/(*UCP)^((?:$DAY)(?:$SEP(?:$DAY))*)\\s*:?\\s*/iu";
+    // Libellés reconnus : « Tous les jours », « Du mardi au samedi », « Le samedi », ou un ou plusieurs jours
+    $DAY_LIST_RE = "/(*UCP)^(tous les jours|du\\s+(?:$DAY)\\s+au\\s+(?:$DAY)|(?:le\\s+)?(?:$DAY)(?:$SEP(?:$DAY))*)\\s*:?\\s*/iu";
     $RANGE_RE = '/(*UCP)(?:de\s+)?\d{1,2}\s*[h:]\s*\d{0,2}\s*(?:[-–]|à)\s*\d{1,2}\s*[h:]?\s*\d{0,2}/iu';
 
     // Une suite de 3 jours consécutifs ou plus est compactée en plage (« Lundi - Vendredi ») ;
     // une liste non consécutive est laissée telle quelle.
     $compact = function (string $label) use ($DAYS, $DAY): string {
+        $cap = fn($d) => mb_strtoupper(mb_substr($d, 0, 1)) . mb_substr($d, 1);
+        if (preg_match('/^tous les jours$/iu', $label)) return 'Tous les jours';
+        if (preg_match('/(*UCP)^le\s/iu', $label)) $label = $cap(preg_replace('/(*UCP)^le\s+/iu', '', $label));   // « Le samedi » → « Samedi »
         preg_match_all("/$DAY/u", mb_strtolower($label), $m);
         $found = $m[0];
+        // « Du mardi au samedi » est une plage par définition : même forme que les autres
+        if (preg_match('/(*UCP)^du\s/iu', $label) && count($found) === 2) return $cap($found[0]) . ' - ' . $cap($found[1]);
         if (count($found) < 3) return $label;
         $idx = array_map(fn($d) => array_search($d, $DAYS, true), $found);
         foreach ($idx as $i => $v) if ($i > 0 && $v !== $idx[$i - 1] + 1) return $label;
-        $cap = fn($d) => mb_strtoupper(mb_substr($d, 0, 1)) . mb_substr($d, 1);
         return $cap($found[0]) . ' - ' . $cap($found[count($found) - 1]);
     };
     $slots = fn(string $str) => preg_replace_callback($RANGE_RE, fn($r) => '<span class="hours-slot">' . $r[0] . '</span>', h($str));
