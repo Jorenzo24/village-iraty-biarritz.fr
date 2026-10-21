@@ -174,7 +174,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const DAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
         const DAY = DAYS.join('|');
         const SEP = '\\s*(?:,|/|-|–|et|à|au)\\s*';
-        const DAY_LIST_RE = new RegExp(`^((?:${DAY})(?:${SEP}(?:${DAY}))*)\\s*:?\\s*`, 'i');
+        // Libellés reconnus : « Tous les jours », « Du mardi au samedi » (plage), « Le samedi », ou un ou
+        // plusieurs jours. Sans « Du … au … » ni « Tous les jours », ces lignes n'étaient pas
+        // mises en colonne et le libellé se tassait mot par mot (octobre 2026).
+        const DAY_LIST_RE = new RegExp(`^(tous les jours|du\\s+(?:${DAY})\\s+au\\s+(?:${DAY})|(?:le\\s+)?(?:${DAY})(?:${SEP}(?:${DAY}))*)\\s*:?\\s*`, 'i');
 
         // "Lundi, mardi, mercredi, jeudi, vendredi" ne tient pas en vis-à-vis des horaires
         // dans la colonne. Une suite de 3 jours consécutifs ou plus est donc compactée en
@@ -182,11 +185,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Une liste non consécutive ("Lundi - Mercredi - Vendredi") est laissée telle quelle :
         // le tiret y sépare des jours distincts, ce n'est pas une plage.
         function compactDays(label) {
+            const cap = d => d.charAt(0).toUpperCase() + d.slice(1);
+            if (/^tous les jours$/i.test(label)) return 'Tous les jours';
+            if (/^le\s/i.test(label)) label = cap(label.replace(/^le\s+/i, ''));   // « Le samedi » → « Samedi »
             const found = label.toLowerCase().match(new RegExp(DAY, 'g')) || [];
+            // « Du mardi au samedi » est une plage par définition : même forme que les autres.
+            if (/^du\s/i.test(label) && found.length === 2) return `${cap(found[0])} - ${cap(found[1])}`;
             if (found.length < 3) return label;
             const idx = found.map(d => DAYS.indexOf(d));
             if (!idx.every((v, i) => i === 0 || v === idx[i - 1] + 1)) return label;
-            const cap = d => d.charAt(0).toUpperCase() + d.slice(1);
             return `${cap(found[0])} - ${cap(found[found.length - 1])}`;
         }
 
