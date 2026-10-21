@@ -33,10 +33,10 @@ $st = $status['entreprises'];
       <strong>Acteurs</strong>
       <span class="adm-muted"><?= $st['ok'] ? (int) $st['count'] . ' fiches · modifier une fiche' : 'indisponible' ?></span>
     </a>
-    <div class="adm-card adm-tile">
+    <a class="adm-card adm-tile" href="/admin/locaux.php">
       <strong>Locaux à louer</strong>
-      <span class="adm-muted">Bientôt disponible</span>
-    </div>
+      <span class="adm-muted"><?= $status['locaux']['ok'] ? (int) $status['locaux']['count'] . ' locaux · modifier une annonce' : 'indisponible' ?></span>
+    </a>
   </div>
   <div class="adm-card">
     <h2>État des données</h2>

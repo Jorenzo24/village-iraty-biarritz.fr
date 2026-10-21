@@ -18,11 +18,11 @@ final class ImageRejected extends RuntimeException {}
 /**
  * @param string $tmp  fichier reçu
  * @param string $kind 'photo' | 'logo'
- * @return string chemin public (/uploads/entreprises/<slug>/…)
+ * @return string chemin public (/uploads/<collection>/<slug>/…)
  */
-function vib_image_store(string $tmp, string $kind, string $slug): string
+function vib_image_store(string $tmp, string $kind, string $slug, string $collection = 'entreprises'): string
 {
-    if (!in_array($kind, ['photo', 'logo'], true) || !preg_match('/^[a-z0-9-]+$/', $slug)) throw new InvalidArgumentException('Paramètres invalides');
+    if (!in_array($kind, ['photo', 'logo'], true) || !preg_match('/^[a-z0-9-]+$/', $slug) || !in_array($collection, ['entreprises', 'locaux'], true)) throw new InvalidArgumentException('Paramètres invalides');
     $info = @getimagesize($tmp);
     if (!$info || !in_array($info[2], [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP], true)) {
         throw new ImageRejected('Format non pris en charge : envoyez une photo JPEG, PNG ou WebP.');
@@ -59,7 +59,7 @@ function vib_image_store(string $tmp, string $kind, string $slug): string
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $nw, $nh, $w, $h);
     imagedestroy($src);
 
-    $rel = "/entreprises/$slug";
+    $rel = "/$collection/$slug";
     $dir = vib_config()['uploads_dir'] . $rel;
     if (!is_dir($dir) && !@mkdir($dir, 0755, true) && !is_dir($dir)) throw new RuntimeException('Dossier des photos inaccessible');
     $base = $kind . '-' . date('Ymd-His') . '-' . bin2hex(random_bytes(3));

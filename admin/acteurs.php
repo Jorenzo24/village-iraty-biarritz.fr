@@ -18,10 +18,10 @@ vib_admin_header('Acteurs', $user, 'acteurs');
       <h1>Acteurs</h1>
       <p class="adm-muted"><?= count($items) ?> fiches publiées. Cliquez sur une fiche pour la modifier.</p>
     </div>
-    <a class="adm-btn" href="/admin/nouveau.php">Ajouter un acteur</a>
+    <a class="adm-btn" href="/admin/nouveau.php?c=entreprises">Ajouter un acteur</a>
   </div>
   <?php if (($_GET['retire'] ?? '') !== ''): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>Fiche « <?= e((string) $_GET['retire']) ?> » retirée du site.</strong> Son adresse redirige vers l’annuaire. Elle reste réintégrable depuis l’<a href="/admin/historique.php#retirees">historique</a>.</div>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>Fiche « <?= e((string) $_GET['retire']) ?> » retirée du site.</strong> Son adresse redirige vers l’annuaire. Elle reste réintégrable depuis l’<a href="/admin/historique.php?c=entreprises#retirees">historique</a>.</div>
   <?php endif; ?>
   <div class="adm-filters">
     <input type="search" id="adm-q" placeholder="Rechercher un nom, une adresse…" aria-label="Rechercher" autocomplete="off">
@@ -44,4 +44,4 @@ vib_admin_header('Acteurs', $user, 'acteurs');
     <?php endforeach; ?>
     <li class="adm-empty" id="adm-none" hidden>Aucune fiche ne correspond.</li>
   </ul>
-<?php vib_admin_footer('/admin/admin.js?v=20261021c');
+<?php vib_admin_footer('/admin/admin.js?v=20261021e');

@@ -1,13 +1,14 @@
 <?php
-/** Back-office VIB — journal de toutes les modifications, et fiches retirées (réintégrables). */
+/** Back-office VIB — journal de toutes les modifications, et fiches retirées (réintégrables), par type de fiche. */
 
 declare(strict_types=1);
 
 require __DIR__ . '/../lib/admin.php';
-require __DIR__ . '/../lib/fields.php';
+require __DIR__ . '/../lib/collections.php';
 $user = vib_admin_user();
 
-$store = new Store('entreprises');
+$col = vib_admin_collection();
+$store = new Store($col['c']);
 $store->seedIfEmpty();
 $error = '';
 
@@ -20,14 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else {
         try {
             $store->addItem($rec['item'], $user['email'], 'Réintégration de la fiche « ' . $rec['item']['name'] . ' » (' . $slug . ')');
-            header('Location: /admin/acteur.php?slug=' . rawurlencode($slug) . '&ok=reintegre', true, 303);
+            header('Location: ' . $col['edit'] . '?slug=' . rawurlencode($slug) . '&ok=reintegre', true, 303);
             exit;
         } catch (StoreConflict $ex) { $error = $ex->getMessage(); }
     }
 }
 
-$items = $store->read()['items'];
-$live = array_flip(array_column($items, 'slug'));
+$live = array_flip(array_column($store->read()['items'], 'slug'));
 $log = $store->history(150);
 $retired = $store->retired();
 
@@ -35,8 +35,13 @@ vib_admin_header('Historique', $user, 'historique');
 ?>
   <div>
     <h1>Historique</h1>
-    <p class="adm-muted">Toutes les modifications des fiches acteurs, la plus récente en haut. Pour revenir en arrière sur une fiche, ouvrez-la : son historique est en bas de page.</p>
+    <p class="adm-muted">Toutes les modifications, la plus récente en haut. Pour revenir en arrière sur une fiche, ouvrez-la : son historique est en bas de page.</p>
   </div>
+  <nav class="adm-tabs" aria-label="Type de fiche">
+    <?php foreach (['entreprises', 'locaux'] as $c): $d = vib_admin_collection($c); ?>
+      <a href="/admin/historique.php?c=<?= e($c) ?>"<?= $c === $col['c'] ? ' aria-current="page"' : '' ?>><?= e($d['title']) ?></a>
+    <?php endforeach; ?>
+  </nav>
   <?php if ($error): ?><div class="adm-flash adm-flash--ko" role="alert"><?= e($error) ?></div><?php endif; ?>
 
   <section class="adm-card" id="retirees">
@@ -50,6 +55,7 @@ vib_admin_header('Historique', $user, 'historique');
             <span><strong><?= e($r['item']['name']) ?></strong> · retirée le <?= e(date('d/m/Y à H:i', strtotime($r['at']))) ?> par <?= e($r['author']) ?></span>
             <form method="post" action="/admin/historique.php">
               <input type="hidden" name="csrf" value="<?= e(vib_csrf_token($user['email'])) ?>">
+              <input type="hidden" name="c" value="<?= e($col['c']) ?>">
               <input type="hidden" name="slug" value="<?= e($r['item']['slug']) ?>">
               <button type="submit" class="adm-btn adm-btn--ghost adm-btn--small">Réintégrer sur le site</button>
             </form>
@@ -67,7 +73,7 @@ vib_admin_header('Historique', $user, 'historique');
         $msg = preg_replace('/ \([a-z0-9-]+\)/', '', (string) $en['message']); ?>
         <li>
           <span><strong><?= e(date('d/m/Y à H:i', strtotime($en['at']))) ?></strong> · <?= e($en['author']) ?></span>
-          <span><?php if ($k && isset($live[$k])): ?><a href="/admin/acteur.php?slug=<?= e(rawurlencode($k)) ?>#historique"><?= e($msg) ?></a><?php else: ?><?= e($msg) ?><?php endif; ?></span>
+          <span><?php if ($k && isset($live[$k])): ?><a href="<?= e($col['edit'] . '?slug=' . rawurlencode($k)) ?>#historique"><?= e($msg) ?></a><?php else: ?><?= e($msg) ?><?php endif; ?></span>
         </li>
       <?php endforeach; ?>
     </ol>

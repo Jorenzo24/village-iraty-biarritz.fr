@@ -8,6 +8,12 @@ require __DIR__ . '/lib/render.php';
 
 $slug = (string) ($_GET['slug'] ?? '');
 $l = preg_match('/^[a-z0-9-]+$/', $slug) ? vib_find(vib_public_items('locaux'), $slug) : null;
+if (!$l && $slug !== '') {
+    // Local retiré depuis le back-office (loué) : adresse peut-être indexée → redirection permanente
+    foreach ((new Store('locaux'))->retired() as $r) {
+        if (($r['item']['slug'] ?? null) === $slug) { header('Location: /louer-un-local', true, 301); exit; }
+    }
+}
 if (!$l) http_response_code(404);
 header('Content-Type: text/html; charset=utf-8');
 // Toujours revalider : une modification faite dans le back-office doit se voir au rechargement suivant

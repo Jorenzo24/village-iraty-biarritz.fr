@@ -86,9 +86,9 @@ const VIB_ACTOR_LABELS = [
 const VIB_MAX_PHOTOS = 15;
 
 /** Chemin public d'une image envoyée depuis le back-office pour cette fiche (format imposé par admin/upload.php). */
-function vib_is_upload(string $path, string $slug): bool
+function vib_is_upload(string $path, string $slug, string $collection = 'entreprises'): bool
 {
-    if (!preg_match('#^/uploads/entreprises/' . preg_quote($slug, '#') . '/(photo|logo)-\d{8}-\d{6}-[0-9a-f]{6}\.(jpg|png)$#', $path)) return false;
+    if (!preg_match('#^/uploads/' . preg_quote($collection, '#') . '/' . preg_quote($slug, '#') . '/(photo|logo)-\d{8}-\d{6}-[0-9a-f]{6}\.(jpg|png)$#', $path)) return false;
     return is_file(vib_config()['uploads_dir'] . substr($path, strlen('/uploads')));
 }
 
@@ -250,7 +250,7 @@ function vib_fold(string $s): string
 {
     $s = mb_strtolower($s, 'UTF-8');
     return strtr($s, ['à'=>'a','â'=>'a','ä'=>'a','á'=>'a','ç'=>'c','é'=>'e','è'=>'e','ê'=>'e','ë'=>'e','î'=>'i','ï'=>'i','í'=>'i',
-                      'ô'=>'o','ö'=>'o','ó'=>'o','ù'=>'u','û'=>'u','ü'=>'u','ú'=>'u','ÿ'=>'y','ñ'=>'n','œ'=>'oe','æ'=>'ae','’'=>"'"]);
+                      'ô'=>'o','ö'=>'o','ó'=>'o','ù'=>'u','û'=>'u','ü'=>'u','ú'=>'u','ÿ'=>'y','ñ'=>'n','œ'=>'oe','æ'=>'ae','’'=>"'",'²'=>'2','³'=>'3']);
 }
 
 /**
@@ -265,20 +265,15 @@ function vib_fold(string $s): string
  */
 function vib_form_merge(array $orig, array $mine, array $fresh): array
 {
-    $n = fn($s): string => trim(str_replace(["\r\n", "\r"], "\n", is_string($s) ? $s : ''));
+    $n = fn($s): string => vib_merge_norm($s);
     $labels = ['name' => 'nom', 'category' => 'catégorie', 'description' => 'description', 'phone' => 'téléphone', 'email' => 'e-mail',
                'website' => 'site web', 'building' => 'adresse', 'street' => 'adresse', 'lot' => 'adresse', 'address_free' => 'adresse', 'address_mode' => 'adresse'];
     $out = $fresh;
     $conflicts = [];
-    $pick = function ($o, $m, $f, string $label, $show) use ($n, &$conflicts) {
-        if ($n($m) === $n($o)) return $f;                       // pas touché par moi
-        if ($n($f) !== $n($o) && $n($f) !== $n($m)) $conflicts[$label] = (string) $show;
-        return $m;
-    };
     foreach ($labels as $k => $label) {
         $show = $label === 'adresse' ? ($fresh['address_mode'] === 'libre' ? $fresh['address_free'] : vib_address_compose($fresh['building'], $fresh['street'], $fresh['lot'])) : $fresh[$k];
         if ($k === 'category') $show = VIB_CATEGORIES[$fresh[$k]] ?? $fresh[$k];
-        $out[$k] = $pick($orig[$k] ?? '', $mine[$k] ?? '', $fresh[$k] ?? '', $label, $show);
+        $out[$k] = vib_merge_value($orig[$k] ?? '', $mine[$k] ?? '', $fresh[$k] ?? '', $label, (string) $show, $conflicts);
     }
     // Horaires : un seul bloc (grille, mode, texte libre et précision vont ensemble)
     $hb = fn(array $v): string => json_encode([$v['hours_mode'] ?? '', $n($v['hours_free'] ?? ''), $n($v['hours_note'] ?? ''), vib_hours_form_norm($v['h'] ?? [])]);
@@ -287,19 +282,37 @@ function vib_form_merge(array $orig, array $mine, array $fresh): array
     foreach (['hours_mode', 'hours_free', 'hours_note', 'h'] as $k) $out[$k] = $mineHours ? ($mine[$k] ?? '') : $fresh[$k];
     if ($mineHours) $out['h'] = vib_hours_form_norm($out['h']);
 
-    // Photos : la liste (ordre compris) forme un bloc ; logo : un champ simple
-    $pl = fn(array $v): array => array_values(array_filter(is_array($v['photos'] ?? null) ? $v['photos'] : [], fn($p) => is_string($p) && $p !== ''));
-    $minePhotos = $pl($mine) !== $pl($orig);
-    if ($minePhotos && $pl($fresh) !== $pl($orig) && $pl($fresh) !== $pl($mine)) $conflicts['photos'] = count($pl($fresh)) . ' photo(s)';
-    $out['photos'] = $minePhotos ? $pl($mine) : $pl($fresh);
-    $out['logo'] = $pick($orig['logo'] ?? '', $mine['logo'] ?? '', $fresh['logo'] ?? '', 'logo', ($fresh['logo'] ?? '') !== '' ? 'un autre logo' : '(aucun)');
+    $out['photos'] = vib_merge_photos($orig, $mine, $fresh, $conflicts);
+    $out['logo'] = vib_merge_value($orig['logo'] ?? '', $mine['logo'] ?? '', $fresh['logo'] ?? '', 'logo', ($fresh['logo'] ?? '') !== '' ? 'un autre logo' : '(aucun)', $conflicts);
 
     $out['social'] = [];
     foreach (array_keys(VIB_SOCIAL) as $k) {
-        $v = $pick($orig['social'][$k] ?? '', $mine['social'][$k] ?? '', $fresh['social'][$k] ?? '', 'réseau ' . VIB_SOCIAL[$k][0], $fresh['social'][$k] ?? '');
+        $v = vib_merge_value($orig['social'][$k] ?? '', $mine['social'][$k] ?? '', $fresh['social'][$k] ?? '', 'réseau ' . VIB_SOCIAL[$k][0], $fresh['social'][$k] ?? '', $conflicts);
         if ($n($v) !== '') $out['social'][$k] = $v;
     }
     return ['values' => $out, 'conflicts' => $conflicts];
+}
+
+function vib_merge_norm($s): string { return trim(str_replace(["\r\n", "\r"], "\n", is_string($s) ? $s : '')); }
+
+/**
+ * Un champ : pas touché par moi → valeur de l'autre ; touché par moi seul → la mienne ;
+ * touché des deux côtés, différemment → la mienne, signalée dans $conflicts (libellé → valeur de l'autre).
+ */
+function vib_merge_value($o, $m, $f, string $label, string $show, array &$conflicts)
+{
+    if (vib_merge_norm($m) === vib_merge_norm($o)) return $f;
+    if (vib_merge_norm($f) !== vib_merge_norm($o) && vib_merge_norm($f) !== vib_merge_norm($m)) $conflicts[$label] = $show;
+    return $m;
+}
+
+/** Photos : la liste (ordre compris) forme un bloc. */
+function vib_merge_photos(array $orig, array $mine, array $fresh, array &$conflicts): array
+{
+    $pl = fn(array $v): array => array_values(array_filter(is_array($v['photos'] ?? null) ? $v['photos'] : [], fn($p) => is_string($p) && $p !== ''));
+    $minePhotos = $pl($mine) !== $pl($orig);
+    if ($minePhotos && $pl($fresh) !== $pl($orig) && $pl($fresh) !== $pl($mine)) $conflicts['photos'] = count($pl($fresh)) . ' photo(s)';
+    return $minePhotos ? $pl($mine) : $pl($fresh);
 }
 
 /** Identifiant d'adresse web à partir du nom : « Café du Port » → « cafe-du-port ». */
@@ -313,12 +326,12 @@ function vib_slugify(string $name): string
  * Identifiants déjà pris : fiches publiées, fiches retirées, et anciennes fiches redirigées par le .htaccess
  * (une nouvelle fiche à cette adresse serait redirigée vers l'annuaire, donc invisible).
  */
-function vib_taken_slugs(Store $store): array
+function vib_taken_slugs(Store $store, string $prefix = 'acteur'): array
 {
     $taken = array_column($store->read()['items'], 'slug');
     foreach ($store->retired() as $r) $taken[] = $r['item']['slug'] ?? '';
     $ht = (string) @file_get_contents(vib_config()['repo_dir'] . '/.htaccess');
-    preg_match_all('#^\s*RewriteRule\s+\^acteur/([a-z0-9\\-]+?)/\?\$\s+\S+\s+\[[^\]]*R=301#m', $ht, $m);
+    preg_match_all('#^\s*RewriteRule\s+\^' . $prefix . '/([a-z0-9\\-]+?)/\?\$\s+\S+\s+\[[^\]]*R=301#m', $ht, $m);
     foreach ($m[1] as $sl) $taken[] = str_replace('\\-', '-', $sl);
     return array_values(array_unique(array_filter($taken)));
 }

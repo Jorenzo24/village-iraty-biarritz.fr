@@ -230,6 +230,27 @@ foreach (['II' => 'v', 'MM' => 'n'] as $bo => $f16) {
 file_put_contents($tmp . '/tronque.jpg', "\xFF\xD8\xFF\xE1\x00");
 check('JPEG tronqué → pas d’erreur, orientation normale', vib_jpeg_orientation($tmp . '/tronque.jpg') === 1);
 
+echo "\nLocaux à louer\n";
+require_once __DIR__ . '/../lib/fields-locaux.php';
+$locs = json_decode((string) file_get_contents(__DIR__ . '/../data/locaux.json'), true);
+$same = 0; foreach ($locs as $l) { $r = vib_local_apply($l, vib_local_form_values($l)); if ($r['item'] === $l && !$r['changed'] && !$r['errors']) $same++; }
+check("réenregistrer sans rien toucher laisse chaque local identique ($same / " . count($locs) . ')', $same === count($locs));
+$l0 = $locs[0]; $f0 = vib_local_form_values($l0);
+check('saisie française : 1165.0 → « 1165 », 150.19 → « 150,19 »', $f0['price_ht'] === '1165' && $f0['charges_ht'] === '150,19');
+$r = vib_local_apply($l0, ['price_ht' => '1 200,50', 'surface' => '95', 'norm_pmr' => ''] + $f0);
+check('loyer « 1 200,50 » → 1200.5 ; surface 95 (entier) ; case décochée → false', $r['item']['price_ht'] === 1200.5 && $r['item']['surface'] === 95 && $r['item']['norm_pmr'] === false && $r['changed'] === ['surface', 'loyer', 'accès PMR']);
+$r = vib_local_apply($l0, ['charges_ht' => ''] + $f0);
+check('charges vides → 0 (bloc masqué sur la fiche)', $r['item']['charges_ht'] === 0.0);
+$r = vib_local_apply($l0, ['price_ht' => 'mille', 'surface' => '0', 'name' => ''] + $f0);
+check('loyer illisible, surface nulle, titre vide → refusés', array_keys($r['errors']) === ['name', 'surface', 'price_ht']);
+$m = vib_local_merge($f0, array_merge($f0, ['price_ht' => '1200']), array_merge($f0, ['description' => 'Autre texte']));
+check('conflit : loyer (moi) et description (l’autre) fusionnés', $m['values']['price_ht'] === '1200' && $m['values']['description'] === 'Autre texte' && !$m['conflicts']);
+$sl = new Store('locaux', $tmp . '/locaux'); $sl->seedIfEmpty();
+$new = vib_local_new(vib_unique_slug('Lot 9 - Bureau 30 m²', vib_taken_slugs($sl, 'local')), 'Lot 9 - Bureau 30 m²', 30, 600);
+$sl->addItem($new, 'a@x', 'Ajout');
+check('nouveau local : identifiant propre, forme exacte', $new['slug'] === 'lot-9-bureau-30-m2' && array_keys($new) === array_keys($locs[0]) && vib_local_apply($new, vib_local_form_values($new))['changed'] === []);
+check('identifiant redirigé par le .htaccess réservé (local loué en août)', in_array('duplex-commercial-de-90mm2-ref-dar41', vib_taken_slugs($sl, 'local'), true));
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

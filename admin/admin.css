@@ -111,6 +111,13 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-compare__row:not(.adm-compare__head) > span:nth-child(2)::before { content: "Cette version : "; font-weight: 600; }
 .adm-compare__row:not(.adm-compare__head) > span:nth-child(3)::before { content: "Actuelle : "; font-weight: 600; }
 
+/* Locaux */
+.adm-flags { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); }
+.adm-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.adm-tabs { display: flex; gap: var(--space-2); }
+.adm-tabs a { padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); border: 1px solid var(--color-border); color: inherit; text-decoration: none; font-size: var(--fs-small); background: var(--color-bg); }
+.adm-tabs a[aria-current] { background: var(--color-text-strong); color: var(--color-on-dark); border-color: var(--color-text-strong); }
+
 /* Horaires */
 .adm-modes { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-4); }
 .adm-mode { display: flex; gap: var(--space-2); align-items: center; font-size: var(--fs-small); }
@@ -140,5 +147,6 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
   .adm-filters { grid-template-columns: 2fr 1fr; }
   .adm-list a.adm-row { grid-template-columns: 1fr auto; }
   .adm-grid--2 { grid-template-columns: 1fr 1fr; }
+  .adm-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
   .adm-grid--addr { grid-template-columns: 1fr 1.6fr .8fr; }
 }

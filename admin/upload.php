@@ -1,6 +1,6 @@
 <?php
 /**
- * Back-office VIB — réception d'une photo ou d'un logo pour une fiche acteur (appelé par admin.js).
+ * Back-office VIB — réception d'une photo (ou d'un logo d'acteur) pour une fiche (appelé par admin.js).
  * L'image est enregistrée mais la fiche n'est PAS modifiée : elle n'apparaît sur le site qu'au clic
  * sur « Enregistrer » (même contrôle de conflit que le reste du formulaire).
  */
@@ -26,8 +26,10 @@ vib_csrf_check($user);
 
 $slug = (string) ($_POST['slug'] ?? '');
 $kind = (string) ($_POST['kind'] ?? '');
-if (!in_array($kind, ['photo', 'logo'], true)) $fail(400, 'Type d’image inconnu');
-if (!vib_find(vib_public_items('entreprises'), $slug)) $fail(404, 'Fiche introuvable');
+$c = (string) ($_POST['c'] ?? 'entreprises');
+if (!in_array($c, ['entreprises', 'locaux'], true)) $fail(400, 'Type de fiche inconnu');
+if (!in_array($kind, $c === 'locaux' ? ['photo'] : ['photo', 'logo'], true)) $fail(400, 'Type d’image inconnu');
+if (!vib_find(vib_public_items($c), $slug)) $fail(404, 'Fiche introuvable');
 
 $f = $_FILES['file'] ?? null;
 if (!$f || !is_array($f) || is_array($f['error'])) $fail(400, 'Aucune image reçue');
@@ -35,7 +37,7 @@ if (in_array($f['error'], [UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE], true)) $f
 if ($f['error'] !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name'])) $fail(400, 'Envoi interrompu, réessayez.');
 
 try {
-    $path = vib_image_store($f['tmp_name'], $kind, $slug);
+    $path = vib_image_store($f['tmp_name'], $kind, $slug, $c);
 } catch (ImageRejected $e) {
     $fail(422, $e->getMessage());
 } catch (Throwable $e) {

@@ -1,20 +1,17 @@
 <?php
 /**
- * Back-office VIB — modification d'une fiche acteur (textes, adresse, contacts, réseaux).
+ * Back-office VIB — modification d'une fiche acteur (textes, adresse, contacts, réseaux, horaires, photos).
  *
- * Sécurités :
- *  - le formulaire porte l'empreinte de la fiche affichée : si quelqu'un l'a modifiée entre-temps,
- *    l'enregistrement est refusé, et la saisie est conservée à l'écran (rien n'est perdu) ;
- *  - seuls les champs du formulaire sont touchés : horaires, photos et logo restent tels quels ;
- *  - après enregistrement, redirection (un rechargement de page ne renvoie pas le formulaire).
+ * Enregistrement, conflits et historique : mécanique commune, lib/admin-fiche.php.
  */
 
 declare(strict_types=1);
 
 require __DIR__ . '/../lib/admin.php';
-require __DIR__ . '/../lib/fields.php';
+require __DIR__ . '/../lib/admin-fiche.php';
 $user = vib_admin_user();
 
+$col = vib_admin_collection('entreprises');
 $store = new Store('entreprises');
 $store->seedIfEmpty();
 $slug = (string) ($_POST['slug'] ?? $_GET['slug'] ?? '');
@@ -28,61 +25,16 @@ if ($item === null) {
     exit;
 }
 
-$values = vib_actor_form_values($item);
-$hash = Store::itemHash($item);
-$errors = [];
-$conflict = null;   // fiche modifiée entre-temps : champs modifiés des deux côtés (libellé → valeur de l'autre personne)
-$orig = $values;    // valeurs à l'ouverture du formulaire : permettent de savoir ce que l'utilisateur a touché
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    vib_csrf_check($user);
-    $sentOrig = json_decode((string) base64_decode((string) ($_POST['orig'] ?? ''), true), true);
-    if (is_array($sentOrig) && !array_diff_key($values, $sentOrig)) $orig = $sentOrig;
-    $mine = array_merge($values, array_intersect_key($_POST, $values));
-    if (!is_array($mine['social'])) $mine['social'] = [];
-    $mine['h'] = vib_hours_form_norm($mine['h']);
-    $mine['photos'] = array_values(array_filter(is_array($mine['photos']) ? $mine['photos'] : [], fn($p) => is_string($p) && $p !== ''));
-    if (!is_string($mine['logo'])) $mine['logo'] = '';
-    $mine['address_mode'] = ($_POST['address_mode'] ?? '') === 'libre' ? 'libre' : 'structuree';   // case décochée = absente du formulaire
-    $values = $mine;
-
-    // Fiche modifiée entre-temps : fusion champ par champ, RIEN n'est enregistré, l'utilisateur vérifie
-    $onConflict = function (array $fresh) use (&$values, &$orig, &$conflict, &$hash, $mine) {
-        $m = vib_form_merge($orig, $mine, vib_actor_form_values($fresh));
-        [$values, $conflict] = [$m['values'], $m['conflicts']];
-        $orig = vib_actor_form_values($fresh);
-        $hash = Store::itemHash($fresh);
-    };
-
-    if ((string) ($_POST['hash'] ?? '') !== $hash) {
-        $onConflict($item);
-    } else {
-        $r = vib_actor_apply($item, $_POST);
-        $errors = $r['errors'];
-        if (!$errors && !$r['changed']) {
-            header('Location: /admin/acteur.php?slug=' . rawurlencode($slug) . '&ok=0', true, 303);
-            exit;
-        }
-        if (!$errors) {
-            try {
-                $store->updateItem($slug, $hash, fn(array $cur) => vib_actor_apply($cur, $_POST)['item'], $user['email'],
-                    'Fiche « ' . $r['item']['name'] . ' » (' . $slug . ') : ' . implode(', ', $r['changed']));
-                header('Location: /admin/acteur.php?slug=' . rawurlencode($slug) . '&ok=1', true, 303);
-                exit;
-            } catch (StoreConflict $ex) {
-                $item = vib_find($store->read()['items'], $slug);
-                if ($item === null) { http_response_code(409); exit('Cette fiche vient d’être retirée.'); }
-                $onConflict($item);
-            }
-        }
-    }
-}
-
-// Dernière modification de cette fiche (affichée après enregistrement et en bas de page)
-$last = null;
-foreach ($store->history(200) as $h) {
-    if (($h['key'] ?? null) === $slug || str_contains((string) $h['message'], '(' . $slug . ')')) { $last = $h; break; }
-}
+$st = vib_admin_edit($store, $col, $item, $user, 'vib_actor_form_values', 'vib_actor_apply', 'vib_form_merge', function (array $m): array {
+    if (!is_array($m['social'])) $m['social'] = [];
+    $m['h'] = vib_hours_form_norm($m['h']);
+    $m['photos'] = array_values(array_filter(is_array($m['photos']) ? $m['photos'] : [], fn($p) => is_string($p) && $p !== ''));
+    if (!is_string($m['logo'])) $m['logo'] = '';
+    $m['address_mode'] = ($_POST['address_mode'] ?? '') === 'libre' ? 'libre' : 'structuree';   // case décochée = absente du formulaire
+    return $m;
+});
+['item' => $item, 'values' => $values, 'errors' => $errors] = $st;
+$last = vib_admin_last_change($store, $slug);
 
 $v = fn(string $k): string => e((string) ($values[$k] ?? ''));
 $err = function (string $k) use ($errors): string {
@@ -99,41 +51,10 @@ vib_admin_header($item['name'], $user, 'acteurs');
     <p class="adm-muted"><?= e($item['category_label']) ?> · <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">Voir la fiche en ligne ↗</a></p>
   </div>
 
-  <?php if (($_GET['ok'] ?? '') === '1' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>Modifications enregistrées.</strong>
-      <?= $last ? 'Champs modifiés : ' . e(preg_replace('/^.*\) : /u', '', $last['message'])) . '.' : '' ?>
-      Elles sont déjà visibles sur <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">la fiche en ligne</a>.</div>
-  <?php elseif (($_GET['ok'] ?? '') === 'nouveau' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>Fiche créée.</strong> Complétez-la ci-dessous puis enregistrez.
-      Elle est déjà consultable à l’adresse <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">/acteur/<?= e($slug) ?></a> ; sa carte dans l’annuaire arrivera dans une prochaine version.</div>
-  <?php elseif (($_GET['ok'] ?? '') === 'restaure' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>Version restaurée.</strong> La fiche a repris son contenu d’alors, déjà visible sur <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">la fiche en ligne</a>. Ce retour en arrière est lui-même annulable depuis l’historique ci-dessous.</div>
-  <?php elseif (($_GET['ok'] ?? '') === 'reintegre' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>Fiche réintégrée</strong>, telle qu’elle était au moment du retrait. Elle est de nouveau visible sur <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">le site</a>.</div>
-  <?php elseif (($_GET['ok'] ?? '') === '0' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
-    <div class="adm-flash adm-flash--ok" role="status">Aucune modification : la fiche était déjà à jour.</div>
-  <?php endif; ?>
-
-  <?php if ($conflict !== null): ?>
-    <div class="adm-flash adm-flash--ko" role="alert"><strong>Rien n’a encore été enregistré :</strong>
-      <?= $last ? e($last['author']) . ' a modifié cette fiche le ' . e(date('d/m/Y à H:i', strtotime($last['at']))) : 'cette fiche a été modifiée' ?> pendant votre saisie.
-      Ses modifications ont été reprises dans le formulaire, avec les vôtres.
-      <?php if ($conflict): ?>
-        <br>Vous avez tous les deux modifié <?= count($conflict) > 1 ? 'les mêmes champs' : 'le même champ' ?> ; c’est votre version qui est affichée. Sa version :
-        <ul><?php foreach ($conflict as $label => $val): ?><li><strong><?= e($label) ?></strong> : <?= e($val !== '' ? mb_strimwidth($val, 0, 160, '…') : '(vide)') ?></li><?php endforeach; ?></ul>
-      <?php endif; ?>
-      Vérifiez, puis cliquez sur « Enregistrer ».
-    </div>
-  <?php elseif ($errors): ?>
-    <div class="adm-flash adm-flash--ko" role="alert"><strong>Rien n’a été enregistré</strong>, merci de corriger :
-      <ul><?php foreach ($errors as $m): ?><li><?= e($m) ?></li><?php endforeach; ?></ul></div>
-  <?php endif; ?>
+  <?php vib_admin_flash($col, $slug, $last, $st['conflict'], $errors); ?>
 
   <form class="adm-form" method="post" action="/admin/acteur.php" id="adm-form" novalidate<?= $_SERVER['REQUEST_METHOD'] === 'POST' ? ' data-unsaved' : '' ?>>
-    <input type="hidden" name="csrf" value="<?= e(vib_csrf_token($user['email'])) ?>">
-    <input type="hidden" name="slug" value="<?= e($slug) ?>">
-    <input type="hidden" name="hash" value="<?= e($hash) ?>">
-    <input type="hidden" name="orig" value="<?= e(base64_encode(json_encode($orig, JSON_UNESCAPED_UNICODE))) ?>">
+    <?= vib_admin_hidden($col, $st, $user) ?>
 
     <section class="adm-card">
       <h2>Présentation</h2>
@@ -266,7 +187,7 @@ vib_admin_header($item['name'], $user, 'acteurs');
       <p class="adm-preview">Texte affiché sur la fiche : <span id="hours-preview" data-original="<?= e((string) $item['hours']) ?>"></span></p>
     </section>
 
-    <section class="adm-card" id="photos" data-slug="<?= e($slug) ?>">
+    <section class="adm-card" id="photos" data-slug="<?= e($slug) ?>" data-c="entreprises">
       <h2>Photos</h2>
       <p class="adm-hint">La première photo est la couverture (en grand sur la fiche, et image d’aperçu quand la fiche est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
       <ul class="adm-photos" id="photo-list">
@@ -308,27 +229,5 @@ vib_admin_header($item['name'], $user, 'acteurs');
     </div>
   </form>
 
-  <section class="adm-card" id="historique">
-    <h2>Historique de cette fiche</h2>
-    <?php $hist = $store->itemHistory($slug, 15); ?>
-    <?php if (!$hist): ?>
-      <p class="adm-muted">Aucune version enregistrée.</p>
-    <?php else: ?>
-      <ol class="adm-history">
-        <?php foreach ($hist as $i => $hv): $en = $hv['entry']; ?>
-          <li>
-            <span><strong><?= e(date('d/m/Y à H:i', strtotime($en['at']))) ?></strong> · <?= e($en['author']) ?></span>
-            <span class="adm-muted"><?= e(($en['base'] ?? '') === '' ? 'Version de départ (mise en place du back-office)' : preg_replace('/^Fiche « .* » \([a-z0-9-]+\) : /u', 'Modifié : ', (string) $en['message'])) ?></span>
-            <?php if ($i === 0): ?><span class="adm-tag">version actuelle</span>
-            <?php elseif ($hv['item']): ?><a href="/admin/version.php?slug=<?= e(rawurlencode($slug)) ?>&amp;id=<?= e(rawurlencode($en['id'])) ?>">Voir et revenir à cette version</a><?php endif; ?>
-          </li>
-        <?php endforeach; ?>
-      </ol>
-    <?php endif; ?>
-  </section>
-
-  <p class="adm-muted">
-    La carte de l’annuaire (nom, photo, horaires) et le plan du site seront reliés à cette fiche dans une prochaine version.
-    · <a href="/admin/retirer.php?slug=<?= e(rawurlencode($slug)) ?>">Retirer cette fiche du site…</a>
-  </p>
-<?php vib_admin_footer('/admin/admin.js?v=20261021c');
+  <?php vib_admin_item_footer($store, $col, $slug); ?>
+<?php vib_admin_footer('/admin/admin.js?v=20261021e');

@@ -68,7 +68,7 @@ function vib_csrf_check(array $user): void
 function vib_admin_header(string $title, array $user, string $nav = ''): void
 {
     header('Content-Type: text/html; charset=utf-8');
-    $items = ['accueil' => ['/admin/', 'Accueil'], 'acteurs' => ['/admin/acteurs.php', 'Acteurs'], 'historique' => ['/admin/historique.php', 'Historique']];
+    $items = ['accueil' => ['/admin/', 'Accueil'], 'acteurs' => ['/admin/acteurs.php', 'Acteurs'], 'locaux' => ['/admin/locaux.php', 'Locaux'], 'historique' => ['/admin/historique.php', 'Historique']];
     ?><!doctype html>
 <html lang="fr">
 <head>
@@ -80,7 +80,7 @@ function vib_admin_header(string $title, array $user, string $nav = ''): void
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets-2026/css/design-system.css?v=20261021a">
-<link rel="stylesheet" href="/admin/admin.css?v=20261021g">
+<link rel="stylesheet" href="/admin/admin.css?v=20261021h">
 </head>
 <body>
 <header class="adm-bar">

@@ -31,26 +31,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // Aperçu de l'adresse : même règle que vib_address_compose() (lib/fields.php)
   const $ = (id) => document.getElementById(id);
   const preview = $('addr-preview');
-  const compose = () => {
-    let lot = $('f-lot').value.trim();
-    if (lot) {
-      if (/^Bureau\s/u.test(lot)) { /* tel quel */ }
-      else if (/\set\s|,|\s-\s|-/u.test(lot)) lot = 'Lots ' + lot.replace(/\s*-\s*/gu, ' et ');
-      else lot = 'Lot n°' + lot;
-    }
-    const parts = [$('f-building').value.trim(), $('f-street').value.trim(), lot].filter(Boolean);
-    preview.textContent = parts.length ? parts.join(' - ') + ' - 64200 BIARRITZ' : '(aucune adresse)';
-  };
-  ['f-building', 'f-street', 'f-lot'].forEach((id) => $(id).addEventListener('input', compose));
-  compose();
+  if (preview) {   // fiches acteurs seulement (adresse structurée)
+    const compose = () => {
+      let lot = $('f-lot').value.trim();
+      if (lot) {
+        if (/^Bureau\s/u.test(lot)) { /* tel quel */ }
+        else if (/\set\s|,|\s-\s|-/u.test(lot)) lot = 'Lots ' + lot.replace(/\s*-\s*/gu, ' et ');
+        else lot = 'Lot n°' + lot;
+      }
+      const parts = [$('f-building').value.trim(), $('f-street').value.trim(), lot].filter(Boolean);
+      preview.textContent = parts.length ? parts.join(' - ') + ' - 64200 BIARRITZ' : '(aucune adresse)';
+    };
+    ['f-building', 'f-street', 'f-lot'].forEach((id) => $(id).addEventListener('input', compose));
+    compose();
 
-  $('f-address-mode').addEventListener('change', (ev) => {
-    const free = ev.target.checked;
-    // En passant en saisie libre, partir de l'adresse composée plutôt que d'un champ vide
-    if (free && !$('f-address-free').value.trim() && preview.textContent !== '(aucune adresse)') $('f-address-free').value = preview.textContent;
-    $('addr-structured').hidden = free;
-    $('addr-free').hidden = !free;
-  });
+    $('f-address-mode').addEventListener('change', (ev) => {
+      const free = ev.target.checked;
+      // En passant en saisie libre, partir de l'adresse composée plutôt que d'un champ vide
+      if (free && !$('f-address-free').value.trim() && preview.textContent !== '(aucune adresse)') $('f-address-free').value = preview.textContent;
+      $('addr-structured').hidden = free;
+      $('addr-free').hidden = !free;
+    });
+  }
 
   // --- Horaires : même règles que lib/hours.php (aperçu seulement, le serveur recalcule)
   const hoursBox = $('hours');
@@ -156,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const fd = new FormData();
       fd.append('csrf', form.elements.csrf.value);
       fd.append('slug', photosBox.dataset.slug);
+      fd.append('c', photosBox.dataset.c || 'entreprises');
       fd.append('kind', kind);
       fd.append('file', blob, kind === 'logo' ? 'logo.png' : 'photo.jpg');
       const res = await fetch('/admin/upload.php', { method: 'POST', body: fd, credentials: 'same-origin' });
@@ -198,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       uploading--;
       status.textContent = errors.length ? errors.join(' ') : 'Envoyé. Cliquez sur « Enregistrer » pour publier.';
     }));
-    $('logo-remove').addEventListener('click', () => {
+    $('logo-remove')?.addEventListener('click', () => {
       $('logo-input').value = ''; $('logo-img').hidden = true; $('logo-none').hidden = false; $('logo-remove').hidden = true;
       changed();
     });
