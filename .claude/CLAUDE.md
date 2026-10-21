@@ -50,7 +50,6 @@ HTML5 / CSS3 / JavaScript vanilla. Pas de framework, pas de build step. Les fich
 ├── .htaccess            # HTTPS, rewrites d'URL propres, cache, sécurité
 ├── robots.txt
 ├── sitemap.xml
-├── llms.txt             # Carte du site pour les LLM (aucun effet mesurable attendu)
 ├── index.html           # Pages du site, servies en /<nom> via le catch-all .htaccess
 ├── le-village.html  activites.html  louer-un-local.html  services.html
 ├── a-propos.html    contact.html    nos-articles.html    faq.html
@@ -223,7 +222,7 @@ autres redirections historiques. Exemple en place : `local/duplex-commercial-de-
   la page a été éditée à la main depuis juin, les relancer réécrirait le fichier avec un shell
   d'époque. Il n'a pas été vérifié qu'ils reproduisent la page actuelle. En pratique, on édite
   `activites.html` à la main.
-- ⚠️ **Compteurs en dur, 6 endroits à corriger à chaque ajout/suppression.** Dans [`activites.html`](../activites.html) : la `<meta name="description">`, le `page-hero__lead`, la pastille `data-cat="all"` et la pastille de la catégorie touchée. Dans [`llms.txt`](../llms.txt) : deux mentions du nombre d'acteurs. Le compteur `#acteur-count` sous les filtres, lui, est calculé en JS — il ne se corrige pas à la main et **trahit immédiatement une pastille fausse**.
+- ⚠️ **Compteurs en dur, 4 endroits à corriger à chaque ajout/suppression**, tous dans [`activites.html`](../activites.html) : la `<meta name="description">`, le `page-hero__lead`, la pastille `data-cat="all"` et la pastille de la catégorie touchée. (`llms.txt` a été supprimé en octobre 2026 : aucun effet mesurable, ne pas le recréer.) Le compteur `#acteur-count` sous les filtres, lui, est calculé en JS — il ne se corrige pas à la main et **trahit immédiatement une pastille fausse**.
 - ⚠️ **L'accueil affiche AUSSI 6 cartes vedettes en dur** ([`index.html`](../index.html), grid `.acteurs-grid`), avec leur **propre image** dans `assets-2026/images/acteurs/<slug>.jpg` (jeu distinct de `assets/photos/entreprises/`). C'est un 5ᵉ endroit à toucher, facile à oublier. La grille fait 3 colonnes : **garder un multiple de 3**, sinon la dernière rangée est bancale. Réflexe : `grep -rn '<slug>' index.html activites.html data/entreprises.json sitemap.xml` avant de conclure.
 - **Sitemap** : ajouter `/acteur/<slug>` (le fichier est trié alphabétiquement).
 - **Photos** : `assets/photos/entreprises/<slug>/` (dossier = slug), `cover.jpg` + `logo.png|jpg`.
