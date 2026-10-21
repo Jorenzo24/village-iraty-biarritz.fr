@@ -43,6 +43,11 @@ check('la restauration est elle-même une version (annulable)', count($s->histor
 check('identifiant de version piégé refusé', throws(fn() => $s->historyItems('../../etc/passwd'), InvalidArgumentException::class));
 check('collections séparées (locaux)', (new Store('locaux'))->seedIfEmpty() === true && count((new Store('locaux'))->read()['items']) >= 1);
 
+$loc = new Store('locaux'); $raw = json_encode($loc->read()['items'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_PRESERVE_ZERO_FRACTION);
+check('nombres réécrits à l’identique (107.87, 179.0)', str_contains($raw, '107.87,') && !str_contains($raw, '107.8700') && str_contains($raw, '179.0'));
+$seed = json_decode(file_get_contents(__DIR__ . '/../data/locaux.json'), true);
+check('import fidèle : contenu identique au fichier d’origine', $loc->read()['items'] === $seed);
+
 echo "\nÉcritures simultanées (8 processus × 10 ajouts, avec relecture en cas de conflit)\n";
 $php = PHP_BINARY; $workers = 8; $per = 10; $procs = [];
 $worker = __DIR__ . '/worker.php';

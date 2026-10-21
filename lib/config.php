@@ -14,6 +14,8 @@
 declare(strict_types=1);
 
 date_default_timezone_set('Europe/Paris');   // dates de l'historique en heure française
+// Nombres décimaux réécrits à l'identique (107.87 et non 107.87000000000001), quel que soit le php.ini du serveur
+ini_set('serialize_precision', '-1');
 
 function vib_env(): string {
     $host = strtolower($_SERVER['HTTP_HOST'] ?? '');
