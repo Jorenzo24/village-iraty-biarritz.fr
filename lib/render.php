@@ -129,3 +129,16 @@ function vib_jsonld_actor(array $e, string $url): string
     ], fn($v) => $v !== null);
     return json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP);
 }
+
+/** Nombre écrit comme JavaScript l'écrit dans un gabarit (`${n}`) : 90 → "90", 90.5 → "90.5", 179.0 → "179". */
+function vib_jsnum(int|float $n): string
+{
+    if (is_float($n) && floor($n) === $n && abs($n) < 1e15) return (string) (int) $n;
+    return (string) $n;
+}
+
+/** Prix comme toLocaleString('fr-FR', 2 décimales) : « 1 165,00 € HT » (espace fine insécable U+202F). */
+function vib_price(int|float $p): string
+{
+    return number_format((float) $p, 2, ',', "\u{202F}") . ' € HT';
+}

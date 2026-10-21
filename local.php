@@ -1,25 +1,44 @@
+<?php
+/**
+ * Fiche local à louer, rendue par le serveur : /local/<slug> (réécriture .htaccess → local.php?slug=).
+ * Seul le changement de photo au clic sur une vignette reste en JavaScript (local.js).
+ */
+declare(strict_types=1);
+require __DIR__ . '/lib/render.php';
+
+$slug = (string) ($_GET['slug'] ?? '');
+$l = preg_match('/^[a-z0-9-]+$/', $slug) ? vib_find(vib_public_items('locaux'), $slug) : null;
+if (!$l) http_response_code(404);
+header('Content-Type: text/html; charset=utf-8');
+
+$url = $l ? 'https://village-iraty-biarritz.fr/local/' . $l['slug'] : 'https://village-iraty-biarritz.fr/louer-un-local';
+$desc = $l ? $l['name'] . ' à louer au VILLAGE Iraty-BIARRITZ. ' . vib_jsnum($l['surface']) . ' m², ' . vib_jsnum($l['price_ht']) . ' € HT/mois.' : 'Local commercial à louer au VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.';
+$photos = $l['photos'] ?? [];
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title id="page-title">Local à louer - VILLAGE Iraty-Biarritz</title>
-  <meta id="page-description" name="description" content="Local commercial à louer au VILLAGE Iraty-Biarritz, au cœur de BIARRITZ.">
+  <title id="page-title"><?= h($l ? $l['name'] . ' - VILLAGE Iraty-BIARRITZ' : 'Local à louer - VILLAGE Iraty-Biarritz') ?></title>
+  <meta id="page-description" name="description" content="<?= ha($desc) ?>">
+<?php if (!$l): ?>  <meta name="robots" content="noindex">
+<?php endif; ?>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Local à louer - VILLAGE Iraty-Biarritz">
-  <meta property="og:description" content="Local professionnel à louer au VILLAGE Iraty-Biarritz, sans frais d'agence.">
+  <meta property="og:title" content="<?= ha($l ? $l['name'] . ' - VILLAGE Iraty-Biarritz' : 'Local à louer - VILLAGE Iraty-Biarritz') ?>">
+  <meta property="og:description" content="<?= ha($l ? $desc : 'Local professionnel à louer au VILLAGE Iraty-Biarritz, sans frais d\'agence.') ?>">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://village-iraty-biarritz.fr/louer-un-local">
+  <meta property="og:url" content="<?= ha($url) ?>">
   <meta property="og:site_name" content="VILLAGE Iraty-Biarritz">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://village-iraty-biarritz.fr/assets-2026/images/story-interieur.jpg">
+  <meta property="og:image" content="<?= ha($photos ? 'https://village-iraty-biarritz.fr' . $photos[0] : 'https://village-iraty-biarritz.fr/assets-2026/images/story-interieur.jpg') ?>">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="canonical" href="https://village-iraty-biarritz.fr/louer-un-local">
+  <link rel="canonical" href="<?= ha($url) ?>">
   <link rel="icon" type="image/png" href="/assets-2026/images/logo/favicon.png">
 
   <!-- Fonts -->
@@ -76,63 +95,80 @@
 
 <main id="main">
 
-  <!-- Hero local (titre injecté par local.js) -->
+  <!-- Hero local -->
   <section class="acteur-hero" id="local-hero">
     <div class="container acteur-hero__inner">
       <a href="/louer-un-local" class="acteur-hero__back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         Tous les locaux disponibles
       </a>
-      <h1 class="acteur-hero__title" id="local-name">Chargement…</h1>
+      <h1 class="acteur-hero__title" id="local-name"><?= h($l ? $l['name'] : 'Local introuvable') ?></h1>
     </div>
   </section>
 
-  <!-- Contenu (rempli par local.js) -->
-  <section class="acteur-detail" id="local-content" hidden>
+  <!-- Contenu -->
+  <section class="acteur-detail" id="local-content"<?= $l ? '' : ' hidden' ?>>
+<?php if ($l): ?>
     <div class="container">
       <div class="local-detail">
 
         <div class="local-detail__gallery">
-          <div class="local-detail__main-photo" id="local-main-photo"></div>
-          <div class="local-detail__thumbs" id="local-thumbs"></div>
+          <div class="local-detail__main-photo" id="local-main-photo"><?php if ($photos): ?><img src="<?= ha($photos[0]) ?>" alt="<?= ha($l['name']) ?>" loading="eager" id="local-main-img"><?php else: ?>
+                <div class="local-detail__placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                    </svg>
+                    <p><?= h(vib_jsnum($l['surface'])) ?> m²</p>
+                    <small>Photos prochainement</small>
+                </div><?php endif; ?></div>
+          <div class="local-detail__thumbs" id="local-thumbs"><?php foreach ($photos as $i => $p): ?><button class="local-detail__thumb<?= $i === 0 ? ' is-active' : '' ?>" data-src="<?= ha($p) ?>" type="button">
+                    <img src="<?= ha($p) ?>" alt="Vue <?= $i + 1 ?>" loading="lazy">
+                </button><?php endforeach; ?></div>
         </div>
 
         <aside class="local-detail__info">
           <span class="badge badge--available local-detail__badge"><span class="badge__dot"></span>Disponible</span>
-          <p class="local-detail__address" id="local-address"></p>
+          <p class="local-detail__address" id="local-address">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" style="display:inline;vertical-align:middle;color:var(--color-accent);" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <?= h($l['address']) ?>
+        </p>
 
           <div class="local-detail__price-box">
             <div>
               <p class="local-detail__price-label">Loyer / mois</p>
-              <p class="local-detail__price" id="local-price"></p>
+              <p class="local-detail__price" id="local-price"><?= h(vib_price($l['price_ht'])) ?></p>
             </div>
             <div>
               <p class="local-detail__price-label">Superficie</p>
-              <p class="local-detail__surface" id="local-surface"></p>
+              <p class="local-detail__surface" id="local-surface"><?= h(vib_jsnum($l['surface'])) ?> m²</p>
             </div>
           </div>
 
-          <a href="/contact?sujet=louer-local&local=" id="local-rdv-btn" class="btn btn--primary local-detail__rdv">
+          <a href="<?= ha('/contact?sujet=louer-local&local=' . rawurlencode($l['slug'])) ?>" id="local-rdv-btn" class="btn btn--primary local-detail__rdv">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Prendre rendez-vous pour ce local
           </a>
 
-          <div class="local-detail__features" id="local-features"></div>
+          <?php $features = array_filter([!empty($l['no_fees']) ? "✓ Sans frais d'agence" : null, !empty($l['no_pas_de_porte']) ? '✓ Pas de pas-de-porte' : null, !empty($l['norm_pmr']) ? '✓ Normes PMR' : null, !empty($l['type']) ? '✓ ' . $l['type'] : null]); ?>
+          <div class="local-detail__features" id="local-features"><?php foreach ($features as $f): ?><span class="local-detail__chip"><?= h($f) ?></span><?php endforeach; ?></div>
 
-          <div class="local-detail__charges" id="local-charges-block" hidden>
+          <div class="local-detail__charges" id="local-charges-block"<?= !empty($l['charges_ht']) && $l['charges_ht'] > 0 ? '' : ' hidden' ?>>
             <p class="contact-info__label">Charges mensuelles HT</p>
-            <p id="local-charges"></p>
+            <p id="local-charges"><?= !empty($l['charges_ht']) && $l['charges_ht'] > 0 ? h(vib_price($l['charges_ht'])) : '' ?></p>
           </div>
         </aside>
 
       </div>
 
-      <div class="local-detail__description prose" id="local-description"></div>
+      <div class="local-detail__description prose" id="local-description"><?php if ($l['description']): ?><h3>Description</h3><p><?= str_replace('. ', '.<br>', h($l['description'])) ?></p><?php endif; ?></div>
     </div>
+<?php endif; ?>
   </section>
 
   <!-- Local introuvable -->
-  <section class="acteur-detail acteur-detail--empty" id="local-not-found" hidden>
+  <section class="acteur-detail acteur-detail--empty" id="local-not-found"<?= $l ? ' hidden' : '' ?>>
     <div class="container entity-notfound">
       <h2 class="entity-notfound__title">Local introuvable</h2>
       <p class="entity-notfound__lead">Désolé, ce local n'est plus disponible ou n'existe pas.</p>
@@ -218,6 +254,6 @@
 </footer>
 
 <script src="/assets-2026/js/main.js?v=20260526a" defer></script>
-<script src="/assets-2026/js/local.js?v=20260623a" defer></script>
+<script src="/assets-2026/js/local.js?v=20261021a" defer></script>
 </body>
 </html>

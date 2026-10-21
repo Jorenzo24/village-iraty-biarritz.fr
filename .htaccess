@@ -42,8 +42,8 @@ RewriteRule ^acteurs-coworking/?$ /activites [L,R=301]
 RewriteRule ^fastlink/?$ /regie-vib [L,R=301]
 RewriteRule ^les-services/?$ /services [L,R=301]
 
-# Lot 38 loué : son URL etait indexee, on la renvoie vers la liste des locaux
-# plutot que de laisser une fiche vide (local.js ne trouve plus le slug).
+# Lot 38 loué : son URL etait indexee, on la renvoie vers la liste des locaux (301)
+# plutot que vers une page « Local introuvable » (404).
 RewriteRule ^local/duplex-commercial-de-90mm2-ref-dar41/?$ /louer-un-local [L,R=301]
 
 # Acteurs retires de l'annuaire : leurs URL etaient indexees et au sitemap, on les
@@ -63,8 +63,8 @@ RewriteRule ^acteur/the-inspire-academy/?$ /activites [L,R=301]
 RewriteCond %{THE_REQUEST} \s/+entreprise(?:\.php)?\?slug=([a-z0-9\-]+)\s [NC]
 RewriteRule ^ /acteur/%1? [R=301,L]
 
-# /local?slug=X → /local/X (301)
-RewriteCond %{THE_REQUEST} \s/+local\?slug=([a-z0-9\-]+)\s [NC]
+# /local?slug=X ou /local.php?slug=X → /local/X (301)
+RewriteCond %{THE_REQUEST} \s/+local(?:\.php)?\?slug=([a-z0-9\-]+)\s [NC]
 RewriteRule ^ /local/%1? [R=301,L]
 
 # /article?slug=X → /X (301, articles au root)
@@ -74,8 +74,8 @@ RewriteRule ^ /%1? [R=301,L]
 # /acteur/<slug> → entreprise.php?slug=<slug> (rewrite silencieux ; page rendue par le serveur)
 RewriteRule ^acteur/([a-z0-9\-]+)/?$ /entreprise.php?slug=$1 [L,QSA]
 
-# /local/<slug> → local.html?slug=<slug>
-RewriteRule ^local/([a-z0-9\-]+)/?$ /local.html?slug=$1 [L,QSA]
+# /local/<slug> → local.php?slug=<slug> (page rendue par le serveur)
+RewriteRule ^local/([a-z0-9\-]+)/?$ /local.php?slug=$1 [L,QSA]
 
 # Articles au root : liste explicite des slugs
 RewriteRule ^(gros-plan-sur-le-quartier-iraty-de-biarritz-et-son-marche-immobilier|le-forum-des-associations-de-biarritz-de-retour-a-la-halle-diraty|pourquoi-de-plus-en-plus-de-professionnels-sinstallent-en-zone-dactivites|5-astuces-pour-bien-choisir-son-local-commercial|les-erreurs-a-eviter-lors-de-la-location-dun-local-commercial|les-meilleurs-endroits-pour-une-viree-shopping-a-biarritz|la-location-dun-local-commercial-a-biarritz)/?$ /article.html?slug=$1 [L,QSA]
