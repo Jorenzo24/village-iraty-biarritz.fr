@@ -39,3 +39,6 @@ validation-acteurs/data/*.json
 validation-acteurs/data/historique/
 validation-acteurs/data/*.lock
 validation-acteurs/data/*.tmp
+
+# Données locales du back-office (poste de dev) : jamais dans Git
+.local-data/

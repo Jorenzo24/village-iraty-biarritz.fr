@@ -1,0 +1,2 @@
+# Code PHP interne du back-office : jamais servi directement par le web.
+Require all denied
