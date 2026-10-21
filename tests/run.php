@@ -57,6 +57,17 @@ check('un « social » vidé dans le back-office est réécrit {} et non []', st
 $seedL = json_decode(file_get_contents(__DIR__ . '/../data/locaux.json'), false);
 check('locaux : contenu ET forme identiques au fichier d’origine', json_decode($loc->publicJson(), false) == $seedL);
 
+echo "\nModification fiche par fiche\n";
+$e = new Store('entreprises'); $cur = $e->read()['items']; $A = $cur[1]; $B = $cur[2];
+$hA = Store::itemHash($A); $hB = Store::itemHash($B);
+$e->updateItem($A['slug'], $hA, fn($x) => ['phone' => '01 11 11 11 11'] + $x, 'alice@vib', 'modif A');
+$okB = true; try { $e->updateItem($B['slug'], $hB, fn($x) => ['phone' => '02 22 22 22 22'] + $x, 'bob@vib', 'modif B'); } catch (Throwable $t) { $okB = false; }
+check('deux personnes, deux fiches différentes → les DEUX enregistrements passent', $okB && array_column($e->read()['items'], 'phone', 'slug')[$A['slug']] === '01 11 11 11 11');
+check('même fiche modifiée entre-temps → REFUSÉ', throws(fn() => $e->updateItem($A['slug'], $hA, fn($x) => ['phone' => 'x'] + $x, 'bob@vib', 'x'), StoreConflict::class));
+check('fiche retirée entre-temps → REFUSÉ', throws(fn() => $e->updateItem('nexiste-pas', 'abc', fn($x) => $x, 'bob@vib', 'x'), StoreConflict::class));
+check('changer l’identifiant d’une fiche par cette voie → refusé', throws(fn() => $e->updateItem($B['slug'], Store::itemHash(array_column($e->read()['items'], null, 'slug')[$B['slug']]), fn($x) => ['slug' => 'autre'] + $x, 'bob@vib', 'x'), InvalidArgumentException::class));
+check('autres fiches intactes', count($e->read()['items']) === count($cur) && array_column($e->read()['items'], null, 'slug')[$cur[3]['slug']] === $cur[3]);
+
 echo "\nÉcritures simultanées (8 processus × 10 ajouts, avec relecture en cas de conflit)\n";
 $php = PHP_BINARY; $workers = 8; $per = 10; $procs = [];
 $worker = __DIR__ . '/worker.php';
@@ -67,7 +78,7 @@ $final = (new Store('entreprises'))->read()['items'];
 $added = count(array_filter($final, fn($e) => str_starts_with($e['slug'], 'test-w')));
 check("aucune écriture perdue : $added ajouts sur " . ($workers * $per) . " ($conflicts conflits détectés puis rejoués)", $added === $workers * $per);
 check('fichier final valide et sans doublon', count($final) === count(array_unique(array_column($final, 'slug'))));
-check('historique complet : une version par écriture', count((new Store('entreprises'))->history(1000)) === 5 + $workers * $per);
+check('historique complet : une version par écriture', count((new Store('entreprises'))->history(1000)) === 7 + $workers * $per);
 check('aucun fichier temporaire oublié', !glob("$tmp/*.tmp-*") && !glob("$tmp/historique/*/*.tmp-*"));
 
 echo "\nRendu des horaires (fiches)\n";

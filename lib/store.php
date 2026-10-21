@@ -56,16 +56,7 @@ final class Store
      */
     public function write(array $items, string $base, string $author, string $message): string
     {
-        if (!array_is_list($items)) throw new InvalidArgumentException('Les fiches doivent former une liste');
-        $key = vib_config()['collections'][$this->collection]['key'];
-        $seen = [];
-        foreach ($items as $i => $it) {
-            if (!is_array($it) || !isset($it[$key]) || !is_string($it[$key]) || $it[$key] === '') throw new InvalidArgumentException("Fiche n°$i sans « $key »");
-            if (isset($seen[$it[$key]])) throw new InvalidArgumentException("« $key » en double : {$it[$key]}");
-            $seen[$it[$key]] = true;
-        }
-        $raw = $this->encode($items);
-
+        $raw = $this->validateAndEncode($items);
         $lock = $this->lock(LOCK_EX);
         try {
             $current = $this->readUnlocked();
@@ -76,16 +67,72 @@ final class Store
             if (count($items) === 0 && count($current['items']) > 0 && $message !== 'VIDER') {
                 throw new InvalidArgumentException('Enregistrement d’une liste vide refusé');
             }
-            $this->atomicWrite($this->file(), $raw);
-            $version = self::versionOf($raw);
-            $id = date('Ymd-His') . '-' . bin2hex(random_bytes(3));
-            $this->atomicWrite($this->histDir() . "/$id.json", $raw);
-            $this->appendLog(['id' => $id, 'version' => $version, 'base' => $base, 'at' => date(DATE_ATOM),
-                              'author' => $author, 'message' => $message, 'count' => count($items)]);
-            return $version;
+            return $this->commitUnlocked($raw, $base, $author, $message, count($items));
         } finally {
             $this->unlock($lock);
         }
+    }
+
+    /** Empreinte d'une fiche : sert à détecter qu'elle a été modifiée par quelqu'un d'autre. */
+    public static function itemHash(array $item): string
+    {
+        return substr(hash('sha256', json_encode($item, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION)), 0, 16);
+    }
+
+    /**
+     * Modifie UNE fiche. Le contrôle porte sur cette fiche seulement : deux personnes peuvent modifier
+     * deux fiches différentes en même temps ; deux modifications de la MÊME fiche → la seconde est refusée.
+     * @param string   $expectedHash empreinte de la fiche telle qu'affichée dans le formulaire
+     * @param callable $fn           reçoit la fiche actuelle, renvoie la fiche modifiée
+     * @return array{version: string, item: array}
+     */
+    public function updateItem(string $keyValue, string $expectedHash, callable $fn, string $author, string $message): array
+    {
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $lock = $this->lock(LOCK_EX);
+        try {
+            $current = $this->readUnlocked();
+            $items = $current['items'];
+            $idx = null;
+            foreach ($items as $i => $it) if (($it[$key] ?? null) === $keyValue) { $idx = $i; break; }
+            if ($idx === null) throw new StoreConflict('Cette fiche n’existe plus (retirée entre-temps).');
+            if (self::itemHash($items[$idx]) !== $expectedHash) {
+                throw new StoreConflict('Cette fiche a été modifiée entre-temps (par un autre onglet ou une autre personne). Vos modifications n’ont pas été enregistrées : rechargez la fiche pour voir la version actuelle.');
+            }
+            $new = $fn($items[$idx]);
+            if (!is_array($new) || ($new[$key] ?? null) !== $keyValue) throw new InvalidArgumentException('Modification invalide');
+            $items[$idx] = $new;
+            $raw = $this->validateAndEncode($items);
+            $version = $this->commitUnlocked($raw, $current['version'], $author, $message, count($items));
+            return ['version' => $version, 'item' => $new];
+        } finally {
+            $this->unlock($lock);
+        }
+    }
+
+    private function validateAndEncode(array $items): string
+    {
+        if (!array_is_list($items)) throw new InvalidArgumentException('Les fiches doivent former une liste');
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $seen = [];
+        foreach ($items as $i => $it) {
+            if (!is_array($it) || !isset($it[$key]) || !is_string($it[$key]) || $it[$key] === '') throw new InvalidArgumentException("Fiche n°$i sans « $key »");
+            if (isset($seen[$it[$key]])) throw new InvalidArgumentException("« $key » en double : {$it[$key]}");
+            $seen[$it[$key]] = true;
+        }
+        return $this->encode($items);
+    }
+
+    /** Écrit la nouvelle version + l'historique. Doit être appelé verrou exclusif tenu. */
+    private function commitUnlocked(string $raw, string $base, string $author, string $message, int $count): string
+    {
+        $this->atomicWrite($this->file(), $raw);
+        $version = self::versionOf($raw);
+        $id = date('Ymd-His') . '-' . bin2hex(random_bytes(3));
+        $this->atomicWrite($this->histDir() . "/$id.json", $raw);
+        $this->appendLog(['id' => $id, 'version' => $version, 'base' => $base, 'at' => date(DATE_ATOM),
+                          'author' => $author, 'message' => $message, 'count' => $count]);
+        return $version;
     }
 
     /** JSON public (api/data.php) : fiches réencodées avec la forme attendue de chaque champ. */
