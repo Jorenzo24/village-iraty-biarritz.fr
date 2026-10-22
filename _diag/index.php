@@ -12,6 +12,14 @@ const KEY_HASH = 'dc740c820d842873d0b668af577f74a02fd18659e67753b0e5f1cb826fe2ed
 $k = $_GET['cle'] ?? '';
 if (!is_string($k) || !hash_equals(KEY_HASH, hash('sha256', $k))) { http_response_code(403); echo '{"ok":false}'; exit; }
 
+// Lecture seule du .htaccess de la production (modifié sur le serveur hors Git, bloque la mise à jour cPanel)
+if (($_GET['fichier'] ?? '') === 'htaccess-prod') {
+    header('Content-Type: text/plain; charset=utf-8');
+    $f = dirname(__DIR__, 2) . '/public_html/.htaccess';
+    echo is_file($f) ? 'mtime ' . date('c', (int) filemtime($f)) . "\n----\n" . file_get_contents($f) : 'introuvable';
+    exit;
+}
+
 $disabled = array_filter(array_map('trim', explode(',', (string) ini_get('disable_functions'))));
 $can = fn(string $f) => function_exists($f) && !in_array($f, $disabled, true);
 $which = function (string $bin) use ($can): string {
