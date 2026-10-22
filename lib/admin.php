@@ -65,7 +65,7 @@ function vib_csrf_check(array $user): void
 }
 
 /** Début de page commun : $nav = rubrique active (accueil, acteurs, locaux). */
-function vib_admin_header(string $title, array $user, string $nav = ''): void
+function vib_admin_header(string $title, array $user, string $nav = '', bool $wide = false): void
 {
     header('Content-Type: text/html; charset=utf-8');
     $items = ['accueil' => ['/admin/', 'Accueil'], 'acteurs' => ['/admin/acteurs.php', 'Acteurs'], 'locaux' => ['/admin/locaux.php', 'Locaux'], 'historique' => ['/admin/historique.php', 'Historique']];
@@ -80,19 +80,25 @@ function vib_admin_header(string $title, array $user, string $nav = ''): void
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets-2026/css/design-system.css?v=20261021a">
-<link rel="stylesheet" href="/admin/admin.css?v=20261021i">
+<link rel="stylesheet" href="/admin/admin.css?v=20261022b">
 </head>
 <body>
 <header class="adm-bar">
-  <a class="adm-bar__brand" href="/admin/">Back-office <strong>VILLAGE Iraty-BIARRITZ</strong></a>
+  <a class="adm-bar__brand" href="/admin/" aria-label="Back-office, accueil">
+    <img src="/assets-2026/images/logo/vib-full.svg" alt="VILLAGE Iraty-BIARRITZ" width="132" height="28">
+    <span class="adm-bar__tag">Back-office</span>
+  </a>
   <nav class="adm-bar__nav" aria-label="Back-office">
     <?php foreach ($items as $k => [$href, $label]): ?>
       <a href="<?= e($href) ?>"<?= $k === $nav ? ' aria-current="page"' : '' ?>><?= e($label) ?></a>
     <?php endforeach; ?>
   </nav>
-  <span class="adm-bar__user"><?= e($user['email']) ?><?= vib_env() !== 'prod' ? ' · <em>' . e(vib_env() === 'test' ? 'site de test' : 'poste local') . '</em>' : '' ?></span>
+  <span class="adm-bar__user">
+    <?php if (vib_env() !== 'prod'): ?><span class="adm-env"><?= e(vib_env() === 'test' ? 'Site de test' : 'Poste local') ?></span><?php endif; ?>
+    <span class="adm-bar__email"><?= e($user['email']) ?></span>
+  </span>
 </header>
-<main class="adm-main">
+<main class="adm-main<?= $wide ? ' adm-main--wide' : '' ?>">
 <?php
 }
 

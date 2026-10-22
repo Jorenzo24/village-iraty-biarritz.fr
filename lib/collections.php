@@ -25,3 +25,45 @@ function vib_admin_url(array $col, string $page, array $q = []): string
 {
     return '/admin/' . $page . '?' . http_build_query(['c' => $col['c']] + $q);
 }
+
+/**
+ * Ce qui manque à une fiche, du plus visible au moins visible (accueil du back-office).
+ * Indicatif seulement : une fiche sans horaires peut l'être volontairement (atelier sur commande).
+ * @return list<string>
+ */
+function vib_item_gaps(string $c, array $it): array
+{
+    $g = [];
+    if (empty($it['photos'])) $g[] = 'photo';
+    if (mb_strlen(trim((string) ($it['description'] ?? ''))) < 120) $g[] = 'description courte';
+    if ($c === 'entreprises') {
+        if (trim((string) ($it['hours'] ?? '')) === '') $g[] = 'horaires';
+        if (($it['phone'] ?? '') === '' && ($it['email'] ?? '') === '') $g[] = 'contact';
+    } else {
+        if (trim((string) ($it['address'] ?? '')) === '') $g[] = 'adresse';
+        if (trim((string) ($it['type'] ?? '')) === '') $g[] = 'type de local';
+    }
+    return $g;
+}
+
+/** Date lisible et relative : « à l’instant », « il y a 12 min », « aujourd’hui à 14:02 », « hier à 09:10 », « le 18/10 ». */
+function vib_when(string $iso): string
+{
+    $t = strtotime($iso);
+    if (!$t) return '';
+    $d = time() - $t;
+    if ($d < 60) return 'à l’instant';
+    if ($d < 3600) return 'il y a ' . intdiv($d, 60) . ' min';
+    if (date('Y-m-d', $t) === date('Y-m-d')) return 'aujourd’hui à ' . date('H:i', $t);
+    if (date('Y-m-d', $t) === date('Y-m-d', strtotime('-1 day'))) return 'hier à ' . date('H:i', $t);
+    return 'le ' . date(date('Y', $t) === date('Y') ? 'd/m' : 'd/m/Y', $t) . ' à ' . date('H:i', $t);
+}
+
+/** « jeudi 22 octobre » */
+function vib_date_fr(?int $t = null): string
+{
+    $t ??= time();
+    $j = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'][(int) date('w', $t)];
+    $m = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'][(int) date('n', $t) - 1];
+    return $j . ' ' . (int) date('j', $t) . ' ' . $m;
+}
