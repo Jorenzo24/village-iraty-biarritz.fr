@@ -294,6 +294,12 @@ check('supprimée : adresse toujours redirigée, identifiant toujours réservé'
 check('supprimer deux fois → refusé', throws(fn() => $sd2->deleteRetired('lot-50-darla-90m2', 'a@x'), StoreConflict::class));
 check('journal : « Supprimée définitivement »', vib_log_describe($sd2->history(1)[0])['label'] === 'Supprimée définitivement');
 
+$sd3 = new Store('entreprises', $tmp . '/suppr2'); $sd3->seedIfEmpty();
+$v = vib_find($sd3->read()['items'], 'veloff');
+check('suppression directe : empreinte périmée → refusée', throws(fn() => $sd3->deleteItem('veloff', 'perime', 'a@x'), StoreConflict::class));
+$sd3->deleteItem('veloff', Store::itemHash($v), 'a@x');
+check('suppression directe : hors du site, absente des dépubliées, adresse redirigée', vib_find($sd3->read()['items'], 'veloff') === null && $sd3->retired(false) === [] && ($sd3->retired()[0]['item']['slug'] ?? '') === 'veloff');
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

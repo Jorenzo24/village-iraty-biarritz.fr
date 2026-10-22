@@ -53,7 +53,7 @@ vib_admin_header($item['name'], $user, 'acteurs');
   </div>
     <div class="adm-head__actions">
       <a class="adm-btn adm-btn--ghost adm-btn--small" href="<?= e($col['public'] . rawurlencode($slug)) ?>" target="_blank" rel="noopener">Voir en ligne ↗</a>
-      <a class="adm-btn adm-btn--ghost adm-btn--small" href="<?= e(vib_admin_url($col, 'retirer.php', ['slug' => $slug])) ?>">Dépublier</a>
+      <a class="adm-btn adm-btn--ghost adm-btn--small adm-btn--warn" href="<?= e(vib_admin_url($col, 'supprimer.php', ['slug' => $slug])) ?>">Supprimer</a>
     </div>
   </div>
 

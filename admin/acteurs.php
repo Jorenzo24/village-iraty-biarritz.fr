@@ -23,10 +23,8 @@ vib_admin_header('Acteurs', $user, 'acteurs', true);
     </div>
     <a class="adm-btn" href="/admin/nouveau.php?c=entreprises">+ Ajouter un acteur</a>
   </div>
-  <?php if (($_GET['retire'] ?? '') !== ''): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>« <?= e((string) $_GET['retire']) ?> » dépublié.</strong> Il n’apparaît plus sur le site (son adresse redirige vers l’annuaire) et reste en bas de cette page, prêt à être republié.</div>
-  <?php elseif (($_GET['supprime'] ?? '') !== ''): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>« <?= e((string) $_GET['supprime']) ?> » supprimé définitivement.</strong></div>
+  <?php if (($_GET['supprime'] ?? '') !== ''): ?>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>« <?= e((string) $_GET['supprime']) ?> » supprimé.</strong> La fiche a disparu de l’annuaire ; son ancienne adresse redirige vers l’annuaire.</div>
   <?php endif; ?>
 
   <div class="adm-toolbar" id="adm-filters">
@@ -65,5 +63,4 @@ vib_admin_header('Acteurs', $user, 'acteurs', true);
     <?php endforeach; ?>
     <li class="adm-empty" id="adm-none" hidden>Aucune fiche ne correspond.</li>
   </ul>
-<?php vib_admin_unpublished(vib_admin_collection('entreprises'), $user); ?>
 <?php vib_admin_footer('/admin/admin.js?v=20261022a');

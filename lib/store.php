@@ -177,6 +177,34 @@ final class Store
         }
     }
 
+    /**
+     * Supprime définitivement une fiche publiée, en une seule opération (pas de passage par « dépubliée »).
+     * Comme pour deleteRetired() : l'adresse reste redirigée et l'identifiant réservé.
+     */
+    public function deleteItem(string $keyValue, string $expectedHash, string $author): void
+    {
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $lock = $this->lock(LOCK_EX);
+        try {
+            $current = $this->readUnlocked();
+            $items = $current['items'];
+            $idx = null;
+            foreach ($items as $i => $it) if (($it[$key] ?? null) === $keyValue) { $idx = $i; break; }
+            if ($idx === null) throw new StoreConflict('Cette fiche n’existe plus (supprimée entre-temps).');
+            if (self::itemHash($items[$idx]) !== $expectedHash) throw new StoreConflict('Cette fiche a été modifiée entre-temps. Rechargez-la avant de la supprimer.');
+            $item = $items[$idx];
+            array_splice($items, $idx, 1);
+            $raw = $this->validateAndEncode($items);
+            $now = date(DATE_ATOM);
+            $retired = $this->readRetiredUnlocked();
+            $retired[] = ['item' => $item, 'at' => $now, 'author' => $author, 'deleted' => true, 'deleted_at' => $now, 'deleted_by' => $author];
+            $this->writeRetiredUnlocked($retired);
+            $this->commitUnlocked($raw, $current['version'], $author, 'Suppression définitive de la fiche « ' . ($item['name'] ?? $keyValue) . ' » (' . $keyValue . ')', count($items), $keyValue);
+        } finally {
+            $this->unlock($lock);
+        }
+    }
+
     /** Supprime définitivement une fiche déjà dépubliée (cf. retired()). */
     public function deleteRetired(string $keyValue, string $author): void
     {

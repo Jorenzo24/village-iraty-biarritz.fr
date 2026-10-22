@@ -8,6 +8,10 @@ require __DIR__ . '/../lib/collections.php';
 $user = vib_admin_user();
 
 $col = vib_admin_collection();
+if (empty($col['unpublish'])) {   // acteurs : pas de dépublication, seulement la suppression
+    header('Location: ' . vib_admin_url($col, 'supprimer.php', ['slug' => (string) ($_GET['slug'] ?? '')]), true, 303);
+    exit;
+}
 $store = new Store($col['c']);
 $slug = (string) ($_POST['slug'] ?? $_GET['slug'] ?? '');
 $item = vib_find($store->read()['items'], $slug);

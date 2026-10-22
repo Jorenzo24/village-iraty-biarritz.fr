@@ -210,6 +210,8 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-rowcard--off .adm-rowcard__name { color: var(--color-text-muted); }
 .adm-rowcard__side form { margin: 0; }
 .adm-btn--danger { background: var(--color-accent); }
+.adm-btn--warn { color: var(--color-accent); }
+.adm-btn--warn:hover { border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 6%, var(--color-bg)); }
 .adm-inline-form--col { flex-direction: column; align-items: flex-start; }
 
 /* Bouton d'apparence lien (dans une aide) */
