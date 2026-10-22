@@ -12,6 +12,7 @@
  *
  * Autonome : ne dépend pas du reste du back-office (fonctionne aussi sur la production actuelle).
  * Fichiers : <données>/stats/AAAA-MM.json  →  { "AAAA-MM-JJ": { "v": {page: n}, "e": {page: {tel: n, …}},
+ *            "q": {mot recherché: {n, vide}}, "cat": {catégorie filtrée: n},
  *            "visiteurs": n, "src": {moteur: n, …}, "dev": {mobile: n, ordinateur: n} } }
  */
 
@@ -33,7 +34,16 @@ if ($ua === '' || preg_match('/bot|crawl|spider|slurp|preview|headless|lighthous
 $path = strtolower(rtrim((string) ($in['p'] ?? ''), '/')) ?: '/';
 if (!preg_match('#^/[a-z0-9/\-]{0,90}$#', $path)) exit;
 $ev = (string) ($in['e'] ?? 'v');
-if (!in_array($ev, ['v', 'tel', 'mail', 'web', 'social'], true)) exit;
+if (!in_array($ev, ['v', 'tel', 'mail', 'web', 'social', 'q', 'cat'], true)) exit;
+
+// Recherches et filtres de l'annuaire : seulement sur /activites, termes courts et « propres »
+$term = '';
+if ($ev === 'q' || $ev === 'cat') {
+    if ($path !== '/activites') exit;
+    $term = mb_strtolower(trim(preg_replace('/\s+/u', ' ', (string) ($in['t'] ?? ''))), 'UTF-8');
+    if ($ev === 'q' && !preg_match("/^[\p{L}\p{M}' &\-]{3,40}$/u", $term)) exit;   // lettres uniquement : ni chiffres, ni adresse
+    if ($ev === 'cat' && !in_array($term, ['commerces', 'restaurants', 'sante', 'services', 'sport', 'createurs', 'entreprises', 'ouvert'], true)) exit;
+}
 
 $host = strtolower($_SERVER['HTTP_HOST'] ?? '');
 $home = '/home/villageiratybiar';
@@ -51,8 +61,8 @@ if (!in_array($path, $pages, true)) {
     $src = is_file("$dataDir/$c.json") ? "$dataDir/$c.json" : dirname(__DIR__) . "/data/$c.json";
     $slugs = array_column((array) json_decode((string) @file_get_contents($src), true), 'slug');
     if (!in_array($m[2], $slugs, true)) exit;
-} elseif ($ev !== 'v' && $ev !== 'tel' && $ev !== 'mail') {
-    exit;   // pages générales : vues, et clics d'appel / e-mail vers le VILLAGE
+} elseif (!in_array($ev, ['v', 'tel', 'mail', 'q', 'cat'], true)) {
+    exit;   // pages générales : vues, clics d'appel / e-mail vers le VILLAGE, recherches de l'annuaire
 }
 
 $dir = "$dataDir/stats";
@@ -72,7 +82,7 @@ try {
     $ip = (string) ($_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '');
     $salt = (string) file_get_contents($saltFile);
     $visitor = substr(hash('sha256', "$salt|$ip|$ua"), 0, 16);                 // le visiteur, pour la journée
-    $mark = substr(hash('sha256', "$salt|$ip|$ua|$path|$ev"), 0, 16);          // ce visiteur, cette page, cette action
+    $mark = substr(hash('sha256', "$salt|$ip|$ua|$path|$ev|$term"), 0, 16);    // ce visiteur, cette page, cette action
     $seenFile = "$dir/.vu-$day";
     $seen = is_file($seenFile) ? (string) file_get_contents($seenFile) : '';
     if (str_contains($seen, $mark)) exit;   // déjà compté aujourd'hui pour cette personne
@@ -99,6 +109,11 @@ try {
             $dev = preg_match('/Mobi|Android|iPhone|iPod/i', $ua) ? 'mobile' : (preg_match('/iPad|Tablet/i', $ua) ? 'tablette' : 'ordinateur');
             $d['dev'][$dev] = ($d['dev'][$dev] ?? 0) + 1;
         }
+    } elseif ($ev === 'q') {
+        $d['q'][$term]['n'] = ($d['q'][$term]['n'] ?? 0) + 1;
+        if ((int) ($in['n'] ?? 1) === 0) $d['q'][$term]['vide'] = ($d['q'][$term]['vide'] ?? 0) + 1;   // recherche sans résultat
+    } elseif ($ev === 'cat') {
+        $d['cat'][$term] = ($d['cat'][$term] ?? 0) + 1;
     } else {
         $d['e'][$path][$ev] = ($d['e'][$path][$ev] ?? 0) + 1;
     }
