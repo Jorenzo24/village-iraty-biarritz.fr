@@ -262,7 +262,7 @@ $ogImage = ($e && !empty($e['photos'][0])) ? 'https://village-iraty-biarritz.fr'
   </div>
 </footer>
 
-<script src="/assets-2026/js/main.js?v=20260526a" defer></script>
+<script src="/assets-2026/js/main.js?v=20261022a" defer></script>
 <script src="/assets-2026/js/open-status.js?v=20260622a" defer></script>
 <script src="/assets-2026/js/entreprise.js?v=20261021a" defer></script>
 </body>

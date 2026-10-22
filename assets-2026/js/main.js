@@ -121,3 +121,27 @@
   // Re-vérifier toutes les minutes pour les visites longues
   setInterval(updateStatusBadges, 60 * 1000);
 })();
+
+/* ---------- Mesure d'audience anonyme (sans cookie) ----------
+   Signale au serveur la page vue, et les clics « appeler », « e-mail », « site web », « réseau social »
+   d'une fiche. Le serveur (api/stat.php) ne garde que des totaux par jour. */
+(function () {
+  if (!navigator.sendBeacon || navigator.webdriver) return;
+  const path = location.pathname.replace(/\/+$/, '') || '/';
+  const send = (data) => {
+    try { navigator.sendBeacon('/api/stat.php', new Blob([JSON.stringify(data)], { type: 'text/plain' })); } catch (e) { /* jamais bloquant */ }
+  };
+  send({ p: path, e: 'v', r: document.referrer || '' });
+  document.addEventListener('click', (ev) => {
+    const a = ev.target.closest && ev.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    let kind = null;
+    if (href.startsWith('tel:')) kind = 'tel';
+    else if (href.startsWith('mailto:')) kind = 'mail';
+    else if (/^https?:\/\//i.test(href) && a.hostname !== location.hostname) {
+      kind = /(^|\.)(facebook|instagram|linkedin|tiktok|twitter|x|youtube|pinterest)\.com$/i.test(a.hostname) ? 'social' : 'web';
+    }
+    if (kind) send({ p: path, e: kind });
+  }, true);
+})();

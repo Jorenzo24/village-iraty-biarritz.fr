@@ -263,7 +263,7 @@ $photos = $l['photos'] ?? [];
   </div>
 </footer>
 
-<script src="/assets-2026/js/main.js?v=20260526a" defer></script>
+<script src="/assets-2026/js/main.js?v=20261022a" defer></script>
 <script src="/assets-2026/js/local.js?v=20261021a" defer></script>
 </body>
 </html>
