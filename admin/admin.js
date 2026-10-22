@@ -2,6 +2,34 @@
 document.addEventListener('DOMContentLoaded', () => {
   const fold = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/’/g, "'");
 
+  // --- Graphiques des statistiques : infobulle immédiate au survol (ou au toucher) d'une colonne
+  document.querySelectorAll('.adm-chartbox').forEach((box) => {
+    const tip = box.querySelector('.adm-tip');
+    const svg = box.querySelector('svg');
+    let current = null;
+    const show = (g) => {
+      if (current) current.classList.remove('is-hover');
+      current = g;
+      g.classList.add('is-hover');
+      tip.innerHTML = '';
+      const day = document.createElement('strong'); day.textContent = g.dataset.day;
+      const v = document.createElement('span'); v.textContent = g.dataset.v;
+      const c = document.createElement('span'); c.textContent = g.dataset.c;
+      tip.append(day, v, c);
+      tip.hidden = false;
+      const b = g.querySelector('.adm-chart__hit').getBoundingClientRect();
+      const r = box.getBoundingClientRect();
+      const x = Math.min(Math.max(b.left + b.width / 2 - r.left, tip.offsetWidth / 2), r.width - tip.offsetWidth / 2);
+      tip.style.left = x + 'px';
+      const top = g.querySelector('.adm-chart__v').getBoundingClientRect().top;   // au-dessus de la colonne
+      tip.style.top = Math.max(top - r.top - 8, tip.offsetHeight - 40) + 'px';
+    };
+    const hide = () => { tip.hidden = true; if (current) current.classList.remove('is-hover'); current = null; };
+    svg.addEventListener('pointerover', (ev) => { const g = ev.target.closest('g[data-day]'); if (g) show(g); });
+    svg.addEventListener('pointerdown', (ev) => { const g = ev.target.closest('g[data-day]'); if (g) show(g); });
+    box.addEventListener('pointerleave', (ev) => { if (ev.pointerType === 'mouse') hide(); });
+  });
+
   // --- Liste des acteurs : recherche, catégorie, « à compléter »
   const list = document.getElementById('adm-list');
   if (list) {

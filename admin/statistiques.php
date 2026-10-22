@@ -99,9 +99,6 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
   </div>
   <?= vib_stats_picker($per) ?>
 
-  <?php if (!$s['first'] || $s['first'] > $s['from']): ?>
-    <div class="adm-flash adm-flash--info" role="status">La mesure a démarré <?= $s['first'] ? 'le ' . e(date('d/m/Y', strtotime($s['first']))) : 'aujourd’hui' ?> : les chiffres s’étoffent jour après jour.</div>
-  <?php endif; ?>
 
   <div class="adm-kpis">
     <?php foreach ($kpi as [$l, $n, $hint]): ?>
@@ -125,4 +122,4 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     <?php $ranking('Appareils', $relabel($s['dev'], $devLabels), 'visiteurs'); ?>
   </div>
   <p class="adm-hint">Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés, jamais gonflés. Un même visiteur n’est compté qu’une fois par jour pour une même page ou une même action.</p>
-<?php vib_admin_footer();
+<?php vib_admin_footer('/admin/admin.js?v=20261022c');

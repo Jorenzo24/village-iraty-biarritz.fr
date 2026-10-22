@@ -120,7 +120,7 @@ function vib_stats_chart(array $daily, string $what = 'visiteurs'): string
     $i = 0;
     foreach ($daily as $day => $d) {
         $hv = $d['visitors'] / $max * 100; $hc = $d['contacts'] / $max * 100;
-        $svg .= '<g><title>' . $h(date('d/m', strtotime($day))) . ' : ' . $d['visitors'] . ' ' . $h($what) . ', ' . $d['contacts'] . ' appels et clics</title>'
+        $svg .= '<g data-day="' . $h(vib_date_court($day)) . '" data-v="' . $d['visitors'] . ' ' . $h($what) . '" data-c="' . $d['contacts'] . ' appels et clics">'
               . '<rect class="adm-chart__hit" x="' . ($i * 10) . '" y="0" width="10" height="100"/>'
               . '<rect class="adm-chart__v" x="' . ($i * 10 + 1) . '" y="' . (100 - $hv) . '" width="8" height="' . $hv . '"/>'
               . '<rect class="adm-chart__c" x="' . ($i * 10 + 3) . '" y="' . (100 - $hc) . '" width="4" height="' . $hc . '"/></g>';
@@ -131,7 +131,7 @@ function vib_stats_chart(array $daily, string $what = 'visiteurs'): string
     foreach ([1, 0.75, 0.5, 0.25, 0] as $g) $axis .= '<span style="top:' . ((1 - $g) * 100) . '%">' . (int) round($max * $g) . '</span>';
     $days = array_keys($daily);
     $mid = $days[intdiv(count($days), 2)] ?? null;
-    return '<div class="adm-chartbox"><div class="adm-chart__y">' . $axis . '</div>' . $svg . '</div>'
+    return '<div class="adm-chartbox"><div class="adm-chart__y">' . $axis . '</div>' . $svg . '<div class="adm-tip" hidden></div></div>'
          . '<div class="adm-chart__axis"><span>' . $h(date('d/m', strtotime((string) reset($days)))) . '</span>'
          . ($mid && count($days) > 6 ? '<span>' . $h(date('d/m', strtotime($mid))) . '</span>' : '')
          . '<span>' . $h(date('d/m', strtotime((string) end($days)))) . '</span></div>';
@@ -172,4 +172,12 @@ function vib_stats_picker(array $per, array $keep = []): string
 function vib_stats_query(array $per): array
 {
     return $per['p'] === null ? ['du' => $per['from'], 'au' => $per['to']] : ['p' => $per['p']];
+}
+
+/** « jeu. 22 oct. » */
+function vib_date_court(string $day): string
+{
+    $t = strtotime($day);
+    return ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'][(int) date('w', $t)] . ' ' . (int) date('j', $t) . ' '
+         . ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'][(int) date('n', $t) - 1];
 }

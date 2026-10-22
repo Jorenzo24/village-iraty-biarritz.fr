@@ -112,6 +112,11 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-chart__y span { position: absolute; right: 0; transform: translateY(-50%); font-size: var(--fs-xs); color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
 .adm-chart__grid { stroke: var(--color-border); stroke-width: 1; }
 .adm-chart__hit { fill: transparent; }
+.adm-chart g.is-hover .adm-chart__hit { fill: color-mix(in srgb, var(--color-text-strong) 5%, transparent); }
+.adm-chart g.is-hover .adm-chart__v { fill: color-mix(in srgb, var(--color-accent) 45%, var(--color-bg)); }
+.adm-tip { position: absolute; top: 0; transform: translate(-50%, -100%); display: grid; gap: 2px; padding: var(--space-2) var(--space-3); background: var(--color-text-strong); color: var(--color-on-dark); border-radius: var(--radius-md); font-size: var(--fs-xs); white-space: nowrap; pointer-events: none; box-shadow: var(--shadow-md); z-index: 2; }
+.adm-tip strong { font-weight: 600; }
+.adm-tip span { opacity: .85; }
 .adm-chart__axis { padding-left: 36px; }
 .adm-head__id { display: flex; align-items: center; gap: var(--space-4); }
 .adm-head__id img { width: 72px; height: 54px; object-fit: cover; border-radius: var(--radius-md); }
@@ -139,7 +144,6 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-chart { display: block; width: 100%; height: 180px; }
 .adm-chart__v { fill: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg)); }
 .adm-chart__c { fill: var(--color-accent); }
-.adm-chart g:hover .adm-chart__v { fill: color-mix(in srgb, var(--color-accent) 40%, var(--color-bg)); }
 .adm-chart__axis { display: flex; justify-content: space-between; font-size: var(--fs-xs); color: var(--color-text-muted); margin-top: var(--space-1); }
 .adm-legend { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-xs); color: var(--color-text-muted); }
 .adm-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
