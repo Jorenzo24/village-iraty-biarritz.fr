@@ -19,6 +19,15 @@ RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L]
 
 # ============================================
+# Teaser vidéo du VIB (fichier perdu avec l'ancien site WordPress, remis en ligne en octobre 2026)
+# ============================================
+# Lien court à partager : https://village-iraty-biarritz.fr/vib
+# L'ancienne adresse WordPress (visée aussi par le lien bit.ly/vibiarritz) mène au même fichier.
+# Redirections temporaires (302) : le fichier peut changer sans que les navigateurs gardent l'ancienne cible.
+RewriteRule ^vib/?$ /assets/videos/teaser-vib.mp4 [NC,R=302,L]
+RewriteRule ^wp-content/uploads/2025/08/V_I_B_1\.mp4$ /assets/videos/teaser-vib.mp4 [NC,R=302,L]
+
+# ============================================
 # URLs WordPress historiques (préservation SEO)
 # ============================================
 
