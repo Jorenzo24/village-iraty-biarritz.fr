@@ -257,6 +257,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Aperçu en direct de la carte (annuaire / louer un local), mêmes règles que lib/cards.php
+  const live = document.querySelector('.adm-live');
+  if (live) {
+    const val = (id) => ($(id)?.value || '').trim();
+    const excerpt = (txt) => {
+      let s = txt.replace(/\n\s*[•\-]\s*/g, ' ').replace(/\s+/g, ' ').trim();
+      if (s.length > 100) { s = s.slice(0, 100); if (s.includes(' ')) s = s.slice(0, s.lastIndexOf(' ')); s = s.replace(/[\s,;:.\-–]+$/, '') + '…'; }
+      return s;
+    };
+    const cover = () => document.querySelector('#photo-list input[name="photos[]"]')?.closest('li')?.querySelector('img')?.getAttribute('src') || '';
+    const num = (v) => { const n = parseFloat(String(v).replace(/[\s\u00a0\u202f€]/g, '').replace(',', '.')); return isNaN(n) ? null : n; };
+    const draw = () => {
+      if (live.dataset.live === 'actor') {
+        const name = val('f-name');
+        $('pv-name').textContent = name || 'Nom de l’acteur';
+        const sel = $('f-category'); $('pv-cat').textContent = sel.options[sel.selectedIndex]?.text || '';
+        $('pv-desc').textContent = val('f-card-desc') || excerpt($('f-description').value);
+        const src = cover();
+        $('pv-img').hidden = !src; if (src) $('pv-img').src = src;
+        $('pv-ph').hidden = !!src;
+        $('pv-ph').textContent = name.split(/[\s'-]+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+      } else {
+        const [ref, title] = (() => { const n = val('f-name'); const i = n.indexOf(' - '); return i < 0 ? ['', n] : [n.slice(0, i), n.slice(i + 3)]; })();
+        $('pv-ref').textContent = val('f-card-ref') || ref;
+        $('pv-title').textContent = val('f-card-title') || title || 'Titre du local';
+        const surf = num(val('f-surface')), price = num(val('f-price'));
+        const fmt = (n) => n === null ? '…' : n.toLocaleString('fr-FR', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 });
+        $('pv-meta').textContent = `${fmt(surf)} m² · ${fmt(price)} € /mois HT`;
+        const d = $('f-description').value.trim(); const m = d.match(/^(.+?[.!?])(\s|$)/);
+        $('pv-sub').textContent = val('f-card-sub') || (m ? m[1] : excerpt(d));
+        $('pv-img').src = cover() || $('pv-img').dataset.default;
+      }
+    };
+    form.addEventListener('input', draw);
+    form.addEventListener('change', draw);
+    const plist = $('photo-list');
+    if (plist) new MutationObserver(draw).observe(plist, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'value'] });
+    draw();
+  }
+
   // Prévenir avant de quitter une saisie non enregistrée
   const snapshot = () => new URLSearchParams(new FormData(form)).toString();
   // Formulaire réaffiché après un refus (erreur, conflit) : la saisie à l'écran n'est pas enregistrée

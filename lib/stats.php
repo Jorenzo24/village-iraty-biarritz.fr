@@ -37,7 +37,8 @@ function vib_stats(int $days): array
 function vib_stats_range(string $from, string $to): array
 {
     $all = vib_stats_raw();
-    $out = ['from' => $from, 'to' => $to, 'first' => array_key_first($all), 'visitors' => 0, 'views' => [], 'events' => [], 'src' => [], 'dev' => [], 'daily' => []];
+    $out = ['from' => $from, 'to' => $to, 'first' => array_key_first($all), 'visitors' => 0, 'views' => [], 'events' => [], 'src' => [], 'dev' => [], 'daily' => [],
+            'searches' => [], 'empty' => [], 'cats' => []];
     for ($t = strtotime($from); $t <= strtotime($to); $t = strtotime('+1 day', $t)) $out['daily'][date('Y-m-d', $t)] = ['visitors' => 0, 'views' => 0, 'contacts' => 0];
     foreach ($all as $day => $d) {
         if ($day < $from || $day > $to) continue;
@@ -52,7 +53,13 @@ function vib_stats_range(string $from, string $to): array
             $out['daily'][$day]['contacts'] += $n;
         }
         foreach (['src', 'dev'] as $k) foreach ((array) ($d[$k] ?? []) as $x => $n) $out[$k][$x] = ($out[$k][$x] ?? 0) + $n;
+        foreach ((array) ($d['q'] ?? []) as $term => $x) {
+            $out['searches'][$term] = ($out['searches'][$term] ?? 0) + (int) ($x['n'] ?? 0);
+            if (!empty($x['vide'])) $out['empty'][$term] = ($out['empty'][$term] ?? 0) + (int) $x['vide'];
+        }
+        foreach ((array) ($d['cat'] ?? []) as $c => $n) $out['cats'][$c] = ($out['cats'][$c] ?? 0) + $n;
     }
+    arsort($out['searches']); arsort($out['empty']); arsort($out['cats']);
     arsort($out['views']);
     return $out;
 }
@@ -68,6 +75,25 @@ function vib_stats_daily_page(string $from, string $to, string $path): array
         $out[$day] = ['visitors' => (int) ($d['v'][$path] ?? 0), 'contacts' => (int) array_sum((array) ($d['e'][$path] ?? []))];
     }
     return $out;
+}
+
+/** Période précédente de même durée (pour l'évolution), ou null si la mesure n'existait pas encore. */
+function vib_stats_previous(string $from, string $to): ?array
+{
+    $len = (int) round((strtotime($to) - strtotime($from)) / 86400) + 1;
+    $prevTo = date('Y-m-d', strtotime($from . ' -1 day'));
+    $first = array_key_first(vib_stats_raw());
+    if ($first === null || $first > $prevTo) return null;
+    return vib_stats_range(date('Y-m-d', strtotime($prevTo . ' -' . ($len - 1) . ' days')), $prevTo);
+}
+
+/** Pastille d'évolution « +12 % » / « −8 % » (vide sans période précédente). */
+function vib_delta(int $now, ?int $before): string
+{
+    if ($before === null) return '';
+    if ($before === 0) return $now > 0 ? '<span class="adm-delta adm-delta--up" title="Rien sur la période précédente">nouveau</span>' : '';
+    $pct = (int) round(($now - $before) / $before * 100);
+    return '<span class="adm-delta adm-delta--' . ($pct >= 0 ? 'up' : 'down') . '" title="Période précédente : ' . $before . '">' . ($pct >= 0 ? '+' : '−') . abs($pct) . ' %</span>';
 }
 
 /** Somme d'un type de clic (tel, web, mail, social) sur les pages dont le chemin commence par $prefix. */

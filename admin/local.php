@@ -35,7 +35,7 @@ $v = fn(string $k): string => e((string) ($values[$k] ?? ''));
 $err = fn(string $k): string => isset($errors[$k]) ? '<p class="adm-error" id="err-' . e($k) . '">' . e($errors[$k]) . '</p>' : '';
 $inv = fn(string $k): string => isset($errors[$k]) ? ' aria-invalid="true" aria-describedby="err-' . e($k) . '"' : '';
 
-vib_admin_header($item['name'], $user, 'locaux');
+vib_admin_header($item['name'], $user, 'locaux', true);
 ?>
   <p><a class="adm-back" href="/admin/locaux.php">← Tous les locaux</a></p>
   <div class="adm-head">
@@ -51,6 +51,7 @@ vib_admin_header($item['name'], $user, 'locaux');
 
   <?php vib_admin_flash($col, $slug, vib_admin_last_change($store, $slug), $st['conflict'], $errors); ?>
 
+  <div class="adm-edit">
   <form class="adm-form" method="post" action="/admin/local.php" id="adm-form" novalidate<?= $_SERVER['REQUEST_METHOD'] === 'POST' ? ' data-unsaved' : '' ?>>
     <?= vib_admin_hidden($col, $st, $user) ?>
 
@@ -159,6 +160,24 @@ vib_admin_header($item['name'], $user, 'locaux');
       <span class="adm-dirty" id="adm-dirty" hidden>Modifications non enregistrées</span>
     </div>
   </form>
+    <aside class="adm-live" aria-label="Aperçu de la carte sur la page Louer un local" data-live="local">
+      <p class="adm-eyebrow">Aperçu sur « Louer un local »</p>
+      <div class="adm-live__card">
+        <div class="adm-live__media">
+          <img id="pv-img" src="<?= e($values['photos'][0] ?? '/assets-2026/images/story-interieur.jpg') ?>" alt="" data-default="/assets-2026/images/story-interieur.jpg">
+          <span class="adm-live__badge adm-live__badge--ok">● Disponible</span>
+        </div>
+        <div class="adm-live__body">
+          <p class="adm-live__ref" id="pv-ref"></p>
+          <h3 id="pv-title"></h3>
+          <p class="adm-live__meta" id="pv-meta"></p>
+          <p id="pv-sub"></p>
+          <span class="adm-live__more">En savoir plus →</span>
+        </div>
+      </div>
+      <p class="adm-hint">Se met à jour pendant la saisie. Visible sur le site après « Enregistrer ».</p>
+    </aside>
+  </div>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261022c');
+<?php vib_admin_footer('/admin/admin.js?v=20261022d');

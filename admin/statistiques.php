@@ -10,6 +10,7 @@ $user = vib_admin_user();
 
 $per = vib_stats_period();
 $s = vib_stats_range($per['from'], $per['to']);
+$prev = vib_stats_previous($per['from'], $per['to']);
 $q = vib_stats_query($per);
 $g = vib_stats_grouping();
 
@@ -39,15 +40,20 @@ if (($_GET['format'] ?? '') === 'csv') {
     exit;
 }
 
-// Ligne 1 : les visites ; ligne 2 : les contacts générés pour les acteurs
-$kpi = [
-    ['Visiteurs uniques', $s['visitors'], 'chacun compté une fois par jour'],
-    ['Fiches acteurs vues', array_sum(vib_stats_top($s, '/acteur/', 'v', 10000)), 'toutes fiches confondues'],
-    ['Annonces de locaux vues', array_sum(vib_stats_top($s, '/local/', 'v', 10000)), 'page « Louer un local » non comprise'],
-    ['Appels', vib_stats_sum($s, 'tel', '/acteur/'), 'clics sur « Appeler »'],
-    ['Clics vers leur site', vib_stats_sum($s, 'web', '/acteur/'), 'visiteurs envoyés aux acteurs'],
-    ['E-mails et réseaux', vib_stats_sum($s, 'mail', '/acteur/') + vib_stats_sum($s, 'social', '/acteur/'), 'e-mail, Facebook, Instagram…'],
+// Ligne 1 : les visites ; ligne 2 : les contacts générés pour les acteurs. Chaque chiffre est calculé
+// aussi sur la période précédente de même durée, pour l'évolution.
+$kpiOf = fn(array $x): array => [
+    $x['visitors'], array_sum(vib_stats_top($x, '/acteur/', 'v', 10000)), array_sum(vib_stats_top($x, '/local/', 'v', 10000)),
+    vib_stats_sum($x, 'tel', '/acteur/'), vib_stats_sum($x, 'web', '/acteur/'), vib_stats_sum($x, 'mail', '/acteur/') + vib_stats_sum($x, 'social', '/acteur/'),
 ];
+$now = $kpiOf($s);
+$before = $prev ? $kpiOf($prev) : array_fill(0, 6, null);
+$kpi = [];
+foreach ([['Visiteurs uniques', 'chacun compté une fois par jour'], ['Fiches acteurs vues', 'toutes fiches confondues'],
+          ['Annonces de locaux vues', 'page « Louer un local » non comprise'], ['Appels', 'clics sur « Appeler »'],
+          ['Clics vers leur site', 'visiteurs envoyés aux acteurs'], ['E-mails et réseaux', 'e-mail, Facebook, Instagram…']] as $i => [$l, $hint]) {
+    $kpi[] = [$l, $now[$i], $hint, $before[$i]];
+}
 
 // Vues par catégorie d'acteurs
 $byCat = [];
@@ -102,8 +108,8 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
 
 
   <div class="adm-kpis">
-    <?php foreach ($kpi as [$l, $n, $hint]): ?>
-      <div class="adm-stat"><span class="adm-stat__label"><?= e($l) ?></span><span class="adm-stat__value"><?= number_format((int) $n, 0, ',', "\u{202F}") ?></span><span class="adm-stat__meta"><?= e($hint) ?></span></div>
+    <?php foreach ($kpi as [$l, $n, $hint, $b]): ?>
+      <div class="adm-stat"><span class="adm-stat__label"><?= e($l) ?></span><span class="adm-stat__value"><?= number_format((int) $n, 0, ',', "\u{202F}") ?> <?= vib_delta((int) $n, $b) ?></span><span class="adm-stat__meta"><?= e($hint) ?></span></div>
     <?php endforeach; ?>
   </div>
 
@@ -112,6 +118,20 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     <?= vib_stats_chart($s['daily'], 'visiteurs', $g) ?>
   </section>
 
+  <?php
+  $catLabels = VIB_CATEGORIES + ['ouvert' => 'Ouvert maintenant'];
+  $empty = $s['empty'];
+  ?>
+  <h2 class="adm-section-title">Ce que cherchent les visiteurs de l’annuaire</h2>
+  <div class="adm-ranks">
+    <?php $rows = []; foreach (array_slice($s['searches'], 0, 12, true) as $t => $n) $rows[$t . (isset($empty[$t]) ? ' · sans résultat' : '')] = $n; ?>
+    <?php $ranking('Mots recherchés', $rows, 'fois', [], 'Aucune recherche sur la période.'); ?>
+    <?php $ranking('Recherches sans résultat', array_slice($empty, 0, 12, true), 'fois', [], 'Aucune recherche sans résultat : tout le monde a trouvé.'); ?>
+    <?php $c = []; foreach ($s['cats'] as $k => $n) $c[$catLabels[$k] ?? $k] = $n; $ranking('Filtres utilisés', $c, 'fois', [], 'Aucun filtre utilisé sur la période.'); ?>
+  </div>
+  <p class="adm-hint">« Sans résultat » : aucun acteur de l’annuaire ne correspond. Une demande qui revient souvent peut signaler une activité qui manque au VILLAGE.</p>
+
+  <h2 class="adm-section-title">Classements</h2>
   <div class="adm-ranks">
     <?php [$r, $l] = $named(vib_stats_top($s, '/acteur/', 'v'), 'entreprises'); $ranking('Fiches les plus vues', $r, 'vues', $l); ?>
     <?php [$r, $l] = $named(vib_stats_top($s, '/acteur/', 'tel'), 'entreprises'); $ranking('Les plus appelés', $r, 'appels', $l, 'Aucun appel depuis une fiche sur la période.'); ?>
@@ -123,4 +143,4 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     <?php $ranking('Appareils', $relabel($s['dev'], $devLabels), 'visiteurs'); ?>
   </div>
   <p class="adm-hint">Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés, jamais gonflés. Un même visiteur n’est compté qu’une fois par jour pour une même page ou une même action.</p>
-<?php vib_admin_footer('/admin/admin.js?v=20261022c');
+<?php vib_admin_footer('/admin/admin.js?v=20261022d');

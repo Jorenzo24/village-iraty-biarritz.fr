@@ -43,7 +43,7 @@ $err = function (string $k) use ($errors): string {
 $inv = fn(string $k): string => isset($errors[$k]) ? ' aria-invalid="true" aria-describedby="err-' . e($k) . '"' : '';
 $free = $values['address_mode'] === 'libre';
 
-vib_admin_header($item['name'], $user, 'acteurs');
+vib_admin_header($item['name'], $user, 'acteurs', true);
 ?>
   <p><a class="adm-back" href="/admin/acteurs.php">← Tous les acteurs</a></p>
   <div class="adm-head">
@@ -59,6 +59,7 @@ vib_admin_header($item['name'], $user, 'acteurs');
 
   <?php vib_admin_flash($col, $slug, $last, $st['conflict'], $errors); ?>
 
+  <div class="adm-edit">
   <form class="adm-form" method="post" action="/admin/acteur.php" id="adm-form" novalidate<?= $_SERVER['REQUEST_METHOD'] === 'POST' ? ' data-unsaved' : '' ?>>
     <?= vib_admin_hidden($col, $st, $user) ?>
 
@@ -240,6 +241,23 @@ vib_admin_header($item['name'], $user, 'acteurs');
       <span class="adm-dirty" id="adm-dirty" hidden>Modifications non enregistrées</span>
     </div>
   </form>
+    <aside class="adm-live" aria-label="Aperçu de la carte dans l’annuaire" data-live="actor">
+      <p class="adm-eyebrow">Aperçu dans l’annuaire</p>
+      <div class="adm-live__card">
+        <div class="adm-live__media">
+          <img id="pv-img" src="<?= e($values['photos'][0] ?? '') ?>" alt=""<?= empty($values['photos']) ? ' hidden' : '' ?>>
+          <span class="adm-live__ph" id="pv-ph"<?= empty($values['photos']) ? '' : ' hidden' ?>></span>
+          <span class="adm-live__badge" id="pv-cat"></span>
+        </div>
+        <div class="adm-live__body">
+          <h3 id="pv-name"></h3>
+          <p id="pv-desc"></p>
+          <span class="adm-live__more">Voir la fiche →</span>
+        </div>
+      </div>
+      <p class="adm-hint">Se met à jour pendant la saisie. Visible sur le site après « Enregistrer ».</p>
+    </aside>
+  </div>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261022c');
+<?php vib_admin_footer('/admin/admin.js?v=20261022d');

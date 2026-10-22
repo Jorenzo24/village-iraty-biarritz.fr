@@ -30,12 +30,7 @@ $all = vib_stats_top($s, $col['public'], 'v', 100000);
 $rank = array_search($slug, array_keys($all), true);
 $count = count(vib_public_items($col['c']));
 
-$delta = function (int $now, int $before) use ($hasPrev): string {
-    if (!$hasPrev) return '';
-    if ($before === 0) return $now > 0 ? '<span class="adm-delta adm-delta--up">nouveau</span>' : '';
-    $pct = (int) round(($now - $before) / $before * 100);
-    return '<span class="adm-delta adm-delta--' . ($pct >= 0 ? 'up' : 'down') . '">' . ($pct >= 0 ? '+' : '') . $pct . ' %</span>';
-};
+$delta = fn(int $now, int $before): string => vib_delta($now, $hasPrev ? $before : null);
 $cells = [['Vues de la fiche', $m['v'], $prev['v']]];
 if ($col['c'] === 'entreprises') {
     $cells[] = ['Appels', $m['tel'] ?? 0, $prev['tel'] ?? 0];
@@ -78,4 +73,4 @@ vib_admin_header('Statistiques : ' . $it['name'], $user, 'statistiques', true);
     <?= vib_stats_chart(vib_stats_daily_page($per['from'], $per['to'], $path), 'vues', $g) ?>
   </section>
   <p class="adm-hint">Un même visiteur n’est compté qu’une fois par jour pour une même action. Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés.</p>
-<?php vib_admin_footer('/admin/admin.js?v=20261022c');
+<?php vib_admin_footer('/admin/admin.js?v=20261022d');
