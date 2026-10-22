@@ -38,6 +38,18 @@
 - **Deploy path** : `/home/villageiratybiar/public_html/`
 - **CDN** : ⚠️ **le site est derrière Cloudflare** (en proxy : les réponses portent `server: cloudflare`, `cf-cache-status`, `cf-ray`). Conséquence majeure sur les images et le cache — voir la section **Images**. Après un déploiement qui remplace des fichiers statiques, **purger le cache Cloudflare**, sinon l'ancienne version reste servie malgré le `git pull`.
 - **Déploiement** : ⚠️ cPanel **n'exécute PAS `.cpanel.yml`** sur ce serveur, malgré la présence du fichier. Il fait un simple `git pull` de `main` dans `public_html/`, donc **l'URL live = le chemin dans le repo**. Le déploiement n'est **pas automatique au push** : il faut cliquer **Deploy HEAD Commit** dans cPanel › Git Version Control.
+- ⚠️ **Bloc PHP écrit par cPanel dans `.htaccess`** : quand la version de PHP d'un domaine est changée
+  (MultiPHP, WHM), cPanel ajoute ou réécrit à la fin du `.htaccess` du serveur un bloc
+  `# php -- BEGIN cPanel-generated handler … END`. Le fichier diffère alors de Git, et « Update from Remote »
+  échoue (« Vos modifications locales … seraient écrasées : .htaccess »). Arrivé le 21/10/2026 : l'administrateur
+  système a fixé PHP 8.2 (ea-php82) après une faille cPanel. **Ne pas supprimer ce bloc** : il est recopié mot pour
+  mot à la fin du `.htaccess` du dépôt. Si la version de PHP change à nouveau :
+  1. voir le bloc sur le serveur (terminal WHM, en root) :
+     `git -c safe.directory='*' -C /home/villageiratybiar/public_html diff .htaccess` (idem `test_html`) ;
+  2. recopier le nouveau bloc dans le `.htaccess` du dépôt (`main` et branches en cours), pousser ;
+  3. remettre le fichier du serveur à sa version Git, avec le compte du site et non root :
+     `sudo -u villageiratybiar git -C /home/villageiratybiar/public_html checkout -- .htaccess` ;
+  4. « Update from Remote » aussitôt après (le bloc revient avec la mise à jour).
 - **Vérifier le live** : toujours contourner le cache CDN avec un query string unique par requête (`?x=$RANDOM`) et lire `cf-cache-status`, sinon on teste le cache et pas le serveur.
 
 ## Stack
