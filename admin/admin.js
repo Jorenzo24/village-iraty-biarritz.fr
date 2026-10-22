@@ -2,25 +2,38 @@
 document.addEventListener('DOMContentLoaded', () => {
   const fold = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/’/g, "'");
 
-  // --- Liste des acteurs : recherche + catégorie
+  // --- Liste des acteurs : recherche, catégorie, « à compléter »
   const list = document.getElementById('adm-list');
   if (list) {
     const q = document.getElementById('adm-q');
-    const cat = document.getElementById('adm-cat');
     const none = document.getElementById('adm-none');
+    const pills = [...document.querySelectorAll('.adm-pill[data-cat]')];
+    const todoBtn = document.querySelector('.adm-pill[data-todo]');
     const rows = [...list.querySelectorAll('li[data-search]')];
+    let cat = '';
     const apply = () => {
       const words = fold(q.value).split(/\s+/).filter(Boolean);
+      const todo = todoBtn && todoBtn.getAttribute('aria-pressed') === 'true';
       let shown = 0;
       rows.forEach((li) => {
-        const ok = (!cat.value || li.dataset.cat === cat.value) && words.every((w) => li.dataset.search.includes(w));
+        const ok = (!cat || li.dataset.cat === cat) && (!todo || li.hasAttribute('data-todo')) && words.every((w) => li.dataset.search.includes(w));
         li.hidden = !ok;
         if (ok) shown++;
       });
       none.hidden = shown > 0;
     };
+    pills.forEach((b) => b.addEventListener('click', () => {
+      cat = b.dataset.cat;
+      pills.forEach((x) => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      apply();
+    }));
+    todoBtn?.addEventListener('click', () => {
+      const on = todoBtn.getAttribute('aria-pressed') !== 'true';
+      todoBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      todoBtn.classList.toggle('is-active', on);
+      apply();
+    });
     q.addEventListener('input', apply);
-    cat.addEventListener('change', apply);
     apply();   // le navigateur peut avoir conservé la saisie (retour arrière)
   }
 

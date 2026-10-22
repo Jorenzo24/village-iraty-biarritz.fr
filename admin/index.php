@@ -32,7 +32,7 @@ if (($_GET['format'] ?? '') === 'json') {   // utilisé par les tests automatiqu
 }
 
 // Dernières modifications, acteurs et locaux confondus (hors opérations techniques du système)
-$log = array_filter($log, fn($e) => ($e['author'] ?? '') !== 'système');
+$log = array_filter($log, fn($e) => vib_log_describe($e)['kind'] !== 'system');
 usort($log, fn($a, $b) => strcmp($b['at'], $a['at']));
 $log = array_slice($log, 0, 8);
 $names = [];
@@ -92,15 +92,18 @@ vib_admin_header('Accueil', $user, 'accueil', true);
         <ol class="adm-feed">
           <?php foreach ($log as $en):
             $c = $en['c'];
-            $k = $en['key'] ?? (preg_match('/\(([a-z0-9-]+)\)/', (string) $en['message'], $m) ? $m[1] : null);
-            $msg = preg_replace(['/^Fiche « .* » \([a-z0-9-]+\) : /u', '/ \([a-z0-9-]+\)/'], ['', ''], (string) $en['message']);
-            $name = $k !== null ? ($names[$c][$k] ?? null) : null;
-            $href = $name !== null ? vib_admin_collection($c)['edit'] . '?slug=' . rawurlencode($k) : null; ?>
+            $d = vib_log_describe($en, $names[$c] ?? []);
+            $live = $d['slug'] !== null && isset($names[$c][$d['slug']]);
+            $href = $live ? vib_admin_collection($c)['edit'] . '?slug=' . rawurlencode($d['slug']) : null; ?>
             <li>
-              <span class="adm-feed__dot adm-feed__dot--<?= e($c) ?>" aria-hidden="true"></span>
+              <span class="adm-feed__dot adm-feed__dot--<?= e($d['kind']) ?>" aria-hidden="true"></span>
               <div>
-                <p><?php if ($href): ?><a href="<?= e($href) ?>"><strong><?= e($name) ?></strong></a> · <?= e($msg) ?><?php else: ?><?= e($msg) ?><?php endif; ?></p>
-                <p class="adm-feed__meta"><?= e(vib_when((string) $en['at'])) ?> · <?= e($en['author']) ?></p>
+                <p>
+                  <?php if ($href): ?><a href="<?= e($href) ?>"><strong><?= e($d['name']) ?></strong></a><?php else: ?><strong><?= e($d['name'] ?? '') ?></strong><?php endif; ?>
+                  <span class="adm-tag"><?= $c === 'locaux' ? 'Local' : 'Acteur' ?></span>
+                </p>
+                <p class="adm-feed__what"><?= e($d['label']) ?></p>
+                <p class="adm-feed__meta"><?= e(vib_when((string) $en['at'])) ?> · <?= e(vib_author_label((string) $en['author'])) ?></p>
               </div>
             </li>
           <?php endforeach; ?>

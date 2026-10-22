@@ -27,12 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$live = array_flip(array_column($store->read()['items'], 'slug'));
+$names = array_column($store->read()['items'], 'name', 'slug');
 $log = $store->history(150);
 $retired = $store->retired();
 
-vib_admin_header('Historique', $user, 'historique');
+vib_admin_header('Historique', $user, 'accueil');
 ?>
+  <p><a class="adm-back" href="/admin/">← Accueil</a></p>
   <div>
     <h1>Historique</h1>
     <p class="adm-muted">Toutes les modifications, la plus récente en haut. Pour revenir en arrière sur une fiche, ouvrez-la : son historique est en bas de page.</p>
@@ -52,7 +53,7 @@ vib_admin_header('Historique', $user, 'historique');
       <ul class="adm-history">
         <?php foreach ($retired as $r): ?>
           <li>
-            <span><strong><?= e($r['item']['name']) ?></strong> · retirée le <?= e(date('d/m/Y à H:i', strtotime($r['at']))) ?> par <?= e($r['author']) ?></span>
+            <span><strong><?= e($r['item']['name']) ?></strong> · retirée <?= e(vib_when((string) $r['at'])) ?> par <?= e(vib_author_label((string) $r['author'])) ?></span>
             <form method="post" action="/admin/historique.php">
               <input type="hidden" name="csrf" value="<?= e(vib_csrf_token($user['email'])) ?>">
               <input type="hidden" name="c" value="<?= e($col['c']) ?>">
@@ -67,13 +68,17 @@ vib_admin_header('Historique', $user, 'historique');
 
   <section class="adm-card">
     <h2>Dernières modifications</h2>
-    <ol class="adm-history">
-      <?php foreach ($log as $en):
-        $k = $en['key'] ?? (preg_match('/\(([a-z0-9-]+)\)/', (string) $en['message'], $m) ? $m[1] : null);
-        $msg = preg_replace('/ \([a-z0-9-]+\)/', '', (string) $en['message']); ?>
+    <ol class="adm-feed">
+      <?php foreach ($log as $en): $d = vib_log_describe($en, $names); ?>
         <li>
-          <span><strong><?= e(date('d/m/Y à H:i', strtotime($en['at']))) ?></strong> · <?= e($en['author']) ?></span>
-          <span><?php if ($k && isset($live[$k])): ?><a href="<?= e($col['edit'] . '?slug=' . rawurlencode($k)) ?>#historique"><?= e($msg) ?></a><?php else: ?><?= e($msg) ?><?php endif; ?></span>
+          <span class="adm-feed__dot adm-feed__dot--<?= e($d['kind']) ?>" aria-hidden="true"></span>
+          <div>
+            <?php if ($d['name'] !== null): ?>
+              <p><?php if (isset($names[$d['slug']])): ?><a href="<?= e($col['edit'] . '?slug=' . rawurlencode($d['slug'])) ?>#historique"><strong><?= e($d['name']) ?></strong></a><?php else: ?><strong><?= e($d['name']) ?></strong><?php endif; ?></p>
+            <?php endif; ?>
+            <p class="adm-feed__what"><?= e($d['label']) ?></p>
+            <p class="adm-feed__meta"><?= e(vib_when((string) $en['at'])) ?> · <?= e(vib_author_label((string) $en['author'])) ?></p>
+          </div>
         </li>
       <?php endforeach; ?>
     </ol>

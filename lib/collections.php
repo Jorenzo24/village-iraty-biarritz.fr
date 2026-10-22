@@ -67,3 +67,34 @@ function vib_date_fr(?int $t = null): string
     $m = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'][(int) date('n', $t) - 1];
     return $j . ' ' . (int) date('j', $t) . ' ' . $m;
 }
+
+/**
+ * Une entrée du journal, en clair : quoi, sur quelle fiche, et la nature de l'action (couleur de la pastille).
+ * @param array<string,string> $names identifiant → nom actuel de la fiche
+ * @return array{kind: string, slug: ?string, name: ?string, label: string}
+ *   kind : add (vert), edit (gris), retire (rouge), restore (orange), system (technique, masqué à l'accueil)
+ */
+function vib_log_describe(array $e, array $names = []): array
+{
+    $m = (string) ($e['message'] ?? '');
+    $slug = $e['key'] ?? (preg_match('/\(([a-z0-9-]+)\)/', $m, $x) ? $x[1] : null);
+    $quoted = preg_match('/« (.*) »/u', $m, $x) ? $x[1] : null;
+    $name = ($slug !== null ? ($names[$slug] ?? null) : null) ?? $quoted;
+    if (($e['base'] ?? '') === '' || str_starts_with($m, 'Import initial')) return ['kind' => 'system', 'slug' => null, 'name' => null, 'label' => 'Mise en place du back-office'];
+    if (str_starts_with($m, 'Mise à jour du format')) return ['kind' => 'system', 'slug' => null, 'name' => null, 'label' => 'Mise à jour technique'];
+    if (str_starts_with($m, 'Ajout de la fiche')) return ['kind' => 'add', 'slug' => $slug, 'name' => $name, 'label' => 'Nouvelle fiche'];
+    if (str_starts_with($m, 'Réintégration de la fiche')) return ['kind' => 'add', 'slug' => $slug, 'name' => $name, 'label' => 'Remise en ligne'];
+    if (str_starts_with($m, 'Retrait de la fiche')) return ['kind' => 'retire', 'slug' => $slug, 'name' => $name, 'label' => 'Retirée du site'];
+    if (preg_match('/ : retour à la version du (.+?) \((.*)\)$/u', $m, $x)) return ['kind' => 'restore', 'slug' => $slug, 'name' => $name, 'label' => 'Retour à la version du ' . $x[1]];
+    if (preg_match('/^Fiche « .* » \([a-z0-9-]+\) : (.+)$/u', $m, $x)) return ['kind' => 'edit', 'slug' => $slug, 'name' => $name, 'label' => 'Modifié : ' . $x[1]];
+    if (str_starts_with($m, 'Restauration')) return ['kind' => 'restore', 'slug' => null, 'name' => null, 'label' => 'Restauration générale'];
+    return ['kind' => 'edit', 'slug' => $slug, 'name' => $name, 'label' => preg_replace('/ \([a-z0-9-]+\)/', '', $m)];
+}
+
+/** Auteur affiché : les vérifications automatiques apparaissent comme « Maintenance ». */
+function vib_author_label(string $a): string
+{
+    if (str_starts_with($a, 'service:')) return 'Maintenance';
+    if ($a === 'système') return 'Automatique';
+    return $a;
+}

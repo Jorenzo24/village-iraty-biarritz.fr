@@ -155,4 +155,4 @@ vib_admin_header($item['name'], $user, 'locaux');
   </form>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261021f');
+<?php vib_admin_footer('/admin/admin.js?v=20261022a');

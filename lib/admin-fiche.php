@@ -119,10 +119,9 @@ function vib_admin_item_footer(Store $store, array $col, string $slug): void
         echo '<ol class="adm-history">';
         foreach ($hist as $i => $hv) {
             $en = $hv['entry'];
-            $what = ($en['base'] ?? '') === '' ? 'Version de départ (mise en place du back-office)'
-                : preg_replace(['/^Fiche « .* » \([a-z0-9-]+\) : /u', '/ \([a-z0-9-]+\)/'], ['Modifié : ', ''], (string) $en['message']);
-            echo '<li><span><strong>' . e(date('d/m/Y à H:i', strtotime($en['at']))) . '</strong> · ' . e($en['author']) . '</span>'
-               . '<span class="adm-muted">' . e($what) . '</span>';
+            $d = vib_log_describe($en);
+            echo '<li><span><strong>' . e(date('d/m/Y à H:i', strtotime($en['at']))) . '</strong> · ' . e(vib_author_label((string) $en['author'])) . '</span>'
+               . '<span class="adm-muted">' . e($d['label']) . '</span>';
             if ($i === 0) echo '<span class="adm-tag">version actuelle</span>';
             elseif ($hv['item']) echo '<a href="' . e(vib_admin_url($col, 'version.php', ['slug' => $slug, 'id' => $en['id']])) . '">Voir et revenir à cette version</a>';
             echo '</li>';
