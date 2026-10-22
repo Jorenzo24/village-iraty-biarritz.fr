@@ -200,11 +200,10 @@ function vib_token_user(string $tok): ?array
 }
 
 /** Ajoute un compte (sans mot de passe : la personne le choisit via son lien d'invitation). */
-function vib_user_add(string $email, string $name, string $role): void
+function vib_user_add(string $email, string $name, string $role = 'admin'): void
 {
     $email = vib_norm_email($email);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new AuthError('Adresse e-mail invalide.');
-    if (!in_array($role, ['admin', 'editeur'], true)) throw new AuthError('Rôle inconnu.');
     vib_users(function ($all) use ($email, $name, $role) {
         foreach ($all as $x) if ($x['email'] === $email) throw new AuthError('Ce compte existe déjà.');
         $all[] = ['email' => $email, 'name' => trim($name), 'role' => $role, 'hash' => '', 'created_at' => date(DATE_ATOM)];

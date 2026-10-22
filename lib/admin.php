@@ -24,11 +24,11 @@ function vib_admin_user(): array
         return ['email' => 'dev@local', 'kind' => 'user', 'name' => 'Développement', 'role' => 'admin'];
     }
     $u = vib_session_user();
-    if ($u) return ['email' => $u['email'], 'kind' => 'user', 'name' => (string) ($u['name'] ?? ''), 'role' => (string) ($u['role'] ?? 'editeur')];
+    if ($u) return ['email' => $u['email'], 'kind' => 'user', 'name' => (string) ($u['name'] ?? ''), 'role' => 'admin'];
     // Vérifications automatiques (jeton de service Cloudflare Access), tant que l'accès Cloudflare existe
     if (!empty($_SERVER['HTTP_CF_ACCESS_JWT_ASSERTION'])) {
         try {
-            return vib_access_identity() + ['name' => 'Maintenance', 'role' => 'editeur'];
+            return vib_access_identity() + ['name' => 'Maintenance', 'role' => 'admin'];
         } catch (AccessDenied $e) {
             error_log('VIB admin : jeton Cloudflare refusé (' . $e->getMessage() . ')');
         }
@@ -40,16 +40,6 @@ function vib_admin_user(): array
         header('Content-Type: text/html; charset=utf-8');
         echo '<!doctype html><meta charset="utf-8"><title>Session expirée</title><p>Votre session a expiré. <a href="/admin/connexion.php">Reconnectez-vous</a> (votre saisie n’a pas été enregistrée).</p>';
     }
-    exit;
-}
-
-/** Réservé aux administrateurs (gestion des comptes). */
-function vib_require_admin(array $user): void
-{
-    if (($user['role'] ?? '') === 'admin') return;
-    http_response_code(403);
-    header('Content-Type: text/html; charset=utf-8');
-    echo '<!doctype html><meta charset="utf-8"><title>Accès réservé</title><p>Cette page est réservée aux administrateurs. <a href="/admin/">Retour</a></p>';
     exit;
 }
 
@@ -102,7 +92,7 @@ function vib_admin_header(string $title, array $user, string $nav = '', bool $wi
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets-2026/css/design-system.css?v=20261021a">
-<link rel="stylesheet" href="/admin/admin.css?v=20261022k">
+<link rel="stylesheet" href="/admin/admin.css?v=20261022m">
 </head>
 <body>
 <header class="adm-bar">
@@ -124,7 +114,7 @@ function vib_admin_header(string $title, array $user, string $nav = '', bool $wi
     <div class="adm-account__menu">
       <p class="adm-muted"><?= e($user['email']) ?></p>
       <a href="/admin/compte.php">Mon compte</a>
-      <?php if (($user['role'] ?? '') === 'admin'): ?><a href="/admin/utilisateurs.php">Utilisateurs</a><?php endif; ?>
+      <a href="/admin/utilisateurs.php">Utilisateurs</a>
       <form method="post" action="/admin/deconnexion.php"><input type="hidden" name="csrf" value="<?= e(vib_csrf_token($user['email'])) ?>"><button type="submit">Se déconnecter</button></form>
     </div>
   </details>
@@ -154,7 +144,7 @@ function vib_auth_header(string $title): void
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets-2026/css/design-system.css?v=20261021a">
-<link rel="stylesheet" href="/admin/admin.css?v=20261022k">
+<link rel="stylesheet" href="/admin/admin.css?v=20261022m">
 </head>
 <body class="adm-auth">
 <main class="adm-auth__box">

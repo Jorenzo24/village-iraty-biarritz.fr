@@ -8,10 +8,9 @@ require __DIR__ . '/../lib/collections.php';
 require __DIR__ . '/../lib/stats.php';
 $user = vib_admin_user();
 
-$periods = [7 => '7 jours', 30 => '30 jours', 90 => '90 jours'];
-$days = (int) ($_GET['p'] ?? 30);
-if (!isset($periods[$days])) $days = 30;
-$s = vib_stats($days);
+$per = vib_stats_period();
+$s = vib_stats_range($per['from'], $per['to']);
+$q = vib_stats_query($per);
 
 // Noms et catégories des fiches (y compris retirées, pour les jours où elles étaient en ligne)
 $info = ['entreprises' => [], 'locaux' => []];
@@ -39,13 +38,14 @@ if (($_GET['format'] ?? '') === 'csv') {
     exit;
 }
 
+// Ligne 1 : les visites ; ligne 2 : les contacts générés pour les acteurs
 $kpi = [
-    ['Visiteurs', $s['visitors'], 'personnes différentes, comptées une fois par jour'],
-    ['Fiches acteurs vues', array_sum(vib_stats_top($s, '/acteur/', 'v', 10000)), 'pages /acteur/… consultées'],
-    ['Appels', vib_stats_sum($s, 'tel', '/acteur/'), 'clics sur « Appeler » des fiches'],
+    ['Visiteurs uniques', $s['visitors'], 'chacun compté une fois par jour'],
+    ['Fiches acteurs vues', array_sum(vib_stats_top($s, '/acteur/', 'v', 10000)), 'toutes fiches confondues'],
+    ['Annonces de locaux vues', array_sum(vib_stats_top($s, '/local/', 'v', 10000)), 'page « Louer un local » non comprise'],
+    ['Appels', vib_stats_sum($s, 'tel', '/acteur/'), 'clics sur « Appeler »'],
     ['Clics vers leur site', vib_stats_sum($s, 'web', '/acteur/'), 'visiteurs envoyés aux acteurs'],
-    ['E-mails et réseaux', vib_stats_sum($s, 'mail', '/acteur/') + vib_stats_sum($s, 'social', '/acteur/'), 'clics e-mail, Facebook, Instagram…'],
-    ['Annonces de locaux vues', array_sum(vib_stats_top($s, '/local/', 'v', 10000)), 'pages /local/… consultées'],
+    ['E-mails et réseaux', vib_stats_sum($s, 'mail', '/acteur/') + vib_stats_sum($s, 'social', '/acteur/'), 'e-mail, Facebook, Instagram…'],
 ];
 
 // Vues par catégorie d'acteurs
@@ -78,12 +78,12 @@ $ranking = function (string $title, array $rows, string $unit, array $links = []
     }
     echo '</ol></section>';
 };
-$named = function (array $top, string $c) use ($label, $info): array {
+$named = function (array $top, string $c) use ($label, $info, $q): array {
     $rows = []; $links = [];
     foreach ($top as $slug => $n) {
         $l = $label($c, (string) $slug) . (!empty($info[$c][$slug]['_gone']) ? ' (retirée)' : '');
         $rows[$l] = $n;
-        if (empty($info[$c][$slug]['_gone'])) $links[$l] = vib_admin_collection($c)['edit'] . '?slug=' . rawurlencode((string) $slug);
+        if (empty($info[$c][$slug]['_gone'])) $links[$l] = '/admin/stats-fiche.php?' . http_build_query(['c' => $c, 'slug' => (string) $slug] + $q);
     }
     return [$rows, $links];
 };
@@ -95,15 +95,9 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
       <h1>Statistiques</h1>
       <p class="adm-muted">Du <?= e(date('d/m/Y', strtotime($s['from']))) ?> au <?= e(date('d/m/Y', strtotime($s['to']))) ?> · mesure anonyme, sans cookie, robots exclus.</p>
     </div>
-    <div class="adm-head__actions">
-      <div class="adm-pills" role="group" aria-label="Période">
-        <?php foreach ($periods as $d => $l): ?>
-          <a class="adm-pill<?= $d === $days ? ' is-active' : '' ?>" href="?p=<?= $d ?>"<?= $d === $days ? ' aria-current="true"' : '' ?>><?= e($l) ?></a>
-        <?php endforeach; ?>
-      </div>
-      <a class="adm-btn adm-btn--ghost adm-btn--small" href="?p=<?= $days ?>&amp;format=csv">Exporter (tableur)</a>
-    </div>
+    <a class="adm-btn adm-btn--ghost adm-btn--small" href="?<?= e(http_build_query($q + ['format' => 'csv'])) ?>">Exporter (tableur)</a>
   </div>
+  <?= vib_stats_picker($per) ?>
 
   <?php if (!$s['first'] || $s['first'] > $s['from']): ?>
     <div class="adm-flash adm-flash--info" role="status">La mesure a démarré <?= $s['first'] ? 'le ' . e(date('d/m/Y', strtotime($s['first']))) : 'aujourd’hui' ?> : les chiffres s’étoffent jour après jour.</div>
@@ -117,16 +111,7 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
 
   <section class="adm-card">
     <div class="adm-card__head"><h2>Visiteurs par jour</h2><span class="adm-legend"><i class="adm-legend__v"></i> visiteurs <i class="adm-legend__c"></i> appels et clics</span></div>
-    <?php $max = max(1, ...array_map(fn($d) => max($d['visitors'], $d['contacts']), array_values($s['daily']))); $n = count($s['daily']); ?>
-    <svg class="adm-chart" viewBox="0 0 <?= $n * 10 ?> 100" preserveAspectRatio="none" role="img" aria-label="Visiteurs par jour">
-      <?php $i = 0; foreach ($s['daily'] as $day => $d): $h = $d['visitors'] / $max * 92; $hc = $d['contacts'] / $max * 92; ?>
-        <g><title><?= e(date('d/m', strtotime($day))) ?> : <?= $d['visitors'] ?> visiteurs, <?= $d['contacts'] ?> appels et clics</title>
-          <rect class="adm-chart__v" x="<?= $i * 10 + 1 ?>" y="<?= 100 - $h ?>" width="8" height="<?= $h ?>" rx="1"/>
-          <rect class="adm-chart__c" x="<?= $i * 10 + 3 ?>" y="<?= 100 - $hc ?>" width="4" height="<?= $hc ?>" rx="1"/>
-        </g>
-      <?php $i++; endforeach; ?>
-    </svg>
-    <div class="adm-chart__axis"><span><?= e(date('d/m', strtotime($s['from']))) ?></span><span>aujourd’hui</span></div>
+    <?= vib_stats_chart($s['daily']) ?>
   </section>
 
   <div class="adm-ranks">

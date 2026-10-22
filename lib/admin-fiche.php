@@ -117,7 +117,7 @@ function vib_admin_item_footer(Store $store, array $col, string $slug): void
     $m = vib_stats_page(vib_stats(30), $col['public'] . $slug);
     $cells = ['vues' => $m['v'], 'appels' => $m['tel'] ?? 0, 'clics vers le site' => $m['web'] ?? 0, 'e-mails et réseaux' => ($m['mail'] ?? 0) + ($m['social'] ?? 0)];
     if ($col['c'] === 'locaux') $cells = ['vues' => $m['v']];
-    echo '<section class="adm-card"><div class="adm-card__head"><h2>Audience, 30 derniers jours</h2><a class="adm-more" href="/admin/statistiques.php">Toutes les statistiques →</a></div><div class="adm-minis">';
+    echo '<section class="adm-card"><div class="adm-card__head"><h2>Audience, 30 derniers jours</h2><a class="adm-more" href="' . e('/admin/stats-fiche.php?' . http_build_query(['c' => $col['c'], 'slug' => $slug])) . '">Statistiques détaillées →</a></div><div class="adm-minis">';
     foreach ($cells as $l => $n) echo '<div><strong>' . (int) $n . '</strong><span>' . e($l) . '</span></div>';
     echo '</div></section>';
 
