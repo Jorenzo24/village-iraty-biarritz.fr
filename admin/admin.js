@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fold = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/’/g, "'");
 
   // --- Graphiques des statistiques : infobulle immédiate au survol (ou au toucher) d'une colonne
-  document.querySelectorAll('.adm-chartbox').forEach((box) => {
+  const initChart = (box) => {
     const tip = box.querySelector('.adm-tip');
     const svg = box.querySelector('svg');
     let current = null;
@@ -28,6 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
     svg.addEventListener('pointerover', (ev) => { const g = ev.target.closest('g[data-day]'); if (g) show(g); });
     svg.addEventListener('pointerdown', (ev) => { const g = ev.target.closest('g[data-day]'); if (g) show(g); });
     box.addEventListener('pointerleave', (ev) => { if (ev.pointerType === 'mouse') hide(); });
+  };
+  document.querySelectorAll('.adm-chartbox').forEach(initChart);
+
+  // Jour / Semaine / Mois / Année : seul le graphique est rechargé, la page ne bouge pas
+  document.addEventListener('click', async (ev) => {
+    const a = ev.target.closest('.adm-seg a');
+    const card = a && a.closest('#graphique');
+    if (!card || ev.metaKey || ev.ctrlKey) return;
+    ev.preventDefault();
+    try {
+      const html = await (await fetch(a.href, { credentials: 'same-origin' })).text();
+      const fresh = new DOMParser().parseFromString(html, 'text/html').getElementById('graphique');
+      if (!fresh) { location.href = a.href; return; }
+      card.replaceWith(fresh);
+      fresh.querySelectorAll('.adm-chartbox').forEach(initChart);
+      history.replaceState(null, '', a.href);
+      // Les liens de période gardent le regroupement choisi
+      const g = new URL(a.href).searchParams.get('g');
+      document.querySelectorAll('.adm-period a, .adm-period form').forEach((el) => {
+        if (el.tagName === 'A') { const u = new URL(el.href); u.searchParams.set('g', g); el.href = u; }
+        else { let i = el.querySelector('input[name=g]'); if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = 'g'; el.prepend(i); } i.value = g; }
+      });
+    } catch (e) { location.href = a.href; }
   });
 
   // --- Liste des acteurs : recherche, catégorie, « à compléter »

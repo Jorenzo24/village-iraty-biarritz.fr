@@ -255,9 +255,8 @@ vib_admin_header($item['name'], $user, 'acteurs', true);
           <span class="adm-live__more">Voir la fiche →</span>
         </div>
       </div>
-      <p class="adm-hint">Se met à jour pendant la saisie. Visible sur le site après « Enregistrer ».</p>
     </aside>
   </div>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261022d');
+<?php vib_admin_footer('/admin/admin.js?v=20261022e');

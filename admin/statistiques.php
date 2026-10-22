@@ -113,7 +113,7 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     <?php endforeach; ?>
   </div>
 
-  <section class="adm-card">
+  <section class="adm-card" id="graphique">
     <div class="adm-card__head adm-card__head--chart"><h2>Visiteurs par <?= e(mb_strtolower(VIB_GROUPS[$g])) ?></h2><?= vib_stats_group_picker($g, $q) ?><span class="adm-legend"><i class="adm-legend__v"></i> visiteurs <i class="adm-legend__c"></i> appels et clics</span></div>
     <?= vib_stats_chart($s['daily'], 'visiteurs', $g) ?>
   </section>
@@ -143,4 +143,4 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     <?php $ranking('Appareils', $relabel($s['dev'], $devLabels), 'visiteurs'); ?>
   </div>
   <p class="adm-hint">Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés, jamais gonflés. Un même visiteur n’est compté qu’une fois par jour pour une même page ou une même action.</p>
-<?php vib_admin_footer('/admin/admin.js?v=20261022d');
+<?php vib_admin_footer('/admin/admin.js?v=20261022e');
