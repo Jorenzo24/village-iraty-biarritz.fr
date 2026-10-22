@@ -244,6 +244,6 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 </footer>
 
 <script src="assets-2026/js/main.js?v=20261022a" defer></script>
-<script src="assets-2026/js/activites.js?v=20260619b" defer></script>
+<script src="assets-2026/js/activites.js?v=20261022a" defer></script>
 </body>
 </html>
