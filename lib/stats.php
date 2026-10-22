@@ -1,7 +1,7 @@
 <?php
 /**
  * Lecture des statistiques d'audience collectées par api/stat.php (totaux par jour, anonymes).
- * Fichiers : <données>/stats/AAAA-MM.json.
+ * Fichiers : <données>/stats/AAAA-MM.json (sur le site de test : ceux de la production, cf. config).
  */
 
 declare(strict_types=1);
@@ -16,7 +16,7 @@ require_once __DIR__ . '/config.php';
  */
 function vib_stats(int $days): array
 {
-    $dir = vib_config()['data_dir'] . '/stats';
+    $dir = vib_config()['stats_dir'];
     $to = date('Y-m-d');
     $from = date('Y-m-d', strtotime("-" . ($days - 1) . " days"));
     $all = [];

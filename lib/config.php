@@ -41,6 +41,9 @@ function vib_config(): array {
         // Photos envoyées depuis le back-office : dans le dossier du site (servies directement, avec leur
         // jumeau .webp), mais exclues de Git. Jamais supprimées : une ancienne version restaurée les retrouve.
         'uploads_dir' => getenv('VIB_UPLOADS_DIR') ?: dirname(__DIR__) . '/uploads',
+        // Statistiques d'audience (écrites par api/stat.php). Le site de test LIT celles de la production :
+        // l'onglet Statistiques y montre les vrais chiffres pendant la recette (lecture seule).
+        'stats_dir' => $env === 'test' && !getenv('VIB_DATA_DIR') ? $home . '/vib-data/stats' : $dataDir . '/stats',
         // Collections gérées par le moteur. Le fichier du dépôt sert de point de départ (migration).
         'collections' => [
             // 'objects' : champs qui sont des OBJETS JSON ({}), même vides. PHP ne distingue pas un objet
