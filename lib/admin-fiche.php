@@ -11,6 +11,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/collections.php';
+require_once __DIR__ . '/stats.php';
 
 /**
  * Traite l'envoi du formulaire (ou prépare l'affichage). Redirige et termine si l'enregistrement réussit.
@@ -112,6 +113,14 @@ function vib_admin_hidden(array $col, array $st, array $user): string
 /** Historique de la fiche (bas de page) + lien de retrait. */
 function vib_admin_item_footer(Store $store, array $col, string $slug): void
 {
+    // Audience de la fiche sur 30 jours (mesure anonyme, cf. api/stat.php)
+    $m = vib_stats_page(vib_stats(30), $col['public'] . $slug);
+    $cells = ['vues' => $m['v'], 'appels' => $m['tel'] ?? 0, 'clics vers le site' => $m['web'] ?? 0, 'e-mails et réseaux' => ($m['mail'] ?? 0) + ($m['social'] ?? 0)];
+    if ($col['c'] === 'locaux') $cells = ['vues' => $m['v']];
+    echo '<section class="adm-card"><div class="adm-card__head"><h2>Audience, 30 derniers jours</h2><a class="adm-more" href="/admin/statistiques.php">Toutes les statistiques →</a></div><div class="adm-minis">';
+    foreach ($cells as $l => $n) echo '<div><strong>' . (int) $n . '</strong><span>' . e($l) . '</span></div>';
+    echo '</div></section>';
+
     $hist = $store->itemHistory($slug, 15);
     echo '<section class="adm-card" id="historique"><h2>Historique de cette fiche</h2>';
     if (!$hist) echo '<p class="adm-muted">Aucune version enregistrée.</p>';

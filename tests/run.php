@@ -315,6 +315,20 @@ for ($i = 0; $i < VIB_MAX_FAILS; $i++) vib_throttle('cible@exemple.fr', true);
 check('5 échecs → compte bloqué 15 min', vib_throttle('cible@exemple.fr') > 14 * 60);
 check('un autre compte n’est pas bloqué', vib_throttle('autre@exemple.fr') === 0);
 
+echo "\nStatistiques\n";
+require_once __DIR__ . '/../lib/stats.php';
+@mkdir($tmp . '/stats', 0777, true);
+$today = date('Y-m-d'); $old = date('Y-m-d', strtotime('-40 days'));
+$put = function (string $day, array $d) use ($tmp) { $f = $tmp . '/stats/' . substr($day, 0, 7) . '.json'; $all = is_file($f) ? json_decode(file_get_contents($f), true) : []; $all[$day] = $d; file_put_contents($f, json_encode($all)); };
+$put($today, ['visiteurs' => 10, 'v' => ['/acteur/veloff' => 5, '/acteur/tunstall' => 2, '/local/lot-50-darla-90m2' => 3], 'e' => ['/acteur/veloff' => ['tel' => 2, 'web' => 1]], 'src' => ['moteur' => 6], 'dev' => ['mobile' => 7]]);
+$put($old, ['visiteurs' => 99, 'v' => ['/acteur/veloff' => 50]]);
+$st7 = vib_stats(7);
+check('période : jours anciens exclus', $st7['visitors'] === 10 && $st7['views']['/acteur/veloff'] === 5);
+check('appels et clics additionnés par type', vib_stats_sum($st7, 'tel', '/acteur/') === 2 && vib_stats_sum($st7, 'web', '/acteur/') === 1);
+check('classement des fiches les plus vues', array_keys(vib_stats_top($st7, '/acteur/')) === ['veloff', 'tunstall']);
+check('chiffres d’une fiche', vib_stats_page($st7, '/acteur/veloff') === ['v' => 5, 'tel' => 2, 'web' => 1]);
+check('courbe : un point par jour de la période', count($st7['daily']) === 7 && end($st7['daily'])['contacts'] === 3);
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

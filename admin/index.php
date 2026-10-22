@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/../lib/admin.php';
 require __DIR__ . '/../lib/collections.php';
+require __DIR__ . '/../lib/stats.php';
 $user = vib_admin_user();
 
 $status = [];
@@ -71,6 +72,12 @@ vib_admin_header('Accueil', $user, 'accueil', true);
       <span class="adm-stat__label">Locaux à louer</span>
       <span class="adm-stat__value"><?= count($items['locaux']) ?></span>
       <span class="adm-stat__meta"><?= $items['locaux'] ? e(vib_num_to_input(min(array_column($items['locaux'], 'surface'))) . ' à ' . vib_num_to_input(max(array_column($items['locaux'], 'surface'))) . ' m²') : 'Aucun local disponible' ?></span>
+    </a>
+    <?php $s30 = vib_stats(30); ?>
+    <a class="adm-stat" href="/admin/statistiques.php">
+      <span class="adm-stat__label">Visiteurs (30 jours)</span>
+      <span class="adm-stat__value"><?= number_format($s30['visitors'], 0, ',', "\u{202F}") ?></span>
+      <span class="adm-stat__meta"><?= vib_stats_sum($s30, 'tel', '/acteur/') ?> appels · <?= vib_stats_sum($s30, 'web', '/acteur/') ?> clics vers les sites</span>
     </a>
     <a class="adm-stat<?= $todo ? ' adm-stat--todo' : '' ?>" href="#a-completer">
       <span class="adm-stat__label">Fiches à compléter</span>
