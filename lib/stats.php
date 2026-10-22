@@ -106,35 +106,76 @@ function vib_nice_max(int $n): int
     return (int) (40 * $p);
 }
 
+const VIB_GROUPS = ['jour' => 'Jour', 'semaine' => 'Semaine', 'mois' => 'Mois', 'annee' => 'Année'];
+
+/** Regroupement des colonnes demandé (?g=jour|semaine|mois|annee). */
+function vib_stats_grouping(): string
+{
+    $g = (string) ($_GET['g'] ?? 'jour');
+    return isset(VIB_GROUPS[$g]) ? $g : 'jour';
+}
+
+/**
+ * Regroupe les jours en colonnes (semaines du lundi au dimanche, mois, années ; colonnes du bord éventuellement partielles).
+ * @return list<array{long: string, short: string, visitors: int, contacts: int}>
+ */
+function vib_stats_group(array $daily, string $g): array
+{
+    $mois = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+    $moisLong = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    $out = [];
+    foreach ($daily as $day => $d) {
+        $t = strtotime($day);
+        [$key, $long, $short] = match ($g) {
+            'semaine' => [date('o-W', $t), 'semaine du ' . (int) date('j', strtotime('monday this week', $t)) . ' ' . $mois[(int) date('n', strtotime('monday this week', $t)) - 1], date('d/m', strtotime('monday this week', $t))],
+            'mois'    => [date('Y-m', $t), $moisLong[(int) date('n', $t) - 1] . ' ' . date('Y', $t), $mois[(int) date('n', $t) - 1]],
+            'annee'   => [date('Y', $t), date('Y', $t), date('Y', $t)],
+            default   => [$day, vib_date_court($day), date('d/m', $t)],
+        };
+        $out[$key] ??= ['long' => $long, 'short' => $short, 'visitors' => 0, 'contacts' => 0];
+        $out[$key]['visitors'] += (int) $d['visitors'];
+        $out[$key]['contacts'] += (int) $d['contacts'];
+    }
+    return array_values($out);
+}
+
+/** Boutons Jour / Semaine / Mois / Année du graphique. $keep : paramètres d'URL à conserver. */
+function vib_stats_group_picker(string $g, array $keep): string
+{
+    $out = '<div class="adm-seg" role="group" aria-label="Regrouper par">';
+    foreach (VIB_GROUPS as $k => $l) {
+        $out .= '<a href="?' . htmlspecialchars(http_build_query($keep + ['g' => $k]), ENT_QUOTES) . '"' . ($k === $g ? ' class="is-active" aria-current="true"' : '') . '>' . $l . '</a>';
+    }
+    return $out . '</div>';
+}
+
 /**
  * Courbe en barres (barre claire = visiteurs ou vues, barre foncée = appels et clics), avec axe gradué.
- * @param array<string,array{visitors:int,contacts:int}> $daily
+ * @param array<string,array{visitors:int,contacts:int}> $daily jours de la période
  */
-function vib_stats_chart(array $daily, string $what = 'visiteurs'): string
+function vib_stats_chart(array $daily, string $what = 'visiteurs', string $g = 'jour'): string
 {
     $h = fn($s) => htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
-    $max = vib_nice_max(max(1, ...array_map(fn($d) => max($d['visitors'], $d['contacts']), array_values($daily) ?: [['visitors' => 0, 'contacts' => 0]])));
-    $n = max(1, count($daily));
-    $svg = '<svg class="adm-chart" viewBox="0 0 ' . ($n * 10) . ' 100" preserveAspectRatio="none" role="img" aria-label="' . $h(ucfirst($what)) . ' par jour">';
-    foreach ([0.25, 0.5, 0.75, 1] as $g) $svg .= '<line class="adm-chart__grid" x1="0" x2="' . ($n * 10) . '" y1="' . (100 - $g * 100) . '" y2="' . (100 - $g * 100) . '" vector-effect="non-scaling-stroke"/>';
-    $i = 0;
-    foreach ($daily as $day => $d) {
+    $cols = vib_stats_group($daily, $g) ?: [['long' => '', 'short' => '', 'visitors' => 0, 'contacts' => 0]];
+    $max = vib_nice_max(max(1, ...array_map(fn($d) => max($d['visitors'], $d['contacts']), $cols)));
+    $n = count($cols);
+    $svg = '<svg class="adm-chart" viewBox="0 0 ' . ($n * 10) . ' 100" preserveAspectRatio="none" role="img" aria-label="' . $h(ucfirst($what)) . '">';
+    foreach ([0.25, 0.5, 0.75, 1] as $q) $svg .= '<line class="adm-chart__grid" x1="0" x2="' . ($n * 10) . '" y1="' . (100 - $q * 100) . '" y2="' . (100 - $q * 100) . '" vector-effect="non-scaling-stroke"/>';
+    foreach ($cols as $i => $d) {
         $hv = $d['visitors'] / $max * 100; $hc = $d['contacts'] / $max * 100;
-        $svg .= '<g data-day="' . $h(vib_date_court($day)) . '" data-v="' . $d['visitors'] . ' ' . $h($what) . '" data-c="' . $d['contacts'] . ' appels et clics">'
+        $svg .= '<g data-day="' . $h(ucfirst($d['long'])) . '" data-v="' . $d['visitors'] . ' ' . $h($what) . '" data-c="' . $d['contacts'] . ' appels et clics">'
               . '<rect class="adm-chart__hit" x="' . ($i * 10) . '" y="0" width="10" height="100"/>'
               . '<rect class="adm-chart__v" x="' . ($i * 10 + 1) . '" y="' . (100 - $hv) . '" width="8" height="' . $hv . '"/>'
               . '<rect class="adm-chart__c" x="' . ($i * 10 + 3) . '" y="' . (100 - $hc) . '" width="4" height="' . $hc . '"/></g>';
-        $i++;
     }
     $svg .= '</svg>';
     $axis = '';
-    foreach ([1, 0.75, 0.5, 0.25, 0] as $g) $axis .= '<span style="top:' . ((1 - $g) * 100) . '%">' . (int) round($max * $g) . '</span>';
-    $days = array_keys($daily);
-    $mid = $days[intdiv(count($days), 2)] ?? null;
+    foreach ([1, 0.75, 0.5, 0.25, 0] as $q) $axis .= '<span style="top:' . ((1 - $q) * 100) . '%">' . (int) round($max * $q) . '</span>';
+    $mid = $cols[intdiv($n, 2)];
     return '<div class="adm-chartbox"><div class="adm-chart__y">' . $axis . '</div>' . $svg . '<div class="adm-tip" hidden></div></div>'
-         . '<div class="adm-chart__axis"><span>' . $h(date('d/m', strtotime((string) reset($days)))) . '</span>'
-         . ($mid && count($days) > 6 ? '<span>' . $h(date('d/m', strtotime($mid))) . '</span>' : '')
-         . '<span>' . $h(date('d/m', strtotime((string) end($days)))) . '</span></div>';
+         . '<div class="adm-chart__axis"><span>' . $h($cols[0]['short']) . '</span>'
+         . ($n > 4 ? '<span>' . $h($mid['short']) . '</span>' : '')
+         . ($n > 1 ? '<span>' . $h($cols[$n - 1]['short']) . '</span>' : '') . '</div>';
 }
 
 /** Période demandée : boutons (?p=7|30|90) ou dates précises (?du=…&au=…). @return array{from:string,to:string,p:?int} */
@@ -173,6 +214,7 @@ function vib_stats_query(array $per): array
 {
     return $per['p'] === null ? ['du' => $per['from'], 'au' => $per['to']] : ['p' => $per['p']];
 }
+
 
 /** « jeu. 22 oct. » */
 function vib_date_court(string $day): string

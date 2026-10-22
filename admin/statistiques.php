@@ -11,6 +11,7 @@ $user = vib_admin_user();
 $per = vib_stats_period();
 $s = vib_stats_range($per['from'], $per['to']);
 $q = vib_stats_query($per);
+$g = vib_stats_grouping();
 
 // Noms et catégories des fiches (y compris retirées, pour les jours où elles étaient en ligne)
 $info = ['entreprises' => [], 'locaux' => []];
@@ -97,7 +98,7 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     </div>
     <a class="adm-btn adm-btn--ghost adm-btn--small" href="?<?= e(http_build_query($q + ['format' => 'csv'])) ?>">Exporter (tableur)</a>
   </div>
-  <?= vib_stats_picker($per) ?>
+  <?= vib_stats_picker($per, $g !== 'jour' ? ['g' => $g] : []) ?>
 
 
   <div class="adm-kpis">
@@ -107,8 +108,8 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
   </div>
 
   <section class="adm-card">
-    <div class="adm-card__head"><h2>Visiteurs par jour</h2><span class="adm-legend"><i class="adm-legend__v"></i> visiteurs <i class="adm-legend__c"></i> appels et clics</span></div>
-    <?= vib_stats_chart($s['daily']) ?>
+    <div class="adm-card__head adm-card__head--chart"><h2>Visiteurs par <?= e(mb_strtolower(VIB_GROUPS[$g])) ?></h2><?= vib_stats_group_picker($g, $q) ?><span class="adm-legend"><i class="adm-legend__v"></i> visiteurs <i class="adm-legend__c"></i> appels et clics</span></div>
+    <?= vib_stats_chart($s['daily'], 'visiteurs', $g) ?>
   </section>
 
   <div class="adm-ranks">

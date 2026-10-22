@@ -103,6 +103,12 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-tech summary { cursor: pointer; font-size: var(--fs-small); color: var(--color-text-muted); }
 
 /* Statistiques */
+.adm-card__head--chart { flex-wrap: wrap; align-items: center; }
+.adm-card__head--chart h2 { margin-right: auto; }
+.adm-seg { display: inline-flex; padding: 2px; border-radius: var(--radius-full); background: var(--color-bg-alt); border: 1px solid var(--color-border); }
+.adm-seg a { padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--fs-xs); font-weight: 600; color: var(--color-text-muted); text-decoration: none; }
+.adm-seg a:hover { color: var(--color-text-strong); }
+.adm-seg a.is-active { background: var(--color-bg); color: var(--color-text-strong); box-shadow: var(--shadow-sm); }
 .adm-period { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
 .adm-dates { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); font-size: var(--fs-small); color: var(--color-text-muted); }
 .adm-dates label { display: flex; align-items: center; gap: var(--space-2); }

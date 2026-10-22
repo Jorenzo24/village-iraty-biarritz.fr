@@ -16,6 +16,7 @@ if (!$it) { header('Location: /admin/statistiques.php', true, 303); exit; }
 
 $per = vib_stats_period();
 $q = vib_stats_query($per);
+$g = vib_stats_grouping();
 $s = vib_stats_range($per['from'], $per['to']);
 $path = $col['public'] . $slug;
 $m = vib_stats_page($s, $path);
@@ -60,7 +61,7 @@ vib_admin_header('Statistiques : ' . $it['name'], $user, 'statistiques', true);
       </div>
     <?php endif; ?>
   </div>
-  <?= vib_stats_picker($per, ['c' => $col['c'], 'slug' => $slug]) ?>
+  <?= vib_stats_picker($per, ['c' => $col['c'], 'slug' => $slug] + ($g !== 'jour' ? ['g' => $g] : [])) ?>
 
   <div class="adm-kpis adm-kpis--<?= count($cells) ?>">
     <?php foreach ($cells as [$l, $n, $before]): ?>
@@ -73,8 +74,8 @@ vib_admin_header('Statistiques : ' . $it['name'], $user, 'statistiques', true);
   <?php endif; ?>
 
   <section class="adm-card">
-    <div class="adm-card__head"><h2>Vues par jour</h2><span class="adm-legend"><i class="adm-legend__v"></i> vues<?php if ($col['c'] === 'entreprises'): ?> <i class="adm-legend__c"></i> appels et clics<?php endif; ?></span></div>
-    <?= vib_stats_chart(vib_stats_daily_page($per['from'], $per['to'], $path), 'vues') ?>
+    <div class="adm-card__head adm-card__head--chart"><h2>Vues par <?= e(mb_strtolower(VIB_GROUPS[$g])) ?></h2><?= vib_stats_group_picker($g, ['c' => $col['c'], 'slug' => $slug] + $q) ?><span class="adm-legend"><i class="adm-legend__v"></i> vues<?php if ($col['c'] === 'entreprises'): ?> <i class="adm-legend__c"></i> appels et clics<?php endif; ?></span></div>
+    <?= vib_stats_chart(vib_stats_daily_page($per['from'], $per['to'], $path), 'vues', $g) ?>
   </section>
   <p class="adm-hint">Un même visiteur n’est compté qu’une fois par jour pour une même action. Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés.</p>
 <?php vib_admin_footer('/admin/admin.js?v=20261022c');
