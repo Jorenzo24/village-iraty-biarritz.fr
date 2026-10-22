@@ -53,7 +53,6 @@ vib_admin_header('Accueil', $user, 'accueil', true);
     <div>
       <p class="adm-eyebrow"><?= e(vib_date_fr()) ?></p>
       <h1>Bonjour</h1>
-      <p class="adm-muted">Les fiches du VILLAGE, à jour sur le site dès l’enregistrement.</p>
     </div>
     <div class="adm-hero__actions">
       <a class="adm-btn" href="/admin/nouveau.php?c=entreprises">+ Ajouter un acteur</a>

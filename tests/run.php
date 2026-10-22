@@ -300,6 +300,21 @@ check('suppression directe : empreinte périmée → refusée', throws(fn() => $
 $sd3->deleteItem('veloff', Store::itemHash($v), 'a@x');
 check('suppression directe : hors du site, absente des dépubliées, adresse redirigée', vib_find($sd3->read()['items'], 'veloff') === null && $sd3->retired(false) === [] && ($sd3->retired()[0]['item']['slug'] ?? '') === 'veloff');
 
+echo "\nComptes et connexion\n";
+require_once __DIR__ . '/../lib/auth.php';
+vib_user_add('Joseph@Exemple.fr', 'Joseph', 'admin');
+check('compte créé sans mot de passe (choisi via le lien)', (vib_user_find('joseph@exemple.fr')['hash'] ?? 'x') === '');
+check('adresse en double → refusée', throws(fn() => vib_user_add('joseph@exemple.fr', 'X', 'admin'), AuthError::class));
+$tk = vib_issue_token('joseph@exemple.fr', 3600);
+check('lien valable → compte retrouvé ; seule l’empreinte est stockée', vib_token_user($tk)['email'] === 'joseph@exemple.fr' && !str_contains((string) file_get_contents(vib_auth_dir() . '/utilisateurs.json'), $tk));
+check('mot de passe trop court / différent → refusé', vib_password_problem('court', 'court') !== null && vib_password_problem('assez long ici', 'autre chose ici') !== null);
+vib_set_password('joseph@exemple.fr', 'Une phrase de passe solide');
+check('mot de passe haché, jamais en clair', password_verify('Une phrase de passe solide', vib_user_find('joseph@exemple.fr')['hash']) && !str_contains((string) file_get_contents(vib_auth_dir() . '/utilisateurs.json'), 'phrase de passe'));
+check('lien à usage unique', vib_token_user($tk) === null);
+for ($i = 0; $i < VIB_MAX_FAILS; $i++) vib_throttle('cible@exemple.fr', true);
+check('5 échecs → compte bloqué 15 min', vib_throttle('cible@exemple.fr') > 14 * 60);
+check('un autre compte n’est pas bloqué', vib_throttle('autre@exemple.fr') === 0);
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);
