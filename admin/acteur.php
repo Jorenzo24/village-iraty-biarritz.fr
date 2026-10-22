@@ -202,22 +202,11 @@ vib_admin_header($item['name'], $user, 'acteurs', true);
 
     <section class="adm-card" id="photos" data-slug="<?= e($slug) ?>" data-c="entreprises">
       <h2>Photos</h2>
-      <p class="adm-hint">La première photo est la couverture (en grand sur la fiche, et image d’aperçu quand la fiche est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
+      <p class="adm-hint">Faites glisser les photos pour changer leur ordre. L’étoile met une photo en couverture (la première, en grand sur la fiche et en aperçu quand la fiche est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
       <ul class="adm-photos" id="photo-list">
-        <?php foreach ($values['photos'] as $src): ?>
-          <li class="adm-photo">
-            <img src="<?= e($src) ?>" alt="" loading="lazy">
-            <input type="hidden" name="photos[]" value="<?= e($src) ?>">
-            <span class="adm-photo__cover">Couverture</span>
-            <span class="adm-photo__tools">
-              <button type="button" data-photo="left" aria-label="Avancer">←</button>
-              <button type="button" data-photo="right" aria-label="Reculer">→</button>
-              <button type="button" data-photo="cover">En couverture</button>
-              <button type="button" data-photo="remove">Retirer</button>
-            </span>
-          </li>
-        <?php endforeach; ?>
+        <?php foreach ($values['photos'] as $src) echo vib_photo_tile($src); ?>
       </ul>
+      <template id="photo-tpl"><?= vib_photo_tile('') ?></template>
       <input type="hidden" name="photos[]" value="" data-keep>
       <p class="adm-muted" id="photo-none"<?= $values['photos'] ? ' hidden' : '' ?>>Aucune photo : la fiche affiche le nom à la place.</p>
       <?= $err('photos') ?>
@@ -259,4 +248,4 @@ vib_admin_header($item['name'], $user, 'acteurs', true);
   </div>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261022e');
+<?php vib_admin_footer('/admin/admin.js?v=20261022f');

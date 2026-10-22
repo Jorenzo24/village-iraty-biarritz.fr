@@ -143,4 +143,4 @@ vib_admin_header('Statistiques', $user, 'statistiques', true);
     <?php $ranking('Appareils', $relabel($s['dev'], $devLabels), 'visiteurs'); ?>
   </div>
   <p class="adm-hint">Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés, jamais gonflés. Un même visiteur n’est compté qu’une fois par jour pour une même page ou une même action.</p>
-<?php vib_admin_footer('/admin/admin.js?v=20261022e');
+<?php vib_admin_footer('/admin/admin.js?v=20261022f');

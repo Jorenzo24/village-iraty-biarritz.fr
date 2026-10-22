@@ -140,3 +140,17 @@ function vib_admin_item_footer(Store $store, array $col, string $slug): void
     echo '</section>';
 
 }
+
+/** Vignette d'une photo de la galerie : étoile (couverture), retrait, glisser-déposer pour l'ordre. */
+function vib_photo_tile(string $src): string
+{
+    $star = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.55 4.43 1.07 6.27L12 17.2l-5.62 2.9 1.07-6.27L2.9 9.4l6.3-.9z"/></svg>';
+    $minus = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 12h12" stroke-width="3" stroke-linecap="round"/></svg>';
+    return '<li class="adm-photo" draggable="true" tabindex="0" aria-label="Photo, déplaçable (glisser, ou flèches du clavier)">'
+         . '<img src="' . e($src) . '" alt="" loading="lazy" draggable="false">'
+         . '<input type="hidden" name="photos[]" value="' . e($src) . '">'
+         . '<button type="button" class="adm-photo__star" data-photo="cover" title="Mettre en couverture" aria-label="Mettre en couverture">' . $star . '</button>'
+         . '<button type="button" class="adm-photo__del" data-photo="remove" title="Retirer la photo" aria-label="Retirer la photo">' . $minus . '</button>'
+         . '<span class="adm-photo__cover">Couverture</span>'
+         . '</li>';
+}

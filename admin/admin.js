@@ -203,11 +203,61 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = ev.target.closest('[data-photo]');
       if (!btn) return;
       const li = btn.closest('li');
-      const act = btn.dataset.photo;
-      if (act === 'left' && li.previousElementSibling) li.previousElementSibling.before(li);
-      if (act === 'right' && li.nextElementSibling) li.nextElementSibling.after(li);
-      if (act === 'cover') list.prepend(li);
-      if (act === 'remove') li.remove();
+      if (btn.dataset.photo === 'cover') list.prepend(li);
+      if (btn.dataset.photo === 'remove') li.remove();
+      changed();
+    });
+
+    // Glisser-déposer : souris et doigt (pointer events). La photo suit le pointeur, les autres se décalent.
+    let drag = null;
+    list.addEventListener('pointerdown', (ev) => {
+      const li = ev.target.closest('.adm-photo');
+      if (!li || ev.target.closest('button') || ev.button > 0) return;
+      const start = { x: ev.clientX, y: ev.clientY };
+      // Au doigt, un appui long (250 ms) lance le déplacement, pour laisser la page défiler normalement
+      const begin = () => {
+        drag = { li, id: ev.pointerId };
+        li.classList.add('is-dragging');
+        list.classList.add('is-sorting');
+        try { li.setPointerCapture(ev.pointerId); } catch (e) { /* ancien navigateur */ }
+      };
+      if (ev.pointerType === 'mouse') { ev.preventDefault(); begin(); }
+      else {
+        const t = setTimeout(begin, 250);
+        const cancel = (e) => { if (!drag && (e.type !== 'pointermove' || Math.hypot(e.clientX - start.x, e.clientY - start.y) > 8)) clearTimeout(t); };
+        li.addEventListener('pointermove', cancel, { once: false });
+        li.addEventListener('pointerup', () => clearTimeout(t), { once: true });
+      }
+    });
+    list.addEventListener('pointermove', (ev) => {
+      if (!drag || ev.pointerId !== drag.id) return;
+      ev.preventDefault();
+      const over = document.elementsFromPoint(ev.clientX, ev.clientY).find((el) => el.classList?.contains('adm-photo') && el !== drag.li);
+      if (!over) return;
+      const r = over.getBoundingClientRect();
+      const after = ev.clientX > r.left + r.width / 2;
+      if (after ? over.nextElementSibling !== drag.li : over.previousElementSibling !== drag.li) {
+        after ? over.after(drag.li) : over.before(drag.li);
+      }
+    });
+    const drop = () => {
+      if (!drag) return;
+      drag.li.classList.remove('is-dragging');
+      list.classList.remove('is-sorting');
+      drag = null;
+      changed();
+    };
+    list.addEventListener('pointerup', drop);
+    list.addEventListener('pointercancel', drop);
+    list.addEventListener('dragstart', (ev) => ev.preventDefault());   // pas de glisser natif des images
+    // Clavier : flèches gauche / droite sur une photo sélectionnée
+    list.addEventListener('keydown', (ev) => {
+      const li = ev.target.closest('.adm-photo');
+      if (!li || !['ArrowLeft', 'ArrowRight'].includes(ev.key)) return;
+      ev.preventDefault();
+      if (ev.key === 'ArrowLeft' && li.previousElementSibling) li.previousElementSibling.before(li);
+      if (ev.key === 'ArrowRight' && li.nextElementSibling) li.nextElementSibling.after(li);
+      li.focus();
       changed();
     });
 
@@ -251,11 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         status.textContent = `Envoi ${files.length > 1 ? `${i + 1} / ${files.length} ` : ''}en cours…`;
         let li = null;
         if (kind === 'photo') {
-          li = list.querySelector('li')?.cloneNode(true) || (() => {
-            const t = document.createElement('li'); t.className = 'adm-photo';
-            t.innerHTML = '<img alt=""><input type="hidden" name="photos[]"><span class="adm-photo__cover">Couverture</span><span class="adm-photo__tools"><button type="button" data-photo="left" aria-label="Avancer">←</button><button type="button" data-photo="right" aria-label="Reculer">→</button><button type="button" data-photo="cover">En couverture</button><button type="button" data-photo="remove">Retirer</button></span>';
-            return t;
-          })();
+          li = $('photo-tpl').content.firstElementChild.cloneNode(true);
           li.classList.add('is-uploading');
           li.querySelector('img').src = URL.createObjectURL(file);
           li.querySelector('input').value = '';

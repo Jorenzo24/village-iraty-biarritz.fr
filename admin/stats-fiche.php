@@ -73,4 +73,4 @@ vib_admin_header('Statistiques : ' . $it['name'], $user, 'statistiques', true);
     <?= vib_stats_chart(vib_stats_daily_page($per['from'], $per['to'], $path), 'vues', $g) ?>
   </section>
   <p class="adm-hint">Un même visiteur n’est compté qu’une fois par jour pour une même action. Les bloqueurs de publicité empêchent une partie des mesures : les chiffres sont légèrement sous-estimés.</p>
-<?php vib_admin_footer('/admin/admin.js?v=20261022e');
+<?php vib_admin_footer('/admin/admin.js?v=20261022f');

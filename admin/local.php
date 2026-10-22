@@ -111,10 +111,10 @@ vib_admin_header($item['name'], $user, 'locaux', true);
 
     <section class="adm-card">
       <h2>Carte dans la liste des locaux</h2>
-      <p class="adm-hint">Textes de la carte sur la page « Louer un local » (et sur l’accueil si le local y est mis en avant). Laissés vides, ils sont tirés du titre et de la description.</p>
+      <p class="adm-hint adm-hint--block">Textes de la carte sur la page « Louer un local » (et sur l’accueil si le local y est mis en avant). Laissés vides, ils sont tirés du titre et de la description.</p>
       <div class="adm-grid adm-grid--2">
         <div class="adm-field">
-          <label for="f-card-ref">Référence</label>
+          <label for="f-card-ref">Titre de l’annonce</label>
           <input type="text" id="f-card-ref" name="card_ref" value="<?= $v('card_ref') ?>" placeholder="Lot 50, Halle DARLA">
         </div>
         <div class="adm-field">
@@ -131,22 +131,11 @@ vib_admin_header($item['name'], $user, 'locaux', true);
 
     <section class="adm-card" id="photos" data-slug="<?= e($slug) ?>" data-c="locaux">
       <h2>Photos</h2>
-      <p class="adm-hint">La première photo est la couverture (en grand sur la fiche, et image d’aperçu quand l’annonce est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
+      <p class="adm-hint">Faites glisser les photos pour changer leur ordre. L’étoile met une photo en couverture (la première, en grand sur la fiche et en aperçu quand l’annonce est partagée). Les changements ne sont visibles sur le site qu’après « Enregistrer ».</p>
       <ul class="adm-photos" id="photo-list">
-        <?php foreach ($values['photos'] as $src): ?>
-          <li class="adm-photo">
-            <img src="<?= e($src) ?>" alt="" loading="lazy">
-            <input type="hidden" name="photos[]" value="<?= e($src) ?>">
-            <span class="adm-photo__cover">Couverture</span>
-            <span class="adm-photo__tools">
-              <button type="button" data-photo="left" aria-label="Avancer">←</button>
-              <button type="button" data-photo="right" aria-label="Reculer">→</button>
-              <button type="button" data-photo="cover">En couverture</button>
-              <button type="button" data-photo="remove">Retirer</button>
-            </span>
-          </li>
-        <?php endforeach; ?>
+        <?php foreach ($values['photos'] as $src) echo vib_photo_tile($src); ?>
       </ul>
+      <template id="photo-tpl"><?= vib_photo_tile('') ?></template>
       <input type="hidden" name="photos[]" value="" data-keep>
       <p class="adm-muted" id="photo-none"<?= $values['photos'] ? ' hidden' : '' ?>>Aucune photo : la fiche affiche une image par défaut.</p>
       <?= $err('photos') ?>
@@ -179,4 +168,4 @@ vib_admin_header($item['name'], $user, 'locaux', true);
   </div>
 
   <?php vib_admin_item_footer($store, $col, $slug); ?>
-<?php vib_admin_footer('/admin/admin.js?v=20261022e');
+<?php vib_admin_footer('/admin/admin.js?v=20261022f');
