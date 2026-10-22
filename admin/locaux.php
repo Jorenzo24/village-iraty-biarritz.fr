@@ -14,12 +14,14 @@ vib_admin_header('Locaux à louer', $user, 'locaux', true);
   <div class="adm-head">
     <div>
       <h1>Locaux à louer</h1>
-      <p class="adm-muted"><?= count($items) ?> <?= count($items) > 1 ? 'locaux publiés' : 'local publié' ?> sur la page « Louer un local ». Un local loué se retire depuis sa fiche.</p>
+      <p class="adm-muted"><?= count($items) ?> <?= count($items) > 1 ? 'locaux publiés' : 'local publié' ?> sur la page « Louer un local ». Un local loué se dépublie depuis sa fiche, et se republie quand il est de nouveau disponible.</p>
     </div>
     <a class="adm-btn" href="/admin/nouveau.php?c=locaux">+ Ajouter un local</a>
   </div>
   <?php if (($_GET['retire'] ?? '') !== ''): ?>
-    <div class="adm-flash adm-flash--ok" role="status"><strong>« <?= e((string) $_GET['retire']) ?> » retiré du site.</strong> Son adresse redirige vers la page « Louer un local ». Il reste réintégrable depuis l’<a href="/admin/historique.php?c=locaux#retirees">historique</a>.</div>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>« <?= e((string) $_GET['retire']) ?> » dépublié.</strong> Il n’apparaît plus sur le site (son adresse redirige vers la page « Louer un local ») et reste en bas de cette page, prêt à être republié.</div>
+  <?php elseif (($_GET['supprime'] ?? '') !== ''): ?>
+    <div class="adm-flash adm-flash--ok" role="status"><strong>« <?= e((string) $_GET['supprime']) ?> » supprimé définitivement.</strong></div>
   <?php endif; ?>
 
   <ul class="adm-cards">
@@ -45,4 +47,5 @@ vib_admin_header('Locaux à louer', $user, 'locaux', true);
       </a>
     </li>
   </ul>
+<?php vib_admin_unpublished(vib_admin_collection('locaux'), $user); ?>
 <?php vib_admin_footer();

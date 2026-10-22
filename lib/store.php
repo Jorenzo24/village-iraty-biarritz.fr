@@ -160,11 +160,41 @@ final class Store
         }
     }
 
-    /** @return list<array{item: array, at: string, author: string}> fiches retirées, la plus récente d'abord */
-    public function retired(): array
+    /**
+     * Fiches dépubliées, la plus récente d'abord.
+     * Une fiche « supprimée définitivement » reste dans cette liste, marquée deleted : son adresse continue
+     * de rediriger et son identifiant reste réservé ; elle n'apparaît plus dans le back-office.
+     * @return list<array{item: array, at: string, author: string, deleted?: bool}>
+     */
+    public function retired(bool $withDeleted = true): array
     {
         $lock = $this->lock(LOCK_SH);
-        try { return array_reverse($this->readRetiredUnlocked()); } finally { $this->unlock($lock); }
+        try {
+            $r = array_reverse($this->readRetiredUnlocked());
+            return $withDeleted ? $r : array_values(array_filter($r, fn($x) => empty($x['deleted'])));
+        } finally {
+            $this->unlock($lock);
+        }
+    }
+
+    /** Supprime définitivement une fiche déjà dépubliée (cf. retired()). */
+    public function deleteRetired(string $keyValue, string $author): void
+    {
+        $key = vib_config()['collections'][$this->collection]['key'];
+        $lock = $this->lock(LOCK_EX);
+        try {
+            $list = $this->readRetiredUnlocked();
+            $found = null;
+            foreach ($list as $i => $r) if (($r['item'][$key] ?? null) === $keyValue && empty($r['deleted'])) $found = $i;
+            if ($found === null) throw new StoreConflict('Cette fiche n’est plus dans les fiches dépubliées.');
+            $list[$found] += ['deleted' => true, 'deleted_at' => date(DATE_ATOM), 'deleted_by' => $author];
+            $this->writeRetiredUnlocked($list);
+            $current = $this->readUnlocked();
+            $this->commitUnlocked($this->encode($current['items']), $current['version'], $author,
+                'Suppression définitive de la fiche « ' . ($list[$found]['item']['name'] ?? $keyValue) . ' » (' . $keyValue . ')', count($current['items']), $keyValue);
+        } finally {
+            $this->unlock($lock);
+        }
     }
 
     /**

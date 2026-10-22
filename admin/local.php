@@ -38,9 +38,14 @@ $inv = fn(string $k): string => isset($errors[$k]) ? ' aria-invalid="true" aria-
 vib_admin_header($item['name'], $user, 'locaux');
 ?>
   <p><a class="adm-back" href="/admin/locaux.php">← Tous les locaux</a></p>
+  <div class="adm-head">
   <div>
     <h1><?= e($item['name']) ?></h1>
-    <p class="adm-muted"><a href="/local/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">Voir la fiche en ligne ↗</a></p>
+  </div>
+    <div class="adm-head__actions">
+      <a class="adm-btn adm-btn--ghost adm-btn--small" href="<?= e($col['public'] . rawurlencode($slug)) ?>" target="_blank" rel="noopener">Voir en ligne ↗</a>
+      <a class="adm-btn adm-btn--ghost adm-btn--small" href="<?= e(vib_admin_url($col, 'retirer.php', ['slug' => $slug])) ?>">Dépublier</a>
+    </div>
   </div>
 
   <?php vib_admin_flash($col, $slug, vib_admin_last_change($store, $slug), $st['conflict'], $errors); ?>

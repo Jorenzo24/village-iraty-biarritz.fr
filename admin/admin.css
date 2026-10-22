@@ -200,6 +200,18 @@ body { margin: 0; background: var(--color-bg-alt); color: var(--color-text); }
 .adm-compare__row:not(.adm-compare__head) > span:nth-child(2)::before { content: "Cette version : "; font-weight: 600; }
 .adm-compare__row:not(.adm-compare__head) > span:nth-child(3)::before { content: "Actuelle : "; font-weight: 600; }
 
+/* En-tête de fiche, fiches dépubliées, suppression */
+.adm-head__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.adm-unpub { display: grid; gap: var(--space-2); margin-top: var(--space-5); }
+.adm-unpub h2 { font-family: var(--font-display); font-size: var(--fs-h3); margin: 0; }
+.adm-rowcard--off { background: transparent; border-style: dashed; }
+.adm-rowcard--off:hover { box-shadow: none; border-color: var(--color-text-muted); }
+.adm-rowcard--off .adm-rowcard__img { filter: grayscale(1); opacity: .6; }
+.adm-rowcard--off .adm-rowcard__name { color: var(--color-text-muted); }
+.adm-rowcard__side form { margin: 0; }
+.adm-btn--danger { background: var(--color-accent); }
+.adm-inline-form--col { flex-direction: column; align-items: flex-start; }
+
 /* Bouton d'apparence lien (dans une aide) */
 .adm-linkbtn { font: inherit; color: var(--color-accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
 

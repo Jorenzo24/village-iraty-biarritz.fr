@@ -46,9 +46,15 @@ $free = $values['address_mode'] === 'libre';
 vib_admin_header($item['name'], $user, 'acteurs');
 ?>
   <p><a class="adm-back" href="/admin/acteurs.php">← Tous les acteurs</a></p>
+  <div class="adm-head">
   <div>
     <h1><?= e($item['name']) ?></h1>
-    <p class="adm-muted"><?= e($item['category_label']) ?> · <a href="/acteur/<?= e(rawurlencode($slug)) ?>" target="_blank" rel="noopener">Voir la fiche en ligne ↗</a></p>
+    <p class="adm-muted"><?= e($item['category_label']) ?></p>
+  </div>
+    <div class="adm-head__actions">
+      <a class="adm-btn adm-btn--ghost adm-btn--small" href="<?= e($col['public'] . rawurlencode($slug)) ?>" target="_blank" rel="noopener">Voir en ligne ↗</a>
+      <a class="adm-btn adm-btn--ghost adm-btn--small" href="<?= e(vib_admin_url($col, 'retirer.php', ['slug' => $slug])) ?>">Dépublier</a>
+    </div>
   </div>
 
   <?php vib_admin_flash($col, $slug, $last, $st['conflict'], $errors); ?>

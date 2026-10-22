@@ -281,6 +281,19 @@ check('autres champs non touchés (modification intermédiaire gardée)', $items
 check('une seule fois : ne refait rien ensuite', $sm->migrate() === false);
 check('tracée dans l’historique', str_starts_with($sm->history(1)[0]['message'], 'Mise à jour du format'));
 
+require_once __DIR__ . '/../lib/collections.php';
+echo "\nDépublier, republier, supprimer\n";
+$sd2 = new Store('locaux', $tmp . '/suppr'); $sd2->seedIfEmpty();
+$l50 = vib_find($sd2->read()['items'], 'lot-50-darla-90m2');
+$sd2->retireItem('lot-50-darla-90m2', Store::itemHash($l50), 'a@x');
+check('dépubliée : listée parmi les dépubliées', count($sd2->retired(false)) === 1);
+check('supprimer une fiche encore publiée → refusé', throws(fn() => $sd2->deleteRetired('lot-21-aldades-42m2', 'a@x'), StoreConflict::class));
+$sd2->deleteRetired('lot-50-darla-90m2', 'a@x');
+check('supprimée : n’apparaît plus parmi les dépubliées', $sd2->retired(false) === []);
+check('supprimée : adresse toujours redirigée, identifiant toujours réservé', ($sd2->retired()[0]['item']['slug'] ?? '') === 'lot-50-darla-90m2' && in_array('lot-50-darla-90m2', vib_taken_slugs($sd2, 'local'), true));
+check('supprimer deux fois → refusé', throws(fn() => $sd2->deleteRetired('lot-50-darla-90m2', 'a@x'), StoreConflict::class));
+check('journal : « Supprimée définitivement »', vib_log_describe($sd2->history(1)[0])['label'] === 'Supprimée définitivement');
+
 exec('rm -rf ' . escapeshellarg($tmp));
 echo "\n" . ($ko === 0 ? "TOUS LES TESTS PASSENT ($ok)" : "ÉCHECS : $ko sur " . ($ok + $ko)) . "\n";
 exit($ko === 0 ? 0 : 1);

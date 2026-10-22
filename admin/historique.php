@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     vib_csrf_check($user);
     $slug = (string) ($_POST['slug'] ?? '');
     $rec = null;
-    foreach ($store->retired() as $r) if (($r['item']['slug'] ?? null) === $slug) { $rec = $r; break; }
+    foreach ($store->retired(false) as $r) if (($r['item']['slug'] ?? null) === $slug) { $rec = $r; break; }
     if (!$rec) $error = 'Cette fiche a déjà été réintégrée.';
     else {
         try {
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $names = array_column($store->read()['items'], 'name', 'slug');
 $log = $store->history(150);
-$retired = $store->retired();
+$retired = $store->retired(false);
 
 vib_admin_header('Historique', $user, 'accueil');
 ?>
@@ -46,19 +46,19 @@ vib_admin_header('Historique', $user, 'accueil');
   <?php if ($error): ?><div class="adm-flash adm-flash--ko" role="alert"><?= e($error) ?></div><?php endif; ?>
 
   <section class="adm-card" id="retirees">
-    <h2>Fiches retirées</h2>
+    <h2>Fiches dépubliées</h2>
     <?php if (!$retired): ?>
-      <p class="adm-muted">Aucune fiche retirée depuis la mise en place du back-office.</p>
+      <p class="adm-muted">Aucune fiche dépubliée.</p>
     <?php else: ?>
       <ul class="adm-history">
         <?php foreach ($retired as $r): ?>
           <li>
-            <span><strong><?= e($r['item']['name']) ?></strong> · retirée <?= e(vib_when((string) $r['at'])) ?> par <?= e(vib_author_label((string) $r['author'])) ?></span>
-            <form method="post" action="/admin/historique.php">
+            <span><strong><?= e($r['item']['name']) ?></strong> · dépubliée <?= e(vib_when((string) $r['at'])) ?> par <?= e(vib_author_label((string) $r['author'])) ?></span>
+            <form method="post" action="/admin/publier.php">
               <input type="hidden" name="csrf" value="<?= e(vib_csrf_token($user['email'])) ?>">
               <input type="hidden" name="c" value="<?= e($col['c']) ?>">
               <input type="hidden" name="slug" value="<?= e($r['item']['slug']) ?>">
-              <button type="submit" class="adm-btn adm-btn--ghost adm-btn--small">Réintégrer sur le site</button>
+              <button type="submit" class="adm-btn adm-btn--ghost adm-btn--small">Republier</button>
             </form>
           </li>
         <?php endforeach; ?>
